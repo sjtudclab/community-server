@@ -32,6 +32,8 @@
 		authentication-manager-ref="authenticationManager">
 
 		<intercept-url pattern="/rest/login" access="permitAll" />
+		<intercept-url pattern="/rest/item/**" access="permitAll" />
+		<intercept-url pattern="/rest/hello" access="permitAll" />
 		
 		<intercept-url pattern="/rest/**" access="hasRole('user')" />
 
