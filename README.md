@@ -1,4 +1,5 @@
-# archetype-server
+# community-server
+webapp for community
 
 template for restful server
 
@@ -15,4 +16,3 @@ tomcat
 
 #database
 mysql
-################
