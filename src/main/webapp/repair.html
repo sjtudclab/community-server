@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/iconFont.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <link href="js/prettify/prettify.css" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.mousewheel.js"></script>
+    <script src="js/prettify/prettify.js"></script>
+
+    <script src="js/chen/repair.js"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="js/load-metro.js"></script>
+
+    <!-- Local JavaScript -->
+    <script src="js/docs.js"></script>
+    <script src="js/github.info.js"></script>
+
+    <title>物业报修页面</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+                <div class="offset1">
+                    <h1>
+                        <a href="/"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                        物业报修
+                    </h1>
+                </div>
+                <div class="grid fluid">
+                    <div class="row">
+                       
+                            <div class="span3 offset1">
+                                <nav class="sidebar light">
+                                    <ul>
+                                        <li class="title">功能操作</li>
+                                        <li id="l1" class="stick bg-green"><a href="#"><i class="icon-cycle"></i>查看报修进度</a></li>
+                                        <li id="l2" class="stick bg-red"><a href="#"><i class="icon-pencil"></i>填写报修信息</a></li>
+                                        <li id="l3" class="stick bg-blue"><a href="#"><i class="icon-comments"></i>评价物业服务</a></li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <!--<div class="span1"></div>-->
+
+                            <div class="span6 offset1" >
+                                <!-- 物业报修界面 -->
+                                <div id="welcome_repair">
+                                    <img src="images/welcome_repair.png">
+                                </div>
+                                <!-- End 物业报修界面 -->
+
+                                <!-- 填写物业报修信息 -->
+                                <div id="fill_form" class="bg-grayLighter" style="display:none">
+                                    <div class="row">
+                                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;物业报修单</h2>
+                                        <div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>报修项目：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control select">
+                                                        <select id="fill_form_type">
+                                                            <option>水</option>
+                                                            <option>电</option>
+                                                            <option>煤</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>报修地址：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control text" data-role="input-control">
+                                                        <input id="fill_form_address" type="text" value="" placeholder="报修地址"/>
+                                                        <button class="btn-clear"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>客户姓名：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control text" data-role="input-control">
+                                                        <input id="fill_form_name" type="text" value="" placeholder="联系人"/>
+                                                        <button class="btn-clear"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>联系电话：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control text" data-role="input-control">
+                                                        <input type="text" value="" placeholder="联系电话"/>
+                                                        <button class="btn-clear"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="span2 offset4">
+                                                    <button class=" bg-blue">报修</button>
+                                                </div>
+                                                <div class="span2">
+                                                    <button class="">取消</button>
+                                                </div>
+                                            </div>
+                                            <div class="row"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End 填写物业报修信息 -->
+
+                                <!-- 查看报修进度 -->
+                                <div id="check_progress" class="" style="display:none">
+                                    <div class="row">
+                                        <h3>您的维修已受理，维修人员0023正在为你服务。</h3>
+                                    </div>
+
+                                    <div class="row">
+                                        <span>当前阶段：维修人员0023服务中</span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="span6 bg-blue">
+                                            <span>2015-02-15 18:15:30</span>
+                                            <span>维修订单受理</span>
+                                        </div>
+                                            
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="span6 bg-blue">
+                                            <span>2015-02-15 18:20:30</span>
+                                            <span>维修人员分派</span>
+                                        </div>
+                                            
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="span6 bg-blue">
+                                            <span>2015-02-16 08:30:10</span>
+                                            <span>维修人员服务</span>
+                                        </div>
+                                            
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="span6 bg-grayLighter">
+                                            <div style="color:#787878">
+                                            <span></span>
+                                            <span>维修已完成</span>
+                                            </div>
+                                        </div>
+                                            
+                                    </div>
+
+                                </div>
+                                <!-- End 查看报修进度 -->
+
+                                <!-- 评价物业服务 -->
+                                <div id="comment_repair" style="display:none">
+                                    <div class="row bg-grayLighter">
+                                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;物业服务评价</h2>
+                                        <div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>满意度：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control radio default-style">
+                                                        <label>
+                                                            <input type="radio" name="star" />
+                                                            <span class="check"></span>
+                                                            满意
+                                                        </label>
+                                                    </div>
+                                                    <div class="input-control radio default-style">
+                                                        <label>
+                                                            <input type="radio" name="star" />
+                                                            <span class="check"></span>
+                                                            一般
+                                                        </label>
+                                                    </div>
+                                                    <div class="input-control radio default-style">
+                                                        <label>
+                                                            <input type="radio" name="star" />
+                                                            <span class="check"></span>
+                                                            不满意
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>评价：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control textarea">
+                                                        <textarea></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">    
+                                                <div class="span2 offset4">
+                                                    <button class=" bg-blue">提交</button>
+                                                </div>
+                                            </div>
+                                            <div class="row"></div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- End 评价物业服务 -->
+
+                            </div>
+
+                    </div>
+                    
+                </div>
+
+    </div>
+
+</body>
+</html>

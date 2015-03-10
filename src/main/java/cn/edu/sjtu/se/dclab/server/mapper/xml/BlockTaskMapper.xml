@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.BlockTaskMapper">
+	
+	<resultMap type="Block_task" id="block_taskResultMap">
+		<id property="id" column="block_task_id" />
+		<result property="name" column="bloick_task_name" />
+		<result property="info" column="block_task_info" />
+		<result property="block" column="block_name" />
+	</resultMap>
+
+</mapper>

@@ -1,0 +1,366 @@
+<!doctype html> 
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh"> <!--<![endif]-->
+<head>
+   <meta charset="UTF-8" />
+   <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+   <!-- Mobile viewport optimized: h5bp.com/viewport -->
+   <meta name="viewport" content="width=device-width">
+
+   <title>页面1</title>
+
+   <meta name="robots" content="noindex, nofollow">
+   <meta name="description" content="MetroUI-Web : Simple and complete web UI framework to create web apps with Windows 8 Metro user interface." />
+   <meta name="keywords" content="metro, metroui, metro-ui, metro ui, windows 8, metro style, bootstrap, framework, web framework, css, html" />
+   <meta name="author" content="AozoraLabs by Marcello Palmitessa"/>
+   
+   <link rel="stylesheet" type="text/css" href="content/css/bootstrap.css">
+   <link rel="stylesheet" type="text/css" href="content/css/bootstrap-responsive.css">
+   <link rel="stylesheet" type="text/css" href="content/css/bootmetro.css">
+   <link rel="stylesheet" type="text/css" href="content/css/bootmetro-tiles.css">
+   <link rel="stylesheet" type="text/css" href="content/css/bootmetro-charms.css">
+   <link rel="stylesheet" type="text/css" href="content/css/metro-ui-light.css">
+   <link rel="stylesheet" type="text/css" href="content/css/icomoon.css">
+
+   <!--  these two css are to use only for documentation -->
+   <link rel="stylesheet" type="text/css" href="content/css/demo.css">
+   <link rel="stylesheet" type="text/css" href="scripts/google-code-prettify/prettify.css" >
+
+   <!-- Le fav and touch icons -->
+   <link rel="shortcut icon" href="content/ico/favicon.ico">
+   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="content/ico/apple-touch-icon-144-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="content/ico/apple-touch-icon-114-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="content/ico/apple-touch-icon-72-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" href="content/ico/apple-touch-icon-57-precomposed.png">
+  
+   <!-- All JavaScript at the bottom, except for Modernizr and Respond.
+      Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
+      For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
+   <script src="scripts/modernizr-2.6.1.min.js"></script>
+   <script src="scripts/jquery-1.7.2.min.js"></script>
+   <link rel="stylesheet" href="http://dreamsky.github.io/main/blog/common/init.css">
+   <style>
+      body {
+         padding-top: 50px;
+         background-color: #333;
+      }   
+   </style>
+
+   <script language="javascript" type="text/javascript">
+	$(function (){		
+		var initializationTime=(new Date()).getTime();
+		var manager_name = "admin";
+		showLeftTime();
+		showManager();
+		showBlock("admin");
+		function showLeftTime()
+		{
+			var now=new Date();
+			var year=now.getFullYear();
+			var month=now.getMonth();
+			var day=now.getDate();
+			var hours=now.getHours();
+			var minutes=now.getMinutes();
+			var seconds=now.getSeconds();
+			var timetable = ""+year+"年"+month+"月"+day+"日 ";
+			if (hours < 10) 
+				timetable += "0" + hours + ":";
+			else
+				timetable += hours + ":";
+			if (minutes < 10)
+				timetable += "0" + minutes + ":";
+			else
+				timetable += minutes + ":";
+			if (seconds < 10)
+				timetable += "0" + seconds + "";
+			else
+				timetable += seconds + "";
+			
+			document.all.showtime.innerHTML = timetable;
+			var timeID=setTimeout(showLeftTime,1000);
+		}
+
+		function showManager()
+		{
+			$.ajax(
+			{
+				url: "rest/block_manager/admin",
+				dataType: "JSON",
+				type: "GET", 
+				success: function (data) { 
+					document.all.showname.innerHTML = data.name;
+					document.all.showdescription.innerHTML = data.description;
+				}
+
+			}
+			)
+		}
+
+	})
+	
+	
+	function showBlock(block)
+	{
+		$.ajax(
+		{
+			url : "rest/block_info/admin",
+			dataType : "JSON",
+			type : "GET",
+			success : function(data){
+				var all = eval(data.block);
+				var otherbk = "";
+				for(var i=0;i<all.length;i++)
+				{
+					if ((i == 0 && block == "admin") || block == all[i].name)
+					{
+						document.all.showBlock.innerHTML = all[i].name + 
+						"<b class=\"caret\"></b>";
+						showRoom(all[i].name);
+					}
+					else
+						otherbk += "<li onclick = \"showBlock('"+all[i].name+"')\">"+all[i].name+"</li>";
+				}
+				document.all.showOther.innerHTML = otherbk;
+			}
+		}
+		)
+	}
+
+	function showRoom(block) 
+	{
+		//alert(block);
+		$.ajax(
+		{
+			url : "rest/block_room/" + block,
+			dataType : "JSON",
+			type : "GET",
+			success : function(data){
+				var all = eval(data.room);
+				var allhtm = "<h2><font color=\"white\">房屋选择</font></h2>";
+				for(var i=0;i<all.length;i++)
+				{
+					if (i % 7 == 0)
+						allhtm += "<a class=\"tile square text tilesquareblock\"";
+					else if (i % 7 == 1)	
+						allhtm += "<a class=\"tile square text tilesquareblock bg-color-orange\"";
+					else if (i % 7 == 2)
+						allhtm += "<a class=\"tile square text tilesquareblock bg-color-greenDark\"";
+					else if (i % 7 == 3)
+						allhtm += "<a class=\"tile square text tilesquareblock bg-color-purple\"";
+					else if (i % 7 == 4)
+						allhtm += "<a class=\"tile square text tilesquareblock bg-color-red\"";
+					else if (i % 7 == 5)
+						allhtm += "<a class=\"tile square text tilesquareblock bg-color-yellow\"";
+					else if (i % 7 == 6)
+						allhtm += "<a class=\"tile square text tilesquareblock bg-color-blueDark\"";		
+					allhtm += "href=\"detail.html?id="+block+"-"+all[i].name+"\">";	
+					allhtm += "<div class=\"text-big\">"+all[i].name+"</div>";
+                    allhtm += "<div class=\"text\">"+block+"</div>";
+                    allhtm += "</a>";
+				}
+				document.all.section1.innerHTML = allhtm;
+			}
+		}
+		)
+				
+	}
+	</script>
+</head>
+
+<body data-accent="blue" >
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+   <!-- Header
+   ================================================== -->
+
+   <header id="nav-bar" class="container-fluid" >
+      <div class="row-fluid">
+         <div class="span8">
+            <div id="header-container">
+               <a id="backbutton" class="win-backbutton" href="./index.html"></a>
+               <h4 id="showtime" style="color:white;">显示时间的位置</h4>
+               <div class="dropdown">
+                  <a class="header-dropdown dropdown-toggle accent-color" data-toggle="dropdown" href="#" id = "showBlock">
+                     楼栋1
+                     <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu" id = "showOther">
+                  <li><a href="./hub.html">Hub</a></li>
+                  <li><a href="./tiles-templates.html">Tile Templates</a></li>
+                  <li><a href="./listviews.html">ListViews</a></li>
+                  <li><a href="./appbar-demo.html">Demo App-Bar</a></li>
+                  <li><a href="./table.html">Demo Table</a></li>
+                  <li><a href="./icons.html">Icons</a></li>
+                  <li><a href="./scaffolding.html">Bootstrap Scaffolding</a></li>
+                  <li><a href="./base-css.html">Bootstrap Base CSS</a></li>
+                  <li><a href="./components.html">Bootstrap Components</a></li>
+                  <li><a href="./javascript.html">Bootstrap Javascript</a></li>
+                  <li class="divider"></li>
+                  <li><a href="./index.html">Home</a></li>
+               </ul>
+            </div>
+            </div>
+         </div>
+         <div id="top-info" class="pull-right">
+         <a href="#" class="pull-left">
+            <div class="top-info-block">
+               <h3 id = "showname">XXXXX</h3>
+               <h4 id = "showdescription">楼栋1楼长</h4>
+            </div>
+            <div class="top-info-block">
+               <b class="icon-user"></b>
+            </div>
+         </a>
+         <hr class="separator pull-left"/>
+         <a id="settings" class="pull-left" href="#">
+            <b class="icon-settings"></b>
+         </a>
+      </div>
+   </div>
+   </header>
+   
+   <div class="container-fluid">
+      <div class="row-fluid">
+         <div class="metro span12">
+            <div class="metro-sections">
+   
+               <div id="section1" class="metro-section tile-span-4">
+   
+                  <h2><font color="white">房屋选择</font></h2>
+   
+                  <a class="tile square text tilesquareblock" href="#">
+                           <div class="text-big">101</div>
+                           <div class="text">楼栋1</div>
+                  </a>
+                  
+                  <a class="tile square text tilesquareblock bg-color-orange" href="#">
+                           <div class="text-big">102</div>
+                           <div class="text">楼栋1</div>
+                  </a>
+                  
+                  <a class="tile square text tilesquareblock bg-color-greenDark" href="#">
+                           <div class="text-big">201</div>
+                           <div class="text">楼栋1</div>
+                  </a>       
+
+                  <a class="tile square text tilesquareblock bg-color-purple" href="#">
+                           <div class="text-big">202</div>
+                           <div class="text">楼栋1</div>
+                  </a>    
+                  
+                  <a class="tile square text tilesquareblock bg-color-red" href="#">
+                           <div class="text-big">301</div>
+                           <div class="text">楼栋1</div>
+                  </a>    
+
+                  <a class="tile square text tilesquareblock bg-color-yellow" href="#">
+                           <div class="text-big">302</div>
+                           <div class="text">楼栋1</div>
+                  </a>   
+
+                  <a class="tile square text tilesquareblock bg-color-blueDark" href="#">
+                           <div class="text-big">401</div>
+                           <div class="text">楼栋1</div>
+                  </a>   
+   
+                  <a class="tile square text tilesquareblock" href="#">
+                           <div class="text-big">402</div>
+                           <div class="text">楼栋1</div>
+                  </a>
+                  
+                  <a class="tile square text tilesquareblock bg-color-orange" href="#">
+                           <div class="text-big">501</div>
+                           <div class="text">楼栋1</div>
+                  </a>
+                  
+                  <a class="tile square text tilesquareblock bg-color-greenDark" href="#">
+                           <div class="text-big">502</div>
+                           <div class="text">楼栋1</div>
+                  </a>       
+
+                  <a class="tile square text tilesquareblock bg-color-purple" href="#">
+                           <div class="text-big">601</div>
+                           <div class="text">楼栋1</div>
+                  </a>    
+                  
+                  <a class="tile square text tilesquareblock bg-color-red" href="#">
+                           <div class="text-big">602</div>
+                           <div class="text">楼栋1</div>
+                  </a>    
+
+               </div>
+   
+               <div id="section2" class="metro-section tile-span-4">
+   
+                  <h2><font color="white">其他功能</font></h2>
+   
+                  <a class="tile app bg-color-orange" href="task.html?id=block1">
+                     <div class="image-wrapper">
+                        <img src="content/img/page1_1.png" alt="" />
+                     </div>
+                     <span class="app-label">任务统计</span>
+                  </a>
+   
+                  <a class="tile app bg-color-red" href="./javascript.html">
+                     <div class="image-wrapper">
+                        <img src="content/img/page1_2.png" alt="" />
+                     </div>
+                     <span class="app-label">楼组活动</span>
+                  </a>
+   
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   
+   <div id="charms" class="win-ui-dark">
+   
+      <div id="theme-charms-section" class="charms-section">
+         <div class="charms-header">
+            <a href="#" class="close-charms win-command">
+               <span class="win-commandimage win-commandring">&#xe05d;</span>
+            </a>
+            <h2>Settings</h2>
+         </div>
+   
+         <div class="row-fluid">
+            <div class="span12">
+   
+               <form class="">
+                  <label for="win-theme-select">Change theme:</label>
+                  <select id="win-theme-select" class="">
+                     <option value="metro-ui-semilight">Semi-Light</option>
+                     <option value="metro-ui-light">Light</option>
+                     <option value="metro-ui-dark">Dark</option>
+                  </select>
+               </form>
+   
+            </div>
+         </div>
+      </div>
+   
+   </div>
+
+   <script src="http://dreamsky.github.io/main/blog/common/jquery.min.js"></script>
+   <script type="text/javascript" src="scripts/google-code-prettify/prettify.js"></script>
+   <script type="text/javascript" src="scripts/jquery.mousewheel.js"></script>
+   <script type="text/javascript" src="scripts/jquery.scrollTo.js"></script>
+   <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+   <script type="text/javascript" src="scripts/bootmetro.js"></script>
+   <script type="text/javascript" src="scripts/bootmetro-charms.js"></script>
+   <script type="text/javascript" src="scripts/demo.js"></script>
+   <script type="text/javascript" src="scripts/holder.js"></script>
+<!--   <script src="http://dreamsky.github.io/main/blog/common/init.js"></script>-->
+   <script type="text/javascript">
+      $(".metro").metro();
+   </script> 
+</body>
+</html>

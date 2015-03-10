@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.BlockRoomMapper">
+	
+	<select id="getRoomByBlock" parameterType="java.lang.String" resultMap="block_roomResultMap">
+		select * from block_room where block_name=#{id};
+	</select>
+	
+	<select id="getRoomByName" parameterType="java.lang.String" resultMap="block_roomResultMap">
+		select * from block_room where block_room_name=#{id};
+	</select>
+		
+	<resultMap type="Block_room" id="block_roomResultMap">
+		<id property="name" column="block_room_name" />
+		<result property="info" column="block_room_info" />
+		<result property="number" column="block_room_number" />
+		<result property="block" column="block_name" />
+	</resultMap>
+
+</mapper>

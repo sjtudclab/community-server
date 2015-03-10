@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.RoomMemberMapper">
+	
+	<resultMap type="Room_member" id="room_memberResultMap">
+		<id property="user_id" column="block_user_id" />
+		<result property="room" column="block_room_name" />
+		<result property="is_owner" column="room_member_is_owner" />
+	</resultMap>
+
+</mapper>

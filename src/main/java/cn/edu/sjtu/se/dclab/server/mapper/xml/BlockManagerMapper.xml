@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.BlockManagerMapper">
+	
+	<select id="getManagerByName" parameterType="java.lang.String" resultMap="block_managerResultMap">
+		select * from block_manager where block_manager_name=#{id};
+	</select>
+	
+	<resultMap type="Block_manager" id="block_managerResultMap">
+		<id property="name" column="block_manager_name" />
+		<result property="password" column="block_manager_password" />
+		<result property="description" column="block_manager_description" />
+	</resultMap>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.SecondGoodsMapper">
+
+	<select id="getSecondGoodsById" parameterType="java.lang.Integer" resultMap="secondGoodsResultMap">
+		select * from second_goods where id=#{id};
+	</select>
+	
+	<select id="getAllSecondGoods" parameterType="java.lang.Integer" resultMap="secondGoodsResultMap">
+		select * from second_goods;
+	</select>
+	
+
+	<resultMap type="SecondGoods" id="secondGoodsResultMap">
+		<id property="id" column="id" />
+		<result property="category" column="category" />
+		<result property="type" column="type" />
+		<result property="title" column="title" />
+		<result property="imagePath" column="imagePath" />
+		<result property="desc" column="desc" />
+		<result property="owner" column="owner" />
+		<result property="phone" column="phone" />
+	</resultMap>
+	
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.BlockUserMapper">
+	
+	<resultMap type="Block_user" id="block_userResultMap">
+		<id property="id" column="block_user_id" />
+		<result property="name" column="block_user_name" />
+		<result property="age" column="block_user_age" />
+		<result property="education" column="block_user_education" />
+		<result property="marriage" column="block_user_marriage" />
+		<result property="job" column="block_user_job" />
+	</resultMap>
+
+</mapper>

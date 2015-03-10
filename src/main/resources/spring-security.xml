@@ -31,11 +31,7 @@
 		create-session="stateless" entry-point-ref="unauthorizedEntryPoint"
 		authentication-manager-ref="authenticationManager">
 
-		<intercept-url pattern="/rest/login" access="permitAll" />
-		<intercept-url pattern="/rest/item/**" access="permitAll" />
-		<intercept-url pattern="/rest/hello" access="permitAll" />
-		
-		<intercept-url pattern="/rest/**" access="hasRole('user')" />
+		<intercept-url pattern="/rest/**" access="permitAll" />
 
 		<custom-filter ref="authenticationTokenProcessingFilter"
 			position="FORM_LOGIN_FILTER" />

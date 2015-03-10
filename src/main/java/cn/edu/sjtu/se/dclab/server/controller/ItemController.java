@@ -30,7 +30,7 @@ public class ItemController {
 	@ResponseBody
 	public String getItem(@PathVariable("id") int id) {
 		Item item = itemService.getItemById(id);
-		return "index";
+		return item.getName();
 	}
 
 	@RequestMapping(value="create",method = RequestMethod.GET)

@@ -7,7 +7,18 @@
     <typeAliases>
         
         <typeAlias alias="Item" type="cn.edu.sjtu.se.dclab.server.entity.Item" />
-        
- 	</typeAliases>
+        <typeAlias alias="Block_info" type="cn.edu.sjtu.se.dclab.server.entity.Block_info" />
+        <typeAlias alias="Block_manager" type="cn.edu.sjtu.se.dclab.server.entity.Block_manager" />
+        <typeAlias alias="Block_room" type="cn.edu.sjtu.se.dclab.server.entity.Block_room" />
+        <typeAlias alias="Block_task_room" type="cn.edu.sjtu.se.dclab.server.entity.Block_task_room" />
+        <typeAlias alias="Block_task" type="cn.edu.sjtu.se.dclab.server.entity.Block_task" />
+        <typeAlias alias="Block_user" type="cn.edu.sjtu.se.dclab.server.entity.Block_user" />
+        <typeAlias alias="Room_member" type="cn.edu.sjtu.se.dclab.server.entity.Room_member" />
+
+        <typeAlias alias="Item" type="cn.edu.sjtu.se.dclab.server.entity.Item" />
+        <typeAlias alias="SecondGoods" type="cn.edu.sjtu.se.dclab.server.entity.SecondGoods" />
+        <typeAlias alias="UserPublishedGoods" type="cn.edu.sjtu.se.dclab.server.entity.UserPublishedGoods" />
+
+    </typeAliases>
     
 </configuration>  
