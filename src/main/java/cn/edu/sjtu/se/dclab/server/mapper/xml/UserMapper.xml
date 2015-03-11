@@ -1,0 +1,19 @@
+<?mybatis version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.UserMapper">
+
+    <select id="findByUserName" resultMap="UserMap">
+        SELECT id, username, password, identification
+        FROM user
+        WHERE username = #{username}
+    </select>
+
+    <resultMap id="UserMap" type="User">
+        <id property="id" column="id" />
+        <result property="identification" column="identification" />
+        <result property="password" column="password" />
+        <result property="username" column="username" />
+    </resultMap>
+</mapper>

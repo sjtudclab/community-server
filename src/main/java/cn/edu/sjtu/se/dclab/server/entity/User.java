@@ -9,41 +9,42 @@ import org.springframework.security.core.userdetails.UserDetails;
  *2015年1月19日 下午9:42:41
  *@author changyi yuan
  */
-public class User implements UserDetails{
+public class User {
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+	private long id;
+	private String username;
+	private String password;
+	private String identification;
+
+	public long getId() {
+		return id;
 	}
 
-	@Override
-	public String getPassword() {
-		return null;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	@Override
 	public String getUsername() {
-		return null;
+		return username;
 	}
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
+	public String getPassword() {
+		return password;
 	}
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	@Override
-	public boolean isEnabled() {
-		return false;
+	public String getIdentification() {
+		return identification;
 	}
 
+	public void setIdentification(String identification) {
+		this.identification = identification;
+	}
 }
