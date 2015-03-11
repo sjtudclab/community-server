@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.mapper;
 
+import java.util.Collection;
+
 import cn.edu.sjtu.se.dclab.server.entity.User;
 
 /**
@@ -8,4 +10,6 @@ import cn.edu.sjtu.se.dclab.server.entity.User;
 public interface UserMapper {
 
     public User findByUserName(String username);
+    public Collection<User> findAll();
+    
 }

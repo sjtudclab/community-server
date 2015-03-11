@@ -10,4 +10,7 @@ import java.util.Collection;
 public interface RoleMapper {
 
     public Collection<Role> findAll();
+    
+    public Collection<Role> findByUserId(long id);
+    
 }

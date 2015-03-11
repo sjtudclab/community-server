@@ -1,10 +1,5 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 /**
  *2015年1月19日 下午9:42:41
  *@author changyi yuan
