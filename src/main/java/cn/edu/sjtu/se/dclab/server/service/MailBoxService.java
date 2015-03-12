@@ -10,4 +10,5 @@ import cn.edu.sjtu.se.dclab.server.entity.MailBox;
  */
 public interface MailBoxService {
 	public Collection<MailBox> getMailBoxByUserId(long id);
+	public void createMailBox(MailBox mailBox);
 }

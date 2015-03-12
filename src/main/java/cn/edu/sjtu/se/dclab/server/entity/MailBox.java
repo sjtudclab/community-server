@@ -2,6 +2,8 @@ package cn.edu.sjtu.se.dclab.server.entity;
 
 import java.util.Date;
 
+import cn.edu.sjtu.se.dclab.server.transfer.MailBoxTransfer;
+
 /**
  * Created by Huiyi on 2015/3/11.
  */
@@ -12,7 +14,18 @@ public class MailBox {
     private String content;
     private Date submitedDate;
 
-    public long getId() {
+    public MailBox(){
+    	
+    }
+    
+    public MailBox(MailBoxTransfer mailBoxTransfer) {
+		this.from = mailBoxTransfer.getFrom();
+		this.to = mailBoxTransfer.getTo();
+		this.content  = mailBoxTransfer.getContent();
+		this.submitedDate  = mailBoxTransfer.getSubmitedDate();
+	}
+
+	public long getId() {
         return id;
     }
 

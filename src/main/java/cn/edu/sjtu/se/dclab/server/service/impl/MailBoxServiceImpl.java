@@ -31,4 +31,9 @@ public class MailBoxServiceImpl implements MailBoxService {
 		return mailBoxMapper.findAllByUser(id);
 	}
 
+	@Override
+	public void createMailBox(MailBox mailBox) {
+		mailBoxMapper.save(mailBox);
+	}
+	
 }

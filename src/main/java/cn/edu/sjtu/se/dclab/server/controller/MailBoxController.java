@@ -12,17 +12,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.sjtu.se.dclab.server.entity.MailBox;
 import cn.edu.sjtu.se.dclab.server.service.MailBoxService;
+import cn.edu.sjtu.se.dclab.server.transfer.MailBoxTransfer;
 
 /**
- *2015年3月11日 下午7:27:42
- *@author changyi yuan
+ * 2015年3月11日 下午7:27:42
+ *
+ * @author changyi yuan
  */
 @Controller
 @RequestMapping("/mailbox")
 public class MailBoxController {
 	@Autowired
 	private MailBoxService mailBoxService;
-	
+
 	public MailBoxService getMailBoxService() {
 		return mailBoxService;
 	}
@@ -33,8 +35,14 @@ public class MailBoxController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<MailBox> getMailBoxByUserId(@PathVariable long id){
+	public Collection<MailBox> getMailBoxByUserId(@PathVariable long id) {
 		return mailBoxService.getMailBoxByUserId(id);
 	}
-	
+
+	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public void createMailBox(MailBoxTransfer mailBoxTransfer) {
+		MailBox mailBox = new MailBox(mailBoxTransfer);
+		mailBoxService.createMailBox(mailBox);
+	}
 }
