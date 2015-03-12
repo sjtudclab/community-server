@@ -21,10 +21,6 @@
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
 	</beans:bean>
 
-	<beans:bean id="customAuthenticationProcessingFilter"
-		class="cn.edu.sjtu.se.dclab.server.security.CustomAuthenticationProcessingFilter">
-	</beans:bean>
-
 	<beans:bean id="securityDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="${driverClassName}"></beans:property>
