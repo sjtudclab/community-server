@@ -193,6 +193,8 @@
 	</dependencies>
 
 	<build>
+		<finalName>community-server</finalName>
+
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/java</directory>
