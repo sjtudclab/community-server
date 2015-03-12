@@ -80,15 +80,17 @@ public class SecondGoodsController {
 	@ResponseBody
 	public String getDealGoods(HttpServletRequest request,
 			HttpServletResponse response) {
-		System.out.println("dealGoods haha");
+		int id = secondGoodsService.getMaxGoodsId();
+		System.out.println("dealGoods haha:"+id);
 		return "dealGoods success";
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public String getItem(@PathVariable("id") int id) throws JSONException, Exception {
+	public String getItem(@PathVariable("id") int id) {
 		JSONObject json = new JSONObject();
-		SecondGoods secondGoods = secondGoodsService.getSecondGoodsById(id);
+		json = secondGoodsService.getSecondGoodsInfoById(id);
+		/*SecondGoods secondGoods = secondGoodsService.getSecondGoodsById(id);
 		json.put("id", secondGoods.getId());
 				
 		json.put("category", URLEncoder.encode(secondGoods.getCategory(),"UTF-8"));			
@@ -97,53 +99,12 @@ public class SecondGoodsController {
 		json.put("imagePath", secondGoods.getImagePath());
 		json.put("desc", URLEncoder.encode(secondGoods.getDesc(),"UTF-8"));
 		json.put("owner", URLEncoder.encode(secondGoods.getOwner(),"UTF-8"));
-		json.put("phone", URLEncoder.encode(secondGoods.getPhone(),"UTF-8"));
+		json.put("phone", URLEncoder.encode(secondGoods.getPhone(),"UTF-8"));*/
 		
 		System.out.println("second goods:"+json.toString());
 		
 
 		return json.toString();
-	}
-	
-	
-	// form post to receive goods info.
-	@RequestMapping(value="create", method=RequestMethod.POST)  
-	@ResponseBody
-	public String createSecondGoods(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-
-		
-		MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
-		MultipartFile file1 = req.getFile("file");
-		String type = request.getParameter("dealType");
-		String title = request.getParameter("goodsTitle");
-		String desc = request.getParameter("goodsDescribe");
-		String category = request.getParameter("type1");
-		String location = request.getParameter("address");
-		String phone = request.getParameter("contactTel");
-		String owner = request.getParameter("contactName");
-		
-		if(!file1.isEmpty()){
-			ServletContext sc = request.getSession().getServletContext();
-			String dir = sc.getRealPath("/uploadimage");    //设定文件保存的目录
-			//sc.getRealPath(arg0)
-			
-			
-			String filename = file1.getOriginalFilename();    //得到上传时的文件名
-			FileUtils.writeByteArrayToFile(new File(dir,filename), file1.getBytes());
-			
-			System.out.println("file path:"+dir+"/"+filename);
-			
-			System.out.println("file:"+filename);
-
-		}
-		
-		System.out.println("create goods haha");
-		
-		
-		System.out.println(type+" "+title+" "+desc+" "+category+" "+location+" "+
-		phone + " "+owner);
-		return "create Goods success";
 	}
 	
 	

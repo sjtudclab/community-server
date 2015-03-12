@@ -13,4 +13,6 @@ import cn.edu.sjtu.se.dclab.server.entity.UserPublishedGoods;
  */
 public interface UserPublishedGoodsMapper {
 	public List<UserPublishedGoods> getPublishedInfoById(Integer id);
+	
+	public void createPublishedGoods(UserPublishedGoods tmp);
 }

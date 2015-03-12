@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});*/
 	
 	$.ajax({
-		url:"/archetype-server/rest/SecondGoods/latest",
+		url:"/community-server/rest/SecondGoods/latest",
 		type:"get",
 		dataType:"json",
 		success:function(obj){

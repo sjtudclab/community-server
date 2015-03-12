@@ -8,6 +8,14 @@
 		select * from user_publish_goods where userID=#{id};
 	</select>
 	
+	<insert id="createPublishedGoods" parameterType="UserPublishedGoods">
+		insert into user_publish_goods (userID,goodsID,stage) 
+			values (#{userID},#{goodsID},#{stage});
+		<selectKey resultType="int">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+	
 	
 
 	<resultMap type="UserPublishedGoods" id="dataResultMap">

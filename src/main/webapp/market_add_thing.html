@@ -25,6 +25,16 @@
 
     <title>发布物品页面</title>
 </head>
+
+<script type="text/javascript" language="javascript">
+	function submitYouFrom(){
+		document.getElementById('id_post_form').submit();
+		alert("submit success:");
+		//location.href = "market.html";
+		
+	}
+</script>
+
 <body class="metro">
     <header class="bg-dark" data-load="header.html"></header>
     <div class="">
@@ -45,8 +55,8 @@
                         </div>
                         <div class="second__add_cont_form">
                             <!-- enctype="multipart/form-data" -->
-                            <form enctype="multipart/form-data" id="id_post_form" method="post"
-                                action="/archetype-server/rest/SecondGoods/create" >
+                            <form enctype="multipart/form-data" name="id_post_form" id="id_post_form" method="post"
+                                action="/community-server/rest/publish/create" onsubmit="">
                                 <table style="width:100%;" class="bg-grayLight">
                                     <tbody>
                                         <tr>
@@ -201,10 +211,16 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                <!--
-                                                <button id="pub_submit" class="default large"  style="margin-left: 184px;">发布</button>
-                                                -->
+                                                <!-- 
+                                                <button id="pub_submit" class="default large"  style="margin-left: 184px;" 
+                                                	onclick="submitYouFrom('/community-server/rest/publish/create')">发布</button>
+                                                 -->
+                                                <!-- 
                                                 <input type="submit" value="提交">
+                                                 -->
+                                                 
+                                                 <input type="button" value="提交1" onclick="submitYouFrom()"/>
+                                                 
                                             </td>
                                         </tr>
                                         <tr></tr>

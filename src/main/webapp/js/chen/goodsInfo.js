@@ -27,12 +27,16 @@ $(document).ready(function(){
 	//alert("通过URL获取参数:" + $goodsID);
 
 	$.ajax({
-		url:"/archetype-server/rest/SecondGoods/" + $goodsID,
+		url:"/community-server/rest/SecondGoods/" + $goodsID,
 		type:"get",
 		dataType:"json",
 		success:function(obj){
 			//console.log("success:"+obj);
 			//alert(decodeURI(obj.title));
+			
+			$("#goods_id").html($goodsID);
+			$("#user_id").html(1);         // 用户 ID
+
 			$("#imagePath").attr("src", obj.imagePath);
 			//$("#imagePath").attr("src", "images/11.jpg");
 			$("#title").html(decodeURI(obj.title));

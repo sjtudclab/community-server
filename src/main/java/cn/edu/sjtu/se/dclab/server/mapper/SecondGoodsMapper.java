@@ -15,4 +15,8 @@ public interface SecondGoodsMapper {
 	public SecondGoods getSecondGoodsById(Integer id);
 	
 	public List<SecondGoods> getAllSecondGoods(Integer id);
+	
+	public void createSecondGoods(SecondGoods secondGoods);
+	
+	public int getMaxGoodsId();
 }
