@@ -81,11 +81,11 @@
 <script type="text/javascript">
 	$('#loginBtn').click(function () {
 		$.ajax({
-			url: '/rest/j_spring_security_check',
+			url: 'j_spring_security_check',
 			type: "POST",
 			data: $('form#loginForm').serializeArray(),
 			success: function () {
-				window.location = '/start-screen-tenement.html'
+				window.location = 'start-screen-tenement.html'
 			},
 			error: function() {
 				alert("用户名或密码错误")
@@ -96,19 +96,6 @@
 	$('form#loginForm').submit(function() {
 		return false;
 	});
-//			var postData = $(this).serializeArray();
-//			var formURL = '/rest/j_spring_security_check';
-//			$.ajax({
-//				url: formURL,
-//				type: "POST",
-//				data: postData,
-//				success:function() {
-//					window.location = '/'
-//				}
-//			});
-//			return false;
-//		});
-//	}
 </script>
 
 </body>
