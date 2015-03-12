@@ -50,5 +50,11 @@ public class UserController {
 		userService.updateUser(userTransfer);
 		return "success";
 	}
+	
+	@RequestMapping(value = "test", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String test(){
+		return "test";
+	}
 
 }

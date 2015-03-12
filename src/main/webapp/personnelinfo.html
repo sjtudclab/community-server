@@ -13,9 +13,10 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <script type="text/javascript" src="../js/info.js" />
-
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/info.js"></script>
+	
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
@@ -52,7 +53,7 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header"><i class="icon-wrench"></i> 人员管理</li>
-              <li class="active"><a id="userManagement" href="#">用户管理</a></li>
+              <li class="active"><a id="personnelManagement" href="#">用户管理</a></li>
               <li><a href="#">角色管理</a></li>
               <li class="nav-header"><i class="icon-user"></i>系统</li>
               <li><a href="#">设置</a></li>
@@ -71,15 +72,12 @@
 					<tr>
 						<th>ID</th>
 						<th>姓名</th>
-						<th>邮箱</th>
-						<th>电话</th>
 						<th>角色</th>
-						<th>状态</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-				<tr class="pending-user">
+				<!-- <tr class="pending-user">
 					<td>564</td>
 					<td>王大妈</td>
 					<td>wangdama@xxx.com</td>
@@ -110,7 +108,7 @@
           </td>
 					<td><span class="label label-important">终止</span></td>
 					<td><span class="user-actions"><a href="javascript:void(0);" class="label label-success">Approve</a> <a href="javascript:void(0);" class="label label-important">Reject</a></span></td>
-				</tr>
+				</tr> -->
 				</tbody>
 			</table>
 		  </div>
