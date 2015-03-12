@@ -82,7 +82,17 @@ public class SecondGoodsController {
 			HttpServletResponse response) {
 		int id = secondGoodsService.getMaxGoodsId();
 		System.out.println("dealGoods haha:"+id);
+		
 		return "dealGoods success";
+	}
+	
+	@RequestMapping(value="search/{name}", method=RequestMethod.GET)
+	@ResponseBody
+	public String getSearchGoodsByCategory(@PathVariable("name") String name) {
+		JSONArray array = new JSONArray();
+		array = secondGoodsService.searchGoodsByCategory(name);
+		System.out.println("search goods:"+name+" result:"+array.toString());
+		return array.toString();
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.GET)
