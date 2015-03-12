@@ -43,6 +43,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserTransfer getUserByUsername(String username) {
 		User user = userMapper.findByUserName(username);
+		if(user == null)
+			return null;
 		Collection<Role> roles = roleMapper.findByUserId(user.getId());
 		
 		UserTransfer userTransfer = new UserTransfer();
@@ -69,6 +71,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(UserTransfer userTransfer) {
 		User user = new User();
+	}
+
+	@Override
+	public UserTransfer authenticateUser(String username, String password) {
+		User user = userMapper.findByUserName(username);
+		if(user == null)
+			return null;
+		if(user.getPassword().equals(password)){
+			Collection<Role> roles = roleMapper.findByUserId(user.getId());
+			
+			UserTransfer userTransfer = new UserTransfer();
+			userTransfer.setId(user.getId());
+			userTransfer.setUsername(user.getUsername());
+			userTransfer.setRoles(roles);
+			
+			return userTransfer;
+		}else{
+			return null;
+		}
 	}
 
 }

@@ -21,13 +21,8 @@
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
 	</beans:bean>
 
-	<beans:bean id="authenticationProcessingFilter"
-		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
-		<beans:property name="authenticationManager" ref="authenticationManager" />
-		<beans:property name="authenticationFailureHandler"
-			ref="failureHandler" />
-		<beans:property name="authenticationSuccessHandler"
-			ref="successHandler" />
+	<beans:bean id="customAuthenticationProcessingFilter"
+		class="cn.edu.sjtu.se.dclab.server.security.CustomAuthenticationProcessingFilter">
 	</beans:bean>
 
 	<beans:bean id="securityDataSource"
@@ -53,11 +48,11 @@
 	<http realm="Protected API" use-expressions="true" auto-config="false"
 		entry-point-ref="unauthorizedEntryPoint" authentication-manager-ref="authenticationManager">
 		
-		<intercept-url pattern="/rest/j_spring_security_check" access="permitAll" />
-		<intercept-url pattern="/rest/**" access="permitAll" />
+		<intercept-url pattern="rest/login" access="permitAll" />
+		<intercept-url pattern="rest/**" access="permitAll" />
 
-		<custom-filter ref="authenticationProcessingFilter"
-			position="FORM_LOGIN_FILTER" />
+		<!-- <custom-filter ref="customAuthenticationProcessingFilter"
+			position="FORM_LOGIN_FILTER" /> -->
 	</http>
 
 </beans:beans>
