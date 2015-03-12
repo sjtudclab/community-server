@@ -40,11 +40,13 @@
 
 	<authentication-manager id="authenticationManager">
 		<authentication-provider>
+			<!--
 			<password-encoder ref="passwordEncoder" />
+			-->
 			<jdbc-user-service data-source-ref="securityDataSource"
-				users-by-username-query="select username,password,enabled where username=?"
-				authorities-by-username-query="select u.username,p.name from user u,user_role ur,role_permission rp,permission p 
-				where ur.userId = u.id and rp.roleId = ur.id and rp.permissionId = p.id and u.username = ?" />
+				users-by-username-query="select username,password,enabled from user where username=?"
+				authorities-by-username-query="select u.username,p.name from user u,user_role ur, user_role_permission rp,permission p
+				where ur.user_id = u.id and rp.user_role_id = ur.id and rp.permission_id = p.id and u.username = ?" />
 		</authentication-provider>
 	</authentication-manager>
 
