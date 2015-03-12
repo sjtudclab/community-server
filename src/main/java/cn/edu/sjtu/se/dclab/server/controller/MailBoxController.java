@@ -20,7 +20,7 @@ import cn.edu.sjtu.se.dclab.server.transfer.MailBoxTransfer;
  * @author changyi yuan
  */
 @Controller
-@RequestMapping("/mailbox")
+@RequestMapping("/mailboxs")
 public class MailBoxController {
 	@Autowired
 	private MailBoxService mailBoxService;
