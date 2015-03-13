@@ -10,7 +10,7 @@
 
     <resultMap type="Announcement" id="AnnouncementMap">
         <id property="id" column="id" />
-        <result property="content" column="floor" />
+        <result property="content" column="content" />
     </resultMap>
 
 </mapper>
