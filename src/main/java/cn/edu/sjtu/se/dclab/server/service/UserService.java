@@ -12,6 +12,8 @@ import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 public interface UserService{
 	public UserTransfer getUserByUsername(String username);
 	public Collection<UserTransfer> getAllUsers();
+
+	public Collection<UserTransfer> getUserByCategory(String category);
 	
 	public void updateUser(UserTransfer userTransfer);
 	

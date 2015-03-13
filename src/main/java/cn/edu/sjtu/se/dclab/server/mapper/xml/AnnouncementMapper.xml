@@ -8,6 +8,10 @@
         select * from announcement;
     </select>
 
+    <insert id="save" keyProperty="id" parameterType="Announcement">
+        INSERT INTO announcement (content) VALUES (#{content})
+    </insert>
+
     <resultMap type="Announcement" id="AnnouncementMap">
         <id property="id" column="id" />
         <result property="content" column="content" />
