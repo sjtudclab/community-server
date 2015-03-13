@@ -46,11 +46,11 @@
 			            <legend>登录</legend>
 			            <!--input-->
 			            <div class="input-control text" data-role="input-control">
-			                <input type="text" placeholder="用户名" name="j_username">
+			                <input type="text" placeholder="用户名" name="username">
 			                <button class="btn-clear" tabindex="-1" type="button"></button>
 			            </div>
 			            <div class="input-control password" data-role="input-control">
-			                <input type="password" placeholder="密码" autofocus="" name="j_password">
+			                <input type="password" placeholder="密码" autofocus="" name="password">
 			                <button class="btn-reveal" tabindex="-1" type="button"></button>
 			            </div>
 						<!--Checkbox-->
@@ -81,7 +81,7 @@
 <script type="text/javascript">
 	$('#loginBtn').click(function () {
 		$.ajax({
-			url: 'j_spring_security_check',
+			url: 'rest/users/login',
 			type: "POST",
 			data: $('form#loginForm').serializeArray(),
 			success: function () {
