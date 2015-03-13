@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.CitizenMapper">
+
+    <select id="findAll" resultMap="CitizenMap">
+        select * from citizen;
+    </select>
+
+    <resultMap type="Citizen" id="CitizenMap">
+        <id property="id" column="id" />
+        <result property="credentialType" column="credential_type" />
+        <result property="marriageStatus" column="marriage_status" />
+        <result property="employmentStatus" column="employment_status" />
+        <result property="residenceType" column="residence_type" />
+        <result property="residenceStatus" column="residence_status" />
+        <result property="nation" column="nation" />
+        <result property="gender" column="gender" />
+        <result property="emigrationStatus" column="emigration_status" />
+        <result property="educationStatus" column="education_status" />
+        <result property="politicsStatus" column="politics_status" />
+        <result property="incomeCategory" column="income_category" />
+    </resultMap>
+
+</mapper>
