@@ -5,13 +5,13 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.MailBoxMapper">
 
     <select id="findAllByUser" resultMap="MailBoxMap">
-        SELECT id, from, to, content, submited_date
+        SELECT id, `from`, `to`, content, submited_date
         FROM mailbox
-        WHERE from = #{userId} or to = #{userId}
+        WHERE `from` = #{userId} or `to` = #{userId}
     </select>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="MailBox">
-        INSERT INTO mailbox (from, to, submited_date, content)
+        INSERT INTO mailbox (`from`, `to`, submited_date, content)
         VALUES (#{from}, #{to}, #{submitedDate}, #{content})
     </insert>
 
