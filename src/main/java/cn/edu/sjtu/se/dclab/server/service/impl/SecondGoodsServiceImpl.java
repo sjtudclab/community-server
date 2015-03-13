@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,36 @@ public class SecondGoodsServiceImpl implements SecondGoodsService{
 	@Override
 	public void createSecondGoods(SecondGoods secondGoods) {
 		secondGoodsMapper.createSecondGoods(secondGoods);
+	}
+	
+	@Override
+	public JSONArray searchGoodsByCategory(String s) {
+		JSONArray array = new JSONArray();
+		List<SecondGoods> list = secondGoodsMapper.searchGoodsByCategory(s);
+		
+		for (int i=0; i<list.size(); i++) {
+			SecondGoods secondGoods = list.get(i);
+			
+			JSONObject json = new JSONObject();
+			try {
+				json.put("id", secondGoods.getId());
+				
+				json.put("category", URLEncoder.encode(secondGoods.getCategory() ,"UTF-8"));
+				json.put("type", URLEncoder.encode(secondGoods.getType() ,"UTF-8"));
+				json.put("title",URLEncoder.encode(secondGoods.getTitle() ,"UTF-8"));
+				json.put("imagePath", secondGoods.getImagePath());
+				json.put("desc", URLEncoder.encode(secondGoods.getDesc() ,"UTF-8"));
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			array.put(json);
+		}
+		
+		return array;
 	}
 
 }

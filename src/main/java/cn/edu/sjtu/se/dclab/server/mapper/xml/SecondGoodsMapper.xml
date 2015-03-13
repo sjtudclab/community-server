@@ -16,6 +16,10 @@
 		select max(id) from second_goods;
 	</select>
 	
+	<select id="searchGoodsByCategory" parameterType="java.lang.String" resultMap="secondGoodsResultMap">
+		select * from second_goods where category like #{category};
+	</select>
+	
 	<insert id="createSecondGoods" parameterType="SecondGoods">
 		insert into second_goods (id,category,type,title,imagePath,`desc`,owner,phone) 
 			values (#{id},#{category},#{type},#{title},#{imagePath},#{desc},#{owner},#{phone});

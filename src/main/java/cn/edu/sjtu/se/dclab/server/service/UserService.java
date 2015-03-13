@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.service;
 
 import java.util.Collection;
 
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 
 /**
@@ -13,4 +14,6 @@ public interface UserService{
 	public Collection<UserTransfer> getAllUsers();
 	
 	public void updateUser(UserTransfer userTransfer);
+	
+	public UserTransfer authenticateUser(String username,String password);
 }

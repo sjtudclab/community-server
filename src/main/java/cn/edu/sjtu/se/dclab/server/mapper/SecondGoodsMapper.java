@@ -19,4 +19,6 @@ public interface SecondGoodsMapper {
 	public void createSecondGoods(SecondGoods secondGoods);
 	
 	public int getMaxGoodsId();
+	
+	public List<SecondGoods> searchGoodsByCategory(String s);
 }
