@@ -2,8 +2,10 @@ package cn.edu.sjtu.se.dclab.server.controller;
 
 import java.util.Collection;
 
+import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletRequest;
 
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -81,7 +83,25 @@ public class UserController {
 		userService.updateUser(userTransfer);
 		return "success";
 	}
-	
+
+	@RequestMapping(value = "committee", method = RequestMethod.GET, produces = "application/json;utf-8")
+	@ResponseBody
+	public Collection<UserTransfer> getAllCommitteeUser() {
+		return userService.getUserByCategory("居委会");
+	}
+
+	@RequestMapping(value = "owner", method = RequestMethod.GET, produces = "application/json;utf-8")
+	@ResponseBody
+	public Collection<UserTransfer> getAllOwnerUser() {
+		return userService.getUserByCategory("业委会");
+	}
+
+	@RequestMapping(value = "tenement", method = RequestMethod.GET, produces = "application/json;utf-8")
+	@ResponseBody
+	public Collection<UserTransfer> getAllTenementUser() {
+		return userService.getUserByCategory("物业");
+	}
+
 	@RequestMapping(value = "test", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String test(){

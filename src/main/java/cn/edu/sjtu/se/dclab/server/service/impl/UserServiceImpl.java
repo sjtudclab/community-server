@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,54 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
 			userTransfers.add(userTransfer);
 		}
+		return userTransfers;
+	}
+
+	@Override
+	public Collection<UserTransfer> getUserByCategory(String category) {
+		Collection<User> users = userMapper.findAll();
+		Collection<UserTransfer> userTransfers = new ArrayList<>();
+
+		Iterator<User> iter = users.iterator();
+		while (iter.hasNext()) {
+			User user = iter.next();
+			Collection<Role> roles = roleMapper.findByUserId(user.getId());
+
+			UserTransfer userTransfer = new UserTransfer();
+			userTransfer.setId(user.getId());
+			userTransfer.setUsername(user.getUsername());
+			userTransfer.setRoles(roles);
+
+			boolean flag = false;
+			if (category.equals("业委会")) {
+				for (Role role : roles) {
+					if (role.getName().endsWith("长")) {
+						flag = true;
+						break;
+					}
+				}
+				if (flag) userTransfers.add(userTransfer);
+			} else if (category.equals("居委会")) {
+				for (Role role : roles) {
+					if (role.getName().endsWith("主任")
+							|| role.getName().endsWith("书记")
+							|| role.getName().endsWith("员")) {
+						flag = true;
+						break;
+					}
+				}
+				if (flag) userTransfers.add(userTransfer);
+			} else {
+				for (Role role : roles) {
+					if (role.getName().endsWith("保安")) {
+						flag = true;
+						break;
+					}
+				}
+				if (flag) userTransfers.add(userTransfer);
+			}
+		}
+
 		return userTransfers;
 	}
 

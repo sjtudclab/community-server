@@ -32,7 +32,7 @@
 <body class="metro">
 <nav class="navigation-bar dark">
     <div class="navigation-bar-content">
-        <a href="/" class="element"><span class="icon-grid-view"></span> 可信社区 <sup>1.0</sup></a>
+        <a href="start-screen-committee.html" class="element"><span class="icon-grid-view"></span> 可信社区 <sup>1.0</sup></a>
         <span class="element-divider"></span>
 
         <a class="pull-menu" href="#"></a>
@@ -86,7 +86,7 @@
 
 <div class="page">
     <h1>
-        <a href="/"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        <a href="start-screen-committee.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
         社区公告
     </h1>
 
@@ -109,11 +109,10 @@
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({content:$('textarea#content').val()}),
-            dataType: 'json',
-            success: function () {
+            success: function (object) {
                 alert("公告发布成功");
             },
-            error: function() {
+            error: function(object) {
                 alert("公告发布失败");
             }
         })
