@@ -9,6 +9,10 @@
         FROM user
         WHERE username = #{username}
     </select>
+    
+    <select id="findAll" resultMap="UserMap">
+    	SELECT * FROM user;
+    </select>
 
     <resultMap id="UserMap" type="User">
         <id property="id" column="id" />

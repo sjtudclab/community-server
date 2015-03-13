@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
 			userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
+			userTransfers.add(userTransfer);
 		}
 		return userTransfers;
 	}

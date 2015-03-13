@@ -41,8 +41,10 @@ public class MailBoxController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public void createMailBox(MailBoxTransfer mailBoxTransfer) {
+	@ResponseBody
+	public String createMailBox(MailBoxTransfer mailBoxTransfer) {
 		MailBox mailBox = new MailBox(mailBoxTransfer);
 		mailBoxService.createMailBox(mailBox);
+		return "suceess";
 	}
 }

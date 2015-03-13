@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;
@@ -30,6 +31,7 @@ public class RoleController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	public Collection<Role> getAllRoles(){
 		return roleService.getAllRoles();
 	}

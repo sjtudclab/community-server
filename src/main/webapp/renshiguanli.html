@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="GB2312">
+  <head>
+    <meta charset="utf-8">
+    <title>智慧社区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin panel developed with the Bootstrap from Twitter.">
+    <meta name="author" content="travis">
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+	  <link href="css/site.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    $(document).ready(function(){    	
+    	var form = $("form fieldset");    	
+    	var checkboxs = "";
+    	
+    	$.get("rest/users","",function(data,status){
+    		$(data).each(function(user){
+        		checkboxs += "<input type='checkbox'>" + user.username + "</input>"
+    		});
+    	});
+    	
+    	$.get("rest/roles","",function(data,status){
+    		$(data).each(function(role){
+    			var group = "<div class='control-group'>";
+    			group += "<label class='control-label'>" + role.name + "</lable>";
+    			group += "<div class='controls'>" + checkboxs + "</div>";
+    			group += "</div>"
+    			form.append(group);
+    		});
+    	});
+    	
+    });
+    </script>
+    
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">人事管理系统</a>
+          <div class="btn-group pull-right">
+			<a class="btn" href="my-profile.html"><i class="icon-user"></i> 管理员</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="caret"></span>
+            </a>
+            
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  <form class="form-horizontal">
+    <fieldset>
+
+    </fieldset>
+  </form>
+
+    
+
+
+
+    
+  </body>
+</html>
