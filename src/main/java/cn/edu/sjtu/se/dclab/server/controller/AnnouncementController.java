@@ -33,6 +33,7 @@ public class AnnouncementController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public void save(@RequestBody Announcement announcement) {
         announcementService.save(announcement);
     }
