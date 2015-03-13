@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.AnnouncementMapper">
+
+    <select id="findAll" resultMap="AnnouncementMap">
+        select * from announcement;
+    </select>
+
+    <resultMap type="Announcement" id="AnnouncementMap">
+        <id property="id" column="id" />
+        <result property="content" column="floor" />
+    </resultMap>
+
+</mapper>

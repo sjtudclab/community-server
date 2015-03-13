@@ -12,6 +12,7 @@
         <typeAlias alias="Permission" type="cn.edu.sjtu.se.dclab.server.entity.Permission" />
         <typeAlias alias="Citizen" type="cn.edu.sjtu.se.dclab.server.entity.Citizen" />
         <typeAlias alias="Apartment" type="cn.edu.sjtu.se.dclab.server.entity.Apartment" />
+        <typeAlias alias="Announcement" type="cn.edu.sjtu.se.dclab.server.entity.Announcement" />
 
         <typeAlias alias="Item" type="cn.edu.sjtu.se.dclab.server.entity.Item" />
         <typeAlias alias="Block_info" type="cn.edu.sjtu.se.dclab.server.entity.Block_info" />

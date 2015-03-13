@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.ApartmentMapper">
 
     <select id="findAll" resultMap="ApartmentMap">
-        select * from citizen;
+        select * from apartment;
     </select>
 
     <resultMap type="Apartment" id="ApartmentMap">
@@ -15,6 +15,10 @@
         <result property="owner" column="owner" />
         <result property="resident" column="resident" />
         <result property="serialNumber" column="serial_number" />
+        <association property="owner" javaType="Apartment">
+            <id property="id" column="owner" />
+        </association>
+
     </resultMap>
 
 </mapper>
