@@ -1,85 +1,162 @@
 <!DOCTYPE html>
 <html lang="GB2312">
-  <head>
-    <meta charset="utf-8">
-    <title>智慧社区</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Admin panel developed with the Bootstrap from Twitter.">
-    <meta name="author" content="travis">
+<head>
+<meta charset="utf-8">
+<title>智慧社区</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Admin panel developed with the Bootstrap from Twitter.">
+<meta name="author" content="travis">
 
-    <link href="css/bootstrap.css" rel="stylesheet">
-	  <link href="css/site.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/site.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
     
-    <script type="text/javascript">
-    
-    $(document).ready(function(){    	
-    	var form = $("form fieldset");    	
-    	var checkboxs = "";
+  $(document).ready(function(){
+	  var checkFlag = false;
+	  var adjustFlag = false;
+	  
+	  $("#personnelCheck").click(function(){
+		  $(this).attr("class","active");
+		   $("#personnelAdjust").attr("class","");
+		   $("form").hide();
+		   if(checkFlag){
+			   $("#check").show();
+			   return false;
+		   }
+		   
+		   $.get("rest/users","",function(users,status){
+			   var divs = "<div id=check>";
+			   $(users).each(function(index,user){
+				   var roleNames = "";
+				   $.each(user.roles,function(n,value){
+					   roleNames += value.name + "、";
+				   });
+				   roleNames = roleNames.substring(0,roleNames.length-1);
+				   divs += "<div class='span3' style='text-align:center'><image src='images/person.jpg'/>";
+				   divs += "<p>" + user.username + "：" + roleNames + "</p>";
+				   divs += "</div>";
+			   });
+			   divs += "</div>";
+			   $("div.span9").append(divs);
+			   checkFlag = true;
+		   });
+		  return false;
+	  });
+	  
+	  $("#personnelAdjust").click(function(){
+		   $(this).attr("class","active");
+		   $("#personnelCheck").attr("class","");
+		   $("#check").hide();
+		   if(adjustFlag){
+			   $("form").show();
+			   return false;
+		   }
+		  
+		    var form = $("<form>");
+		    var table = $("<table  class='table table-bordered' contenteditable='true'>")
+		    var thead = $("<thead>");
+	    	var tbody = $("<tbody>");    	
+	    	
+	    	$.get("rest/users","",function(datas,status){
+
+	        	var checkboxs = "";
+	    		$.get("rest/roles","",function(roles,status){
+	    			var n = 0;
+	        		$(roles).each(function(index1,role){
+	            		checkboxs += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp";
+	            		n += 1;
+	            		if(n == 5){
+	            			checkboxs += "<br><br>";
+	            			n=0;
+	            		}
+	        		});
+	        		
+	        		thead.append("<tr><th>人员</th><th>角色</th></tr>","</thead>");	        		
+	        		$(datas).each(function(index2,user){
+	        			var tr = "<tr>";
+	        			tr += "<td>" + "<input type='hidden' name='userId' value=" + user.id + "/>" + user.username + "</td>";
+	        			tr += "<td>" + checkboxs + "</td>";
+	        			tr += "</tr>"
+	        			tbody.append(tr);
+	        		});
+	        		
+	        		tbody.append("</tbody>");
+	        		table.append(thead,tbody,"</tbody>");
+	        		form.append(table,"<button type='submit' class='btn'>提交</button>","</form>");
+	        		$("div.span9").append(form);
+	        		adjustFlag = true;
+	        	});
+	    		
+	    	});
+	    	return false;
+	  });
+	  	
     	
-    	$.get("rest/users","",function(data,status){
-    		$(data).each(function(index,user){
-        		checkboxs += "<input type='checkbox'>" + user.username + "</input>"
-    		});
-    	});
-    	
-    	$.get("rest/roles","",function(data,status){
-    		$(data).each(function(index,role){
-    			var group = "<div class='control-group'>";
-    			group += "<label class='control-label'>" + role.name + "</lable>";
-    			group += "<div class='controls'>" + checkboxs + "</div>";
-    			group += "</div>"
-    			form.append(group);
-    		});
-    	});
-    	
-    });
+    }); 
     </script>
-    
-  </head>
-  <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">人事管理系统</a>
-          <div class="btn-group pull-right">
-			<a class="btn" href="my-profile.html"><i class="icon-user"></i> 管理员</a>
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <span class="caret"></span>
-            </a>
-            
-          </div>
-          <div class="nav-collapse">
-            <ul class="nav">
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">人事管理系统</a>
+				<div class="btn-group pull-right">
+					<a class="btn" href="my-profile.html"><i class="icon-user"></i>
+						管理员</a> <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<span class="caret"></span>
+					</a>
+
+				</div>
+				<div class="nav-collapse">
+					<ul class="nav">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<!-- left -->
+			<div class="span3">
+			
+				<div class="well sidebar-nav">
+		            <ul class="nav nav-list">
+		             <!--  <li class="nav-header"><i class="icon-wrench"></i> 人事管理</li> -->
+		              <li class="active" id="personnelCheck"><a  href="#">查看人事</a></li>
+		              <li id="personnelAdjust"><a href="#">调整人事</a></li>
+		            </ul>
+	          	</div>
+			
+			</div>
+			
+			<!-- right -->
+			<div class="span9">
+			</div>
+		</div>
+	</div>
 
 
 
 
-  <form class="form-horizontal">
-    <fieldset>
-
-    </fieldset>
-  </form>
-
-    
 
 
 
-    
-  </body>
+
+
+</body>
 </html>
