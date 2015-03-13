@@ -3,13 +3,16 @@ package cn.edu.sjtu.se.dclab.server.service.impl;
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
 import cn.edu.sjtu.se.dclab.server.mapper.CitizenMapper;
 import cn.edu.sjtu.se.dclab.server.service.CitizenService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
  * Created by Huiyi on 2015/3/13.
  */
+@Service
 public class CitizenServiceImpl implements CitizenService {
 
     @Autowired

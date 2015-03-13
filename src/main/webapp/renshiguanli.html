@@ -23,13 +23,13 @@
     	var checkboxs = "";
     	
     	$.get("rest/users","",function(data,status){
-    		$(data).each(function(user){
+    		$(data).each(function(index,user){
         		checkboxs += "<input type='checkbox'>" + user.username + "</input>"
     		});
     	});
     	
     	$.get("rest/roles","",function(data,status){
-    		$(data).each(function(role){
+    		$(data).each(function(index,role){
     			var group = "<div class='control-group'>";
     			group += "<label class='control-label'>" + role.name + "</lable>";
     			group += "<div class='controls'>" + checkboxs + "</div>";

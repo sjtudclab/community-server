@@ -12,7 +12,7 @@
         <id property="id" column="id" />
         <result property="floor" column="floor" />
         <result property="location" column="location" />
-        <result property="owner" column="owner" />
+       <!--  <result property="owner" column="owner" /> -->
         <result property="resident" column="resident" />
         <result property="serialNumber" column="serial_number" />
         <association property="owner" javaType="Apartment">

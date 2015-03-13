@@ -1,34 +1,38 @@
 package cn.edu.sjtu.se.dclab.server.service.impl;
 
-import cn.edu.sjtu.se.dclab.server.entity.Announcement;
-import cn.edu.sjtu.se.dclab.server.service.AnnouncementService;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.edu.sjtu.se.dclab.server.entity.Announcement;
+import cn.edu.sjtu.se.dclab.server.mapper.AnnouncementMapper;
+import cn.edu.sjtu.se.dclab.server.service.AnnouncementService;
 
 /**
  * Created by Huiyi on 2015/3/13.
  */
+@Service
 public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Autowired
-    private AnnouncementService announcementService;
+    private AnnouncementMapper announcementMapper;
 
-    public AnnouncementService getAnnouncementService() {
-        return announcementService;
+    public AnnouncementMapper getAnnouncementMapper() {
+        return announcementMapper;
     }
 
-    public void setAnnouncementService(AnnouncementService announcementService) {
-        this.announcementService = announcementService;
+    public void setAnnouncementMapper(AnnouncementMapper announcementMapper) {
+        this.announcementMapper = announcementMapper;
     }
 
     @Override
     public void save(Announcement announcement) {
-        announcementService.save(announcement);
+        announcementMapper.save(announcement);
     }
 
     @Override
     public Collection<Announcement> findAll() {
-        return announcementService.findAll();
+        return announcementMapper.findAll();
     }
 }

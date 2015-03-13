@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.mapper;
 
+import java.util.Collection;
+
 import cn.edu.sjtu.se.dclab.server.entity.Announcement;
 
 /**
@@ -8,5 +10,5 @@ import cn.edu.sjtu.se.dclab.server.entity.Announcement;
 public interface AnnouncementMapper {
     public void save(Announcement announcement);
 
-    public void findAll();
+    public Collection<Announcement> findAll();
 }
