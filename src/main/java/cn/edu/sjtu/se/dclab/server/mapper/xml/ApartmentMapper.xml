@@ -15,7 +15,7 @@
        <!--  <result property="owner" column="owner" /> -->
         <result property="resident" column="resident" />
         <result property="serialNumber" column="serial_number" />
-        <association property="owner" javaType="Apartment">
+        <association property="owner" javaType="Citizen">
             <id property="id" column="owner" />
         </association>
 
