@@ -8,6 +8,10 @@
 		select * from user_publish_goods where userID=#{id};
 	</select>
 	
+	<select id="getGoodsByStage" parameterType="java.lang.String" resultMap="dataResultMap">
+		select * from user_publish_goods where stage=#{stage};
+	</select>
+	
 	<insert id="createPublishedGoods" parameterType="UserPublishedGoods">
 		insert into user_publish_goods (userID,goodsID,stage) 
 			values (#{userID},#{goodsID},#{stage});

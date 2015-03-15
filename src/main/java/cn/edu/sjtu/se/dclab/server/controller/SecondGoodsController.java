@@ -95,6 +95,7 @@ public class SecondGoodsController {
 		return array.toString();
 	}
 	
+	
 	@RequestMapping(value="{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public String getItem(@PathVariable("id") int id) {
@@ -134,6 +135,15 @@ public class SecondGoodsController {
 		
 		System.out.println("test user goods haha");
 		return "test Goods success";
+	}
+	
+	@RequestMapping(value="stage/{stage}", method=RequestMethod.GET)
+	@ResponseBody
+	public String getGoodsByStage(@PathVariable("stage") String stage) {
+		JSONArray array = new JSONArray();
+		array =service.getGoodsByStage(stage);
+		System.out.println("stage goods:"+stage+" result:"+array.toString());
+		return array.toString();
 	}
 
 }

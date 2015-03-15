@@ -66,7 +66,11 @@ public class GoodsPublishController {
 		
 		// get form
 		MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
+		
 		MultipartFile file = req.getFile("file");
+		
+		// req.setCharacterEncoding("utf-8");
+		
 		String type = request.getParameter("dealType");
 		String title = request.getParameter("goodsTitle");
 		String desc = request.getParameter("goodsDescribe");

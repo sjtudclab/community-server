@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.edu.sjtu.se.dclab.server.entity.SecondGoods;
 import cn.edu.sjtu.se.dclab.server.entity.UserPublishedGoods;
 import cn.edu.sjtu.se.dclab.server.mapper.UserPublishedGoodsMapper;
 import cn.edu.sjtu.se.dclab.server.service.SecondGoodsService;
@@ -66,6 +65,22 @@ public class UserPublishedGoodsServiceImpl implements UserPublishedGoodsService{
 		tmp.setStage(stage);
 		
 		mapper.createPublishedGoods(tmp);
+	}
+	
+	@Override
+	public JSONArray getGoodsByStage(String stage) {
+		JSONArray array = new JSONArray();
+		List<UserPublishedGoods> list = mapper.getGoodsByStage(stage);
+		
+		for (int i=0; i<list.size(); i++) {
+			UserPublishedGoods tmp = list.get(i);
+			JSONObject json = new JSONObject();
+			json = goodsService.getSecondGoodsInfoById(tmp.getGoodsID());
+			
+			array.put(json);
+		}
+		
+		return array;
 	}
 
 }

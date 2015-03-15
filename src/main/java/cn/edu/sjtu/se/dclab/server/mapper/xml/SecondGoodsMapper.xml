@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="searchGoodsByCategory" parameterType="java.lang.String" resultMap="secondGoodsResultMap">
-		select * from second_goods where category like #{category};
+		select * from second_goods where title like CONCAT('%',#{title},'%') ;
 	</select>
 	
 	<insert id="createSecondGoods" parameterType="SecondGoods">
