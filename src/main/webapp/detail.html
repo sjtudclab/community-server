@@ -37,6 +37,9 @@
    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="content/ico/apple-touch-icon-72-precomposed.png">
    <link rel="apple-touch-icon-precomposed" href="content/ico/apple-touch-icon-57-precomposed.png">
   
+
+
+  
    <!-- All JavaScript at the bottom, except for Modernizr and Respond.
       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
@@ -93,7 +96,7 @@
 			var timeID=setTimeout(showLeftTime,1000);
 		}
 
-/*		function showManager()
+		function showManager()
 		{
 			$.ajax(
 			{
@@ -107,9 +110,67 @@
 
 			}
 			)
-		}*/
+		}
 
 	})
+
+    function changeBasicInfo() {
+		
+		var cancel_button = document.getElementById("BasicInfo").innerHTML;
+		
+        var temp = document.getElementById("BasicInfo_1").innerHTML;
+        document.all.BasicInfo_1.innerHTML = "<input id=\"BasicInfo_1_in\" type=\"text\" value=\""+temp+"\" >";
+        temp = document.getElementById("BasicInfo_2").innerHTML;
+        document.all.BasicInfo_2.innerHTML = "<input id=\"BasicInfo_2_in\" type=\"text\" value=\""+temp+"\" >";
+        temp = document.getElementById("BasicInfo_3").innerHTML;
+        document.all.BasicInfo_3.innerHTML = "<input id=\"BasicInfo_3_in\" type=\"text\" value=\""+temp+"\" >";
+        temp = document.getElementById("BasicInfo_4").innerHTML;
+        document.all.BasicInfo_4.innerHTML = "<input id=\"BasicInfo_4_in\" type=\"text\" value=\""+temp+"\" >";
+        temp = document.getElementById("BasicInfo_5").innerHTML;
+        document.all.BasicInfo_5.innerHTML = "<input id=\"BasicInfo_5_in\" type=\"text\" value=\""+temp+"\" >";
+        temp = document.getElementById("BasicInfo_6").innerHTML;
+        document.all.BasicInfo_6.innerHTML = "<input id=\"BasicInfo_6_in\" type=\"text\" value=\""+temp+"\" >";
+        temp = document.getElementById("BasicInfo_7").innerHTML;
+        document.all.BasicInfo_7.innerHTML = "<input id=\"BasicInfo_7_in\" type=\"text\" value=\""+temp+"\" >";
+        temp = document.getElementById("BasicInfo_8").innerHTML;
+        document.all.BasicInfo_8.innerHTML = "<input id=\"BasicInfo_8_in\" type=\"text\" value=\""+temp+"\" >";
+        document.getElementById("BasicInfo_change").style.display="block";
+        
+		document.getElementById("BasicInfo_cancel").onclick = function(){
+			changeBasicInfoButton(cancel_button);   
+		}
+			     
+    }
+	
+	function changeBasicInfoButton(flag) 
+	{
+		if (flag == "true")
+			{
+				var temp = document.getElementById("BasicInfo_1_in").value;
+				document.getElementById("BasicInfo_1").innerHTML = temp;
+				temp = document.getElementById("BasicInfo_2_in").value;
+				document.getElementById("BasicInfo_2").innerHTML = temp;
+				temp = document.getElementById("BasicInfo_3_in").value;
+				document.getElementById("BasicInfo_3").innerHTML = temp;
+				temp = document.getElementById("BasicInfo_4_in").value;
+				document.getElementById("BasicInfo_4").innerHTML = temp;
+				temp = document.getElementById("BasicInfo_5_in").value;
+				document.getElementById("BasicInfo_5").innerHTML = temp;
+				temp = document.getElementById("BasicInfo_6_in").value;
+				document.getElementById("BasicInfo_6").innerHTML = temp;
+				temp = document.getElementById("BasicInfo_7_in").value;
+				document.getElementById("BasicInfo_7").innerHTML = temp;
+				temp = document.getElementById("BasicInfo_8_in").value;
+				document.getElementById("BasicInfo_8").innerHTML = temp;
+				document.getElementById("BasicInfo_change").style.display="none";
+				
+			}
+		else
+			{
+				document.getElementById("BasicInfo_change").style.display="none";
+				document.all.BasicInfo.innerHTML = flag;
+			}
+	}
 
 	</script>
 
@@ -195,25 +256,47 @@
              <div class="page-header">
                <h1>房屋信息</h1>
              </div>
+   			<div id = "BasicInfo_temp_1">
+			 <table width="100%" border="0" >
+			 	<tr>
+			 		<th>
+			 			<h3 align = "left">基本信息</h3>     
+			 		</th>
+			 		<th>
+			 			<a style="float:right; text-align:right" onclick="changeBasicInfo()">修改</a>
+			 		</th>
+			 	</tr>
+			 </table>  			
+             </div>
+             
+             <div id = "BasicInfo">
+              <table width="100%" border="1" cellspacing="0" cellpadding="0">
+                <tr><th>商品住宅名称</th><th id = "BasicInfo_1">block1-102</th></tr>
+                <tr><th>建筑面积</th><th id = "BasicInfo_2">100平方米</th></tr>
+                <tr><th>使用面积</th><th id = "BasicInfo_3">60平方米</th></tr>
+                <tr><th>房主姓名</th><th id = "BasicInfo_4">张三</th></tr>
+                <tr><th>房主年龄</th><th id = "BasicInfo_5">60</th></tr>
+                <tr><th>房主学历</th><th id = "BasicInfo_6">小学</th></tr>
+                <tr><th>房主婚姻状况</th><th id = "BasicInfo_7">已婚</th></tr>
+                <tr><th>房主工作情况</th><th id = "BasicInfo_8">退休</th></tr>
+              </table>
+              <div id = "BasicInfo_change" style="display:none;">
+               <table width="100%" cellspacing="0" cellpadding="0">
+                	<tr>
+                		<th>
+                			<button align = "center" onclick = "changeBasicInfoButton('true')">确定</button>
+                		</th>
+                		<th>
+                			<button align = "center" id = "BasicInfo_cancel" onclick = "">取消</button>
+                		</th>
+                	</tr>
+                </table>
+               </div>
+             </div>
+             <p>&nbsp;</p>
+			 <p>&nbsp;</p>
    
-             <h3>基本信息</h3>
-             <p>房屋建筑面积XXX平方米，X室X厅...</p>
-<!--    <pre class="prettyprint linenums">
-   &lt;!DOCTYPE html&gt;
-   &lt;html lang="en"&gt;
-     ...
-   &lt;/html&gt;
-   </pre> -->
-   
-             <h3>户主信息</h3>
-             <ul>
-               <li><code>姓名：</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;王XX</li>
-               <li><code>身份证号：</code> 301234567898745632</li>
-               <li><code>年龄：</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;70 </li>
-               <li><code>学历：</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小学</li>
-               <li><code>婚姻情况：</code> 已婚</li>
-               <li><code>工作情况：</code> 退休</li>
-             </ul>
+ 
 
            </section>
    
