@@ -23,66 +23,24 @@
     <script src="js/load-metro.js"></script>
 
     <!-- Local JavaScript -->
-    <script src="js/docs.js"></script>
-    <script src="js/github.info.js"></script>
+    <script>
+	$(document).ready(function(){
+	  $("#hide").click(function(){
+	    $("#friend").hide();
+	    $("#friend2").hide();
+	  });
+	  $("#show").click(function(){
+	    $("#friend").show();
+	    $("#friend2").show();
+	  });
+	});
+	</script>
 
     <title>左邻右舍</title>
 </head>
 	
 <body class="metro">
-    <nav class="navigation-bar dark">
-                <div class="navigation-bar-content">
-                    <a href="/" class="element"><span class="icon-grid-view"></span> 可信社区 <sup>1.0</sup></a>
-                    <span class="element-divider"></span>
-
-                    <a class="pull-menu" href="#"></a>
-                    <ul class="element-menu">
-                        <li>
-                            <a class="dropdown-toggle" href="#">社区公告</a>
-                            <ul class="dropdown-menu dark" data-role="dropdown">
-                                <li><a href="Announcement.html">公告浏览</a></li>
-                                <li class="disabled"><a href="#">公告管理</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="dropdown-toggle"  href="Neighbour.html">左邻右舍</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-toggle"  href="Committee.html">居委会</a>
-                        </li>
-                    </ul>
-
-                    <div class="no-tablet-portrait">
-                        <span class="element-divider"></span>
-                        <a class="element brand" href="#"><span class="icon-spin"></span></a>
-                        <a class="element brand" href="#"><span class="icon-printer"></span></a>
-                        <span class="element-divider"></span>
-
-                        <div class="element input-element">
-                            <form>
-                                <div class="input-control text">
-                                    <input type="text" placeholder="Search...">
-                                    <button class="btn-search"></button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="element place-right">
-                            <a class="dropdown-toggle" href="#">
-                                <span class="icon-cog"></span>
-                            </a>
-                            <ul class="dropdown-menu place-right" data-role="dropdown">
-                                <li><a href="#">更改个人信息</a></li>
-                            </ul>
-                        </div>
-                        <span class="element-divider place-right"></span>
-                        <button class="element image-button image-left place-right">
-                            我
-                            <img src="images/me.jpg"/>
-                        </button>
-                    </div>
-                </div>
-            </nav>
+        <header class="bg-dark" data-load="header.html"></header>
     <div class="container">
                 <h1>
                     <a href="/"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
@@ -95,43 +53,47 @@
                                     <ul>
                                         <li class="title">我的分组</li>
                                         <li>
-                                        <a class="dropdown-toggle" href="#"><i class="icon-tree-view"></i>我关注的人</a>
+                                        <a class="dropdown-toggle" id="show" href="#"><i class="icon-tree-view"></i>我关注的人</a>
                                         <ul class="dropdown-menu" data-role="dropdown">
                                                 <li><a href="">相互关注</a></li>
                                             </ul>
                                         </li>
-                                        <li class="stick bg-red"><a href="#"><i class="icon-tree-view"></i>关注我的人</a></li>
+                                        <li class="stick bg-red"><a id="hide" href="#"><i class="icon-tree-view"></i>关注我的人</a></li>
                                         <li class="stick bg-green"><a href="neighbour_all.html"><i class="icon-tree-view"></i>所有人</a></li>
                                     </ul>
                                 </nav>
                             </div>
-                			<div class="span3">
+                			<div id="friend" class="span3">
                 				<div class="image-container1">
                     				<img src="images/default.jpg">
+                    				<p id="fname">aaa</p>
                 				</div>
                 				<div class="image-container1">
                     				<img src="images/default.jpg">
+                    				<p id=fname>bbb</p>
                 				</div>
                 				<div class="image-container1">
                     				<img src="images/default.jpg">
+                    				<p id=fname>ccc</p>
                 				</div>
            			 		</div>
            			 		<div class="span3">
-                				<div class="image-container1">
+                				<div id="friend2" class="image-container1">
                     				<img src="images/default.jpg">
+                    				<p id=fname>ddd</p>
                 				</div>
                 				<div class="image-container1">
                     				<img src="images/default.jpg">
+                    				<p id=fname>eee</p>
                 				</div>
                 				<div class="image-container1">
                     				<img src="images/default.jpg">
+                    				<p id=fname>fff</p>
                 				</div>
            			 		</div>
            			 	</div>
            			</div>
     </div>
-
-    <script src="js/hitua.js"></script>
 
 </body>
 </html>
