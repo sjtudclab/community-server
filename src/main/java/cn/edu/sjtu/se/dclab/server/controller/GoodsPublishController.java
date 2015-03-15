@@ -104,7 +104,7 @@ public class GoodsPublishController {
 
 		// insert into db
 		SecondGoods secondGoods = new SecondGoods();
-		secondGoods.setId(secondGoodsService.getMaxGoodsId()+1);
+		secondGoods.setId(secondGoodsService.getMaxGoodsId() + 1);
 		secondGoods.setCategory(category);
 		secondGoods.setType(type);
 		secondGoods.setTitle(title);
@@ -117,7 +117,7 @@ public class GoodsPublishController {
 		secondGoodsService.createSecondGoods(secondGoods);
 		publishService.createPublishedGoods(1, secondGoods.getId(), "1");
 		
-		return "redirect:/market_thing_info.html?id="+id;
+		return "redirect:/market_thing_info.html?id="+secondGoods.getId();
 	}
 	
 	public String getFileType(String filename){
