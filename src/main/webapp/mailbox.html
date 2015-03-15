@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>信箱管理系统</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="zang/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="zang/css/index.css" type="text/css" media="screen">
+
+<script type="text/javascript" src="zang/js/jquery.js"></script>
+<script type="text/javascript" src="zang/js/tendina.js"></script>
+<script type="text/javascript" src="zang/js/common.js"></script>
+<script src="zang/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <!--顶部-->
+    <div class="layout_top_header">
+            <div style="float: left"><span style="font-size: 16px;line-height: 45px;padding-left: 20px;color: #8d8d8d">信箱管理系统</span></div>
+            <div id="ad_setting" class="ad_setting">
+                <a class="ad_setting_a" href="javascript:;">
+                    <i class="icon-user glyph-icon" style="font-size: 20px"></i>
+                    <span>管理员</span>
+                    <i class="icon-chevron-down glyph-icon"></i>
+                </a>
+                <ul class="dropdown-menu-uu" style="display: none" id="ad_setting_ul">
+                    <li class="ad_setting_ul_li"> <a href="javascript:;"><i class="icon-user glyph-icon"></i> 个人中心 </a> </li>
+                    <li class="ad_setting_ul_li"> <a href="javascript:;"><i class="icon-cog glyph-icon"></i> 设置 </a> </li>
+                    <li class="ad_setting_ul_li"> <a href="javascript:;"><i class="icon-signout glyph-icon"></i> <span class="font-bold">退出</span> </a> </li>
+                </ul>
+            </div>
+    </div>
+    <!--顶部结束-->
+    <!--菜单-->
+    <div class="layout_left_menu">
+        <ul class="tendina" id="menu">
+            <li class="childUlLi">
+               <a id="menumain" href="#"><i class="glyph-icon icon-home"></i>首页</a>
+            </li>
+            <li class="childUlLi">
+                <a id="menumail" href="#"> <i class="glyphicon glyphicon-folder-close"></i>信箱 <span id="num" class="badge">3</span></a>
+            </li>
+            <li class="childUlLi">
+                <a id="menufriend" href="#"> <i class="glyph-icon icon-reorder"></i>好友</a>
+            </li>
+        </ul>
+    </div>
+    <!--菜单-->
+    <div id="layout_right_content" class="layout_right_content">
+        <div class="route_bg">
+            <a href="#">主页</a><i class="glyph-icon icon-chevron-right"></i>
+			<a id="navi">首页</a>
+        </div>
+        <div class="mian_content">
+			<div style="padding: 100px 100px 10px;">
+			<span id="main_page">
+				<div class="text" style=" text-align:center; font-size:30px">欢迎使用信箱管理系统！</div>
+			</span>
+			</div>
+        </div>
+    </div>
+	
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+	   aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+				   aria-hidden="true">×
+				</button>
+				<h4 id="sendto" class="modal-title" id="myModalLabel"></h4>
+				<input id="to" type="hidden"></input>
+			 </div>
+			 <div class="modal-body"><textarea id="cont" class="form-control" placeholder="快问候一下吧~"></textarea></div>
+			 <div class="modal-footer">
+				<button type="button" class="btn btn-default" 
+				   data-dismiss="modal">取消</button>
+				<button id="send" type="button" class="btn btn-primary">发送</button>
+			 </div>
+		  </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<!--页脚-->
+    <div class="layout_footer">
+        <p>Copyright © 2015 - DCLAB</p>
+    </div>
+	
+
+	<!--脚本-->
+	<script type="text/javascript">
+		var userid = 1;
+		var username = null;
+		$(document).ready(function () {
+			$.post("rest/mailboxs/"+userid, function (data) {
+				var count = 0;
+				var jsonData = eval(data);
+				$.each(jsonData, function(index, objval) {
+					count++;
+				});
+				if (count != 0)
+					$("#num").text(count);
+			});
+		});
+		
+		$(function() {
+			$("#send").click(function() {
+				$.ajax({
+					type: "POST",
+					contentType: 'application/json; charset=utf-8',
+					url: "rest/mailboxs",
+					data: JSON.stringify({
+						"from": 1,
+						"to": $("#to").text(),
+						"content": $("#cont")[0].value,
+						"submitedDate": new Date().getTime()
+					}),
+
+					success:function(result, status) {}
+					});
+				$('#myModal').modal('hide');
+			});
+			
+			$("#menumain").click(function() {
+				$("#main_page").html("");
+				$("#navi").text("首页");
+				$("#main_page").append('<div class="text"  style=" text-align:center; font-size:30px">欢迎使用智慧社区平台！</div>');
+			});
+			
+			$("#menumail").click(function() {
+				$("#main_page").html("");
+				$("#navi").text("信箱");
+				$("#num").text("");
+				$.post("rest/mailboxs/"+userid, function (data) {
+					var jsonData = eval(data);
+					$.each(jsonData, function(index, objval){
+						$("#main_page").append(
+							"<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
+							+ objval["from"] + " 发给 " + objval["to"] + "</h3></div><div class='panel-body'>" + objval["content"] + "</div></div>");
+					});
+				});
+			});
+			
+			$("#menufriend").click(function() {
+				$("#main_page").html("");
+				$("#navi").text("好友");
+				$("#main_page").append('<a c-name="friend" class="list-group-item" name="1" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="mailing(this)">admin</a>');
+				$("#main_page").append('<a c-name="friend" class="list-group-item" name="2" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="mailing(this)">tester</a>');
+			});
+			
+			$("#myModal").on('hide.bs.modal', function() {$("#cont")[0].value = "";});
+		});
+		
+		function mailing(item) {
+			$("#to").text($(item).attr("name"));
+			$("#sendto").text("发送给：" + $(item).text());
+		}
+	</script>
+</body></html>

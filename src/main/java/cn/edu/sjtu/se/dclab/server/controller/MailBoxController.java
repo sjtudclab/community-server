@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,9 +43,9 @@ public class MailBoxController {
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String createMailBox(MailBoxTransfer mailBoxTransfer) {
+	public String createMailBox(@RequestBody MailBoxTransfer mailBoxTransfer) {
 		MailBox mailBox = new MailBox(mailBoxTransfer);
 		mailBoxService.createMailBox(mailBox);
-		return "suceess";
+		return "succeess";
 	}
 }
