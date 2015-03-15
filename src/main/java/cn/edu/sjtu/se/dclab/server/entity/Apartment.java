@@ -1,5 +1,8 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by Huiyi on 2015/3/13.
  */
@@ -7,6 +10,9 @@ public class Apartment {
     private long id;
     private String floor;
     private String location;
+
+    @JsonProperty(value = "owner")
+    @JsonIdentityReference(alwaysAsId = true)
     private Citizen owner;
     private String resident;
     private String serialNumber;

@@ -10,6 +10,7 @@
 
     <resultMap type="Citizen" id="CitizenMap">
         <id property="id" column="id" />
+        <result property="name" column="name" />
         <result property="credentialType" column="credential_type" />
         <result property="marriageStatus" column="marriage_status" />
         <result property="employmentStatus" column="employment_status" />
