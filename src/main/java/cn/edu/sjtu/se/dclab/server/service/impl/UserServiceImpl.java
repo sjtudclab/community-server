@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Collection<UserTransfer> getUserByCategory(String category) {
 		Collection<User> users = userMapper.findAll();
-		Collection<UserTransfer> userTransfers = new ArrayList<>();
+		Collection<UserTransfer> userTransfers = new ArrayList<UserTransfer>();
 
 		Iterator<User> iter = users.iterator();
 		while (iter.hasNext()) {

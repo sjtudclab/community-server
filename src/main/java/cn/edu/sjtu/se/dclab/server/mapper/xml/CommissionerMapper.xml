@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.CommissionerMapper" >
+	<select id="getCommissionerById" parameterType="java.lang.Integer" resultMap="commissionerResultMap">
+		select * from commissioner where id=#{id};
+	</select>
+
+	<insert id="createCommissioner" parameterType="Commissioner">
+		insert into commissioner (id,name,duty) values (#{id}, #{name}, #{duty});
+		<selectKey resultType="int">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+	<delete id="deleteCommissionerById" parameterType="java.lang.Integer">
+		delete from commissioner where id = #{id};
+	</delete>
+	<resultMap type="Commissioner" id="commissionerResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="duty" column="duty" />
+	</resultMap>
+</mapper>

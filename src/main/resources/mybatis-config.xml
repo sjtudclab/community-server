@@ -27,6 +27,8 @@
         <typeAlias alias="SecondGoods" type="cn.edu.sjtu.se.dclab.server.entity.SecondGoods" />
         <typeAlias alias="UserPublishedGoods" type="cn.edu.sjtu.se.dclab.server.entity.UserPublishedGoods" />
         <typeAlias alias="UserLovedGoods" type="cn.edu.sjtu.se.dclab.server.entity.UserLovedGoods" />
+        <typeAlias alias="Commissioner" type="cn.edu.sjtu.se.dclab.server.entity.Commissioner" />
+        <typeAlias alias="Fsrelation" type="cn.edu.sjtu.se.dclab.server.entity.Fsrelation" />
 
     </typeAliases>
     
