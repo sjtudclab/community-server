@@ -3,9 +3,9 @@ package cn.edu.sjtu.se.dclab.server.entity;
 public class Fsrelation {
     private Integer id;
 
-    private String actp;
+    private Long actp;
 
-    private String passp;
+    private Long passp;
 
     public Integer getId() {
         return id;
@@ -15,19 +15,19 @@ public class Fsrelation {
         this.id = id;
     }
 
-    public String getActp() {
+    public Long getActp() {
         return actp;
     }
 
-    public void setActp(String actp) {
+    public void setActp(Long actp) {
         this.actp = actp;
     }
 
-    public String getPassp() {
+    public Long getPassp() {
         return passp;
     }
 
-    public void setPassp(String passp) {
+    public void setPassp(Long passp) {
         this.passp = passp;
     }
 }

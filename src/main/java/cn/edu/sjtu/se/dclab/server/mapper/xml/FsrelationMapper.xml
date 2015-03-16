@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.FsrelationMapper" >
 
-  <select id="getFsrelationByActp" resultMap="FsrelationResultMap" parameterType="java.lang.String" >
+  <select id="getFsrelationByActp" resultMap="FsrelationResultMap" >
     select * from fsrelation where actp=#{actp};
   </select>
-    <select id="getFsrelationByPassp" resultMap="FsrelationResultMap" parameterType="java.lang.String" >
+    <select id="getFsrelationByPassp" resultMap="FsrelationResultMap" >
     select * from fsrelation where passp=#{passp};
   </select>
   <delete id="deleteFsrelationById" parameterType="java.lang.Integer" >
@@ -28,7 +28,7 @@
   </update>
     <resultMap id="FsrelationResultMap" type="Fsrelation" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="actp" property="actp" jdbcType="VARCHAR" />
-    <result column="passp" property="passp" jdbcType="VARCHAR" />
+    <result column="actp" property="actp" />
+    <result column="passp" property="passp" />
   </resultMap>
 </mapper>

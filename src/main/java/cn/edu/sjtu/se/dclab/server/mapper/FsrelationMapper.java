@@ -6,9 +6,9 @@ import cn.edu.sjtu.se.dclab.server.entity.Fsrelation;
 
 public interface FsrelationMapper {
 	
-	public List<Fsrelation> getFsrelationByActp(String actp);  //search by Active
+	public List<Fsrelation> getFsrelationByActp(Long actp);  //search by Active
 	
-	public List<Fsrelation> getFsrelationByPassp(String passp);  //search by Passive
+	public List<Fsrelation> getFsrelationByPassp(Long passp);  //search by Passive
 	
 	public Fsrelation createFsrelation(Fsrelation fsrelation);  //add relation
 	
