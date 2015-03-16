@@ -32,6 +32,7 @@
     <script type="text/javascript">
 	$(document).ready(function(){
 	$("#myfriends").click(function(){
+	$("#fan").empty();
 	$("#alllist").hide();
 	var content = "1";			//匹配为登陆人员
         $.ajax({
@@ -39,8 +40,9 @@
             url: "rest/fsrelation/" + content,
             dataType: "json",
             success: function(data) {
+            	$('#friend').empty();
                 $.each(data,function(commentIndex, comment) {
-                	var dbf = "<div class=\"span3\">";
+                	var dbf = "<div class=\"listsmall\">";
                 	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
                 	var daf = "</div>";
                 	var href = "<a href=\"mailbox.html#1\">发信息</a>";
@@ -51,8 +53,47 @@
             },//success
         });//ajax
         });//myfriends onclick
+    $("#myfans").click(function(){
+    $("#friend").empty();
+	$("#alllist").hide();
+	var content = "1";			//匹配为登陆人员
+        $.ajax({
+            type: "GET",
+            url: "rest/fsrelation/se/" + content,
+            dataType: "json",
+            success: function(data) {
+            	$('#fan').empty();
+                $.each(data,function(commentIndex, comment) {
+                	var dbf = "<div class=\"listsmall\">";
+                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
+                	var daf = "</div>";
+                	var href = "<a href=\"mailbox.html#1\">发信息</a>";
+                    $('#fan').append(dbf+image + "<p>"+comment.actp+"</p>"+href+daf); 
+                    //var u = "mailbox.html#" + comment.passp;
+                    //$('#connect').append("<a href=" + u +">发信息</a>");
+                })
+            },//success
+        });//ajax
+        });//myfriends onclick
         $("#all").click(function(){
+        	$("#fan").empty();
+			$("#friend").empty();
         	$("#alllist").show();
+        	$.ajax({
+            	type: "GET",
+	            url: "rest/buildings",
+    	        dataType: "json",
+        	    success: function(data) {
+            		$('#build').empty();
+                	$.each(data,function(commentIndex, comment) {
+                		var sls = "<select name=\"building\"  onchange=\"showBuilding(this.value)\">";
+	                	var sle = "</select>";
+    	            	var opts = "<option>";
+        	        	var opte = "</option>";
+            	        $('#build').append(sls+opts+comment.name+opte+sle); 
+                	})
+	            },//success
+    	    });//ajax
         });//all onclick
         })(jQuery);
         
@@ -71,13 +112,20 @@
        	 <nav class="horizontal-menu">
     		<ul>
     			<li><a href=# id="myfriends">我的好友</a></li>
-    			<li><a id="myfans">关注我的人</a></li>
+    			<li><a href=# id="myfans">关注我的人</a></li>
     			<li><a href=# id="all">所有人</a></li>
     		</ul>
     	   </nav>
     	</div>
-    	<span id="friend"></span>
+    	<div class="spexample">
+    		<span id="friend"></span>
+    		<span id="fan"></span>
+    	</div>
     	<div id="alllist" class="spexample">
+    		<div class="spexample">
+    		<span id="build"></span>
+    		</div>
+    		
     		<div class="spexample">
     		  <select name="building">
 				<option value="1">楼栋1</option>
@@ -88,6 +136,7 @@
 				<option value="6">楼栋6</option>
 			  </select>
 			</div>
+			
     		<button class="shortcut">
 				101室
 			</button>

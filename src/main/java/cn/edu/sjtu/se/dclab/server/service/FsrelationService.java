@@ -8,7 +8,7 @@ public interface FsrelationService {
 	
 	public List<Fsrelation> getRelationByActp(Long actp);  //search by Active
 	
-	public List<Fsrelation> getFsrelationByPassp(Long passp);  //search by Passive
+	public List<Fsrelation> getRelationByPassp(Long passp);  //search by Passive
 	
 	public Fsrelation createFsrelation(Fsrelation fsrelation);  //add relation
 	

@@ -60,3 +60,8 @@ footer {
 	margin: 25px;
 	width: 500px;
 }
+
+.listsmall {
+	margin: 20px;
+	float: left;
+}

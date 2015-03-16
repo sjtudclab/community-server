@@ -31,10 +31,12 @@ public class FsrelationController {
 		return tmp;
 	}
 	
-	@RequestMapping(value="",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="se/{passp}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public void test() {
-		System.out.println("+controller34++++++++++++++++++++++++++++++++");
+	public List<Fsrelation> getFc(@PathVariable("passp") Long passp) {
+		System.out.println("+controller37+++++++++++++++");
+		List<Fsrelation> tmp = fsrelationService.getRelationByPassp(passp);
+		return tmp;
 	}
 
 	@RequestMapping(value="create",method = RequestMethod.GET)

@@ -29,15 +29,13 @@ public class FsrelationServiceImpl implements FsrelationService{
 		// search by Active
 		System.out.println("+impl30++++++++++++++++++");
 		List<Fsrelation> temp = fsrelationMapper.getFsrelationByActp(actp);
-		System.out.println("impl32"+temp);
-		
-		String t = "";
-		for(int i = 0; i < temp.size(); i++)
-		{
-			t = t + temp.get(i).getPassp() + ",";
-			System.out.println("+++"+temp.get(i).getPassp()+"+++");
-		}
 		return temp;
+//		String t = "";
+//		for(int i = 0; i < temp.size(); i++)
+//		{
+//			t = t + temp.get(i).getPassp() + ",";
+//			System.out.println("+++"+temp.get(i).getPassp()+"+++");
+//		}
 //		return t;
 	/*	String Json_string = "[";
 		for(int i = 0; i < temp.size(); i++) 
@@ -56,8 +54,11 @@ public class FsrelationServiceImpl implements FsrelationService{
 		return Json_string;*/
 	}
 	
-	public List<Fsrelation> getFsrelationByPassp(Long passp){
-		return fsrelationMapper.getFsrelationByPassp(passp);  //search by Passive
+	public List<Fsrelation> getRelationByPassp(Long passp){
+		System.out.println("+impl58++++++++++++++++++");
+		// search by Passive
+		List<Fsrelation> temp = fsrelationMapper.getFsrelationByPassp(passp);
+		return temp;
 	}
 	
 	public Fsrelation createFsrelation(Fsrelation fsrelation){
