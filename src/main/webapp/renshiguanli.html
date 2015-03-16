@@ -16,7 +16,6 @@
     <![endif]-->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/common.js"></script>
 
 <script type="text/javascript">
     
@@ -87,7 +86,7 @@
 	        		$(datas).each(function(index2,user){
 	        			if(user.username == 'admin')
 	        				return;
-	        			
+	        			$('form').serialize().split('userId=')
 	        			var n = 0;
 	        			var tr = "<tr>";
 	        			tr += "<td>" + "<input type='hidden' name='userId' value='" + user.id + "'>" + user.username + "</td>";
@@ -141,11 +140,25 @@
 	  });
 	  
 	  $('form').live('submit', function() {
+		  
+		  var us = [];
+		  $($('form').serializeArray()).each(function(i,d) {
+			  if (d.name == 'userId') {
+				  var user = new Object(); 
+				  user.roleIds=new Array(); 
+				  user.userId=d.value; 
+				  us.push(user); 
+				} else { 
+					var user = us[us.length-1]; 
+					user.roleIds.push(d.value); 
+				} 
+			});
+		  
 		   $.ajax({
 			 type: "put",
 			 url: "rest/users",
 			 contentType: "application/json",
-			 data: $('form').serialize(),
+			 data: JSON.stringify(us),
 			 success: function(data){
 				 $("#personnelCheck").click();
 			 },

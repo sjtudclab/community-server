@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.sjtu.se.dclab.server.service.UserService;
+import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 
 /**
@@ -68,7 +69,7 @@ public class UserController {
 	public UserTransfer getUserByUsername(@PathVariable String username) {
 		return userService.getUserByUsername(username);
 	}
-	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "id/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public UserTransfer getUserByUserId(@PathVariable long id){
 		return userService.getUserByUserId(id);
@@ -89,7 +90,8 @@ public class UserController {
 	
 	@RequestMapping(value = "", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String updateUsers(@RequestBody List<UserTransfer> userTransfers){
+	public String updateUsers(@RequestBody List<UserRoleTransfer> userRoleTransfers){
+		userService.updateUserRoles(userRoleTransfers);
 		return "success";
 	}
 
