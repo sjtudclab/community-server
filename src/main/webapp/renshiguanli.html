@@ -26,11 +26,8 @@
 	  $("#personnelCheck").click(function(){
 		  $(this).attr("class","active");
 		   $("#personnelAdjust").attr("class","");
-		   $("form").hide();
-		   if(checkFlag){
-			   $("#check").show();
-			   return false;
-		   }
+		   $("form").remove();
+		   $("#check").remove();
 		   
 		   $.get("rest/users","",function(users,status){
 			   var divs = "<div id=check>";
@@ -57,11 +54,8 @@
 	  $("#personnelAdjust").click(function(){
 		   $(this).attr("class","active");
 		   $("#personnelCheck").attr("class","");
-		   $("#check").hide();
-		   if(adjustFlag){
-			   $("form").show();
-			   return false;
-		   }
+		   $("#check").remove();
+		   $('form').remove();
 		  
 		    var form = $("<form>");
 		    var table = $("<table  class='table table-bordered' contenteditable='true'>")
