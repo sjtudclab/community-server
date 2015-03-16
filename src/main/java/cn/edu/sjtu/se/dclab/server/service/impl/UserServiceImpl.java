@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 				for (Role role : roles) {
 					if (role.getName().endsWith("主任")
 							|| role.getName().endsWith("书记")
-							|| role.getName().endsWith("员")) {
+							|| role.getName().endsWith("员")||role.getName().endsWith("民警")) {
 						flag = true;
 						break;
 					}
