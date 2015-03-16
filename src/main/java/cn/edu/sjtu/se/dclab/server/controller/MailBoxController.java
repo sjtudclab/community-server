@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.controller;
 
 import java.util.Collection;
 
+import cn.edu.sjtu.se.dclab.server.util.MailBoxStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,28 @@ public class MailBoxController {
 		this.mailBoxService = mailBoxService;
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{id}/waiting", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<MailBox> getMailBoxByUserId(@PathVariable long id) {
-		return mailBoxService.getMailBoxByUserId(id);
+	public Collection<MailBoxTransfer> getMailBoxByUserIdAndWaitingStatus(@PathVariable long id) {
+		return mailBoxService.getMailBoxByUserIdAndMailStatus(id, MailBoxStatus.WAITING);
+	}
+
+	@RequestMapping(value = "{id}/done", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<MailBoxTransfer> getMailBoxByUserIdAndDoneStatus(@PathVariable long id) {
+		return mailBoxService.getMailBoxByUserIdAndMailStatus(id, MailBoxStatus.DONE);
+	}
+
+	@RequestMapping(value = "{id}/discussed", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<MailBoxTransfer> getMailBoxByUserIdAndDiscussedStatus(@PathVariable long id) {
+		return mailBoxService.getMailBoxByUserIdAndMailStatus(id, MailBoxStatus.NEED_TO_BE_DISCUSSED);
+	}
+
+	@RequestMapping(value = "{id}/transferred", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<MailBoxTransfer> getMailBoxByUserIdAndTransferredStatus(@PathVariable long id) {
+		return mailBoxService.getMailBoxByUserIdAndMailStatus(id, MailBoxStatus.TRANSFERRED);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, 
