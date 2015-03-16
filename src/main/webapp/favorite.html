@@ -15,7 +15,6 @@
 
     <!-- Load JavaScript Libraries -->
     <script src="js/jquery/jquery.min.js"></script>
-<<<<<<< HEAD
     <script src="js/jquery/jquery.widget.min.js"></script>
     <script src="js/jquery/jquery.mousewheel.js"></script>
     <script src="js/prettify/prettify.js"></script>
@@ -26,16 +25,15 @@
     <!-- Local JavaScript -->
 
     <!-- Local JavaScript -->
-=======
     <script src="js/common.js"></script>
     
 </head>
 <body>
->>>>>>> 0e1d7a5d2a666c1ceab6d8aead571c1e37a3ca45
     <script type="text/javascript">
 	$(document).ready(function(){
 	$("#myfriends").click(function(){
-	var content = "zhangsan";			//匹配为登陆人员
+	$("#alllist").hide();
+	var content = "1";			//匹配为登陆人员
         $.ajax({
             type: "GET",
             url: "rest/fsrelation/" + content,
@@ -45,7 +43,7 @@
                 	var dbf = "<div class=\"span3\">";
                 	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
                 	var daf = "</div>";
-                	var href = "<a href=\"mailbox.html#zhangsan\">发信息</a>";
+                	var href = "<a href=\"mailbox.html#1\">发信息</a>";
                     $('#friend').append(dbf+image + "<p>"+comment.passp+"</p>"+href+daf); 
                     //var u = "mailbox.html#" + comment.passp;
                     //$('#connect').append("<a href=" + u +">发信息</a>");
@@ -54,6 +52,7 @@
         });//ajax
         });//myfriends onclick
         $("#all").click(function(){
+        	$("#alllist").show();
         });//all onclick
         })(jQuery);
         
@@ -77,18 +76,18 @@
     		</ul>
     	   </nav>
     	</div>
+    	<span id="friend"></span>
     	<div id="alllist" class="spexample">
-    		<select name="building">
+    		<div class="spexample">
+    		  <select name="building">
 				<option value="1">楼栋1</option>
 				<option value="2">楼栋2</option>
 				<option value="3">楼栋3</option>
 				<option value="4">楼栋4</option>
 				<option value="5">楼栋5</option>
 				<option value="6">楼栋6</option>
-			</select>
-    		<span id="friend"></span>
-    	</div>
-    	<div id="alllist" class="spexample">
+			  </select>
+			</div>
     		<button class="shortcut">
 				101室
 			</button>
