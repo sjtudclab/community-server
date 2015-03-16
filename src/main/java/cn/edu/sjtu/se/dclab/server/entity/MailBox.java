@@ -13,9 +13,9 @@ public class MailBox {
     private String to;
     private String content;
     private Date submitedDate;
+    private String status;
 
-    public MailBox(){
-    	
+    public MailBox() {
     }
     
     public MailBox(MailBoxTransfer mailBoxTransfer) {
@@ -23,6 +23,7 @@ public class MailBox {
 		this.to = mailBoxTransfer.getTo();
 		this.content  = mailBoxTransfer.getContent();
 		this.submitedDate  = mailBoxTransfer.getSubmitedDate();
+        this.status = mailBoxTransfer.getStatus();
 	}
 
 	public long getId() {
@@ -63,5 +64,13 @@ public class MailBox {
 
     public void setSubmitedDate(Date submitedDate) {
         this.submitedDate = submitedDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

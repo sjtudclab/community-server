@@ -12,6 +12,7 @@ public class MailBoxTransfer {
     private String to;
     private String content;
     private Date submitedDate;
+    private String status;
 
     public long getId() {
         return id;
@@ -51,5 +52,13 @@ public class MailBoxTransfer {
 
     public void setSubmitedDate(Date submitedDate) {
         this.submitedDate = submitedDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

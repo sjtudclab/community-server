@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.MailBoxMapper">
 
     <select id="findAllByUser" resultMap="MailBoxMap">
-        SELECT id, `from`, `to`, content, submited_date
+        SELECT id, `from`, `to`, content, submited_date, status
         FROM mailbox
         WHERE `from` = #{userId} or `to` = #{userId}
     </select>
@@ -21,5 +21,6 @@
         <result property="to" column="to" />
         <result property="content" column="content" />
         <result property="submitedDate" column="submited_date" />
+        <result property="status" column="status" />
     </resultMap>
 </mapper>
