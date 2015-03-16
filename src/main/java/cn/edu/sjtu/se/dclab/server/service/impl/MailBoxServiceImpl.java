@@ -70,6 +70,7 @@ public class MailBoxServiceImpl implements MailBoxService {
 
 	@Override
 	public void createMailBox(MailBox mailBox) {
+		mailBox.setStatus("待办");
 		mailBoxMapper.save(mailBox);
 	}
 
