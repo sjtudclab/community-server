@@ -13,4 +13,5 @@ public interface RoleMapper {
     
     public Collection<Role> findByUserId(long id);
     
+    public Role findOne(long id);
 }

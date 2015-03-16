@@ -8,6 +8,12 @@
         select * from apartment;
     </select>
 
+    <select id="findAllByBuildingId" resultMap="ApartmentMap">
+        SELECT *
+        FROM apartment
+        WHERE building_id = #{buildingId}
+    </select>
+
     <resultMap type="Apartment" id="ApartmentMap">
         <id property="id" column="id" />
         <result property="floor" column="floor" />

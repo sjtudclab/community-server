@@ -10,4 +10,6 @@ import cn.edu.sjtu.se.dclab.server.entity.Role;
  */
 public interface RoleService {
 	public Collection<Role> getAllRoles();
+
+	public Role findOne(long id);
 }

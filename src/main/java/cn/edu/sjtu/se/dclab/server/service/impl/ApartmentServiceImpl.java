@@ -30,4 +30,9 @@ public class ApartmentServiceImpl implements ApartmentService {
     public Collection<Apartment> findAll() {
         return apartmentMapper.findAll();
     }
+
+    @Override
+    public Collection<Apartment> findAllByBuildingId(long id) {
+        return apartmentMapper.findAllByBuildingId(id);
+    }
 }

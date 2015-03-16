@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.entity;
 
 import java.util.Date;
 
+import cn.edu.sjtu.se.dclab.server.transfer.MailBoxSaveTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.MailBoxTransfer;
 
 /**
@@ -30,6 +31,19 @@ public class MailBox {
 		this.setSubmitedDate(mailBoxTransfer.getSubmitedDate());
         this.setStatus(mailBoxTransfer.getStatus());
 	}
+
+    public MailBox(MailBoxSaveTransfer mailBoxSaveTransfer) {
+        User fromUser = new User();
+        fromUser.setId(mailBoxSaveTransfer.getFrom());
+        User toUser = new User();
+        toUser.setId(mailBoxSaveTransfer.getTo());
+
+        this.setFrom(fromUser);
+        this.setTo(toUser);
+        this.setContent(mailBoxSaveTransfer.getContent());
+        this.setSubmitedDate(mailBoxSaveTransfer.getSubmitedDate());
+        this.setStatus(mailBoxSaveTransfer.getStatus());
+    }
 
 
     public long getId() {
