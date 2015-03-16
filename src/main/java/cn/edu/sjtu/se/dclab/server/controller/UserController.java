@@ -68,6 +68,11 @@ public class UserController {
 	public UserTransfer getUserByUsername(@PathVariable String username) {
 		return userService.getUserByUsername(username);
 	}
+	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public UserTransfer getUserByUserId(@PathVariable long id){
+		return userService.getUserByUserId(id);
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

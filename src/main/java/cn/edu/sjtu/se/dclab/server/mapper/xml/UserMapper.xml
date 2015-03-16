@@ -10,6 +10,12 @@
         WHERE username = #{username}
     </select>
     
+    <select id="findUserByUserId" parameterType="long" resultMap="UserMap">
+        SELECT id, username, password, identification, image_url
+        FROM user
+        WHERE id = #{id}
+    </select>
+    
     <select id="findAll" resultMap="UserMap">
     	SELECT * FROM user;
     </select>

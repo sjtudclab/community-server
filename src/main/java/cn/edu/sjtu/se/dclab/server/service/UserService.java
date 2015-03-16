@@ -18,4 +18,5 @@ public interface UserService{
 	public void updateUser(UserTransfer userTransfer);
 	
 	public UserTransfer authenticateUser(String username,String password);
+	public UserTransfer getUserByUserId(long id);
 }
