@@ -9,4 +9,6 @@ import java.util.Collection;
  */
 public interface ApartmentMapper {
     public Collection<Apartment> findAll();
+
+    public Collection<Apartment> findAllByBuildingId(long buildingId);
 }
