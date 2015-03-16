@@ -35,12 +35,15 @@
 		   $.get("rest/users","",function(users,status){
 			   var divs = "<div id=check>";
 			   $(users).each(function(index,user){
+				  if(user.username ==  'admin')
+					  return;
+				   
 				   var roleNames = "";
 				   $.each(user.roles,function(n,value){
 					   roleNames += value.name + "、";
 				   });
 				   roleNames = roleNames.substring(0,roleNames.length-1);
-				   divs += "<div class='span3' style='text-align:center'><image src='images/person.jpg'/>";
+				   divs += "<div class='span3' style='text-align:center'><image src='images/" + user.imageUrl + "' width='200' height='250' />";
 				   divs += "<p>" + user.username + "：" + roleNames + "</p>";
 				   divs += "</div>";
 			   });
@@ -69,28 +72,59 @@
 
 	        	var checkboxs = "";
 	    		$.get("rest/roles","",function(roles,status){
-	    			var n = 0;
-	        		$(roles).each(function(index1,role){
-	            		checkboxs += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp";
+	    			//var n = 0;
+	        		/* $(roles).each(function(index1,role){
+	            		checkboxs += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	            		n += 1;
 	            		if(n == 5){
 	            			checkboxs += "<br><br>";
 	            			n=0;
 	            		}
-	        		});
+	        		}); */
 	        		
 	        		thead.append("<tr><th>人员</th><th>角色</th></tr>","</thead>");	        		
 	        		$(datas).each(function(index2,user){
+	        			if(user.username == 'admin')
+	        				return;
+	        			
+	        			var n = 0;
 	        			var tr = "<tr>";
-	        			tr += "<td>" + "<input type='hidden' name='userId' value=" + user.id + "/>" + user.username + "</td>";
-	        			tr += "<td>" + checkboxs + "</td>";
+	        			tr += "<td>" + "<input type='hidden' name='userId' value='" + user.id + "'>" + user.username + "</td>";
+	        			var checkboxInput = "";
+	        			
+	        			$(roles).each(function(index1,role){
+	        				var hasRole = false;
+	        				$(user.roles).each(function(index3,userRole){
+	        					if(role.name == userRole.name){
+	        						checkboxInput += "<input type='checkbox' name='roleId' value=" + role.id + " checked=true >" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+	        						n += 1;
+	        						if(n == 5){
+	        							checkboxInput += "<br><br>";
+	        							n=0;
+	        						}
+		        					hasRole = true;
+	        					}
+	        				});
+
+        					if(!hasRole){
+        						checkboxInput += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        						n += 1;
+        						if(n == 5){
+        							checkboxInput += "<br><br>";
+        							n=0;
+        						}
+        					}	
+	        			});
+	     
+	        			
+	        			tr += "<td>" + checkboxInput + "</td>";
 	        			tr += "</tr>"
 	        			tbody.append(tr);
 	        		});
 	        		
 	        		tbody.append("</tbody>");
 	        		table.append(thead,tbody,"</tbody>");
-	        		form.append(table,"<button type='submit' class='btn'>提交</button>","</form>");
+	        		form.append(table,"<button class='btn submit1'>提交</button>","</form>");
 	        		$("div.span9").append(form);
 	        		adjustFlag = true;
 	        	});
@@ -100,6 +134,27 @@
 	  });
 	  	
     	
+	  $(".submit1").live('click', function(data,status){
+		  $("form").submit();
+		  return false;
+	  });
+	  
+	  $('form').live('submit', function() {
+		   $.ajax({
+			 type: "put",
+			 url: "rest/users",
+			 contentType: "application/json",
+			 data: $('form').serialize(),
+			 success: function(data){
+				 $("#personnelCheck").click();
+			 },
+			 error: function(data){
+				 alert('调整人事失败！');
+			 }
+		  }); 
+		  return false;
+	  });
+	  
     }); 
     </script>
 

@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
 		userTransfer.setRoles(roles);
+		userTransfer.setImageUrl(user.getImageUrl());
 		
 		return userTransfer;
 	}
@@ -65,6 +66,7 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
 			userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
+			userTransfer.setImageUrl(user.getImageUrl());
 			userTransfers.add(userTransfer);
 		}
 		return userTransfers;
@@ -84,6 +86,7 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
 			userTransfer.setRoles(roles);
+			userTransfer.setImageUrl(user.getImageUrl());
 
 			boolean flag = false;
 			if (category.equals("业委会")) {
@@ -135,6 +138,7 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
 			userTransfer.setRoles(roles);
+			userTransfer.setImageUrl(user.getImageUrl());
 			
 			return userTransfer;
 		}else{
