@@ -18,7 +18,7 @@
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="MailBox">
         INSERT INTO mailbox (`from`, `to`, submited_date, content)
-        VALUES (#{from}, #{to}, #{submitedDate}, #{content})
+        VALUES (#{from.id}, #{to.id}, #{submitedDate}, #{content})
     </insert>
 
     <resultMap id="MailBoxMap" type="MailBox">
