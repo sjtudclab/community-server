@@ -22,5 +22,7 @@ public interface UserPublishedGoodsService {
 	public void createPublishedGoods(int userID, int goodsID, String stage);
 	
 	public JSONArray getGoodsByStage(String stage);
+	
+	public void updateGoodsStage(int goodsID, String stage);
 
 }
