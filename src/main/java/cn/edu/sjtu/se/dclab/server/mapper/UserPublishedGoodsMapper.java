@@ -17,4 +17,6 @@ public interface UserPublishedGoodsMapper {
 	public void createPublishedGoods(UserPublishedGoods tmp);
 	
 	public List<UserPublishedGoods> getGoodsByStage(String stage);
+	
+	public void updateGoodsStage(UserPublishedGoods tmp);
 }

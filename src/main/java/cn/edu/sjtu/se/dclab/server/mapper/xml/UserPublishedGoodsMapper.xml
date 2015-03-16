@@ -20,6 +20,10 @@
 		</selectKey>
 	</insert>
 	
+	<update id="updateGoodsStage" parameterType="UserPublishedGoods">
+		update user_publish_goods set stage = #{stage} where goodsID = #{goodsID};
+	</update>
+	
 	
 
 	<resultMap type="UserPublishedGoods" id="dataResultMap">

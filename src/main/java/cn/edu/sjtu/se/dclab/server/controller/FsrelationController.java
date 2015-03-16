@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.edu.sjtu.se.dclab.server.entity.Fsrelation;
 import cn.edu.sjtu.se.dclab.server.service.FsrelationService;
 
 @Controller
@@ -19,11 +22,11 @@ public class FsrelationController {
 	@Autowired
 	private FsrelationService fsrelationService;
 
-	@RequestMapping(value="{actp}",method = RequestMethod.GET)
+	@RequestMapping(value="{actp}",method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String getFs(@PathVariable("actp") String actp) {
+	public List<Fsrelation> getFs(@PathVariable("actp") Long actp) {
 		System.out.println("+controllerp25+++++++++++++++++");
-		String tmp = fsrelationService.getRelationByActp(actp);
+		List<Fsrelation> tmp = fsrelationService.getRelationByActp(actp);
 		System.out.println("++controller27++++++++++++++++++++++++++++"+tmp);
 		return tmp;
 	}

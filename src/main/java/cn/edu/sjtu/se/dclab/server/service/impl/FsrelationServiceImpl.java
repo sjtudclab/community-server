@@ -24,34 +24,36 @@ public class FsrelationServiceImpl implements FsrelationService{
 	}
 	
 	@Override
-	public String getRelationByActp(String actp){		
+	public List<Fsrelation>  getRelationByActp(Long actp){		
 		System.out.println("+impl28++++++++++++++++++");
 		// search by Active
 		List<Fsrelation> temp = fsrelationMapper.getFsrelationByActp(actp);
-		String t = "";
-		for(int i = 0; i < temp.size(); i++)
-		{
-			t = t + temp.get(i).getPassp() + ",";
-			System.out.println("+++"+temp.get(i).getActp()+"+++");
-		}
-		return t;
-//		String Json_string = "[";
-//		for(int i = 0; i < temp.size(); i++) 
+		return temp;
+//		String t = "";
+//		for(int i = 0; i < temp.size(); i++)
 //		{
-//			if (actp.equals(temp.get(i).getActp())){
-//				if (!Json_string.equals("["))
-//					Json_string+=",";
-//				Json_string = Json_string + "{\"passp\":";
-//				Json_string = Json_string + "\""+temp.get(i).getPassp()+"\"}";
-//			}
+//			t = t + temp.get(i).getPassp() + ",";
+//			System.out.println("+++"+temp.get(i).getActp()+"+++");
 //		}
-//		Json_string+="]";
-//		if (temp.size() < 1)
-//			return null;
-//		return Json_string;
+//		return t;
+	/*	String Json_string = "[";
+		for(int i = 0; i < temp.size(); i++) 
+		{
+			if (actp.equals(temp.get(i).getActp())){
+				if (!Json_string.equals("["))
+					Json_string+=",";
+				Json_string = Json_string + "{\"passp\":";
+				Json_string = Json_string + "\""+temp.get(i).getPassp()+"\"}";
+			}
+		}
+		Json_string+="]";
+		if (temp.size() < 1)
+			return null;
+		System.out.println("+impl51++++++++++++++++++" + Json_string);
+		return Json_string;*/
 	}
 	
-	public List<Fsrelation> getFsrelationByPassp(String passp){
+	public List<Fsrelation> getFsrelationByPassp(Long passp){
 		return fsrelationMapper.getFsrelationByPassp(passp);  //search by Passive
 	}
 	

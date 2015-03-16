@@ -24,3 +24,11 @@
 	margin: 10px;
 }
 
+.pritem .prtitle {
+	font-weight: bold;
+}
+
+.pritem {
+	font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+	line-height: 30px;
+}
