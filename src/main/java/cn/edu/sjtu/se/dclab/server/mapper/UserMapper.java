@@ -9,6 +9,7 @@ import cn.edu.sjtu.se.dclab.server.entity.User;
  */
 public interface UserMapper {
 
+    public User findByUserId(long id);
     public User findByUserName(String username);
     public Collection<User> findAll();
     

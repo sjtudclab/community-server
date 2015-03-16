@@ -1,6 +1,7 @@
 .settings/
 target/
 .classpath
-.project/
+.mymetadata
+.project
 .idea/
 community-server.iml

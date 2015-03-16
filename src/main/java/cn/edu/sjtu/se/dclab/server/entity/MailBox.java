@@ -9,8 +9,8 @@ import cn.edu.sjtu.se.dclab.server.transfer.MailBoxTransfer;
  */
 public class MailBox {
     private long id;
-    private String from;
-    private String to;
+    private User from;
+    private User to;
     private String content;
     private Date submitedDate;
     private String status;
@@ -19,35 +19,25 @@ public class MailBox {
     }
     
     public MailBox(MailBoxTransfer mailBoxTransfer) {
-		this.from = mailBoxTransfer.getFrom();
-		this.to = mailBoxTransfer.getTo();
-		this.content  = mailBoxTransfer.getContent();
-		this.submitedDate  = mailBoxTransfer.getSubmitedDate();
-        this.status = mailBoxTransfer.getStatus();
+        User fromUser = new User();
+        fromUser.setId(mailBoxTransfer.getFrom().getId());
+        User toUser = new User();
+        toUser.setId(mailBoxTransfer.getTo().getId());
+
+		this.setFrom(fromUser);
+		this.setTo(toUser);
+		this.setContent(mailBoxTransfer.getContent());
+		this.setSubmitedDate(mailBoxTransfer.getSubmitedDate());
+        this.setStatus(mailBoxTransfer.getStatus());
 	}
 
-	public long getId() {
+
+    public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
     }
 
     public String getContent() {
@@ -72,5 +62,21 @@ public class MailBox {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public User getFrom() {
+        return from;
+    }
+
+    public void setFrom(User from) {
+        this.from = from;
+    }
+
+    public User getTo() {
+        return to;
+    }
+
+    public void setTo(User to) {
+        this.to = to;
     }
 }

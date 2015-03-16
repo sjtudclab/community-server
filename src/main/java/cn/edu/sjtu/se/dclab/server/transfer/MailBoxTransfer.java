@@ -8,8 +8,8 @@ import java.util.Date;
  */
 public class MailBoxTransfer {
 	private long id;
-    private String from;
-    private String to;
+    private MailBoxUserTransfer from;
+    private MailBoxUserTransfer to;
     private String content;
     private Date submitedDate;
     private String status;
@@ -20,22 +20,6 @@ public class MailBoxTransfer {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
     }
 
     public String getContent() {
@@ -60,5 +44,21 @@ public class MailBoxTransfer {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public MailBoxUserTransfer getFrom() {
+        return from;
+    }
+
+    public void setFrom(MailBoxUserTransfer from) {
+        this.from = from;
+    }
+
+    public MailBoxUserTransfer getTo() {
+        return to;
+    }
+
+    public void setTo(MailBoxUserTransfer to) {
+        this.to = to;
     }
 }
