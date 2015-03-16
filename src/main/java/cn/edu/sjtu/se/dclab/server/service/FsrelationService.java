@@ -1,12 +1,12 @@
-package cn.edu.sjtu.se.dclab.server.mapper;
+package cn.edu.sjtu.se.dclab.server.service;
 
 import java.util.List;
 
 import cn.edu.sjtu.se.dclab.server.entity.Fsrelation;
 
-public interface FsrelationMapper {
+public interface FsrelationService {
 	
-	public List<Fsrelation> getFsrelationByActp(String actp);  //search by Active
+	public String getRelationByActp(String actp);  //search by Active
 	
 	public List<Fsrelation> getFsrelationByPassp(String passp);  //search by Passive
 	

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>list favorite</title>
+    <script src="js/jquery/jquery.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+	(function show(){
+	alert("......");
+	var content = "zhangsan";
+        $.ajax({
+            type: "GET",
+            url: "rest/fsrelation/" + content,
+            success: function(data) {
+            	alert(data);	
+                $.each(data,function(commentIndex, comment) {
+                    $('#friend').append(comment); 
+                })
+            },
+        })
+        })(jQuery);
+      
+	</script>
+	<span id="friend"></span>
+</body>
+</html>

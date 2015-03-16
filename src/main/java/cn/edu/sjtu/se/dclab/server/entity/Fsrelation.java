@@ -20,7 +20,7 @@ public class Fsrelation {
     }
 
     public void setActp(String actp) {
-        this.actp = actp == null ? null : actp.trim();
+        this.actp = actp;
     }
 
     public String getPassp() {
@@ -28,6 +28,6 @@ public class Fsrelation {
     }
 
     public void setPassp(String passp) {
-        this.passp = passp == null ? null : passp.trim();
+        this.passp = passp;
     }
 }

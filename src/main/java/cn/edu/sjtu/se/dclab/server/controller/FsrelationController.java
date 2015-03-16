@@ -1,0 +1,44 @@
+package cn.edu.sjtu.se.dclab.server.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.edu.sjtu.se.dclab.server.service.FsrelationService;
+
+@Controller
+@RequestMapping("/fsrelation/")
+public class FsrelationController {
+	@Autowired
+	private FsrelationService fsrelationService;
+
+	@RequestMapping(value="{actp}",method = RequestMethod.GET)
+	@ResponseBody
+	public String getFs(@PathVariable("actp") String actp) {
+		System.out.println("+controllerp25+++++++++++++++++");
+		String tmp = fsrelationService.getRelationByActp(actp);
+		System.out.println("++controller27++++++++++++++++++++++++++++"+tmp);
+		return tmp;
+	}
+	
+	@RequestMapping(value="",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public void test() {
+		System.out.println("+controller34++++++++++++++++++++++++++++++++");
+	}
+
+	@RequestMapping(value="create",method = RequestMethod.GET)
+	@ResponseBody
+	public String createFsrelation(HttpServletRequest request,
+			HttpServletResponse response) {
+		return "index";
+	}
+
+}

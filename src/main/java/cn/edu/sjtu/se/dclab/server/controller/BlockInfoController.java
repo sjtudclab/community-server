@@ -16,7 +16,7 @@ public class BlockInfoController {
 	@Autowired
 	private BlockInfoService blockinfoService;
 	
-	@RequestMapping(value="{manager}",method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+	@RequestMapping(value="",method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String getInfo(@PathVariable("manager") String manager) {
 		String ans = blockinfoService.getInfoByManager(manager);
