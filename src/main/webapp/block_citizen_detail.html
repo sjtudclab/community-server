@@ -11,7 +11,7 @@
    <!-- Mobile viewport optimized: h5bp.com/viewport -->
    <meta name="viewport" content="width=device-width">
 
-   <title>房屋信息</title>
+   <title>人口信息</title>
 
    <meta name="robots" content="noindex, nofollow">
    <meta name="description" content="MetroUI-Web : Simple and complete web UI framework to create web apps with Windows 8 Metro user interface." />
@@ -36,10 +36,7 @@
    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="content/ico/apple-touch-icon-114-precomposed.png">
    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="content/ico/apple-touch-icon-72-precomposed.png">
    <link rel="apple-touch-icon-precomposed" href="content/ico/apple-touch-icon-57-precomposed.png">
-  
-<!-- For test-->
-<script type="text/javascript" src="http://hq.sinajs.cn/list=sh600000,sh600001,sh600002,sh600003,sh600004,sh600005,sh600006,sh600007,sh600008,sh600009,sh600010,sh600011,sh600012,sh600013,sh600014,sh600015,sh600016,sh600017,sh600018,sh600019,sh600020,sh600021,sh600022,sh600023,sh600024,sh600025,sh600026,sh600027,sh600028,sh600029,sh600030,sh600031,sh600032,sh600033,sh600034,sh600035,sh600036,sh600037,sh600038,sh600039,sh600040,sh600041,sh600042,sh600043,sh600044,sh600045,sh600046,sh600047,sh600048,sh600049,sh600050" charset="gb2312"></script>
-  
+
    <!-- All JavaScript at the bottom, except for Modernizr and Respond.
       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
@@ -163,61 +160,28 @@
 
     })
 
-    var arr1 = new Array();
-    var arr2 = new Array();
-    var arr3 = new Array();
-    var arr4 = new Array();
-    var arr5 = new Array();
-    var arr6 = new Array();
-    var arr7 = new Array();
-    var arr8 = new Array();
-    var arr9 = new Array();
-    var arr10 = new Array();
-    var arr11 = new Array();
-    var arr12 = new Array();
-    var arr13 = new Array();
+    var arr1 = new Array();     //证件号
+    var arr2 = new Array();     //姓名
+    var arr3 = new Array();     //证件类型
+    var arr4 = new Array();     //婚姻状况
+    var arr5 = new Array();     //就业状况
+    var arr6 = new Array();     //户口性质
+    var arr7 = new Array();     //人户分离情况
+    var arr8 = new Array();     //文化程度
+    var arr9 = new Array();     //政治面貌
+    var arr10 = new Array();    //民族
+    var arr11 = new Array();    //性别
+    var arr12 = new Array();    //侨情类别
+    var arr13 = new Array();    //收入情况
+    var arr14 = new Array();    //是否显示
 
     var flag = 0;
     setTimeout("buildTable()",1000);
-    setTimeout("searchListener()",1000);
 
-
-    function getData_test()
-    {   
-        addToArray(hq_str_sh600000, "sh600000");
-        addToArray(hq_str_sh600004, "sh600004");
-        addToArray(hq_str_sh600005, "sh600005");
-        addToArray(hq_str_sh600006, "sh600006");
-        addToArray(hq_str_sh600007, "sh600007");
-        addToArray(hq_str_sh600008, "sh600008");
-        addToArray(hq_str_sh600009, "sh600009");
-        addToArray(hq_str_sh600010, "sh600010");
-        addToArray(hq_str_sh600011, "sh600011");
-        addToArray(hq_str_sh600012, "sh600012");
-        addToArray(hq_str_sh600015, "sh600015");
-        addToArray(hq_str_sh600016, "sh600016");
-        addToArray(hq_str_sh600017, "sh600017");
-        addToArray(hq_str_sh600018, "sh600018");
-        addToArray(hq_str_sh600019, "sh600019");
-        addToArray(hq_str_sh600020, "sh600020");
-        addToArray(hq_str_sh600021, "sh600021");
-        addToArray(hq_str_sh600022, "sh600022");
-        addToArray(hq_str_sh600023, "sh600023");
-        addToArray(hq_str_sh600026, "sh600026");
-        addToArray(hq_str_sh600027, "sh600027");
-        addToArray(hq_str_sh600028, "sh600028");
-        addToArray(hq_str_sh600029, "sh600029");
-        addToArray(hq_str_sh600030, "sh600030");
-        addToArray(hq_str_sh600031, "sh600031");
-    }
-
-    function showTable(tid)
+    function showTable()
     {
-      var state = document.getElementById(tid).style.display;
-      if ( state == "none" )
-        document.getElementById(tid).style.display = "block";
-      else
-       document.getElementById(tid).style.display = "none";
+      searchTable();
+      buildTable();
     }
 
     function addToArray(data, s_name)
@@ -226,149 +190,176 @@
     	for (i = 0; i<data.length; i++){
       		arr1.push(data[i].id.toString());
       		arr2.push(data[i].name);
-      		arr3.push(data[i].gender);
-      		arr4.push(data[i].credentialType);
-      		arr5.push(data[i].nation);
-      		arr6.push(data[i].marriageStatus);
-      		arr7.push(data[i].employmentStatus);
-      		arr8.push(data[i].residenceType);
-      		arr9.push(data[i].residenceStatus);
-      		arr10.push(data[i].emigrationStatus);
-      		arr11.push(data[i].educationStatus);
-      		arr12.push(data[i].politicsStatus);
+      		arr3.push(data[i].credentialType);
+      		arr4.push(data[i].marriageStatus);
+      		arr5.push(data[i].employmentStatus);
+      		arr6.push(data[i].residenceType);
+      		arr7.push(data[i].residenceStatus);
+      		arr8.push(data[i].educationStatus);
+      		arr9.push(data[i].politicsStatus);
+      		arr10.push(data[i].nation);
+      		arr11.push(data[i].gender);
+      		arr12.push(data[i].emigrationStatus);
       		arr13.push(data[i].incomeCategory);
+          	arr14.push(1);
     	}
     }
 
     function buildTable()
     {
+      document.getElementById("full_table").innerHTML = "<tr><th>证件号</th><th>姓名</th><th>证件类型</th><th>婚姻状况</th><th>就业状况</th><th>户口性质</th><th>人户分离情况</th><th>文化程度</th><th>政治面貌</th><th>民族</th><th>性别</th><th>侨情类别</th><th>收入情况</th></tr>";
+
       if (arr1.length == 0)
-        document.all.detail_0.style.display = "block";
+    	  document.getElementById("full_table").innerHTML += "<tr><th colspan=\"13\">无符合条件的结果</th></tr>";
       else
       {
-        var i; var node; var j;
-        var make_html;
-
+        var i; var node;
+        var count = 0;
         for (i = 0; i < arr1.length; i++)
-        {
-          node = document.createElement("div");
-          j = i + 1;
-          node.style = "overflow:hidden;border:0";
-          node.innerHTML =   "<div id=\"detail_"+j.toString()+"\" class=\"row show-grid\" style=\"display:block\">"
-                          +  "<div class=\"span9\">"
-                          +  "<table style=\"width: 100%; height:40px\" border=\"0\">"
-                          +  "<tr>"
-                          +  "<th style=\"width:25%\">"
-                          +  "<h4>身份证号：</h4>"     
-                          +  " </th> "
-                          +  "<th style=\"width:25%\">"
-                          +  "<h4 id=\"detail_"+j.toString()+"_p1\">"+arr1[i]+"</h4>"    
-                          +  "</th>"
-                          +  "<th style=\"width:25%\">"
-                          +  "<h4>居民姓名：</h4>"     
-                          +  "</th>"
-                          +  "<th style=\"width:20%\">"
-                          +  "<h4 id=\"detail_"+j.toString()+"_p2\">"+arr2[i]+"</h4>"     
-                          +  "</th>"  
-                          +  "<th style=\"width:5%\">"
-                          +  "<b class=\"caret\" style=\"color:red\" onclick = \"showTable('detail_"+j.toString()+"_other')\"></b>"
-                          +  "</th>"
-                          +  "</tr>"
-                          +  "</table>"
-                          +  "</div>"
-                          +  "</div>";
-          node.innerHTML +=  "<div id=\"detail_"+j.toString()+"_other\" class=\"row show-grid\" style=\"display:none; margin-top:0px\">"
-                          +  "<div class=\"span9\">"  
-                          +  "<table width=\"100%\" border=\"1\">"
-                          +  "<tr>"
-                          +  "<th style=\"width:20%\">性别：</th>"  
-                          +  "<th style=\"width:10%\">"+arr3[i]+"</th>"  
-                          +  "<th style=\"width:20%\">证件类型：</th>"
-                          +  "<th style=\"width:20%\">"+arr4[i]+"</th>"
-                          +  "<th style=\"width:20%\">民族：</th>"  
-                          +  "<th style=\"width:10%\">"+arr5[i]+"</th>" 
-                          +  "</tr>"
-
-                          +  "<tr>"
-                          +  "<th>婚姻状况：</th>  "
-                          +  "<th colspan=\"2\">"+arr6[i]+"</th>"
-                          +  "<th>工作状况：</th>"
-                          +  "<th colspan=\"2\">"+arr7[i]+"</th>"  
-                          +  "</tr>"
-
-                          +  "<tr>"
-                          +  "<th>户口类型：</th>  "
-                          +  "<th colspan=\"2\">"+arr8[i]+"</th>"
-                          +  "<th>户口状况：</th>"
-                          +  "<th colspan=\"2\">"+arr9[i]+"</th>"  
-                          +  "</tr>"
-
-                          +  "<tr>"
-                          +  "<th>移民情况：</th>  "
-                          +  "<th colspan=\"2\">"+arr10[i]+"</th>"
-                          +  "<th>教育情况：</th>"
-                          +  "<th colspan=\"2\">"+arr11[i]+"</th>"  
-                          +  "</tr>"
-
-                          +  "<tr>"
-                          +  "<th>政治面貌：</th>  "
-                          +  "<th colspan=\"2\">"+arr12[i]+"</th>"
-                          +  "<th>收入情况：</th>"
-                          +  "<th colspan=\"2\">"+arr13[i]+"</th>"  
-                          +  "</tr>"
-
-                          +  "</table>"
-                          +  "</div>"
-                          +  "</div>";
-
-          document.getElementById("add_point").appendChild(node);
-        }
+          if (arr14[i] == 1)
+          {
+            node = "<tr>"
+                 + "<th>" + arr1[i] + "</td>"
+                 + "<th>" + arr2[i] + "</th>"
+                 + "<th>" + arr3[i] + "</th>"
+                 + "<th>" + arr4[i] + "</th>"
+                 + "<th>" + arr5[i] + "</th>"
+                 + "<th>" + arr6[i] + "</th>"
+                 + "<th>" + arr7[i] + "</th>"
+                 + "<th>" + arr8[i] + "</th>"
+                 + "<th>" + arr9[i] + "</th>"
+                 + "<th>" + arr10[i] + "</th>"
+                 + "<th>" + arr11[i] + "</th>"
+                 + "<th>" + arr12[i] + "</th>"
+                 + "<th>" + arr13[i] + "</th>"; 
+                 + "</tr>";
+            document.getElementById("full_table").innerHTML += node;
+            count++;
+          }
+        if (count == 0)
+        	document.getElementById("full_table").innerHTML += "<tr><th colspan=\"13\">无符合条件的结果</th></tr>";
       }
     }
 
-    function searchListener()
+    function searchTable()
     {
-      var str = document.getElementById("search").value;
-      if (str != "")
-        getSearchAnswer(str);
-      else if (flag == 1)
-      {
-        rebuildTable();
-        flag = 0;
-      }
-      var listen = setTimeout(searchListener,2000);
+      var i;
+      var str;
+      for (i = 0; i<arr1.length; i++)
+        arr14[i] = 1;
+
+      str = document.all.s3.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr3[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s4.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr4[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s5.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr5[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s6.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr6[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s7.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr7[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s8.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr8[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s9.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr9[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s10.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr10[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s11.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr11[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s12.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr12[i] && arr14[i] != 0)
+            arr14[i] = 0;
+
+      str = document.all.s13.value;
+      if (str != "不限")
+        for (i = 0; i<arr1.length; i++)
+          if (str != arr13[i] && arr14[i] != 0)
+            arr14[i] = 0;
     }
 
-    function rebuildTable()
+    function outputData()
     {
-      var i,j;
-      document.getElementById("detail_0").style.display = "none";
-      for (i = 1; i<arr1.length+1; i++)
-      {
-          document.getElementById("detail_" + i.toString()).style.display = "block";
-          document.getElementById("detail_" + i.toString() + "_other").style.display = "none";
-          document.getElementById("detail_" + i.toString() + "_p1").innerHTML = arr1[i-1];
-          document.getElementById("detail_" + i.toString() + "_p2").innerHTML = arr2[i-1]; 
-      }
-    }
+    	try {
+        var oXL = new ActiveXObject("Excel.Application");
+        var oWB = oXL.Workbooks.Add();
+        var oSheet = oWB.ActiveSheet;
+        var row = 1; var col = 1; var i;
+        oSheet.Cells(row,1).value = "证件号";
+        oSheet.Cells(row,2).value = "姓名";
+        oSheet.Cells(row,3).value = "证件类型";
+        oSheet.Cells(row,4).value = "婚姻状况";
+        oSheet.Cells(row,5).value = "就业状况";
+        oSheet.Cells(row,6).value = "户口性质";
+        oSheet.Cells(row,7).value = "人户分离情况";
+        oSheet.Cells(row,8).value = "文化程度";
+        oSheet.Cells(row,9).value = "政治面貌";
+        oSheet.Cells(row,10).value = "民族";
+        oSheet.Cells(row,11).value = "性别";
+        oSheet.Cells(row,12).value = "侨情类别";
+        oSheet.Cells(row,13).value = "收入情况";
 
-    function getSearchAnswer(str)
-    { 
-      var i,j;
-      rebuildTable();
-      j = 0;
-      for (i = 1; i<arr1.length+1; i++)
-      {
-          if ((arr1[i-1].indexOf(str) < 0) && (arr2[i-1].indexOf(str) < 0))
-            document.getElementById("detail_" + i.toString()).style.display = "none";
-          else
-            j++;
-      }
-      if (j == 0)
-        document.getElementById("detail_0").style.display = "block";
-      flag = 1;
+        for (i = 0; i<arr1.length; i++)
+          if (arr14[i]!=0)
+          {
+            row++;
+            oSheet.Cells(row,1).value = arr1[i];
+            oSheet.Cells(row,2).value = arr2[i];
+            oSheet.Cells(row,3).value = arr3[i];
+            oSheet.Cells(row,4).value = arr4[i];
+            oSheet.Cells(row,5).value = arr5[i];
+            oSheet.Cells(row,6).value = arr6[i];
+            oSheet.Cells(row,7).value = arr7[i];
+            oSheet.Cells(row,8).value = arr8[i];
+            oSheet.Cells(row,9).value = arr9[i];
+            oSheet.Cells(row,10).value = arr10[i];
+            oSheet.Cells(row,11).value = arr11[i];
+            oSheet.Cells(row,12).value = arr12[i];
+            oSheet.Cells(row,13).value = arr13[i];
+          } 
+        oXL.Visible = true; 
+    	} catch(e)
+    	{
+    		alert("请把IE的安全选项设置为低，否则无法使用该控件！");
+    	}
     }
-
   </script>
   
 	<script src="js/common.js"></script>
@@ -411,103 +402,175 @@
   </header>
    
   <div class="container">
-    <div class="row">
-      <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-          <li>信息过滤</li>
-          <li><input id="search" type="text" value=""></li>
-        </ul>
-      </div>
-      <div class="span9">
-        <section id="global">
-          <div id="add_point" border = "0">
+    <div class="row show-grid">
+       <table style="width:100%" border="0">
+          <tr>
+            <td><h2>条件筛选</h2></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align:center"><a onclick="outputData()">数据导出</a></td>
+          </tr>
+          <tr>
+          	<td><h4>证件类型:</h4></td>
+            <td>
+              <select id="s3" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="居民身份证">居民身份证</option>
+                  <option value="普通护照">普通护照</option>
+                  <option value="香港特别行政区护照">香港特别行政区护照</option>
+                  <option value="台湾居民来往大陆通行证">台湾居民来往大陆通行证</option>
+                  <option value="港澳居民来往大陆通行证">港澳居民来往大陆通行证</option>
+                  <option value="其他证件">其他证件</option>
+              </select>
+            </td>
+            <td><h4>婚姻状况:</h4></td>
+            <td>
+              <select id="s4" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="未婚">未婚</option>
+                  <option value="已婚">已婚</option>
+                  <option value="丧偶">丧偶</option>
+                  <option value="离婚">离婚</option>
+                  <option value="未知">未知</option>
+              </select>
+            </td>
+            <td><h4>就业状况:</h4></td>
+            <td>
+              <select id="s5" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="就业">就业</option>
+                  <option value="失业">失业</option>
+                  <option value="无业">无业</option>
+                  <option value="退休">退休</option>
+                  <option value="务农">务农</option>
+                  <option value="学生">学生</option>
+                  <option value="学龄前儿童">学龄前儿童</option>
+                  <option value="未知">未知</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><h4>户口性质:</h4></td>
+            <td>
+              <select id="s6" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="本市农村">本市农村</option>
+                  <option value="本市城镇">本市城镇</option>
+                  <option value="外地户口">外地户口</option>
+                  <option value="外籍户口">外籍户口</option>
+                  <option value="未知">未知</option>
+                  <option value="街道公共户">街道公共户</option>
+              </select>
+            </td>
+            <td><h4>人户分离情况:</h4></td>
+            <td>
+              <select id="s7" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="人在户在">人在户在</option>
+                  <option value="人在户不在">人在户不在</option>
+                  <option value="人不在户在">人不在户在</option>
+                  <option value="人户不在">人户不在</option>
+              </select>
+            </td>
+            <td><h4>文化程度:</h4></td>
+            <td>
+              <select id="s8" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="不明">人在户在</option>
+                  <option value="研究生">研究生</option>
+                  <option value="硕士">硕士</option>
+                  <option value="博士后">博士后</option>
+                  <option value="博士">博士</option>
+                  <option value="大学">大学</option>
+                  <option value="大学专科和专科学校">大学专科和专科学校</option>
+                  <option value="中等专业学校">中等专业学校</option>
+                  <option value="高中">高中</option>
+                  <option value="初中">初中</option>
+                  <option value="小学">小学</option>
+                  <option value="学龄前儿童">学龄前儿童</option>
+                  <option value="文盲或半文盲">文盲或半文盲</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><h4>政治面貌:</h4></td>
+            <td>
+              <select id="s9" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="群众">群众</option>
+                  <option value="中共党员">中共党员</option>
+                  <option value="中共预备党员">中共预备党员</option>
+                  <option value="共青团员">共青团员</option>
+                  <option value="无党派民主人士">无党派民主人士</option>
+                  <option value="民主党派">民主党派</option>
+                  <option value="其它">其它</option>
+              </select>
+            </td>
+            <td><h4>民族:</h4></td>
+            <td>
+              <select id="s10" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="不明">不明</option>
+                  <option value="汉族">汉族</option>
+                  <option value="少数民族">少数民族</option>
+              </select>
+            </td>
+            <td><h4>性别:</h4></td>
+            <td>
+              <select id="s11" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="男">男</option>
+                  <option value="女">女</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><h4>侨情类别:</h4></td>
+            <td>
+              <select id="s12" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="中国公民">中国公民</option>
+                  <option value="华侨">华侨</option>
+                  <option value="港澳居民">港澳居民</option>
+                  <option value="外籍华人">外籍华人</option>
+                  <option value="留学生">留学生</option>
+                  <option value="归侨">归侨</option>
+                  <option value="早期归侨"> 早期归侨</option>
+                  <option value="侨眷">侨眷</option>
+                  <option value="港澳居民眷属">港澳居民眷属</option>
+                  <option value="归国留学人员">归国留学人员</option>
+                  <option value="留学生眷属">留学生眷属</option>
+                  <option value="其它">其它</option>
+              </select>
+            </td>
+            <td><h4>收入情况:</h4></td>
+            <td>
+              <select id="s13" onchange="showTable()">
+                  <option value="不限" selected="">不限</option>
+                  <option value="退休">退休</option>
+                  <option value="纳保">纳保</option>
+                  <option value="无业">无业</option>
+                  <option value="外地回沪">外地回沪</option>
+                  <option value="低保">低保</option>
+                  <option value="未知">未知</option>
+              </select>
+            </td>
+          </tr>
+       </table>
 
-            <div id="detail_0" style="margin-top:0px; display:none">
-              <table style="width: 100%; height:40px" border="0" >
-                <tr><h3>没有查询到的数据</h3></tr>
-              </table>
-            </div>
-<!-- example -->
-<!--             <div id="detail_1" class="span9" style="margin-top:20px; display:block">
-              <table style="width: 100%; height:40px" border="1" >
-                <tr>
-                <th style="width:25%">
-                  <h4>证券代码：</h4>     
-                </th> 
-                <th style="width:25%">
-                  <h4>sh.600000</h4>     
-                </th>
-                <th style="width:25%">
-                  <h4>证券名称：</h4>     
-                </th>
-                <th style="width:20%">
-                  <h4>浦发银行</h4>     
-                </th>  
-                <th style="width:5%">
-                  <b class="caret" style="color:red" onclick = "showTable('detail_1_other')"></b>
-                </th>
-                </tr>
-              </table>
-            </div>
+       <p> &nbsp; </p>
+       <p> &nbsp; </p>
 
-            <div id="detail_1_other" class="span9" style="display:none">  
-              <table width="100%" border="1">
-                <tr>
-                  <th style="width:20%">今开：</th>  
-                  <th style="width:10%">15.19</th>  
-                  <th style="width:20%">昨收：</th>
-                  <th style="width:10%">15.12</th>
-                  <th style="width:20%">现价：</th>  
-                  <th style="width:20%">15.29</th> 
-                </tr>
-                <tr>
-                  <th style="width:20%">最高：</th>  
-                  <th style="width:10%">15.80</th>  
-                  <th style="width:20%">最低：</th>
-                  <th style="width:10%">15.08</th>
-                  <th style="width:20%">涨幅：</th>
-                  <th style="width:20%">1.12%</th>
-                </tr>
-                <tr>
-                  <th colspan="2">成交量：</th>  
-                  <th>440178379</th>  
-                  <th colspan="2">成交额：</th>
-                  <th >6789040866</th>   
-                </tr>
-              </table>
-            </div> 
- -->
-          </div> 
-             
-        </section>
-      </div>
+       <table style="width:100%" border="1">
+       	 <tbody id="full_table">
+
+          </tbody>
+       </table>
     </div>
+
   </div>
-   <div id="charms" class="win-ui-dark">
-      <div id="theme-charms-section" class="charms-section">
-         <div class="charms-header">
-            <a href="#" class="close-charms win-command">
-               <span class="win-commandimage win-commandring">&#xe05d;</span>
-            </a>
-            <h2>Settings</h2>
-         </div>
-   
-         <div class="row-fluid">
-            <div class="span12">
-   
-               <form class="">
-                  <label for="win-theme-select">Change theme:</label>
-                  <select id="win-theme-select" class="">
-                     <option value="metro-ui-semilight">Semi-Light</option>
-                     <option value="metro-ui-light">Light</option>
-                     <option value="metro-ui-dark">Dark</option>
-                  </select>
-               </form>
-   
-            </div>
-         </div>
-      </div>
-   </div>
 
    <script type="text/javascript" src="scripts/google-code-prettify/prettify.js"></script>
    <script type="text/javascript" src="scripts/jquery.mousewheel.js"></script>
