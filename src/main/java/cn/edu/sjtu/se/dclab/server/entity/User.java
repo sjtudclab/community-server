@@ -10,6 +10,7 @@ public class User {
 	private String username;
 	private String password;
 	private String identification;
+	private String imageUrl;
 
 	public long getId() {
 		return id;
@@ -41,5 +42,13 @@ public class User {
 
 	public void setIdentification(String identification) {
 		this.identification = identification;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }

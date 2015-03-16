@@ -85,6 +85,7 @@
 			type: "POST",
 			data: $('form#loginForm').serializeArray(),
 			success: function () {
+				saveUser(data);
 				window.location = 'start-screen-tenement.html'
 			},
 			error: function() {

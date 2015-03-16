@@ -145,5 +145,17 @@ public class SecondGoodsController {
 		System.out.println("stage goods:"+stage+" result:"+array.toString());
 		return array.toString();
 	}
+	
+	@RequestMapping(value="stage/update", method=RequestMethod.GET)
+	@ResponseBody
+	public String updateGoodsStage(HttpServletRequest request,
+			HttpServletResponse response) {
+		int goodsID = Integer.parseInt(request.getParameter("goodsID"));
+		String stage = request.getParameter("stage");
+		
+		service.updateGoodsStage(goodsID, stage);
+		
+		return "update success";
+	}
 
 }

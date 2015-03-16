@@ -5,19 +5,40 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.UserMapper">
 
     <select id="findByUserName" resultMap="UserMap">
-        SELECT id, username, password, identification
+        SELECT id, username, password, identification, image_url
         FROM user
         WHERE username = #{username}
+    </select>
+    
+    <select id="findUserByUserId" parameterType="long" resultMap="UserMap">
+        SELECT id, username, password, identification, image_url
+        FROM user
+        WHERE id = #{id}
     </select>
     
     <select id="findAll" resultMap="UserMap">
     	SELECT * FROM user;
     </select>
 
+    <select id="findByUserId" resultMap="UserMap">
+        SELECT id, username
+        FROM user
+        WHERE id = #{userId}
+    </select>
+    
+    <delete id="deleteUserRole" parameterType="long">    
+    	DELETE FROM user_role WHERE user_id = #{userId};
+    </delete>
+    
+    <insert id="insertUserRole" parameterType="long">
+    	INSERT INTO user_role (user_id,role_id) VALUES (#{userId},#{roleId});
+    </insert>
+
     <resultMap id="UserMap" type="User">
         <id property="id" column="id" />
         <result property="identification" column="identification" />
         <result property="password" column="password" />
         <result property="username" column="username" />
+        <result property="imageUrl" column="image_url" />
     </resultMap>
 </mapper>

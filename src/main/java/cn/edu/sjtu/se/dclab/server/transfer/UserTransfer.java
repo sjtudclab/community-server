@@ -11,6 +11,7 @@ import cn.edu.sjtu.se.dclab.server.entity.Role;
 public class UserTransfer {
 	private long id;
 	private String username;
+	private String imageUrl;
 	private Collection<Role> roles;
 	public long getId() {
 		return id;
@@ -23,6 +24,12 @@ public class UserTransfer {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	public Collection<Role> getRoles() {
 		return roles;

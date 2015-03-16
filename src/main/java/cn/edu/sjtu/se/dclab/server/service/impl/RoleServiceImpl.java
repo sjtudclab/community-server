@@ -31,4 +31,9 @@ public class RoleServiceImpl implements RoleService {
 		return roleMapper.findAll();
 	}
 
+	@Override
+	public Role findOne(long id) {
+		return roleMapper.findOne(id);
+	}
+
 }

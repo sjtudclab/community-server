@@ -3,6 +3,7 @@ package cn.edu.sjtu.se.dclab.server.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.mapper.RoleMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserMapper;
 import cn.edu.sjtu.se.dclab.server.service.UserService;
+import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 
 /**
@@ -52,6 +54,7 @@ public class UserServiceImpl implements UserService {
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
 		userTransfer.setRoles(roles);
+		userTransfer.setImageUrl(user.getImageUrl());
 		
 		return userTransfer;
 	}
@@ -65,6 +68,7 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
 			userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
+			userTransfer.setImageUrl(user.getImageUrl());
 			userTransfers.add(userTransfer);
 		}
 		return userTransfers;
@@ -84,6 +88,7 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
 			userTransfer.setRoles(roles);
+			userTransfer.setImageUrl(user.getImageUrl());
 
 			boolean flag = false;
 			if (category.equals("业委会")) {
@@ -98,7 +103,7 @@ public class UserServiceImpl implements UserService {
 				for (Role role : roles) {
 					if (role.getName().endsWith("主任")
 							|| role.getName().endsWith("书记")
-							|| role.getName().endsWith("员")) {
+							|| role.getName().endsWith("员")||role.getName().endsWith("民警")) {
 						flag = true;
 						break;
 					}
@@ -119,11 +124,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(UserTransfer userTransfer) {
-		User user = new User();
-	}
-
-	@Override
 	public UserTransfer authenticateUser(String username, String password) {
 		User user = userMapper.findByUserName(username);
 		if(user == null)
@@ -135,10 +135,43 @@ public class UserServiceImpl implements UserService {
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
 			userTransfer.setRoles(roles);
+			userTransfer.setImageUrl(user.getImageUrl());
 			
 			return userTransfer;
 		}else{
 			return null;
+		}
+	}
+
+	@Override
+	public UserTransfer getUserByUserId(long id) {
+		User user = userMapper.findUserByUserId(id);
+		UserTransfer userTransfer = new UserTransfer();
+		userTransfer.setId(user.getId());
+		userTransfer.setUsername(user.getUsername());
+		userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
+		userTransfer.setImageUrl(user.getImageUrl());
+		return userTransfer;
+	}
+
+	@Override
+	public void updateUser(UserTransfer userTransfer) {
+	}
+
+	@Override
+	public void updateUserRole(UserRoleTransfer userRoleTransfer) {
+		long userId = userRoleTransfer.getUserId();
+		long[] roleIds = userRoleTransfer.getRoleIds();
+		userMapper.deleteUserRole(userId);
+		for(long roleId : roleIds){
+			userMapper.insertUserRole(userId, roleId);
+		}
+	}
+
+	@Override
+	public void updateUserRoles(List<UserRoleTransfer> userRoleTransfers) {
+		for(UserRoleTransfer userRoleTransfer : userRoleTransfers){
+			updateUserRole(userRoleTransfer);
 		}
 	}
 

@@ -2,6 +2,8 @@ package cn.edu.sjtu.se.dclab.server.mapper;
 
 import java.util.Collection;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.edu.sjtu.se.dclab.server.entity.User;
 
 /**
@@ -9,7 +11,11 @@ import cn.edu.sjtu.se.dclab.server.entity.User;
  */
 public interface UserMapper {
 
+    public User findByUserId(long id);
     public User findByUserName(String username);
     public Collection<User> findAll();
+	public User findUserByUserId(long id);
     
+	public void deleteUserRole(long userId);
+	public void insertUserRole(@Param("userId") long userId,@Param("roleId") long roleId);
 }

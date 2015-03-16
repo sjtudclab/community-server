@@ -1,8 +1,9 @@
 package cn.edu.sjtu.se.dclab.server.service;
 
 import java.util.Collection;
+import java.util.List;
 
-import cn.edu.sjtu.se.dclab.server.entity.User;
+import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 
 /**
@@ -17,5 +18,9 @@ public interface UserService{
 	
 	public void updateUser(UserTransfer userTransfer);
 	
+	public void updateUserRole(UserRoleTransfer userRoleTransfer);
+	public void updateUserRoles(List<UserRoleTransfer> userRoleTransfers);
+	
 	public UserTransfer authenticateUser(String username,String password);
+	public UserTransfer getUserByUserId(long id);
 }

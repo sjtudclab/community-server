@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 					goods += 
 					"<div class=\"row goods\">" +
-                        "<a href=\"\">" +
+                        "<a href=\"market_check_thing.html?id="+ value.id +"\">" +
 	                        "<div class=\"span8\">" +
 	                        decodeURI(value.title) +
 	                        "</div>" +

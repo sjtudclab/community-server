@@ -5,21 +5,32 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.MailBoxMapper">
 
     <select id="findAllByUser" resultMap="MailBoxMap">
-        SELECT id, `from`, `to`, content, submited_date
+        SELECT id, `from`, `to`, content, submited_date, status
         FROM mailbox
         WHERE `from` = #{userId} or `to` = #{userId}
     </select>
 
+    <select id="findAllByUserIdAndMailStatus" parameterType="java.util.Map" resultMap="MailBoxMap">
+        SELECT id, `from`, `to`, content, submited_date, status
+        FROM mailbox
+        WHERE `to` = #{userId} AND status = #{status}
+    </select>
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="MailBox">
-        INSERT INTO mailbox (`from`, `to`, submited_date, content)
-        VALUES (#{from}, #{to}, #{submitedDate}, #{content})
+        INSERT INTO mailbox (`from`, `to`, submited_date, content, status)
+        VALUES (#{from.id}, #{to.id}, #{submitedDate}, #{content}, #{status})
     </insert>
 
     <resultMap id="MailBoxMap" type="MailBox">
         <id property="id" column="id" />
-        <result property="from" column="from" />
-        <result property="to" column="to" />
         <result property="content" column="content" />
         <result property="submitedDate" column="submited_date" />
+        <result property="status" column="status" />
+        <association property="from" javaType="User">
+            <id property="id" column="from" />
+        </association>
+        <association property="to" javaType="User">
+            <id property="id" column="to" />
+        </association>
     </resultMap>
 </mapper>

@@ -82,5 +82,15 @@ public class UserPublishedGoodsServiceImpl implements UserPublishedGoodsService{
 		
 		return array;
 	}
+	
+	@Override
+	public void updateGoodsStage(int goodsID, String stage) {
+		UserPublishedGoods tmp = new UserPublishedGoods();
+		
+		tmp.setGoodsID(goodsID);
+		tmp.setStage(stage);
+		
+		mapper.updateGoodsStage(tmp);
+	}
 
 }

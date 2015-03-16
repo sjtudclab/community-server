@@ -9,4 +9,6 @@ import java.util.Collection;
  */
 public interface ApartmentService {
     public Collection<Apartment> findAll();
+
+    public Collection<Apartment> findAllByBuildingId(long id);
 }

@@ -27,6 +27,7 @@
     <!-- Local JavaScript -->
     <script src="js/docs.js"></script>
     <script src="js/github.info.js"></script>
+	<script src="js/common.js"></script>
 
     <title>业委会</title>
 </head>
@@ -121,19 +122,26 @@
             type: "GET",
             url: 'rest/users/owner',
             success: function(data) {
-                $(data).each(function(ind, el) {
+                var users = [];
+                $(data).each(function(i, d) {
+                    for (var r in d.roles) {
+                        users.push({userid: d.id, username: d.username, role: d.roles[r], imageUrl: d.imageUrl});
+                    }
+                });
+
+                $(users).each(function(ind, el) {
                     var name = el.username;
-                    var position = el.roles.reduce(function(s, r) {return s + r.name + ', ';}, '').slice(0, -2);
+                    var position = el.role.name;
                     var html = 
                         '<div class="image-container shadow">' +
-                        '<a target="_blank" href="{0}"><img src="images/{1}" class="polaroid"></a>'.format('http://www.baidu.com', 'default.jpg') +
+                        '<a target="_blank" href="{0}"><img src="images/{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}'.format(el.userid, el.role.id), el.imageUrl) +
                             '<div class="overlay">' +
                                 '<span class="name-text">{0}</span><br>'.format(name) +
                                 '<span class="position-text">{0}</span>'.format(position) +
                             '</div>' 
                         '</div>';
                     $('.person-list-container').append($(html));
-                })
+                });
             },
             error: function(obj) {
                 console.log(obj);
