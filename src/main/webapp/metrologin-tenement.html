@@ -78,13 +78,14 @@
 		
 </div>
 <script src="js/hitua.js"></script>
+<script src="js/common.js"></script>
 <script type="text/javascript">
 	$('#loginBtn').click(function () {
 		$.ajax({
 			url: 'rest/users/login',
 			type: "POST",
 			data: $('form#loginForm').serializeArray(),
-			success: function () {
+			success: function (data) {
 				saveUser(data);
 				window.location = 'start-screen-tenement.html'
 			},

@@ -102,7 +102,7 @@
 
 	<!--脚本-->
 	<script type="text/javascript">
-		var userid = 1;
+		var userid = currentUserId();
 /* 		$(document).ready(function () {
 			$.post("rest/mailboxs/"+userid, function (data) {
 				var count = 0;
@@ -141,7 +141,7 @@
 						contentType: 'application/json; charset=utf-8',
 						url: "rest/mailboxs",
 						data: JSON.stringify({
-							"from": 1,
+							"from": userid,
 							"to": $("#to").text(),
 							"content": $("#cont")[0].value,
 							"submitedDate": new Date().getTime()
