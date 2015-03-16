@@ -103,7 +103,7 @@
         <div class="container">
             <div class="row">
                 <div class="pritem police">
-                    <span class="prtitle">社区民警: </span><span class="prname">黄艳萍</span>
+                    <span class="prtitle">社区民警: </span><a class="prname" target="_blank">黄艳萍</a>
                 </div>
 <!--                 <div class="pritem">
                     <span class="prtitle">助残员: </span>
@@ -111,7 +111,7 @@
  -->            </div>
             <div class="row">
                 <div class="pritem zhucan">
-                    <span class="prtitle">助残员: </span><span class="prname">黄艳萍</span>
+                    <span class="prtitle">助残员: </span><a class="prname" target="_blank">黄艳萍</a>
                 </div>
 <!--                 <div class="pritem">
                     <span class="prtitle">社区民警: </span>
@@ -141,19 +141,19 @@
             type: "GET",
             url: 'rest/users/committee',
             success: function(data) {
-                var police = $(data).filter(function(i,d) {return d.roles.some(function(r) {return r.name.includes('民警');})});
-                police = police.length > 0 ? police[0] : null;
-                var zhucan = $(data).filter(function(i,d) {return d.roles.some(function(r) {return r.name.includes('助残员');})});
-                zhucan = zhucan.length > 0 ? zhucan[0] : null;
                 var users = [];
-                $(data).filter(function(i, d) {
-                    return d.id != police.id && d.id != zhucan.id;
-                }).each(function(i, d) {
+                $(data).each(function(i, d) {
                 	for (var r in d.roles) {
                 		users.push({userid: d.id, username: d.username, role: d.roles[r], imageUrl: d.imageUrl});
                 	}
                 });
+                var police = $(users).filter(function(i,d) {return d.role.name.includes('民警');})[0];
+                var zhucan = $(users).filter(function(i,d) {return d.role.name.includes('助残员');})[0];
+
                 $(users).each(function(ind, el) {
+                    if (el.userid == police.userid || el.userid == zhucan.userid) {
+                        return;
+                    }
                     var name = el.username;
                     var position = el.role.name;
                     var html = 
@@ -169,6 +169,8 @@
 
                 $('.police .prname').text(police.username);
                 $('.zhucan .prname').text(zhucan.username);
+                $('.police .prname').attr('href', 'user_position.html?user_id={0}&role_id={1}'.format(police.userid, police.role.id))
+                $('.zhucan .prname').attr('href', 'user_position.html?user_id={0}&role_id={1}'.format(zhucan.userid, zhucan.role.id))
 
             },
             error: function(obj) {
