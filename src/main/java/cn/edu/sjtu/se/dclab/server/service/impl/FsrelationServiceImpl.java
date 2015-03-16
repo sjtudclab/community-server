@@ -27,14 +27,17 @@ public class FsrelationServiceImpl implements FsrelationService{
 	public List<Fsrelation>  getRelationByActp(Long actp){		
 		System.out.println("+impl28++++++++++++++++++");
 		// search by Active
+		System.out.println("+impl30++++++++++++++++++");
 		List<Fsrelation> temp = fsrelationMapper.getFsrelationByActp(actp);
+		System.out.println("impl32"+temp);
+		
+		String t = "";
+		for(int i = 0; i < temp.size(); i++)
+		{
+			t = t + temp.get(i).getPassp() + ",";
+			System.out.println("+++"+temp.get(i).getPassp()+"+++");
+		}
 		return temp;
-//		String t = "";
-//		for(int i = 0; i < temp.size(); i++)
-//		{
-//			t = t + temp.get(i).getPassp() + ",";
-//			System.out.println("+++"+temp.get(i).getActp()+"+++");
-//		}
 //		return t;
 	/*	String Json_string = "[";
 		for(int i = 0; i < temp.size(); i++) 
