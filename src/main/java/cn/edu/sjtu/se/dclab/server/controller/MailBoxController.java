@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.controller;
 
 import java.util.Collection;
 
+import cn.edu.sjtu.se.dclab.server.transfer.MailBoxSaveTransfer;
 import cn.edu.sjtu.se.dclab.server.util.MailBoxStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -62,8 +63,8 @@ public class MailBoxController {
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String createMailBox(@RequestBody MailBoxTransfer mailBoxTransfer) {
-		MailBox mailBox = new MailBox(mailBoxTransfer);
+	public String createMailBox(@RequestBody MailBoxSaveTransfer mailBoxSaveTransfer) {
+		MailBox mailBox = new MailBox(mailBoxSaveTransfer);
 		mailBoxService.createMailBox(mailBox);
 		return "succeess";
 	}
