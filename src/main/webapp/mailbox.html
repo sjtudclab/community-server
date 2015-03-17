@@ -37,7 +37,7 @@
     <div class="layout_left_menu">
         <ul class="tendina" id="menu">
             <li class="childUlLi">
-                <a id="menumain" href="#"><i class="glyph-icon icon-home"></i>首页</a>
+                <a id="menumain" href="start-screen-resident.html"><i class="glyph-icon icon-home"></i>首页</a>
                 <ul style="display: none;">
                 </ul>
             </li>
@@ -154,9 +154,11 @@
 			});
 			
 			$("#menumain").click(function() {
-				$("#main_page").html("");
+				/* $("#main_page").html("");
 				$("#navi").text("首页");
-				$("#main_page").append('<div class="text"  style=" text-align:center; font-size:30px"></div>');
+				$("#main_page").append('<div class="text"  style=" text-align:center; font-size:30px"></div>'); */
+				window.location = "start-screen-resident.html";
+
 			});
 			
 			$("#menumail").click(function() {
