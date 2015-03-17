@@ -33,6 +33,7 @@
 	$(document).ready(function(){
 	$("#myfriends").click(function(){
 	$("#fan").empty();
+	$("#room").empty();
 	$("#alllist").hide();
 	var content = "1";			//匹配为登陆人员
         $.ajax({
@@ -54,6 +55,7 @@
         });//ajax
         });//myfriends onclick
     $("#myfans").click(function(){
+    $("#room").empty();
     $("#friend").empty();
 	$("#alllist").hide();
 	var content = "1";			//匹配为登陆人员
@@ -78,7 +80,9 @@
         $("#all").click(function(){
         	$("#fan").empty();
 			$("#friend").empty();
-        	$("#alllist").show();
+        	$("#alllist").hide();
+        	var buildingid = "";
+        	var content = "1";
         	$.ajax({
             	type: "GET",
 	            url: "rest/buildings",
@@ -86,11 +90,22 @@
         	    success: function(data) {
             		$('#build').empty();
                 	$.each(data,function(commentIndex, comment) {
-                		var sls = "<select name=\"building\"  onchange=\"showBuilding(this.value)\">";
-	                	var sle = "</select>";
-    	            	var opts = "<option>";
-        	        	var opte = "</option>";
-            	        $('#build').append(sls+opts+comment.name+opte+sle); 
+                		var bts = "<button class=\"primary\">";
+	                	var bte = "</button>";
+            	        $('#build').append(bts+comment.name+bte); 
+                	})
+	            },//success
+    	    });//ajax
+    	    $.ajax({
+            	type: "GET",
+	            url: "/rest/buildings/"+content+"/apartments",
+    	        dataType: "json",
+        	    success: function(data) {
+            		$('#room').empty();
+                	$.each(data,function(commentIndex, comment) {
+                		var rms = "<button class=\"shortcut primary\">";
+	                	var rme = "</button>";
+            	        $('#room').append(rms+comment.serial_number+rme); 
                 	})
 	            },//success
     	    });//ajax
@@ -121,59 +136,11 @@
     		<span id="friend"></span>
     		<span id="fan"></span>
     	</div>
-    	<div id="alllist" class="spexample">
-    		<div class="spexample">
+    	<div class="spexample">
     		<span id="build"></span>
-    		</div>
-    		
-    		<div class="spexample">
-    		  <select name="building">
-				<option value="1">楼栋1</option>
-				<option value="2">楼栋2</option>
-				<option value="3">楼栋3</option>
-				<option value="4">楼栋4</option>
-				<option value="5">楼栋5</option>
-				<option value="6">楼栋6</option>
-			  </select>
-			</div>
-			
-    		<button class="shortcut">
-				101室
-			</button>
-			<button class="shortcut info">
-				201室
-			</button>
-			<button class="shortcut danger">
-				202室
-			</button>
-			<button class="shortcut success">
-				203室
-			</button>
-			<button class="shortcut primary">
-				302室
-			</button>
-			<button class="shortcut warning">
-				303室
-			</button>
-			<button class="shortcut">
-				401室
-			</button>
-			<button class="shortcut info">
-				401室
-			</button>
-			<button class="shortcut danger">
-				502室
-			</button>
-			<button class="shortcut success">
-				503室
-			</button>
-			<button class="shortcut primary">
-				602室
-			</button>
-			<button class="shortcut warning">
-				603室
-			</button>
-		</div>
+    		<span id="room"></span>
+    	</div>
+
 	</div>
 </body>
 </html>
