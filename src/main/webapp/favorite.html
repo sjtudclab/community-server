@@ -107,106 +107,58 @@
         });//ajax
         });//myfriends onclick
         $("#all").click(function(){
+        //对所有人进行操作
         	$("#fan").empty();
 			$("#friend").empty();
         	var buildingid = "";
         	var num = "";
+        	var rnum = "";
         	$.ajax({
             	type: "GET",
 	            url: "rest/buildings",
     	        dataType: "json",
         	    success: function(data) {
             		$('#build').empty();
+            		comments = [];
                 	$.each(data,function(commentIndex, comment) {
-                		var bts = "<button class=\"primary\" id=\"b" + comment.id + "\" >";
+                		var bts = "<button class=\"primary building\" id=\"b" + comment.id + "\" >";
                 		num = comment.id;
 	                	var bte = "</button>";
             	        $('#build').append(bts+comment.name+bte); 
+            	        comments.push(num);
                 	})
 	            },//success
     	    });//ajax
-    	     $("body").on("click", "#b1", function(){
+    	    
+    	    $(document).on('click', '.building', function() {
+    	    	var id = this.id.slice(1,100);
     	    	$.ajax({
             		type: "GET",
-	            	url: "rest/buildings/1/apartments",
+	            	url: "rest/buildings/" + id + "/apartments",
     	        	dataType: "json",
         	    	success: function(data) {
             			$('#room').empty();
+            			rooms = [];
                 		$.each(data,function(commentIndex, comment) {
                 			//var rms = "<button class=\"shortcut primary\">";
 	                		//var rme = "</button>";
+	                		rnum = comment.serialNumber;
 	                		var dbf = "<div class=\"listsmall\">";
 		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
     		            	var daf = "</div>";
         		        	var href = "<a href=#>添加关注</a>";
-        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
+        		        	var spt = comment.resident.split(",");
+        		        	for(var i=0;i<spt.length;i++){
+							  $('#room').append(dbf+image + "<p>"+spt[i]+"</p>"+href+daf); 
+							}
             	        	//$('#room').append(rms+comment.resident+rme); 
                 		})
 	            	},//success
     	    	});//ajax
-    	    });//button onclick
-    	    $("body").on("click", "#b2", function(){
-    	    	$.ajax({
-            		type: "GET",
-	            	url: "rest/buildings/2/apartments",
-    	        	dataType: "json",
-        	    	success: function(data) {
-            			$('#room').empty();
-                		$.each(data,function(commentIndex, comment) {
-                			/*var rms = "<button class=\"shortcut primary\" id=\"c" + comment.id + "\">";
-	                		var rme = "</button>";
-            	        	$('#room').append(rms+comment.serialNumber+rme);*/ 
-            	        	var dbf = "<div class=\"listsmall\">";
-		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
-    		            	var daf = "</div>";
-        		        	var href = "<a href=#>添加关注</a>";
-        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
-                		})
-	            	},//success
-    	    	});//ajax
-    	    });//button onclick
-    	    $("body").on("click", "#b3", function(){
-    	    	$.ajax({
-            		type: "GET",
-	            	url: "rest/buildings/3/apartments",
-    	        	dataType: "json",
-        	    	success: function(data) {
-            			$('#room').empty();
-                		$.each(data,function(commentIndex, comment) {
-                			/*var rms = "<button class=\"shortcut primary\" id=\"c" + comment.id + "\">";
-	                		var rme = "</button>";
-            	        	$('#room').append(rms+comment.serialNumber+rme); */
-            	        	var dbf = "<div class=\"listsmall\">";
-		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
-    		            	var daf = "</div>";
-        		        	var href = "<a href=#>添加关注</a>";
-        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
-                		})
-	            	},//success
-    	    	});//ajax
-    	    });//button onclick
-    	    $("body").on("click", "#b4", function(){
-    	    	$.ajax({
-            		type: "GET",
-	            	url: "rest/buildings/4/apartments",
-    	        	dataType: "json",
-        	    	success: function(data) {
-            			$('#room').empty();
-                		$.each(data,function(commentIndex, comment) {
-                			/*var rms = "<button class=\"shortcut primary\" id=\"c" + comment.id + "\">";
-	                		var rme = "</button>";
-            	        	$('#room').append(rms+comment.serialNumber+rme); */
-            	        	var dbf = "<div class=\"listsmall\">";
-		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
-    		            	var daf = "</div>";
-        		        	var href = "<a href=#>添加关注</a>";
-        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
-                		})
-	            	},//success
-    	    	});//ajax
-    	    });//button onclick
+    	    });//楼栋onclick
+    	 
         });//all onclick
-        })(jQuery);
+        });
         
       
 	</script>
