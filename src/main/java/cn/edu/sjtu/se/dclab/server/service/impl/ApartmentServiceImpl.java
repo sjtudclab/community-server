@@ -1,6 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.service.impl;
 
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.mapper.ApartmentMapper;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
 
@@ -34,5 +35,10 @@ public class ApartmentServiceImpl implements ApartmentService {
     @Override
     public Collection<Apartment> findAllByBuildingId(long id) {
         return apartmentMapper.findAllByBuildingId(id);
+    }
+
+    @Override
+    public Collection<User> findAllUserByApartmentId(long id) {
+        return apartmentMapper.findAllByApartmentId(id);
     }
 }

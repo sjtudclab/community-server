@@ -1,10 +1,12 @@
 package cn.edu.sjtu.se.dclab.server.controller;
 
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,5 +35,11 @@ public class ApartmentController {
     @ResponseBody
     public Collection<Apartment> findAll() {
         return apartmentService.findAll();
+    }
+
+    @RequestMapping(value = "{id}/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Collection<User> findUserByApartmentId(@PathVariable(value = "id") long id) {
+        return apartmentService.findAllUserByApartmentId(id);
     }
 }
