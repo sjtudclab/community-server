@@ -64,7 +64,7 @@
 	 });
 
    var room_id, room_floor, room_location, room_resident, room_serialNumber, room_owner;
-   var users;
+   var citizen;
 
 	 $(function (){		
 	 var initializationTime=(new Date()).getTime();
@@ -113,7 +113,7 @@
    {
       $.ajax(
       {
-        url : "rest/apartment/" + room_id + "/users",
+        url : "rest/apartment/" + room_id + "/citizen",
         dataType : "JSON",
         type : "GET",
         success : function(data){
@@ -279,8 +279,23 @@
                <h1>人口信息 
                </h1>
              </div>
-             <table id="table2" width="100%" border="1" cellspacing="0" cellpadding="0">
-             </table>
+
+             <table width="100%" border="0">
+             <tr>
+              <th>
+                <h3 align = "left">住户信息</h3>     
+              </th>
+              <th>
+               <a style="float:right; text-align:right" onclick="#">添加</a>
+              </th>
+             </tr>
+            </table> 
+
+            <div id = "table2_add_point">
+               <table id="table2" width="100%" border="1" cellspacing="0" cellpadding="0">
+               </table>
+            </div>
+             
 
            </section>
    
