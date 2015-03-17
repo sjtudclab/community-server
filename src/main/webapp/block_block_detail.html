@@ -255,9 +255,41 @@
             arr6[i] = 0;
     }
 
+    function  getExplorer() {
+      var explorer = window.navigator.userAgent ;
+      //ie 
+      if (explorer.indexOf("MSIE") >= 0) {
+        return 'ie';
+      }
+      //firefox 
+      else if (explorer.indexOf("Firefox") >= 0) {
+        return 'Firefox';
+      }
+      //Chrome
+      else if(explorer.indexOf("Chrome") >= 0){
+        return 'Chrome';
+      }
+      //Opera
+      else if(explorer.indexOf("Opera") >= 0){
+        return 'Opera';
+      }
+      //Safari
+      else if(explorer.indexOf("Safari") >= 0){
+        return 'Safari';
+      }
+    }
+
     function outputData()
     {
-    	try {
+        if( getExplorer() == 'ie' )
+          outputForIE();
+        else
+          tableToExcel('full_table');
+    }
+
+    function outputForIE()
+    {
+      try {
         var oXL = new ActiveXObject("Excel.Application");
         var oWB = oXL.Workbooks.Add();
         var oSheet = oWB.ActiveSheet;
@@ -279,11 +311,26 @@
             oSheet.Cells(row,5).value = arr5[i];
           } 
         oXL.Visible = true; 
-    	} catch(e)
-    	{
-    		alert("请把IE的安全选项设置为低，否则无法使用该控件！");
-    	}
+      } catch(e)
+      {
+        alert("请把IE的安全选项设置为低，否则无法使用该控件！");
+      }      
     }
+
+    var tableToExcel = (function() {
+        var uri = 'data:application/vnd.ms-excel;base64,',
+        template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8" /><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+        base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s)))},
+        format = function(s, c) {
+          return s.replace(/{(\w+)}/g,
+          function(m, p) { return c[p]; }) }
+        return function(table, name) {
+        if (!table.nodeType) table = document.getElementById(table)
+        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+        window.location.href = uri + base64(format(template, ctx));
+        }
+      })()
+
   </script>
   
 	<script src="js/common.js"></script>

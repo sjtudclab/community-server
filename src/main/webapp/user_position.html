@@ -29,7 +29,7 @@
     <title>职位信息</title>
 </head>
 <body class="metro">
-
+    <!--
     <nav class="navigation-bar dark">
         <div class="navigation-bar-content">
             <a href="/" class="element"><span class="icon-grid-view"></span> 可信社区 <sup>1.0</sup></a>
@@ -83,10 +83,11 @@
             </div>
         </div>
     </nav>
+    -->
 
     <div class="container">
         <h1>
-            <a href="/"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+            <a href="Committee.html" class="back-btn"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
           	  <span class="position-name">{职位名称}</span><small class="on-right"></small>
         </h1>
 
@@ -105,7 +106,7 @@
         </div>
 
         <div style="margin-top:30px">
-            <a class="button large default fg-white contactme" target="_blank" href="#">发信息</a>
+            <a class="button large default fg-white contactme"  href="#">发信息</a>
         </div>
 
 
@@ -141,6 +142,11 @@
 	(function($){
         var userid = getQueryVariable('user_id');
         var roleid = getQueryVariable('role_id');
+        var backUrl = getQueryVariable('back_url');
+        if (backUrl) {
+            $('.back-btn').attr('href', backUrl+'.html');
+        }
+
         $.ajax({
             type: "GET",
             url: 'rest/users/id/' + userid,

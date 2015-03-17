@@ -1,5 +1,8 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *2015年1月19日 下午9:42:41
  *@author changyi yuan
@@ -8,9 +11,15 @@ public class User {
 
 	private long id;
 	private String username;
+
+	@JsonIgnore
 	private String password;
 	private String identification;
 	private String imageUrl;
+	private int enabled;
+
+	@JsonIdentityReference(alwaysAsId = true)
+	private Apartment apartment;
 
 	public long getId() {
 		return id;
@@ -50,5 +59,21 @@ public class User {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
+	public Apartment getApartment() {
+		return apartment;
+	}
+
+	public void setApartment(Apartment apartment) {
+		this.apartment = apartment;
 	}
 }
