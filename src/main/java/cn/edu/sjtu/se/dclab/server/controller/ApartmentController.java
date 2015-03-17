@@ -1,6 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.controller;
 
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
+import cn.edu.sjtu.se.dclab.server.entity.Citizen;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
 import cn.edu.sjtu.se.dclab.server.transfer.ApartmentTransfer;
@@ -39,9 +40,9 @@ public class ApartmentController {
         return apartmentService.findAll();
     }
 
-    @RequestMapping(value = "{id}/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "{id}/citizen", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Collection<User> findUserByApartmentId(@PathVariable(value = "id") long id) {
-        return apartmentService.findAllUserByApartmentId(id);
+    public Collection<Citizen> findUserByApartmentId(@PathVariable(value = "id") long id) {
+        return apartmentService.findAllCitizenByApartmentId(id);
     }
 }
