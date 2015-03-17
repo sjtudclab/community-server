@@ -1,14 +1,13 @@
 package cn.edu.sjtu.se.dclab.server.service;
 
-import java.util.List;
-
 import cn.edu.sjtu.se.dclab.server.entity.Fsrelation;
+import cn.edu.sjtu.se.dclab.server.transfer.FsrelationTransfer;
 
 public interface FsrelationService {
 	
-	public List<Fsrelation> getRelationByActp(Long actp);  //search by Active
+	public FsrelationTransfer getRelationByActp(Long actp);  //search by Active
 	
-	public List<Fsrelation> getRelationByPassp(Long passp);  //search by Passive
+	public FsrelationTransfer getRelationByPassp(Long passp);  //search by Passive
 	
 	public Fsrelation createFsrelation(Fsrelation fsrelation);  //add relation
 	
