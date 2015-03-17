@@ -40,5 +40,9 @@
         <result property="password" column="password" />
         <result property="username" column="username" />
         <result property="imageUrl" column="image_url" />
+        <result property="enabled" column="enabled" />
+        <association property="apartment" javaType="Apartment">
+            <id property="id" column="apartment_id" />
+        </association>
     </resultMap>
 </mapper>

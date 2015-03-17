@@ -1,6 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.mapper;
 
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
+import cn.edu.sjtu.se.dclab.server.entity.User;
 
 import java.util.Collection;
 
@@ -11,4 +12,6 @@ public interface ApartmentMapper {
     public Collection<Apartment> findAll();
 
     public Collection<Apartment> findAllByBuildingId(long buildingId);
+
+    public Collection<User> findAllByApartmentId(long id);
 }
