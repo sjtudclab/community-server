@@ -26,6 +26,12 @@
         WHERE id = #{userId}
     </select>
     
+    <select id="findUserByApartmentId" parameterType="long" resultMap="UserMap">
+        SELECT id, username, password, identification, image_url
+        FROM user
+        WHERE apartment_id = #{id}
+    </select>
+    
     <delete id="deleteUserRole" parameterType="long">    
     	DELETE FROM user_role WHERE user_id = #{userId};
     </delete>

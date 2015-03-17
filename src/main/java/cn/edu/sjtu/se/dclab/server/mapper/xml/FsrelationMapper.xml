@@ -11,14 +11,9 @@
   <delete id="deleteFsrelationById" parameterType="java.lang.Integer" >
     delete from fsrelation where id = #{id}
   </delete>
-  <insert id="insert" parameterType="Fsrelation" >
-    insert into fsrelation (id, actp, passp
-      )
-    values (#{id}, #{actp}, #{passp}
-      )
-      <selectKey resultType="int">
-			SELECT LAST_INSERT_ID();
-		</selectKey>
+  <insert id="createFsrelation" parameterType="Fsrelation" >
+    insert into fsrelation (actp, passp)
+    values (#{actp}, #{passp});
   </insert>
   <update id="updateFsrelationById" parameterType="Fsrelation" >
     update fsrelation

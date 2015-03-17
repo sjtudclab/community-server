@@ -79,8 +79,8 @@ public class FsrelationServiceImpl implements FsrelationService{
 		return fsrelationTransfer;
 	}
 	
-	public Fsrelation createFsrelation(Fsrelation fsrelation){
-		return fsrelationMapper.createFsrelation(fsrelation);  //add relation
+	public void createFsrelation(Fsrelation fsrelation){
+		fsrelationMapper.createFsrelation(fsrelation);  //add relation
 	}
 	
 	public void deleteFsrelationById(Integer id){

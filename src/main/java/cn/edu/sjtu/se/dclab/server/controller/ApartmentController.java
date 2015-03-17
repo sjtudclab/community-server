@@ -3,6 +3,8 @@ package cn.edu.sjtu.se.dclab.server.controller;
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
+import cn.edu.sjtu.se.dclab.server.transfer.ApartmentTransfer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,7 @@ public class ApartmentController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Collection<Apartment> findAll() {
+    public Collection<ApartmentTransfer> findAll() {
         return apartmentService.findAll();
     }
 

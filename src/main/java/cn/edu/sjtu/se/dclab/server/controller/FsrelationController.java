@@ -1,16 +1,15 @@
 package cn.edu.sjtu.se.dclab.server.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.edu.sjtu.se.dclab.server.entity.Fsrelation;
 import cn.edu.sjtu.se.dclab.server.service.FsrelationService;
 import cn.edu.sjtu.se.dclab.server.transfer.FsrelationTransfer;
 
@@ -32,11 +31,14 @@ public class FsrelationController {
 		return fsrelationService.getRelationByPassp(passp);
 	}
 
-	@RequestMapping(value="create",method = RequestMethod.GET)
+	@RequestMapping(value="create",method = RequestMethod.POST)
 	@ResponseBody
-	public String createFsrelation(HttpServletRequest request,
-			HttpServletResponse response) {
-		return "index";
+	public String createFsrelation(@RequestBody long actp,@RequestBody long passp) {
+		Fsrelation fsrelation = new Fsrelation();
+		fsrelation.setActp(actp);
+		fsrelation.setPassp(passp);
+		fsrelationService.createFsrelation(fsrelation);
+		return "success";
 	}
 
 }

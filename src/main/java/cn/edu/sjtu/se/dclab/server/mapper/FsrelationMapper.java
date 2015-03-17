@@ -10,7 +10,7 @@ public interface FsrelationMapper {
 	
 	public List<Fsrelation> getFsrelationByPassp(Long passp);  //search by Passive
 	
-	public Fsrelation createFsrelation(Fsrelation fsrelation);  //add relation
+	public void createFsrelation(Fsrelation fsrelation);  //add relation
 	
 	public void deleteFsrelationById(Integer id);  //delete relation
 	
