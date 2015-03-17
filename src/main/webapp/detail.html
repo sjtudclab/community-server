@@ -117,7 +117,7 @@
         dataType : "JSON",
         type : "GET",
         success : function(data){
-            users = data;
+            citizen = data;
             changeTable2(true);
         }
       }
@@ -169,15 +169,29 @@
       if (flag == true)
       {
         var i;
-        for ( i = 0; i < users.length; i++ )
+        for ( i = 0; i < citizen.length; i++ )
          // htm_temp += "<tr><th><img src=\"images/"+users[i].imageUrl+"\" height=\"100\" width=\"100\"></th><th><h2>"+users[i].username+"</h2></th></tr>";
-         htm_temp + = "<tr><th><h2>"+users[i].username+"</h2></th></tr>"; 
+         htm_temp += "<table width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\" style=\"margin-top:20px\">" +
+          "<tr><th>证件号</th><th>"+citizen[i].id.toString()+"</th></tr>" +       
+          "<tr><th>姓名</th><th>"+citizen[i].name+"</th></tr>" +                
+          "<tr><th>证件类型</th><th>"+citizen[i].credentialType+"</th></tr>" +      
+          "<tr><th>婚姻状况</th><th>"+citizen[i].marriageStatus+"</th></tr>" +      
+          "<tr><th>就业状况</th><th>"+citizen[i].employmentStatus+"</th></tr>" +    
+          "<tr><th>户口性质</th><th>"+citizen[i].residenceType+"</th></tr>" +       
+          "<tr><th>人户分离情况</th><th>"+citizen[i].residenceStatus+"</th></tr>" +     
+          "<tr><th>文化程度</th><th>"+citizen[i].educationStatus+"</th></tr>" +     
+          "<tr><th>政治面貌</th><th>"+citizen[i].politicsStatus+"</th></tr>" +      
+          "<tr><th>民族</th><th>"+citizen[i].nation+"</th></tr>" +            
+          "<tr><th>性别</th><th>"+citizen[i].gender+"</th></tr>" +             
+          "<tr><th>侨情类别</th><th>"+citizen[i].emigrationStatus+"</th></tr>" +  
+          "<tr><th>收入情况</th><th>"+citizen[i].incomeCategory+"</th></tr>" + 
+          "</table>"   
       }
       else
       {
         
       }
-      document.all.table2.innerHTML = htm_temp;
+      document.all.table2_add_point.innerHTML += htm_temp;
     }
 
 	</script>
@@ -292,8 +306,8 @@
             </table> 
 
             <div id = "table2_add_point">
-               <table id="table2" width="100%" border="1" cellspacing="0" cellpadding="0">
-               </table>
+<!--                <table id="table2" width="100%" border="1" cellspacing="0" cellpadding="0">
+               </table> -->
             </div>
              
 
