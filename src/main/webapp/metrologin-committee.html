@@ -53,6 +53,13 @@
 			                <input type="password" placeholder="密码" autofocus="" name="password">
 			                <button class="btn-reveal" tabindex="-1" type="button"></button>
 			            </div>
+						<div>
+							<select id="roleSelection">
+								<option>居委会</option>
+								<option>楼组长</option>
+								<option>块长</option>
+							</select>
+						</div>
 						<!--Checkbox-->
 			            <div class="input-control checkbox" data-role="input-control">
 			                <label class="inline-block" style="font-size: 15px;">
@@ -87,7 +94,14 @@
 			data: $('form#loginForm').serializeArray(),
 			success: function (data) {
 				saveUser(data);
-				window.location = 'start-screen-committee.html'
+				var rtl = $('#roleSelection');
+				var value = rtl[0].options[rtl[0].selectedIndex].value;
+				if (value == "居委会")
+					window.location = 'start-screen-committee.html'
+				else if (value == "楼组长")
+					window.location = 'index.html'
+				else if (value == "块长")
+					window.location = 'unused.html'
 			},
 			error: function() {
 				alert("用户名或密码错误")
