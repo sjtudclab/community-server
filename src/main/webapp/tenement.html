@@ -136,7 +136,7 @@
                     var position = el.role.name;
                     var html = 
                         '<div class="image-container shadow">' +
-                        '<a target="_blank" href="{0}"><img src="images/{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}'.format(el.userid, el.role.id), el.imageUrl) +
+                        '<a  href="{0}"><img src="images/{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'tenement'), el.imageUrl) +
                             '<div class="overlay">' +
                                 '<span class="name-text">{0}</span><br>'.format(name) +
                                 '<span class="position-text">{0}</span>'.format(position) +
