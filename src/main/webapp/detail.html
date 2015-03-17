@@ -64,12 +64,14 @@
 	 });
 
    var room_id, room_floor, room_location, room_resident, room_serialNumber, room_owner;
+   var users;
 
 	 $(function (){		
 	 var initializationTime=(new Date()).getTime();
 	 var manager_name = "admin";
 	 showLeftTime();
    showRoom();	
+   getUser();
 	 function showLeftTime()
 	 {
 			var now=new Date();
@@ -107,6 +109,21 @@
       document.all.showRoom.innerHTML = room_location + "-" + room_floor + "-" + (parseInt(room_serialNumber)%1000).toString();
       changeTable1(true);
 	 }
+   function getUser()
+   {
+      $.ajax(
+      {
+        url : "rest/apartment/" + room_id + "/users",
+        dataType : "JSON",
+        type : "GET",
+        success : function(data){
+            users = data;
+            changeTable2(true);
+        }
+      }
+      )
+   }
+
 	 })
 
     function changeTable1(flag)
@@ -144,6 +161,23 @@
       }
       else
         changeTable1(true);
+    }
+
+    function changeTable2(flag)
+    {
+      var htm_temp = "";
+      if (flag == true)
+      {
+        var i;
+        for ( i = 0; i < users.length; i++ )
+         // htm_temp += "<tr><th><img src=\"images/"+users[i].imageUrl+"\" height=\"100\" width=\"100\"></th><th><h2>"+users[i].username+"</h2></th></tr>";
+         htm_temp + = "<tr><th><h2>"+users[i].username+"</h2></th></tr>"; 
+      }
+      else
+      {
+        
+      }
+      document.all.table2.innerHTML = htm_temp;
     }
 
 	</script>
@@ -245,21 +279,10 @@
                <h1>人口信息 
                </h1>
              </div>
-   
-             <h2>常驻人口信息</h2>
-             <p>本户常驻人口<strong>5人</strong>, 姓名为：<strong>王XX</strong>,<strong>李XX</strong>,<strong>王XX</strong>,<strong>张XX</strong>,<strong>王XX</strong>，...（其他信息）</p>
-             
-             <h2>异常变动信息</h2>
-             <div class="bs-docs-grid">
-               <div class="row show-grid">
-                 <div class="span2">群租现象</div>
-                 <div class="span3">外籍人员来访</div>
-                 <div class="span4">信息更改需要办理</div>
-               </div>
-               <div class="row show-grid">
-                 <div class="span9">提交</div>
-               </div>
-             </div>
+             <table id="table2" width="100%" border="1" cellspacing="0" cellpadding="0">
+             </table>
+
+           </section>
    
    
            <!-- Fluid grid system
