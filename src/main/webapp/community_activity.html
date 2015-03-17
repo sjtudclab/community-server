@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/iconFont.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <link href="js/prettify/prettify.css" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.mousewheel.js"></script>
+    <script src="js/prettify/prettify.js"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="js/load-metro.js"></script>
+
+
+    <title>社区活动</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+        
+        <!-- 返回主页 -->
+        <div class="">
+            <h1><a href="start-screen-resident.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>社区活动</h1>
+        </div>
+        <!-- End 返回主页 -->
+
+        <div class="grid fluid">
+        	<table id="activity_list" class="table hovered striped">
+        		<thead>
+        			<tr>
+        				<th class="text-left">发布人</th>
+        				<th class="text-left">活动时间</th>
+        				<th class="text-left">活动主题</th>
+        				<th class="text-left">活动地点</th>
+        			</tr>
+        		</thead>
+        		
+        	</table>
+        </div>
+        
+    </div>
+    
+
+</body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var activity_list = "";
+
+	$.ajax({
+		url:"rest/activity/all",
+		type:"get",
+		dataType:"json",
+		success:function(obj){
+			var activity = ""
+			$.each(obj, function (n, value) {
+				activity += 
+					"<tr>"+
+					"<td>"+value.publisher_id+"</td>"+
+					"<td>"+value.date+"</td>"+
+					"<td>"+value.title+"</td>"+
+					"<td>"+value.place+"</td></tr>";
+			});
+
+			activity_list += activity;
+			//activity_list += "</tbody>";
+			console.log("html:"+activity_list);
+			$("#activity_list").append(activity_list);
+			
+		},
+		error:function(){
+
+		}
+
+	});
+	
+});
+</script>
+
+</html>

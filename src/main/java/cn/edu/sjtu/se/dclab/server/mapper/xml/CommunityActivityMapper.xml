@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.CommunityActivityMapper">
+
+	<select id="getAllCommunityActivity" resultMap="ResultMap">
+		select * from community_activity;
+	</select>
+
+	<insert id="createCommunityActivity" parameterType="CommunityActivity">
+		insert into community_activity (publisher_id,publish_date,title,content,place) 
+		values(#{publisher_id},#{publish_date},#{title},#{content},#{place});
+	</insert>
+	
+	<resultMap type="CommunityActivity" id="ResultMap">
+		<id property="id" column="id" />
+		<result property="publisher_id" column="publisher_id" />
+		<result property="publish_date" column="publish_date" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="place" column="place" />
+		
+	</resultMap>
+	
+</mapper>

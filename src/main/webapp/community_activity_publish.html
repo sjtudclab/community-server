@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/iconFont.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <link href="js/prettify/prettify.css" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.mousewheel.js"></script>
+    <script src="js/prettify/prettify.js"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="js/load-metro.js"></script>
+
+
+    <title>社区活动发布</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+        
+        <!-- 返回主页 -->
+        <div class="offset1">
+            <h1><a href="start-screen-committee.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>社区活动</h1>
+        </div>
+        <!-- End 返回主页 -->
+
+        <div class="grid fluid offset1">
+        	<div class="span8">
+	        	<div class="input-control text">
+				    <input id="title" type="text" value="" placeholder="活动主题"/>
+				    <button class="btn-clear"></button>
+				</div>
+
+				<div class="input-control text">
+				    <input id="date" type="text" value="" placeholder="活动时间"/>
+				    <button class="btn-clear"></button>
+				</div>
+
+				<div class="input-control text">
+				    <input id="place" type="text" value="" placeholder="活动地点"/>
+				    <button class="btn-clear"></button>
+				</div>
+
+				<div class="input-control textarea">
+				    <textarea id="content">请输入活动内容</textarea>
+				</div>
+
+				<button id="activity_publish" class="large primary">
+				发布
+				</button>
+            </div>
+        </div>
+        
+    </div>
+    
+
+</body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#activity_publish").click(function(){
+		var title = $("#title")[0].value;
+		var date = $("#date")[0].value;
+		var place = $("#place")[0].value;
+
+		var content = $("#content").val();
+
+		$.ajax({
+			url:"rest/activity/create",
+			type:"get",
+			//dataType:
+			data:{title:title, date:date, place:place, content:content, publisher_id:2},
+			success:function(obj){
+				alert("发布活动成功");
+			},
+			error:function(){
+				alert("发布活动失败");
+			}
+		});
+
+	});
+	
+});
+</script>
+
+</html>
