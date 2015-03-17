@@ -29,12 +29,41 @@
     
 </head>
 <body>
-    <script type="text/javascript">
+<title>list favorite</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+    <div class="container">
+       <h1>
+       	<a href="start-screen-resident.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+			左邻右舍
+       </h1>
+       <div class="spexample">
+       	 <nav class="horizontal-menu">
+    		<ul>
+    			<li><a href=# id="myfriends">我关注的人</a></li>
+    			<li><a href=# id="myfans">关注我的人</a></li>
+    			<li><a href=# id="all">所有人</a></li>
+    		</ul>
+    	   </nav>
+    	</div>
+    	<div class="spexample">
+    		<span id="friend"></span>
+    		<span id="fan"></span>
+    	</div>
+    	<div class="spexample">
+    		<span id="build"></span>
+    	</div>
+    	<div class="spexample">
+    		<span id="room"></span>
+    	</div>
+	</div>
+	    <script type="text/javascript">
 	$(document).ready(function(){
 	$("#myfriends").click(function(){
 	$("#fan").empty();
 	$("#room").empty();
-	$("#alllist").hide();
+	$("#build").empty();
 	var content = "1";			//匹配为登陆人员
         $.ajax({
             type: "GET",
@@ -57,7 +86,7 @@
     $("#myfans").click(function(){
     $("#room").empty();
     $("#friend").empty();
-	$("#alllist").hide();
+    $("#build").empty();
 	var content = "1";			//匹配为登陆人员
         $.ajax({
             type: "GET",
@@ -80,9 +109,8 @@
         $("#all").click(function(){
         	$("#fan").empty();
 			$("#friend").empty();
-        	$("#alllist").hide();
         	var buildingid = "";
-        	var content = "1";
+        	var num = "";
         	$.ajax({
             	type: "GET",
 	            url: "rest/buildings",
@@ -90,57 +118,97 @@
         	    success: function(data) {
             		$('#build').empty();
                 	$.each(data,function(commentIndex, comment) {
-                		var bts = "<button class=\"primary\">";
+                		var bts = "<button class=\"primary\" id=\"b" + comment.id + "\" >";
+                		num = comment.id;
 	                	var bte = "</button>";
             	        $('#build').append(bts+comment.name+bte); 
                 	})
 	            },//success
     	    });//ajax
-    	    $.ajax({
-            	type: "GET",
-	            url: "/rest/buildings/"+content+"/apartments",
-    	        dataType: "json",
-        	    success: function(data) {
-            		$('#room').empty();
-                	$.each(data,function(commentIndex, comment) {
-                		var rms = "<button class=\"shortcut primary\">";
-	                	var rme = "</button>";
-            	        $('#room').append(rms+comment.serial_number+rme); 
-                	})
-	            },//success
-    	    });//ajax
+    	     $("body").on("click", "#b1", function(){
+    	    	$.ajax({
+            		type: "GET",
+	            	url: "rest/buildings/1/apartments",
+    	        	dataType: "json",
+        	    	success: function(data) {
+            			$('#room').empty();
+                		$.each(data,function(commentIndex, comment) {
+                			//var rms = "<button class=\"shortcut primary\">";
+	                		//var rme = "</button>";
+	                		var dbf = "<div class=\"listsmall\">";
+		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
+    		            	var daf = "</div>";
+        		        	var href = "<a href=#>添加关注</a>";
+        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
+            	        	//$('#room').append(rms+comment.resident+rme); 
+                		})
+	            	},//success
+    	    	});//ajax
+    	    });//button onclick
+    	    $("body").on("click", "#b2", function(){
+    	    	$.ajax({
+            		type: "GET",
+	            	url: "rest/buildings/2/apartments",
+    	        	dataType: "json",
+        	    	success: function(data) {
+            			$('#room').empty();
+                		$.each(data,function(commentIndex, comment) {
+                			/*var rms = "<button class=\"shortcut primary\" id=\"c" + comment.id + "\">";
+	                		var rme = "</button>";
+            	        	$('#room').append(rms+comment.serialNumber+rme);*/ 
+            	        	var dbf = "<div class=\"listsmall\">";
+		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
+    		            	var daf = "</div>";
+        		        	var href = "<a href=#>添加关注</a>";
+        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
+                		})
+	            	},//success
+    	    	});//ajax
+    	    });//button onclick
+    	    $("body").on("click", "#b3", function(){
+    	    	$.ajax({
+            		type: "GET",
+	            	url: "rest/buildings/3/apartments",
+    	        	dataType: "json",
+        	    	success: function(data) {
+            			$('#room').empty();
+                		$.each(data,function(commentIndex, comment) {
+                			/*var rms = "<button class=\"shortcut primary\" id=\"c" + comment.id + "\">";
+	                		var rme = "</button>";
+            	        	$('#room').append(rms+comment.serialNumber+rme); */
+            	        	var dbf = "<div class=\"listsmall\">";
+		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
+    		            	var daf = "</div>";
+        		        	var href = "<a href=#>添加关注</a>";
+        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
+                		})
+	            	},//success
+    	    	});//ajax
+    	    });//button onclick
+    	    $("body").on("click", "#b4", function(){
+    	    	$.ajax({
+            		type: "GET",
+	            	url: "rest/buildings/4/apartments",
+    	        	dataType: "json",
+        	    	success: function(data) {
+            			$('#room').empty();
+                		$.each(data,function(commentIndex, comment) {
+                			/*var rms = "<button class=\"shortcut primary\" id=\"c" + comment.id + "\">";
+	                		var rme = "</button>";
+            	        	$('#room').append(rms+comment.serialNumber+rme); */
+            	        	var dbf = "<div class=\"listsmall\">";
+		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
+    		            	var daf = "</div>";
+        		        	var href = "<a href=#>添加关注</a>";
+        	    	        $('#room').append(dbf+image + "<p>"+comment.resident+"</p>"+href+daf); 
+                		})
+	            	},//success
+    	    	});//ajax
+    	    });//button onclick
         });//all onclick
         })(jQuery);
         
       
 	</script>
-<title>list favorite</title>
-</head>
-<body class="metro">
-    <header class="bg-dark" data-load="header.html"></header>
-    <div class="container">
-       <h1>
-       	<a href="start-screen-resident.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
-			左邻右舍
-       </h1>
-       <div class="spexample">
-       	 <nav class="horizontal-menu">
-    		<ul>
-    			<li><a href=# id="myfriends">我的好友</a></li>
-    			<li><a href=# id="myfans">关注我的人</a></li>
-    			<li><a href=# id="all">所有人</a></li>
-    		</ul>
-    	   </nav>
-    	</div>
-    	<div class="spexample">
-    		<span id="friend"></span>
-    		<span id="fan"></span>
-    	</div>
-    	<div class="spexample">
-    		<span id="build"></span>
-    		<span id="room"></span>
-    	</div>
-
-	</div>
 </body>
 </html>
