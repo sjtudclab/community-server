@@ -52,7 +52,8 @@ public class FsrelationServiceImpl implements FsrelationService{
 			temp = fsrelationMapper.getFsrelationByActp(id);
 		else
 			temp = fsrelationMapper.getFsrelationByPassp(id);
-		
+		if(temp == null || temp.size()==0)
+			return new FsrelationTransfer();
 		Fsrelation actp = temp.get(0);
 		User user = null;
 		FsrelationTransfer fsrelationTransfer = new FsrelationTransfer();

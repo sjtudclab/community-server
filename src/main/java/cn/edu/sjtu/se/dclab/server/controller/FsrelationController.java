@@ -33,10 +33,7 @@ public class FsrelationController {
 
 	@RequestMapping(value="create",method = RequestMethod.POST)
 	@ResponseBody
-	public String createFsrelation(@RequestBody long actp,@RequestBody long passp) {
-		Fsrelation fsrelation = new Fsrelation();
-		fsrelation.setActp(actp);
-		fsrelation.setPassp(passp);
+	public String createFsrelation(@RequestBody Fsrelation fsrelation) {
 		fsrelationService.createFsrelation(fsrelation);
 		return "success";
 	}

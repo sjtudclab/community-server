@@ -3,9 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="product" content="Metro UI CSS Framework">
-    <meta name="description" content="Simple responsive css framework">
-    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
     <link href="css/metro-bootstrap.css" rel="stylesheet">
     <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
@@ -21,8 +18,6 @@
 
     <!-- Metro UI CSS JavaScript plugins -->
     <script src="js/load-metro.js"></script>
-
-    <!-- Local JavaScript -->
 
     <!-- Local JavaScript -->
     <script src="js/common.js"></script>
@@ -57,13 +52,18 @@
     	<div class="spexample">
     		<span id="room"></span>
     	</div>
+    	<div class="spexample">
+    		<span id="resident"></span>
+    	</div>
 	</div>
 	    <script type="text/javascript">
 	$(document).ready(function(){
+	
 	$("#myfriends").click(function(){
 	$("#fan").empty();
 	$("#room").empty();
 	$("#build").empty();
+	$("#resident").empty();
 	var content = "1";			//匹配为登陆人员
         $.ajax({
             type: "GET",
@@ -71,91 +71,135 @@
             dataType: "json",
             success: function(data) {
             	$('#friend').empty();
-                $.each(data,function(commentIndex, comment) {
+                $.each(data.fNames,function(commentIndex, name) {
+                //$.each(data,function(commentIndex, name) {
                 	var dbf = "<div class=\"listsmall\">";
                 	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
                 	var daf = "</div>";
                 	var href = "<a href=\"mailbox.html#1\">发信息</a>";
-                    $('#friend').append(dbf+image + "<p>"+comment.passp+"</p>"+href+daf); 
-                    //var u = "mailbox.html#" + comment.passp;
-                    //$('#connect').append("<a href=" + u +">发信息</a>");
+                    $('#friend').append(dbf+image + "<p>"+name+"</p>"+href+daf); 
                 })
             },//success
         });//ajax
-        });//myfriends onclick
+    });//我的关注 onclick
+        
+        
     $("#myfans").click(function(){
     $("#room").empty();
     $("#friend").empty();
     $("#build").empty();
-	var content = "1";			//匹配为登陆人员
+    $("#resident").empty();
+	var content = "8";			//匹配为登陆人员
         $.ajax({
             type: "GET",
             url: "rest/fsrelation/se/" + content,
             dataType: "json",
             success: function(data) {
             	$('#fan').empty();
-                $.each(data,function(commentIndex, comment) {
+                $.each(data.fNames,function(commentIndex, comment) {
                 	var dbf = "<div class=\"listsmall\">";
                 	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
                 	var daf = "</div>";
                 	var href = "<a href=\"mailbox.html#1\">发信息</a>";
-                    $('#fan').append(dbf+image + "<p>"+comment.actp+"</p>"+href+daf); 
-                    //var u = "mailbox.html#" + comment.passp;
-                    //$('#connect').append("<a href=" + u +">发信息</a>");
+                    $('#fan').append(dbf+image + "<p>"+comment+"</p>"+href+daf); 
                 })
             },//success
         });//ajax
-        });//myfriends onclick
+     });//我的 粉丝 onclick
+        
+        
         $("#all").click(function(){
         //对所有人进行操作
         	$("#fan").empty();
 			$("#friend").empty();
-        	var buildingid = "";
-        	var num = "";
-        	var rnum = "";
+			$("#resident").empty();
+			$("#room").empty();
+        	//显示楼栋
         	$.ajax({
             	type: "GET",
 	            url: "rest/buildings",
     	        dataType: "json",
         	    success: function(data) {
             		$('#build').empty();
-            		comments = [];
                 	$.each(data,function(commentIndex, comment) {
                 		var bts = "<button class=\"primary building\" id=\"b" + comment.id + "\" >";
-                		num = comment.id;
 	                	var bte = "</button>";
             	        $('#build').append(bts+comment.name+bte); 
-            	        comments.push(num);
                 	})
 	            },//success
-    	    });//ajax
+    	    });//楼栋ajax
     	    
+    	    //显示房间
     	    $(document).on('click', '.building', function() {
+ 		   	    $('#resident').empty();
+ 		   	    $('#room').empty();
     	    	var id = this.id.slice(1,100);
     	    	$.ajax({
             		type: "GET",
 	            	url: "rest/buildings/" + id + "/apartments",
     	        	dataType: "json",
         	    	success: function(data) {
-            			$('#room').empty();
-            			rooms = [];
                 		$.each(data,function(commentIndex, comment) {
-                			//var rms = "<button class=\"shortcut primary\">";
-	                		//var rme = "</button>";
-	                		rnum = comment.serialNumber;
-	                		var dbf = "<div class=\"listsmall\">";
-		                	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
-    		            	var daf = "</div>";
-        		        	var href = "<a href=#>添加关注</a>";
-        		        	var spt = comment.resident.split(",");
-        		        	for(var i=0;i<spt.length;i++){
-							  $('#room').append(dbf+image + "<p>"+spt[i]+"</p>"+href+daf); 
-							}
-            	        	//$('#room').append(rms+comment.resident+rme); 
+                			var rms = "<button class=\"shortcut primary room\" id=\"c" + comment.id + "\" >";
+	                		var rme = "</button>";
+							$('#room').append(rms + comment.serialNumber + rme); 
                 		})
 	            	},//success
     	    	});//ajax
     	    });//楼栋onclick
+    	    
+    	    //添加好友关系
+    	    relations = [];
+    	    people = [];
+    	    
+    	    //显示住户
+			$(document).on('click', '.room', function() {
+				$('#room').empty();
+				$('#resident').empty();
+				var id = this.id.slice(1,100);
+				$.ajax({
+					type: "GET",
+					url: "rest/apartment/" + id + "/users",
+					dataType: "json",
+					success: function(data) {
+						$.each(data,function(commentIndex, comment) {
+    						var dbf = "<div class=\"listsmall\">";
+				        	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
+				        	var href = "<a class=\"relation\" id=\"d"+comment.id+"\" href=#>添加关注</a>";
+				        	var daf = "</div>";
+				        	$('#resident').append(dbf+image+"<p>"+comment.username+"</p>"+href+daf);
+						});
+					},
+					error: function(data) {
+						alert(data);
+						console.log(data);
+					}
+				});//ajax
+			});//住户onclick
+			
+			//添加关注
+			$(document).on('click', '.relation', function() {
+				$('#room').empty();
+				$('#resident').empty();
+				var id = this.id.slice(1,100);
+				alert(id);
+				$.ajax({
+					type: "POST",
+					url: "rest/fsrelation/create",
+					//data: {actp: "1", passp: id},
+					//dataType:html,
+					contentType: "application/json",
+					data: JSON.stringify({actp: "1", passp: id}),
+					success: function (object) {
+                		alert("添加成功");
+                		var mark = "#d"+id;
+                		$(mark).hide();
+            		},
+            		error: function(object) {
+                		alert("添加失败");
+            		}
+				});//ajax
+			});//添加关注onclick
     	 
         });//all onclick
         });
