@@ -11,10 +11,10 @@
    <!-- Mobile viewport optimized: h5bp.com/viewport -->
    <meta name="viewport" content="width=device-width">
 
-   <title>页面1</title>
+   <title>楼组长页面</title>
 
    <meta name="robots" content="noindex, nofollow">
-   <meta name="description" content="MetroUI-Web : Simple and complete web UI framework to create web apps with Windows 8 Metro user interface." />
+   <meta name="description" content="MetroUI-Web : Simple and complete web UI framework to create web apps with Windows 8 Metro user interface." />   
    <meta name="keywords" content="metro, metroui, metro-ui, metro ui, windows 8, metro style, bootstrap, framework, web framework, css, html" />
    <meta name="author" content="AozoraLabs by Marcello Palmitessa"/>
    
@@ -51,11 +51,14 @@
    </style>
 
    <script language="javascript" type="text/javascript">
+   var block;
+   var all_room;
+
+
 	$(function (){		
 		var initializationTime=(new Date()).getTime();
 		var manager_name = "admin";
 		showLeftTime();
-		showManager();
 		showBlock("admin");
 		function showLeftTime()
 		{
@@ -84,64 +87,46 @@
 			var timeID=setTimeout(showLeftTime,1000);
 		}
 
-		function showManager()
-		{
-			$.ajax(
-			{
-				url: "rest/block_manager/admin",
-				dataType: "JSON",
-				type: "GET", 
-				success: function (data) { 
-					document.all.showname.innerHTML = data.name;
-					document.all.showdescription.innerHTML = data.description;
-				}
-
-			}
-			)
-		}
 
 	})
 	
 	
-	function showBlock(block)
+	function showBlock(manager_name)
 	{
 		$.ajax(
 		{
-			url : "rest/block_info/admin",
+			url : "rest/buildings",
 			dataType : "JSON",
 			type : "GET",
 			success : function(data){
-				var all = eval(data.block);
-				var otherbk = "";
-				for(var i=0;i<all.length;i++)
+            	block = data;
+				for(var i=0;i<block.length;i++)
 				{
-					if ((i == 0 && block == "admin") || block == all[i].name)
+					if (i == 0)
 					{
-						document.all.showBlock.innerHTML = all[i].name + 
-						"<b class=\"caret\"></b>";
-						showRoom(all[i].name);
+						document.all.showBlock.innerHTML = "<option value=\""+block[i].id+"\" selected=\"\">"+block[i].name+"</option>";
+						showRoom();
 					}
 					else
-						otherbk += "<li onclick = \"showBlock('"+all[i].name+"')\">"+all[i].name+"</li>";
+						document.all.showBlock.innerHTML += "<option value=\""+block[i].id+"\">"+block[i].name+"</option>";
 				}
-				document.all.showOther.innerHTML = otherbk;
 			}
 		}
 		)
 	}
 
-	function showRoom(block) 
+	function showRoom() 
 	{
-		//alert(block);
+      block_id = document.all.showBlock.value;
 		$.ajax(
 		{
-			url : "rest/block_room/" + block,
+			url : "rest/buildings/" + block_id.toString() + "/apartments",
 			dataType : "JSON",
 			type : "GET",
 			success : function(data){
-				var all = eval(data.room);
-				var allhtm = "<h2><font color=\"white\">房屋选择</font></h2>";
-				for(var i=0;i<all.length;i++)
+				all_room = data;
+				var allhtm = "<h2><font color=\"white\">房屋选择</font></h2>"; 
+				for(var i=0;i<all_room.length;i++)
 				{
 					if (i % 7 == 0)
 						allhtm += "<a class=\"tile square text tilesquareblock\"";
@@ -157,17 +142,26 @@
 						allhtm += "<a class=\"tile square text tilesquareblock bg-color-yellow\"";
 					else if (i % 7 == 6)
 						allhtm += "<a class=\"tile square text tilesquareblock bg-color-blueDark\"";		
-					allhtm += "href=\"detail.html?id="+block+"-"+all[i].name+"\">";	
-					allhtm += "<div class=\"text-big\">"+all[i].name+"</div>";
-                    allhtm += "<div class=\"text\">"+block+"</div>";
-                    allhtm += "</a>";
+					allhtm += "href=\"detail.html?id=" + all_room[i].id.toString()
+                      +  "&floor=" + encodeURI(encodeURI(all_room[i].floor))
+                      +  "&location=" + encodeURI(encodeURI(all_room[i].location))
+                      +  "&resident=" + encodeURI(encodeURI(all_room[i].resident))
+                      +  "&serialNumber=" + all_room[i].serialNumber
+                      +  "&owner=" + all_room[i].owner.toString()
+                      +  "\">";	 
+					allhtm += "<div class=\"text-big\">"+ (parseInt(all_room[i].serialNumber)%1000).toString() +"</div>";
+               		allhtm += "<div class=\"text\">"+all_room[i].floor+"</div>";
+               		allhtm += "</a>";
 				}
-				document.all.section1.innerHTML = allhtm;
+				if (all_room.length>0)
+					document.all.section1.innerHTML = allhtm;
+				else
+					document.all.section1.innerHTML = "<h2><font color=\"white\">无数据</font></h2>"; 
 			}
 		}
-		)
-				
+		)			
 	}
+
 	</script>
 	<script src="js/common.js"></script>
 
@@ -188,32 +182,17 @@
                <a id="backbutton" class="win-backbutton" href="./index.html"></a>
                <h4 id="showtime" style="color:white;">显示时间的位置</h4>
                <div class="dropdown">
-                  <a class="header-dropdown dropdown-toggle accent-color" data-toggle="dropdown" href="#" id = "showBlock">
-                     楼栋1
-                     <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu" id = "showOther">
-                  <li><a href="./hub.html">Hub</a></li>
-                  <li><a href="./tiles-templates.html">Tile Templates</a></li>
-                  <li><a href="./listviews.html">ListViews</a></li>
-                  <li><a href="./appbar-demo.html">Demo App-Bar</a></li>
-                  <li><a href="./table.html">Demo Table</a></li>
-                  <li><a href="./icons.html">Icons</a></li>
-                  <li><a href="./scaffolding.html">Bootstrap Scaffolding</a></li>
-                  <li><a href="./base-css.html">Bootstrap Base CSS</a></li>
-                  <li><a href="./components.html">Bootstrap Components</a></li>
-                  <li><a href="./javascript.html">Bootstrap Javascript</a></li>
-                  <li class="divider"></li>
-                  <li><a href="./index.html">Home</a></li>
-               </ul>
+                  <select id="showBlock" onchange="showRoom()">
+                     <option value="无数据" selected="">无数据</option>
+                  </select>
             </div>
             </div>
          </div>
          <div id="top-info" class="pull-right">
          <a href="#" class="pull-left">
             <div class="top-info-block">
-               <h3 id = "showname">XXXXX</h3>
-               <h4 id = "showdescription">楼栋1楼长</h4>
+               <h3 id = "showname">Admin</h3>
+               <h4 id = "showdescription">admin</h4>
             </div>
             <div class="top-info-block">
                <b class="icon-user"></b>
@@ -233,69 +212,7 @@
             <div class="metro-sections">
    
                <div id="section1" class="metro-section tile-span-4">
-   
-                  <h2><font color="white">房屋选择</font></h2>
-   
-                  <a class="tile square text tilesquareblock" href="#">
-                           <div class="text-big">101</div>
-                           <div class="text">楼栋1</div>
-                  </a>
-                  
-                  <a class="tile square text tilesquareblock bg-color-orange" href="#">
-                           <div class="text-big">102</div>
-                           <div class="text">楼栋1</div>
-                  </a>
-                  
-                  <a class="tile square text tilesquareblock bg-color-greenDark" href="#">
-                           <div class="text-big">201</div>
-                           <div class="text">楼栋1</div>
-                  </a>       
-
-                  <a class="tile square text tilesquareblock bg-color-purple" href="#">
-                           <div class="text-big">202</div>
-                           <div class="text">楼栋1</div>
-                  </a>    
-                  
-                  <a class="tile square text tilesquareblock bg-color-red" href="#">
-                           <div class="text-big">301</div>
-                           <div class="text">楼栋1</div>
-                  </a>    
-
-                  <a class="tile square text tilesquareblock bg-color-yellow" href="#">
-                           <div class="text-big">302</div>
-                           <div class="text">楼栋1</div>
-                  </a>   
-
-                  <a class="tile square text tilesquareblock bg-color-blueDark" href="#">
-                           <div class="text-big">401</div>
-                           <div class="text">楼栋1</div>
-                  </a>   
-   
-                  <a class="tile square text tilesquareblock" href="#">
-                           <div class="text-big">402</div>
-                           <div class="text">楼栋1</div>
-                  </a>
-                  
-                  <a class="tile square text tilesquareblock bg-color-orange" href="#">
-                           <div class="text-big">501</div>
-                           <div class="text">楼栋1</div>
-                  </a>
-                  
-                  <a class="tile square text tilesquareblock bg-color-greenDark" href="#">
-                           <div class="text-big">502</div>
-                           <div class="text">楼栋1</div>
-                  </a>       
-
-                  <a class="tile square text tilesquareblock bg-color-purple" href="#">
-                           <div class="text-big">601</div>
-                           <div class="text">楼栋1</div>
-                  </a>    
-                  
-                  <a class="tile square text tilesquareblock bg-color-red" href="#">
-                           <div class="text-big">602</div>
-                           <div class="text">楼栋1</div>
-                  </a>    
-
+  
                </div>
    
                <div id="section2" class="metro-section tile-span-4">
@@ -316,6 +233,9 @@
                      <span class="app-label">楼组活动</span>
                   </a>
    
+               </div>
+
+               <div id="section3" class="metro-section tile-span-4" style="height:1000px">
                </div>
             </div>
          </div>

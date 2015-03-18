@@ -14,9 +14,9 @@
         WHERE building_id = #{buildingId}
     </select>
 
-    <select id="findAllByApartmentId" resultMap="cn.edu.sjtu.se.dclab.server.mapper.UserMapper.UserMap">
+    <select id="findAllCitizenByApartmentId" resultMap="cn.edu.sjtu.se.dclab.server.mapper.CitizenMapper.CitizenMap">
         SELECT *
-        FROM user
+        FROM citizen
         WHERE apartment_id = #{id}
     </select>
 

@@ -30,6 +30,8 @@
         <typeAlias alias="UserLovedGoods" type="cn.edu.sjtu.se.dclab.server.entity.UserLovedGoods" />
         <typeAlias alias="Commissioner" type="cn.edu.sjtu.se.dclab.server.entity.Commissioner" />
         <typeAlias alias="Fsrelation" type="cn.edu.sjtu.se.dclab.server.entity.Fsrelation" />
+        
+        <typeAlias alias="CommunityActivity" type="cn.edu.sjtu.se.dclab.server.entity.CommunityActivity" />
 
     </typeAliases>
     
