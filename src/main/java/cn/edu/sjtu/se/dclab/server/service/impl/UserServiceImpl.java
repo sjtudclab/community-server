@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 			boolean flag = false;
 			if (category.equals("业委会")) {
 				for (Role role : roles) {
-					if (role.getName().endsWith("长")) {
+					if (role.getName().startsWith("业委会")) {
 						flag = true;
 						break;
 					}
