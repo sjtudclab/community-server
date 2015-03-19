@@ -36,9 +36,16 @@
 					  return;
 				   
 				   var roleNames = "";
+				   var f = false;
 				   $.each(user.roles,function(n,value){
+					   if(value.name == '业委会委员' || value.name == '业委会工作人员'){
+						   f = true;
+						   return;
+					   }
 					   roleNames += value.name + "、";
 				   });
+				   if(f)
+					   return;
 				   roleNames = roleNames.substring(0,roleNames.length-1);
 				   divs += "<div class='span3' style='text-align:center'><image src='images/" + user.imageUrl + "' width='200' height='250' />";
 				   divs += "<p>" + user.username + "：" + roleNames + "</p>";
@@ -78,7 +85,7 @@
 	        		
 	        		thead.append("<tr><th>人员</th><th>角色</th></tr>","</thead>");	        		
 	        		$(datas).each(function(index2,user){
-	        			if(user.username == 'admin')
+	        			if(user.username == 'admin' || user.username == '林诗音' || user.username == '顾西风' || user.username == '江城子')
 	        				return;
 	        			$('form').serialize().split('userId=')
 	        			var n = 0;
@@ -87,8 +94,9 @@
 	        			var checkboxInput = "";
 	        			
 	        			$(roles).each(function(index1,role){
-	        				var hasRole = false;
+	        				var hasRole = false;	        				
 	        				$(user.roles).each(function(index3,userRole){
+	        					
 	        					if(role.name == userRole.name){
 	        						checkboxInput += "<input type='checkbox' name='roleId' value=" + role.id + " checked=true >" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	        						n += 1;
@@ -99,6 +107,7 @@
 		        					hasRole = true;
 	        					}
 	        				});
+	        				
 
         					if(!hasRole){
         						checkboxInput += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";

@@ -1,8 +1,6 @@
 package cn.edu.sjtu.se.dclab.server.controller;
 
-import cn.edu.sjtu.se.dclab.server.entity.Apartment;
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
-import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
 import cn.edu.sjtu.se.dclab.server.transfer.ApartmentTransfer;
 
