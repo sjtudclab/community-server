@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.VoteMapper">
+
+    <select id="findAll" resultMap="VoteMap">
+        select * from vote;
+    </select>
+
+    <insert id="save" keyProperty="id" parameterType="Vote">
+        INSERT INTO vote (vote_title, vote_detail, vote_choice, vote_choice_limit) VALUES (#{vote_detail}, #{vote_choice},#{vote_title},#{vote_choice_limit})
+    </insert>
+
+    <resultMap type="Vote" id="VoteMap">
+        <id property="id" column="vote_id" />
+        <result property="vote_title" column="vote_title" />
+        <result property="vote_detail" column="vote_detail" />
+		<result property="vote_choice" column="vote_choice" />
+		<result property="vote_choice_limit" column="vote_choice_limit" />
+    </resultMap>
+
+</mapper>
