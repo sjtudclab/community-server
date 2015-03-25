@@ -64,20 +64,22 @@
 	$("#room").empty();
 	$("#build").empty();
 	$("#resident").empty();
-	var content = "1";			//匹配为登陆人员
+
+	var content = currentUserId();			//匹配为登陆人员
         $.ajax({
             type: "GET",
             url: "rest/fsrelation/" + content,
             dataType: "json",
             success: function(data) {
             	$('#friend').empty();
+				var index = 5;
                 $.each(data.fNames,function(commentIndex, name) {
                 //$.each(data,function(commentIndex, name) {
                 	var dbf = "<div class=\"listsmall\">";
                 	var image = "<img src=\"images/default.jpg\" class=\"cycle\" style=\"width: 120px; height:120px;\">";
                 	var daf = "</div>";
-                	var href = "<a href=\"mailbox.html#1\">发信息</a>";
-                    $('#friend').append(dbf+image + "<p>"+name+"</p>"+href+daf); 
+                	var href = "<a href=\"mailbox.html#sendtoid=" + index++ + "\">发信息</a>";
+                    $('#friend').append(dbf+image + "<p>"+name+"</p>"+href+daf);
                 })
             },//success
         });//ajax

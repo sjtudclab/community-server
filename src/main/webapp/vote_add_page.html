@@ -150,7 +150,8 @@
         {
           url: "rest/citizen",
           dataType: "JSON",
-          type: "GET", 
+          type: "POST", 
+          data: {nii}
           success: function (data) { 
             addToArray(data, "citizen_detail");
           }
@@ -164,6 +165,28 @@
     var all_text;
     var choice;
     var choice_max = 1;
+
+    function post_data()
+    {
+      var title = document.all.title.value;
+	  var content = document.all.content.value;
+	  var text1 = document.all.text1.value;
+
+      $.ajax(
+      {
+        url:"rest/vote/create",
+        type:"POST",
+        contentType: "application/json",
+        data:JSON.stringify({vote_title : title, vote_detail : content , vote_choice : text1 , vote_choice_limit : "1"}),
+        success:function(obj){
+          alert("发起投票成功！");
+        },
+        error:function(){
+          alert("发起投票失败！");
+        }
+      })
+    }
+
 
     function checkBox()
     {
@@ -248,18 +271,18 @@
        	 <tbody id="full_table">
            <tr>
              <th style="text-align:left"><h2>标题</h2></th>
-             <th><input style="text" value=""></th>
+             <th><input id="title" style="text" value=""></th>
            </tr>
            <tr>
              <th style="text-align:left"><h2>正文</h2></th>
-             <th><input style="text" value=""></th>
+             <th><input id = "content" style="text" value=""></th>
            </tr>
            <tr>
             <th style="text-align:left"><h2>选项（逗号分隔）</h2></th>
-            <th><input style="text" value=""></th>
+            <th><input id = "text1" style="text" value=""></th>
            </tr>
            <tr>
-            <th><button onclick="#">确定</button></th>
+            <th><button onclick="post_data()">确定</button></th>
             <th><button onclick="#">重置</button></th>
            </tr>
          </tbody>
