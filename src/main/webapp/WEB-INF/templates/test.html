@@ -6,10 +6,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" media="all"
 	href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+
+<script th:inline="javascript">
+	//static : use 'Sebastian', dynamic: use expression
+	/* <![CDATA[*/
+
+	var username = /*[[${username}]]*/'Sebastian';
+
+	/*]]> */
+
+	alert(username);
+
+	//static: not evaluate, dynamic: evaluate
+	/*[+
+	var a = 'work when running';
+	alert(a);
+	+]*/
+
+	//static: evaluate, dynamic: not evaluate
+	/*[-*/
+	var msg = 'This is a working application';
+	alert(msg);
+	/*-]*/
+</script>
+
 </head>
 <body>
 	<p th:text="${test}">Welcome to use thymeleaf!</p>
-	
+
 	<div th:include="footer :: copy"></div>
 </body>
 </html>
