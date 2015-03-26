@@ -1,4 +1,4 @@
-package cn.edu.sjtu.se.dclab.server.rest.controller;
+package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;

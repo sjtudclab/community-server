@@ -1,4 +1,4 @@
-package cn.edu.sjtu.se.dclab.server.rest.controller;
+package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,27 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.edu.sjtu.se.dclab.server.service.BlockRoomService;
+import cn.edu.sjtu.se.dclab.server.service.BlockInfoService;
 
 @Controller
-@RequestMapping("/block_room/")
-public class BlockRoomController {
+@RequestMapping("/block_info/")
+public class BlockInfoController {
 	
 	@Autowired
-	private BlockRoomService sv;
+	private BlockInfoService blockinfoService;
 	
-	@RequestMapping(value="{block}",method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+	@RequestMapping(value="",method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
-	public String getManager(@PathVariable("block") String block) {
-		String ans = sv.getRoomByBlock(block);
+	public String getInfo(@PathVariable("manager") String manager) {
+		String ans = blockinfoService.getInfoByManager(manager);
 		System.out.println(ans);
 		return ans;
-	}	
+	}
+	
 }
-
-
-
-
-
-
-

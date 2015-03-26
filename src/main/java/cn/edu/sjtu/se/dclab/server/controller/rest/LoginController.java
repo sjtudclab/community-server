@@ -1,4 +1,4 @@
-package cn.edu.sjtu.se.dclab.server.rest.controller;
+package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import javax.servlet.http.HttpServletRequest;
 
