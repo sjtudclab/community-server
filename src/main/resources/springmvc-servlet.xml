@@ -30,7 +30,7 @@
 		<property name="prefix" value="/WEB-INF/pages/templates/" />
 		<property name="suffix" value=".html" />
 		<property name="cacheable" value="false" />
-		<!-- <property name="templateMode" value="HTML5" /> -->
+		<property name="templateMode" value="LEGACYHTML5" />
 	</bean>
 	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
@@ -72,8 +72,8 @@
 	<!-- RESOURCE FOLDERS CONFIGURATION -->
 	<!-- Dispatcher configuration for serving static resources -->
 	<!-- **************************************************************** -->
-	<mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
+<!-- 	<mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
 	<mvc:resources location="/WEB-INF/login.html" mapping="/login.html"/>
-
+ -->
 </beans>
