@@ -28,7 +28,7 @@ import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
  * @author changyi yuan
  */
 @Controller
-@RequestMapping("/users")
+@RequestMapping("rest/users")
 public class UserController {
 	@Autowired
 	private UserService userService;
