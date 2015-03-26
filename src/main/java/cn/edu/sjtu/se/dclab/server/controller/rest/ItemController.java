@@ -42,8 +42,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping("test")
-	public String test(Model model){
-		model.addAttribute("test", "测试");
+	public String test(){
 		return "test";
 	}
 
