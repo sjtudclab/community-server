@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.edu.sjtu.se.dclab.server.controller;
+package cn.edu.sjtu.se.dclab.server.rest.controller;
 
 import java.io.File;
 import java.io.IOException;

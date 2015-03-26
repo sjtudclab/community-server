@@ -1,7 +1,6 @@
-package cn.edu.sjtu.se.dclab.server.controller;
+package cn.edu.sjtu.se.dclab.server.rest.controller;
 
 import cn.edu.sjtu.se.dclab.server.entity.Announcement;
-import cn.edu.sjtu.se.dclab.server.entity.Apartment;
 import cn.edu.sjtu.se.dclab.server.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

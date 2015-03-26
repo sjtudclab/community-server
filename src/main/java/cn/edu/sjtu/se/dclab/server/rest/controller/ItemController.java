@@ -1,4 +1,4 @@
-package cn.edu.sjtu.se.dclab.server.controller;
+package cn.edu.sjtu.se.dclab.server.rest.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
-	@RequestMapping(value="{id}",method = RequestMethod.GET)
+	@RequestMapping(value="{id}[",method = RequestMethod.GET)
 	@ResponseBody
 	public String getItem(@PathVariable("id") int id) {
 		Item item = itemService.getItemById(id);

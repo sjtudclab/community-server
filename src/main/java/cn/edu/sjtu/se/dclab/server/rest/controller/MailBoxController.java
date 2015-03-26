@@ -1,4 +1,4 @@
-package cn.edu.sjtu.se.dclab.server.controller;
+package cn.edu.sjtu.se.dclab.server.rest.controller;
 
 import java.util.Collection;
 
