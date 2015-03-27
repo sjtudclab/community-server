@@ -46,4 +46,9 @@
 		return typeof cu.id == "undefined" ? 0 : cu.id;
 	}
 	
+	getUrl = function(){
+		var root = "/community-server/";
+		return root;
+	}
+	
 })(jQuery);

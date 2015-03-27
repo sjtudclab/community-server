@@ -9,14 +9,15 @@
 	content="Admin panel developed with the Bootstrap from Twitter."/>
 <meta name="author" content="travis"/>
 
-<link href="../../../css/bootstrap.css" rel="stylesheet" />
-<link href="../../../css/site.css" rel="stylesheet" />
-<link href="css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="../../../css/bootstrap.css" th:href="@{/css/bootstrap.css}"  rel="stylesheet" />
+<link href="../../../css/site.css" th:href="@{/css/site.css}" rel="stylesheet" />
+<link href="../../../css/bootstrap-responsive.css" th:href="@{/css/bootstrap-responsive.css}" rel="stylesheet" />
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/bootstrap.min.js"></script>
+<script src="../../../js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script src="../../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="../../../js/common.js" th:src="@{/js/common.js}"></script>
 
 <script type="text/javascript">
     
@@ -30,7 +31,7 @@
 		   $("form").remove();
 		   $("#check").remove();
 		   
-		   $.get("rest/users","",function(users,status){
+		   $.get(getUrl() + "rest/users","",function(users,status){
 			   var divs = "<div id=check>";
 			   $(users).each(function(index,user){
 				  if(user.username ==  'admin')
