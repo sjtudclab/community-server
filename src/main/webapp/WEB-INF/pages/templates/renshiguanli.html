@@ -9,17 +9,18 @@
 	content="Admin panel developed with the Bootstrap from Twitter."/>
 <meta name="author" content="travis"/>
 
-<link href="../../../css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" />
-<link href="../../../css/site.css" th:href="@{/css/site.css}" rel="stylesheet" />
-<link href="css/bootstrap-responsive.css" th:href="@{/css/bootstrap-responsive.css}" rel="stylesheet" />
+<link href="../../../css/bootstrap.css" rel="stylesheet" />
+<link href="../../../css/site.css" rel="stylesheet" />
+<link href="css/bootstrap-responsive.css" rel="stylesheet" />
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<script src="../../../js/jquery.js" th:src="@{/js/jquery.js}"></script>
-<script src="../../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){
+    
+  $(document).ready(function(){
 	  var checkFlag = false;
 	  var adjustFlag = false;
 	  
@@ -30,7 +31,7 @@ $(document).ready(function(){
 		   $("#check").remove();
 		   
 		   $.get("rest/users","",function(users,status){
-			   var divs = "<div id='check'>";
+			   var divs = "<div id=check>";
 			   $(users).each(function(index,user){
 				  if(user.username ==  'admin')
 					  return;
@@ -67,7 +68,7 @@ $(document).ready(function(){
 		    var form = $("<form>");
 		    var table = $("<table  class='table table-bordered' contenteditable='true'>")
 		    var thead = $("<thead>");
-	    	var tbody = $("<tbody></tbody>");    	
+	    	var tbody = $("<tbody>");    	
 	    	
 	    	$.get("rest/users","",function(datas,status){
 
@@ -75,9 +76,10 @@ $(document).ready(function(){
 	    		$.get("rest/roles","",function(roles,status){
 	    			//var n = 0;
 	        		/* $(roles).each(function(index1,role){
+	            		checkboxs += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	            		n += 1;
 	            		if(n == 5){
-	            			checkboxs += "<br></br>";
+	            			checkboxs += "<br><br>";
 	            			n=0;
 	            		}
 	        		}); */
@@ -89,7 +91,7 @@ $(document).ready(function(){
 	        			$('form').serialize().split('userId=')
 	        			var n = 0;
 	        			var tr = "<tr>";
-	        			
+	        			tr += "<td>" + "<input type='hidden' name='userId' value='" + user.id + "'>" + user.username + "</td>";
 	        			var checkboxInput = "";
 	        			
 	        			$(roles).each(function(index1,role){
@@ -97,10 +99,10 @@ $(document).ready(function(){
 	        				$(user.roles).each(function(index3,userRole){
 	        					
 	        					if(role.name == userRole.name){
-	        						
+	        						checkboxInput += "<input type='checkbox' name='roleId' value=" + role.id + " checked=true >" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	        						n += 1;
 	        						if(n == 5){
-	        							checkboxInput += "<br></br>";
+	        							checkboxInput += "<br><br>";
 	        							n=0;
 	        						}
 		        					hasRole = true;
@@ -108,14 +110,14 @@ $(document).ready(function(){
 	        				});
 	        				
 
-      					if(!hasRole){
-      						
-      						n += 1;
-      						if(n == 5){
-      							checkboxInput += "<br></br>";
-      							n=0;
-      						}
-      					}	
+        					if(!hasRole){
+        						checkboxInput += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        						n += 1;
+        						if(n == 5){
+        							checkboxInput += "<br><br>";
+        							n=0;
+        						}
+        					}	
 	        			});
 	     
 	        			
@@ -124,8 +126,8 @@ $(document).ready(function(){
 	        			tbody.append(tr);
 	        		});
 	        		
-	        		tbody.append("<tboby>");
-	        		table.append(thead,tbody,"<tbody></tbody>");
+	        		tbody.append("</tbody>");
+	        		table.append(thead,tbody,"</tbody>");
 	        		form.append(table,"<button class='btn submit1'>提交</button>","</form>");
 	        		$("div.span9").append(form);
 	        		adjustFlag = true;
@@ -135,7 +137,7 @@ $(document).ready(function(){
 	    	return false;
 	  });
 	  	
-  	
+    	
 	  $(".submit1").live('click', function(data,status){
 		  $("form").submit();
 		  return false;
@@ -171,8 +173,8 @@ $(document).ready(function(){
 		  return false;
 	  });
 	  
-  }); 
-</script>
+    }); 
+    </script>
 
 </head>
 <body>
