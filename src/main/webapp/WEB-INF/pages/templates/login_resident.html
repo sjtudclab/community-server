@@ -63,12 +63,12 @@
 <script type="text/javascript">
 	$('#loginBtn').click(function () {
 		$.ajax({
-			url: '../rest/users/login',
+			url: getUrl('rest/users/login'),
 			type: "POST",
 			data: $('form#loginForm').serializeArray(),
 			success: function (data) {
 				saveUser(data);
-				window.location = '../start-screen-resident.html'
+				window.location = getUrl('start-screen-resident.html')
 			},
 			error: function() {
 				alert("用户名或密码错误")

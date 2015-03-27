@@ -70,7 +70,7 @@
 <script type="text/javascript">
 	$('#loginBtn').click(function () {
 		$.ajax({
-			url: '../rest/users/login',
+			url: getUrl('rest/users/login'),
 			type: "POST",
 			data: $('form#loginForm').serializeArray(),
 			success: function (data) {
@@ -78,13 +78,13 @@
 				var rtl = $('#roleSelection');
 				var value = rtl[0].options[rtl[0].selectedIndex].value;
 				if (value == "居委会")
-					window.location = '../start-screen-committee.html'
+					window.location = getUrl('start-screen-committee.html')
 				else if (value == "业委会")
-					window.location = '../start-screen-owner.html'
+					window.location = getUrl('start-screen-owner.html')
 				else if (value == "楼组长")
-					window.location = '../index.html'
+					window.location = getUrl('index.html')
 				else if (value == "块长")
-					window.location = '../unused.html'
+					window.location = getUrl('unused.html')
 			},
 			error: function() {
 				alert("用户名或密码错误")

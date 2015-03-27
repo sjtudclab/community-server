@@ -1,27 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
 
-    <link href="css/metro-bootstrap.css" rel="stylesheet">
-    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/iconFont.css" rel="stylesheet">
-    <link href="css/docs.css" rel="stylesheet">
-    <link href="js/prettify/prettify.css" rel="stylesheet">
-
-    <!-- Load JavaScript Libraries -->
-    <script src="js/jquery/jquery.min.js"></script>
-    <script src="js/jquery/jquery.widget.min.js"></script>
-    <script src="js/jquery/jquery.mousewheel.js"></script>
-    <script src="js/prettify/prettify.js"></script>
-
-    <!-- Metro UI CSS JavaScript plugins -->
-    <script src="js/load-metro.js"></script>
-
-    <!-- Local JavaScript -->
-    <script src="js/docs.js"></script>
-    <script src="js/github.info.js"></script>
-    <script src="js/start-screen.js"></script>
+    <script th:src="@{/js/start-screen.js}"></script>
 
     <title>上海市杨浦区五角场镇东方名城社区</title>
 </head>
@@ -195,8 +178,8 @@
         </div> <!-- End group -->
 
 </div>
-    <script src="js/hitua.js"></script>
-    <script src="js/common.js"></script>
+
+<div th:include="login_footer :: copy"></div>
 
 </body>
 </html>

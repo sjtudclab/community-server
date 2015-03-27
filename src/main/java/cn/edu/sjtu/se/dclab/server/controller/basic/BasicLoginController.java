@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by Huiyi on 2015/3/26.
  */
 @Controller
+@RequestMapping("login")
 public class BasicLoginController {
 
     @RequestMapping("resident")
@@ -15,12 +16,12 @@ public class BasicLoginController {
         return "login_resident";
     }
 
-    @RequestMapping("login/committee")
+    @RequestMapping("committee")
     public String committeeLogin() {
         return "login_committee";
     }
 
-    @RequestMapping("login/tenement")
+    @RequestMapping("tenement")
     public String tenementLogin() {
         return "login_tenement";
     }
