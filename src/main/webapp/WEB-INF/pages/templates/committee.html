@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
     <meta name="product" content="Metro UI CSS Framework">
     <meta name="description" content="Simple responsive css framework">
-    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
     <link th:href="@{/css/metro-bootstrap.css}" rel="stylesheet">
     <link th:href="@{/css/metro-bootstrap-responsive.css}" rel="stylesheet">
@@ -24,27 +23,41 @@
 
     <!-- Metro UI CSS JavaScript plugins -->
     <script th:src="@{/js/load-metro.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
 
     <!-- Local JavaScript -->
-    <script th:src="@{/js/docs.js}"></script>
-    <script th:src="@{/js/github.info.js}"></script>
-	<script th:src="@{/js/common.js}"></script>
 
-    <title>业委会</title>
+    <title>居委会</title>
 </head>
 <body class="metro">
 
+
     <div class="container">
         <h1>
-            <a th:href="@{/login/resident}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
-          	  业委会<small class="on-right"></small>
+            <a th:href="@{/login/committee}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+              居委干部职位和分工<small class="on-right"></small>
         </h1>
 
-        <p class="description">
-                      下为本社区业委会干部，单击人物相片，进行留言操作
+<!--         <p class="description">
+                      下为本社区居委会干部，单击人物相片，进行留言操作
         </p>
-        <div class="person-list">
+ -->        <div class="person-list">
+
             <div style="margin-top: 20px" class="person-list-container">
+            </div>
+        </div>
+
+        <h3>社区民警以及社区工作人员</h3>
+        <div class="container">
+            <div class="row">
+                <div class="pritem police">
+                    <span class="prtitle">社区民警: </span><a class="prname" >黄艳萍</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="pritem zhucan">
+                    <span class="prtitle">助残员: </span><a class="prname" >黄艳萍</a>
+                </div>
             </div>
         </div>
 
@@ -65,10 +78,10 @@
       };
     }
 
-	(function($){
+    (function($){
         $.ajax({
             type: "GET",
-            url: 'rest/users/owner',
+            url: 'rest/users/committee',
             success: function(data) {
                 var users = [];
                 $(data).each(function(i, d) {
@@ -76,13 +89,18 @@
                         users.push({userid: d.id, username: d.username, role: d.roles[r], imageUrl: d.imageUrl});
                     }
                 });
+                var police = $(users).filter(function(i,d) {return d.role.name.includes('民警');})[0];
+                var zhucan = $(users).filter(function(i,d) {return d.role.name.includes('助残员');})[0];
 
                 $(users).each(function(ind, el) {
+                    if (el.userid == police.userid || el.userid == zhucan.userid) {
+                        return;
+                    }
                     var name = el.username;
                     var position = el.role.name;
                     var html = 
                         '<div class="image-container shadow">' +
-                        '<a  href="{0}"><img src="images/{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id,'owner'), 
+                        '<a  href="{0}"><img src="{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'Committee'), 
                         		getUrl('image/' + el.imageUrl)) +
                             '<div class="overlay">' +
                                 '<span class="name-text">{0}</span><br>'.format(name) +
@@ -91,13 +109,19 @@
                         '</div>';
                     $('.person-list-container').append($(html));
                 });
+
+                $('.police .prname').text(police.username);
+                $('.zhucan .prname').text(zhucan.username);
+                $('.police .prname').attr('href', 'user_position.html?user_id={0}&role_id={1}'.format(police.userid, police.role.id))
+                $('.zhucan .prname').attr('href', 'user_position.html?user_id={0}&role_id={1}'.format(zhucan.userid, zhucan.role.id))
+
             },
             error: function(obj) {
                 console.log(obj);
             }
-        })
+        });
         })(jQuery);
-	</script>
+    </script>
 
 </body>
 </html>

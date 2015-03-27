@@ -46,9 +46,14 @@
 		return typeof cu.id == "undefined" ? 0 : cu.id;
 	}
 	
-	getUrl = function(){
+	getUrl = function(uri){
 		var root = "/community-server/";
-		return root;
+
+		if (typeof uri != 'undefined') {
+			return root + uri.replace(/^\//, '');
+		} else {
+			return root;
+		}
 	}
 	
 })(jQuery);
