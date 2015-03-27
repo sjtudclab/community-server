@@ -15,18 +15,18 @@
 
 	<context:annotation-config />
 
-	<mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
-	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
-	<mvc:resources location="/WEB-INF/compress/" mapping="/compress/**" />
-	<mvc:resources location="/WEB-INF/content/" mapping="/content/**" />
-	<mvc:resources location="/WEB-INF/data/" mapping="/data/**" />
-	<mvc:resources location="/WEB-INF/examples/" mapping="/examples/**" />
-	<mvc:resources location="/WEB-INF/fonts/" mapping="/fonts/**" />
-	<mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
-	<mvc:resources location="/WEB-INF/less/" mapping="/less/**" />
-	<mvc:resources location="/WEB-INF/min/" mapping="/min/**" />
-	<mvc:resources location="/WEB-INF/scripts/" mapping="/scripts/**" />
-	<mvc:resources location="/WEB-INF/zang/" mapping="/zang/**" />
+	<mvc:resources location="/WEB-INF/statics/images/" mapping="/images/**" />
+	<mvc:resources location="/WEB-INF/statics/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/statics/compress/" mapping="/compress/**" />
+	<mvc:resources location="/WEB-INF/statics/content/" mapping="/content/**" />
+	<mvc:resources location="/WEB-INF/statics/data/" mapping="/data/**" />
+	<mvc:resources location="/WEB-INF/statics/examples/" mapping="/examples/**" />
+	<mvc:resources location="/WEB-INF/statics/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/WEB-INF/statics/js/" mapping="/js/**" />
+	<mvc:resources location="/WEB-INF/statics/less/" mapping="/less/**" />
+	<mvc:resources location="/WEB-INF/statics/min/" mapping="/min/**" />
+	<mvc:resources location="/WEB-INF/statics/scripts/" mapping="/scripts/**" />
+	<mvc:resources location="/WEB-INF/statics/zang/" mapping="/zang/**" />
 
 	<mvc:annotation-driven />
 	<context:component-scan base-package="cn.edu.sjtu.se.dclab" />
