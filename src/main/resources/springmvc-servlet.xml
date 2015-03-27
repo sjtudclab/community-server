@@ -30,6 +30,7 @@
 		<property name="prefix" value="/WEB-INF/pages/templates/" />
 		<property name="suffix" value=".html" />
 		<property name="cacheable" value="false" />
+		<property name="characterEncoding" value="UTF-8" />
 		<property name="templateMode" value="LEGACYHTML5" />
 	</bean>
 	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
