@@ -10,19 +10,26 @@
 	</select>
 
 	<select id="findByUserId" parameterType="long" resultMap="RoleMap">
-		SELECT r.id, r.name, r.description FROM role r, user_role ur WHERE ur.role_id =
-		r.id AND ur.user_id = #{id};
+		SELECT r.role_id, r.name, r.description, r.role_type_id, rt.role_type_id, rt.type 
+		FROM role r, user_role ur, role_type rt 
+		WHERE ur.role_id = r.role_id AND r.role_type_id = rt.role_type_id AND ur.user_id = #{id};
 	</select>
 
 	<select id="findOne" resultMap="RoleMap">
-		SELECT *
-		FROM role
-		WHERE id = #{id}
+		SELECT * FROM role WHERE id = #{id}
 	</select>
 
 	<resultMap id="RoleMap" type="Role">
-		<id property="id" column="user_id" />
+		<id property="role_id" column="role_id" />
 		<result property="name" column="name" />
 		<result property="description" column="description" />
+		
+		<association property="roleType" resultMap="RoleTypeMap" />
 	</resultMap>
+	
+	<resultMap type="RoleType" id="RoleTypeMap">
+		<id property="id" column="role_type_id" />
+		<result property="type" column="type" />
+	</resultMap>
+	
 </mapper>

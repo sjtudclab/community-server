@@ -196,7 +196,7 @@ public class UserServiceImpl implements UserService {
 			throws UsernameNotFoundException {
 		User user = userMapper.findByUserName(username);
 		if(user == null)
-			return null;
+			throw new UsernameNotFoundException(username + " user not found");
 		Collection<Permission> permissions = permissionMapper.findPermissionsByUserId(user.getId());
 		Collection<GrantedAuthority> permissionNames = new ArrayList<GrantedAuthority>();
 		for(Permission permission : permissions)

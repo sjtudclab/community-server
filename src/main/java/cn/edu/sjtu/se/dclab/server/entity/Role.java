@@ -7,8 +7,17 @@ public class Role {
     private long id;
     private String name;
     private String description;
+    private RoleType roleType;
 
-    public long getId() {
+    public RoleType getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(RoleType roleType) {
+		this.roleType = roleType;
+	}
+
+	public long getId() {
         return id;
     }
 
