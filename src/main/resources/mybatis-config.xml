@@ -33,7 +33,16 @@
         <typeAlias alias="Fsrelation" type="cn.edu.sjtu.se.dclab.server.entity.Fsrelation" />
         
         <typeAlias alias="CommunityActivity" type="cn.edu.sjtu.se.dclab.server.entity.CommunityActivity" />
+        <typeAlias alias="ResidentCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen" />
+        <typeAlias alias="ManagementCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen" />
+        <typeAlias alias="ServiceCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen" />
 
+        <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
     </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler"
+                     javaType="String" jdbcType="INTEGER" />
+    </typeHandlers>
     
 </configuration>  

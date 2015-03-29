@@ -34,10 +34,10 @@ public class ApartmentTransfer {
 
 	public ApartmentTransfer(Apartment apartment) {
 		this.id = apartment.getId();
-		this.floor = apartment.getFloor();
-		this.location = apartment.getLocation();
+		//this.floor = apartment.getFloor();
+		//this.location = apartment.getLocation();
 		this.owner = apartment.getOwner();
-		this.resident = apartment.getResident();
+		//this.resident = apartment.getResident();
 		this.serialNumber = apartment.getSerialNumber();
 	}
 
