@@ -1,0 +1,20 @@
+<?mybatis version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.ServiceCitizenMapper">
+
+    <resultMap id="ServiceCitizenMap" type="ServiceCitizen">
+        <id property="id" column="citizen_id" />
+        <result property="name" column="name" />
+        <result property="identificationType" column="identification_type" />
+        <result property="identificationValue" column="identification_value" />
+        <result property="gender" column="gender" typeHandler="GenderHandler" />
+        <result property="age" column="age" />
+        <result property="status" column="status" />
+        <result property="phone" column="phone" />
+        <result property="notes" column="notes" />
+        <association property="user"
+                     resultMap="cn.edu.sjtu.se.dclab.server.mapper.UserMapper.UserMap" />
+    </resultMap>
+</mapper>
