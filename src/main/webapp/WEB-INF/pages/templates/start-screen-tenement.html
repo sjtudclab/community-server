@@ -11,39 +11,10 @@
 <body class="metro">
     <div class="tile-area tile-area-dark">
         <h1 class="tile-area-title fg-white">上海市杨浦区五角场镇东方名城物业</h1>
-        <!--
-        <div class="user-id">
-            <div class="user-id-image">
-                <span class="icon-user no-display1"></span>
-                <img src="images/Battlefield_4_Icon.png" class="no-display">
-            </div>
-            <div class="user-id-name">
-                <span class="first-name">赵三</span>
-            </div>
-        </div>
-        -->
 
         <div class="tile-group eight">
 
-            <!--
-            <a class="tile double bg-lightBlue live" data-role="live-tile" data-effect="slideUp" data-click="transform">
-                <div class="tile-content email">
-                    <div class="email-image">
-                        <img src="images/obama.jpg">
-                    </div>
-                    <div class="email-data">
-                        <span class="email-data-title">奥巴马</span>
-                        <span class="email-data-subtitle">你被邀请了</span>
-                        <span class="email-data-text">我希望...</span>
-                    </div>
-                </div>
-                <div class="brand">
-                    <div class="label"><h3 class="no-margin fg-white"><span class="icon-mail"></span></h3></div>
-                    <div class="badge">1</div>
-                </div>
-            </a> <!-- end tile -->
-
-            <a class="tile double bg-magenta" data-click="transform" href="mailbox.html">
+            <a class="tile double bg-magenta" data-click="transform" th:href="@{/tenement/mailbox}">
                 <div class="tile-content icon">
                     <span class="icon-home"></span>
                 </div>
@@ -52,7 +23,7 @@
                 </div>
             </a>
 
-            <a class="tile double bg-darkOrange" data-click="transform" href="repair_manage.html">
+            <a class="tile double bg-darkOrange" data-click="transform" th:href="@{/tenement/repair_manage}">
                 <div class="tile-content icon">
                     <span class="icon-cube"></span>
                 </div>
@@ -62,7 +33,7 @@
             </a>
 
 
-            <a class="tile double bg-yellow" data-click="transform">
+            <a th:href="@{/tenement/setting}" class="tile double bg-yellow" data-click="transform">
                 <div class="tile-content icon">
                     <span class="icon-bell"></span>
                 </div>
@@ -71,7 +42,7 @@
                 </div>
             </a>
 
-            <a href="metrologin-tenement.html" class="tile bg-olive" data-click="transform">
+            <a th:href="@{/rest/users/logout}" class="tile bg-olive" data-click="transform">
                 <div class="tile-content icon">
                     <span class="icon-exit"></span>
                 </div>

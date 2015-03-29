@@ -11,40 +11,10 @@
 <body class="metro">
     <div class="tile-area tile-area-dark">
         <h1 class="tile-area-title fg-white">上海市杨浦区五角场镇东方名城居委会</h1>
-        <!--
-        <div class="user-id">
-            <div class="user-id-image">
-                <span class="icon-user no-display1"></span>
-                <img src="images/Battlefield_4_Icon.png" class="no-display">
-            </div>
-            <div class="user-id-name">
-                <span class="first-name">赵三</span>
-            </div>
-        </div>
-        -->
 
         <div class="tile-group eight">
 
-            <!--
-            <a class="tile double bg-lightBlue live" data-role="live-tile" data-effect="slideUp" data-click="transform">
-                <div class="tile-content email">
-                    <div class="email-image">
-                        <img src="images/obama.jpg">
-                    </div>
-                    <div class="email-data">
-                        <span class="email-data-title">奥巴马</span>
-                        <span class="email-data-subtitle">你被邀请了</span>
-                        <span class="email-data-text">我希望...</span>
-                    </div>
-                </div>
-                <div class="brand">
-                    <div class="label"><h3 class="no-margin fg-white"><span class="icon-mail"></span></h3></div>
-                    <div class="badge">1</div>
-                </div>
-            </a> <!-- end tile -->
-
-
-            <a class="tile double bg-yellow" data-click="transform" href="CommunityNotice.html">
+            <a class="tile double bg-yellow" data-click="transform" th:href="@{/committee/notice}">
                 <div class="tile-content icon">
                     <span class="icon-bell"></span>
                 </div>
@@ -53,8 +23,7 @@
                 </div>
             </a>  
 
-
-            <a href="#" class="tile bg-darkOrange" data-click="transform">
+            <a th:href="@{/committee/workreport}" class="tile bg-darkOrange" data-click="transform">
                 <div class="tile-content icon">
                     <span class="icon-help"></span>
                 </div>
@@ -63,7 +32,7 @@
                 </div>
             </a>
 
-            <a class="tile double bg-lightBlue" data-click="transform" href="mailbox.html">
+            <a class="tile double bg-lightBlue" data-click="transform" th:href="@{/committee/mailbox}">
                 <div class="tile-content image">
                     <img src="images/windows_8_default_13_wallpaper.jpg">
                 </div>
@@ -72,7 +41,7 @@
                 </div>
             </a>
 
-            <a class="tile double bg-lightOlive" data-click="transform" href="community_activity_publish.html">
+            <a class="tile double bg-lightOlive" data-click="transform" th:href="@{/committee/activity}">
                 <div class="tile-content icon">
                     <span class="icon-cart-2"></span>
                 </div>
@@ -81,7 +50,7 @@
                 </div>
             </a>
 
-            <a href="vote_add_page.html.html" class="tile double bg-magenta" data-click="transform">
+            <a th:href="@{/committee/topic}" class="tile double bg-magenta" data-click="transform">
                 <div class="tile-content icon">
                     <span class="icon-home"></span>
                 </div>
@@ -90,7 +59,7 @@
                 </div>
             </a>
 
-            <a href="#" class="tile bg-lightBlue" data-click="transform">
+            <a th:href="@{/committee/setting}" class="tile bg-lightBlue" data-click="transform">
                 <div class="tile-content icon">
                     <span class="icon-IE"></span>
                 </div>
@@ -99,7 +68,7 @@
                 </div>
             </a>
 
-            <a href="metrologin-committee.html" class="tile bg-olive" data-click="transform">
+            <a th:href="@{/rest/users/logout}" class="tile bg-olive" data-click="transform">
                 <div class="tile-content icon">
                     <span class="icon-exit"></span>
                 </div>

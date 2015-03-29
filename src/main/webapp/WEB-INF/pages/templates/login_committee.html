@@ -78,13 +78,13 @@
 				var rtl = $('#roleSelection');
 				var value = rtl[0].options[rtl[0].selectedIndex].value;
 				if (value == "居委会")
-					window.location = getUrl('start-screen-committee.html')
+					window.location = getUrl('start-screen-committee')
 				else if (value == "业委会")
-					window.location = getUrl('start-screen-owner.html')
+					window.location = getUrl('start-screen-owner')
 				else if (value == "楼组长")
-					window.location = getUrl('index.html')
+					window.location = getUrl('index')
 				else if (value == "块长")
-					window.location = getUrl('unused.html')
+					window.location = getUrl('unused')
 			},
 			error: function() {
 				alert("用户名或密码错误")

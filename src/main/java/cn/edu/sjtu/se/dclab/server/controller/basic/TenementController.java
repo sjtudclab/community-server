@@ -23,10 +23,18 @@ import cn.edu.sjtu.se.dclab.server.service.ItemService;
 @RequestMapping("/tenement")
 public class TenementController {
 	
-	@RequestMapping("")
-	public String test() {
-		//model.addAttribute("test", "测试");
-		return "tenement";
+	@RequestMapping("mailbox")
+	public String mailbox() {
+		return "mailbox";
 	}
 
+	@RequestMapping("repair_manage")
+	public String repairManage() {
+		return "repair_manage";
+	}
+
+	@RequestMapping("setting")
+	public String setting() {
+		return "setting";
+	}
 }
