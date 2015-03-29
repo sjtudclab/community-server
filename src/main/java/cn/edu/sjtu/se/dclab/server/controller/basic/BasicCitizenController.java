@@ -10,7 +10,7 @@ import cn.edu.sjtu.se.dclab.server.common.Constants;
  *@author changyi yuan
  */
 @Controller
-@RequestMapping(value = Constants.BASIC + "/citizen")
+@RequestMapping(value = "/committee")
 public class BasicCitizenController {
 	
 	@RequestMapping(value = "manage")

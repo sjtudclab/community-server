@@ -68,7 +68,7 @@
 			data: $('form#loginForm').serializeArray(),
 			success: function (data) {
 				saveUser(data);
-				window.location = getUrl('start-screen-tenement.html')
+				window.location = getUrl('start-screen-tenement')
 			},
 			error: function() {
 				alert("用户名或密码错误")
