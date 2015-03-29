@@ -22,15 +22,18 @@
 
     <resultMap type="Apartment" id="ApartmentMap">
         <id property="id" column="id" />
-        <result property="floor" column="floor" />
-        <result property="location" column="location" />
-       <!--  <result property="owner" column="owner" /> -->
-        <result property="resident" column="resident" />
+        <result property="name" column="name" />
         <result property="serialNumber" column="serial_number" />
+        <result property="area" column="area" />
         <association property="owner" javaType="Citizen">
-            <id property="id" column="owner" />
+            <id property="id" column="owner_id" />
         </association>
-
+        <association property="tenant" javaType="Citizen">
+            <id property="id" column="tenant_id" />
+        </association>
+        <association property="building" javaType="Building">
+            <id property="id" column="building_id" />
+        </association>
     </resultMap>
 
 </mapper>

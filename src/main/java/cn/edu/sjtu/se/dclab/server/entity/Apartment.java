@@ -11,14 +11,15 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Apartment {
     private long id;
-    private String floor;
-    private String location;
+    private String name;
 
     @JsonProperty(value = "owner")
     @JsonIdentityReference(alwaysAsId = true)
     private Citizen owner;
-    private String resident;
     private String serialNumber;
+    private Building building;
+    private String area;
+    private Citizen tenant;
 
     public long getId() {
         return id;
@@ -28,20 +29,12 @@ public class Apartment {
         this.id = id;
     }
 
-    public String getFloor() {
-        return floor;
+    public String getName() {
+        return name;
     }
 
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Citizen getOwner() {
@@ -52,19 +45,35 @@ public class Apartment {
         this.owner = owner;
     }
 
-    public String getResident() {
-        return resident;
-    }
-
-    public void setResident(String resident) {
-        this.resident = resident;
-    }
-
     public String getSerialNumber() {
         return serialNumber;
     }
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public Citizen getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Citizen tenant) {
+        this.tenant = tenant;
     }
 }
