@@ -31,7 +31,7 @@
 		   $("form").remove();
 		   $("#check").remove();
 		   
-		   $.get(getUrl() + "rest/users","",function(users,status){
+		   $.get(getUrl("rest/users") ,"",function(users,status){
 			   var divs = "<div id=check>";
 			   $(users).each(function(index,user){
 				  if(user.username ==  'admin')
@@ -71,10 +71,10 @@
 		    var thead = $("<thead>");
 	    	var tbody = $("<tbody>");    	
 	    	
-	    	$.get("rest/users","",function(datas,status){
+	    	$.get(getUrl("rest/users"),"",function(datas,status){
 
 	        	var checkboxs = "";
-	    		$.get("rest/roles","",function(roles,status){
+	    		$.get(getUrl("rest/roles"),"",function(roles,status){
 	    			//var n = 0;
 	        		/* $(roles).each(function(index1,role){
 	            		checkboxs += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";

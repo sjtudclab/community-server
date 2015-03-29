@@ -8,72 +8,81 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *@author changyi yuan
  */
 public class User {
-
 	private long id;
 	private String username;
-
-	@JsonIgnore
 	private String password;
-	private String identification;
-	private String imageUrl;
-	private int enabled;
-
-	@JsonIdentityReference(alwaysAsId = true)
-	private Apartment apartment;
-
+	private String salt;
+	private String name;
+	private int status;
+	private boolean enabled;
+	private String note;
+	private String email;
+	private String image;
+	private int userTypeId;
 	public long getId() {
 		return id;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getIdentification() {
-		return identification;
+	public String getSalt() {
+		return salt;
 	}
-
-	public void setIdentification(String identification) {
-		this.identification = identification;
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
-
-	public String getImageUrl() {
-		return imageUrl;
+	public String getName() {
+		return name;
 	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public int getEnabled() {
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public boolean isEnabled() {
 		return enabled;
 	}
-
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	public Apartment getApartment() {
-		return apartment;
+	public String getNote() {
+		return note;
 	}
-
-	public void setApartment(Apartment apartment) {
-		this.apartment = apartment;
+	public void setNote(String note) {
+		this.note = note;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public int getUserTypeId() {
+		return userTypeId;
+	}
+	public void setUserTypeId(int userTypeId) {
+		this.userTypeId = userTypeId;
 	}
 }

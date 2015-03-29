@@ -28,24 +28,26 @@
 		<beans:property name="username" value="${username}"></beans:property>
 		<beans:property name="password" value="${password}"></beans:property>
 	</beans:bean>
+	
+	<beans:bean id="userService" class="cn.edu.sjtu.se.dclab.server.service.impl.UserServiceImpl" />
 
 	<authentication-manager id="authenticationManager">
-		<authentication-provider>
+		<authentication-provider user-service-ref="userService">
 			<!--
 			<password-encoder ref="passwordEncoder" />
 			-->
-			<jdbc-user-service data-source-ref="securityDataSource"
+			<!-- <jdbc-user-service data-source-ref="securityDataSource"
 				users-by-username-query="select username,password,enabled from user where username=?"
 				authorities-by-username-query="select u.username,p.name from user u,user_role ur, user_role_permission rp,permission p
-				where ur.user_id = u.id and rp.user_role_id = ur.id and rp.permission_id = p.id and u.username = ?" />
+				where ur.user_id = u.id and rp.user_role_id = ur.id and rp.permission_id = p.id and u.username = ?" /> -->
 		</authentication-provider>
 	</authentication-manager>
 
-	<http realm="Protected API" use-expressions="true" auto-config="false"
-		entry-point-ref="unauthorizedEntryPoint" authentication-manager-ref="authenticationManager">
+	<http entry-point-ref="unauthorizedEntryPoint" use-expressions="true" auto-config="false"
+		access-denied-page="/users/accessDenied" authentication-manager-ref="authenticationManager">
 		
-		<intercept-url pattern="rest/login" access="permitAll" />
-		<intercept-url pattern="rest/**" access="permitAll" />
+		<intercept-url pattern="rest/users/login" access="permitAll" />
+		<intercept-url pattern="users/accessDenied" access="permitAll" />
 
 		<!-- <custom-filter ref="customAuthenticationProcessingFilter"
 			position="FORM_LOGIN_FILTER" /> -->

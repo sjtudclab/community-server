@@ -1,0 +1,18 @@
+<?mybatis version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.PermissionMapper">
+	
+	<select id="findPermissionsByUserRoleId" resultMap="permissionResultMap">
+		select * from permission p where p.permission_id = 
+		(select urp.permission_id from user_role permission where urp.user_role_id = 
+		(select ur.user_role_id from user_role ur where ur.user_id = #{id}));
+	</select>
+
+	<resultMap id="permissionResultMap" type="Permission">
+		<id property="id" column="user_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+	</resultMap>
+</mapper>

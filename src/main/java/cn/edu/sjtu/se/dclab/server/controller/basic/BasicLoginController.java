@@ -1,7 +1,6 @@
 package cn.edu.sjtu.se.dclab.server.controller.basic;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
