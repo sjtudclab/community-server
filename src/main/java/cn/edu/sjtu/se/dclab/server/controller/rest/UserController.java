@@ -23,6 +23,9 @@ import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
@@ -82,6 +85,30 @@ public class UserController {
 		
 		return userTransfer;
 	}
+	
+	@RequestMapping(value = "hardwarelogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String hardwareLogin(HttpServletRequest request) throws JsonProcessingException{
+		String cardNumber = request.getParameter("cardnumber");
+		String cardType = request.getParameter("cardtype");
+		String citizenType = request.getParameter("citizentype");
+		
+		/*
+		UsernamePasswordAuthenticationToken authenticationToken =
+				new UsernamePasswordAuthenticationToken(username, password);
+		Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		*/
+		
+		UserTransfer transfer = userService.getUserByCardInfo(cardType, cardNumber, citizenType);
+		if (transfer == null) {
+			return "User not found";
+		} else {
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writeValueAsString(transfer);
+		}
+	}
+
 
 	@RequestMapping(value = "{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

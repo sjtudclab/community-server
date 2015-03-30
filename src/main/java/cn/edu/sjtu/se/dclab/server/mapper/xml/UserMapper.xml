@@ -31,6 +31,11 @@
     	INSERT INTO user_role (user_id,role_id) VALUES (#{userId},#{roleId});
     </insert>
 
+    <select id="findByCardInfo" resultMap="UserMap">
+        SELECT u.* FROM user as u, ${tableName} as c
+        WHERE c.identification_type = #{cardType} AND c.identification_value = #{cardNumber} AND c.user_id = u.user_id
+    </select>
+
     <resultMap id="UserMap" type="User">
         <id property="id" column="user_id" />
         <result property="username" column="username" />
