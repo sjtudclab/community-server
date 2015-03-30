@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/mailbox")
-public class BasicMailBoxController {
+public class MailBoxBasicController {
 
 	@RequestMapping("")
 	String mailbox() {

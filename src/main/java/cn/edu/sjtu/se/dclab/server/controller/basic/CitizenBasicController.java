@@ -11,7 +11,7 @@ import cn.edu.sjtu.se.dclab.server.common.Constants;
  */
 @Controller
 @RequestMapping(value = "/committee")
-public class BasicCitizenController {
+public class CitizenBasicController {
 	
 	@RequestMapping(value = "manage")
 	public String manage(){

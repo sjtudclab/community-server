@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("login")
-public class BasicLoginController {
+public class LoginBasicController {
 
     @RequestMapping("resident")
     public String residentLogin() {
