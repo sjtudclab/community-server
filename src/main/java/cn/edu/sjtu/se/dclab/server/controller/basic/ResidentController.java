@@ -59,4 +59,9 @@ public class ResidentController {
     public String setting() {
         return "setting";
     }
+    
+    @RequestMapping("user_position")
+    public String userPosition() {
+    	return "user_position";
+    }
 }

@@ -77,6 +77,8 @@
         });
       };
     }
+    
+    var userPositionUrl = getUrl("resident/user_position");
 
     (function($){
         $.ajax({
@@ -112,8 +114,8 @@
 
                 $('.police .prname').text(police.username);
                 $('.zhucan .prname').text(zhucan.username);
-                $('.police .prname').attr('href', 'user_position.html?user_id={0}&role_id={1}'.format(police.userid, police.role.id))
-                $('.zhucan .prname').attr('href', 'user_position.html?user_id={0}&role_id={1}'.format(zhucan.userid, zhucan.role.id))
+                $('.police .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}'.format(police.userid, police.role.id))
+                $('.zhucan .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}'.format(zhucan.userid, zhucan.role.id))
 
             },
             error: function(obj) {
