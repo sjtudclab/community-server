@@ -12,4 +12,9 @@ public class WorkReportBasicController {
 	String serve() {
 		return "workreport";
 	}
+	
+	@RequestMapping("/add")
+	String reportadd() {
+		return "workreportadd";
+	}
 }
