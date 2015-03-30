@@ -11,61 +11,6 @@
     <title>社区公告</title>
 </head>
 <body class="metro">
-<!--
-<nav class="navigation-bar dark">
-    <div class="navigation-bar-content">
-        <a href="start-screen-committee.html" class="element"><span class="icon-grid-view"></span> 可信社区 <sup>1.0</sup></a>
-        <span class="element-divider"></span>
-
-        <a class="pull-menu" href="#"></a>
-        <ul class="element-menu">
-            <li>
-                <a class="dropdown-toggle" href="#">社区公告</a>
-                <ul class="dropdown-menu dark" data-role="dropdown">
-                    <li><a href="Announcement.html">公告浏览</a></li>
-                    <li class="disabled"><a href="#">公告管理</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle"  href="Neighbour.html">左邻右舍</a>
-            </li>
-            <li>
-                <a class="dropdown-toggle"  href="Committee.html">居委会</a>
-            </li>
-        </ul>
-
-        <div class="no-tablet-portrait">
-            <span class="element-divider"></span>
-            <a class="element brand" href="#"><span class="icon-spin"></span></a>
-            <a class="element brand" href="#"><span class="icon-printer"></span></a>
-            <span class="element-divider"></span>
-
-            <div class="element input-element">
-                <form>
-                    <div class="input-control text">
-                        <input type="text" placeholder="Search...">
-                        <button class="btn-search"></button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="element place-right">
-                <a class="dropdown-toggle" href="#">
-                    <span class="icon-cog"></span>
-                </a>
-                <ul class="dropdown-menu place-right" data-role="dropdown">
-                    <li><a href="#">更改个人信息</a></li>
-                </ul>
-            </div>
-            <span class="element-divider place-right"></span>
-            <button class="element image-button image-left place-right">
-                我
-                <img src="images/me.jpg"/>
-            </button>
-        </div>
-    </div>
-</nav>
--->
 
 <div class="page">
     <h1>
@@ -73,7 +18,7 @@
         社区公告
     </h1>
     
-	<form role="form" method="post" action="../rest/information/" enctype="multipart/form-data">
+	<form role="form" method="post" action="../rest/information/" enctype="multipart/form-data" onsubmit="return validate_form(this)">
 	    <div class="grid">
 	        <div class="row">
 	            <div class="span7">
@@ -93,20 +38,21 @@
 <div th:include="login_footer :: copy"></div>
 
 <script type="text/javascript">
-    $('#submitButton').click(function () {
-        $.ajax({
-            url: 'rest/information',
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({content:$('textarea#content').val()}),
-            success: function (object) {
-                alert("公告发布成功");
-            },
-            error: function(object) {
-                alert("公告发布失败");
-            }
-        })
-    });
+    
+    function validate_form(thisForm)
+    {
+    	with(thisForm)
+    	{
+    		if (thisForm.content.value == "") {
+    			thisForm.content.focus();
+    			alert("内容不能为空！")
+    			return false;
+    		} else {
+    			alert("公告发布成功！");
+    			return true;
+    		}
+    	}
+    }
 </script>
 
 </body>
