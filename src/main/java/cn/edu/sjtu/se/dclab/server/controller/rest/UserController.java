@@ -93,6 +93,7 @@ public class UserController {
 		String cardType = request.getParameter("cardtype");
 		String citizenType = request.getParameter("citizentype");
 		
+		cardNumber = cardNumber.trim();
 		/*
 		UsernamePasswordAuthenticationToken authenticationToken =
 				new UsernamePasswordAuthenticationToken(username, password);
