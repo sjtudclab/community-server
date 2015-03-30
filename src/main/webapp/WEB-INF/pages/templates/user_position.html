@@ -1,0 +1,123 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+
+    <link th:href="@{/css/metro-bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/metro-bootstrap-responsive.css}" rel="stylesheet">
+    <link th:href="@{/css/iconFont.css}" rel="stylesheet">
+    <link th:href="@{/css/docs.css}" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+    <link th:href="@{/js/prettify/prettify.css}" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/jquery/jquery.widget.min.js}"></script>
+    <script th:src="@{/js/jquery/jquery.mousewheel.js}"></script>
+    <script th:src="@{/js/prettify/prettify.js}"></script>
+    <script th:src="@{/js/holder/holder.js}"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script th:src="@{/js/load-metro.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+
+    <!-- Local JavaScript -->
+    
+    <title>职位信息</title>
+</head>
+<body class="metro">
+
+    <div class="container">
+        <h1>
+            <a href="Committee.html" class="back-btn"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+          	  <span class="position-name">{职位名称}</span><small class="on-right"></small>
+        </h1>
+
+        <h3>
+            <strong>姓名: </strong><span class="username">{name}</span>
+        </h3>
+
+        <div class="person-list">
+            <div style="margin-top: 20px" class="person-list-container">
+            </div>
+        </div>
+
+        <div class="container">
+            <h3><strong>职位描述：</strong></h3>
+            <p class="description">这里是职位描述</p>
+        </div>
+
+        <div style="margin-top:30px">
+            <a class="button large default fg-white contactme"  href="#">发信息</a>
+        </div>
+
+
+    </div> <!-- End of container -->
+
+    <script src="js/hitua.js"></script>
+    <script type="text/javascript">
+    if (!String.prototype.format) {
+      String.prototype.format = function() {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) { 
+          return typeof args[number] != 'undefined'
+            ? args[number]
+            : match
+          ;
+        });
+      };
+    }
+
+    function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+          return pair[1];
+        }
+      } 
+      return '';
+    }
+
+
+	(function($){
+        var userid = getQueryVariable('user_id');
+        var roleid = getQueryVariable('role_id');
+        var backUrl = getQueryVariable('back_url');
+        if (backUrl) {
+            $('.back-btn').attr('href', backUrl+'.html');
+        }
+
+        $.ajax({
+            type: "GET",
+            url: getUrl('rest/users/id/' + userid),
+            success: function(data) {
+            	console.log(data);
+                var name = data.username;
+                $('.username').text(name);
+                var position = $(data.roles).filter(function(i, d) {return d.id == roleid;})[0];
+
+                var html = 
+                    '<div class="image-container shadow">' +
+                    '<img src="{0}" class=""></a>'.format(getUrl("images/" + data.image)) +
+                    '</div>';
+                $('.person-list-container').append($(html));
+                $('.description').text(position.description);
+                $('.position-name').text(position.name);
+            },
+            error: function(obj) {
+                console.log(obj);
+            }
+        });
+
+        $('.contactme').attr('href', 'mailbox.html#sendtoid='+userid);
+        })(jQuery);
+	</script>
+
+</body>
+</html>

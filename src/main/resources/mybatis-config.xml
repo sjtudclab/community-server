@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE configuration PUBLIC  
-    "-//mybatis.org//DTD Config 3.0//EN"  
-    "http://mybatis.org/dtd/mybatis-3-config.dtd">  
-<configuration>  
+    "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
     
     <typeAliases>
 
@@ -39,6 +39,7 @@
         <typeAlias alias="ManagementCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen" />
         <typeAlias alias="ServiceCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen" />
         <typeAlias alias="WorkReport" type="cn.edu.sjtu.se.dclab.server.entity.WorkReport" />
+        <typeAlias alias="Information" type="cn.edu.sjtu.se.dclab.server.entity.Information" />
 
         <typeAlias alias="Topic" type="cn.edu.sjtu.se.dclab.server.entity.Topic" />
         <typeAlias alias="TopicOption" type="cn.edu.sjtu.se.dclab.server.entity.TopicOption" />
@@ -46,11 +47,14 @@
         <typeAlias alias="TopicType" type="cn.edu.sjtu.se.dclab.server.entity.TopicType" />
 
         <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
+		<typeAlias alias="ContentHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.ContentHandler" />
     </typeAliases>
 
     <typeHandlers>
         <typeHandler handler="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler"
                      javaType="String" jdbcType="INTEGER" />
+		<typeHandler handler="cn.edu.sjtu.se.dclab.server.entity.converter.ContentHandler"
+					 javaType="String" jdbcType="BLOB" />
     </typeHandlers>
-    
+
 </configuration>  

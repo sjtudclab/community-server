@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<!-- <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -10,9 +10,9 @@
 <meta name="author" content="travis"/>
 
 <link th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.min.css}"  rel="stylesheet" />
-<!--[if lt IE 9]>
+[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <![endif]
 <script th:src="@{/zang/js/jquery.min.js}"></script>
 <script th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/common.js}"></script>
@@ -33,16 +33,70 @@
 	<button type="submit" class="btn btn-default">提交</button>
 </form>
 
-<!-- <form method="post" action="rest/work_report/" enctype="multipart/form-data">
-	<input id="citizen_id" name="citizenId" type="hidden" value="1"></input>
-	<textarea id="report_content" name="content" rows="3" cols="20"></textarea>
-	<input type="file" name="file" id="attachment" size="50"></input>
-	<input type="submit"></input>
-</form> -->
 
 
 <script type="text/javascript">
 
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>述职报告</title>
+</head>
+<body class="metro">
+
+<div class="page">
+    <h1>
+        <a href="../start-screen-committee.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        述职报告
+    </h1>
+    
+	<form role="form" method="post" action="../rest/work_report/" enctype="multipart/form-data" onsubmit="return validate_form(this)">
+	    <div class="grid">
+	        <div class="row">
+	            <div class="span7">
+	                <textarea id="content" name="content" rows="10" cols="100"></textarea>
+		            <input name="citizenId" value="1" type="hidden"></input>
+		            附件：<br/>
+		            <input type="file" name="file" id="attachment"></input>
+	            </div>
+	        </div>
+	    </div>
+	
+	    <button class="btn btn-default" id="submitButton">发布</button>
+    </form>
+
+</div>
+
+<div th:include="login_footer :: copy"></div>
+
+<script type="text/javascript">
+    
+    function validate_form(thisForm)
+    {
+    	with(thisForm)
+    	{
+    		if (thisForm.content.value == "") {
+    			thisForm.content.focus();
+    			alert("内容不能为空！")
+    			return false;
+    		} else {
+    			alert("公告发布成功！");
+    			return true;
+    		}
+    	}
+    }
 </script>
 
 </body>
