@@ -37,6 +37,7 @@
         <typeAlias alias="ResidentCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen" />
         <typeAlias alias="ManagementCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen" />
         <typeAlias alias="ServiceCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen" />
+        <typeAlias alias="WorkReport" type="cn.edu.sjtu.se.dclab.server.entity.WorkReport" />
 
         <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
     </typeAliases>
