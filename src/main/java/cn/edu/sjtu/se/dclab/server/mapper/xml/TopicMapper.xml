@@ -1,0 +1,67 @@
+<?mybatis version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.TopicMapper">
+
+   <insert id="submitTopic" parameterType="Topic" useGeneratedKeys="true" keyProperty="id">
+       INSERT INTO topic
+       (name, content, desc, vote_count, start_time, end_time, topic_type_id, parent_topic_id, attachment)
+       VALUES
+       (#{name}, #{content}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
+        #{parentTopicId}, #{attachment})
+   </insert>
+
+    <insert id="submitOption" parameterType="Topic" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO topic_option
+        (name, topic_id)
+        VALUES
+        (#{name}, #{topic.id})
+    </insert>
+
+    <select id="findAllTopics" resultMap="TopicMap">
+      SELECT *
+      FROM topic
+    </select>
+
+    <select id="findTopic" resultMap="TopicMap">
+        SELECT *
+        FROM topic
+        WHERE topic_id = #{topicId}
+    </select>
+
+    <select id="findTopicOptions" resultMap="TopicOptionMap">
+        SELECT *
+        FROM topic_option
+        WHERE topic_id = #{topicId}
+    </select>
+
+    <insert id="vote" useGeneratedKeys="true" keyProperty="id" parameterType="TopicVote">
+        INSERT INTO topic_vote
+        (topic_id, user_id, option_id)
+        VALUES
+        (#{topic.id}, #{user.id}, #{option.id})
+    </insert>
+
+    <resultMap id="TopicMap" type="Topic">
+        <id property="topicId" column="topic_id" />
+        <result property="name" column="name" />
+        <result property="content" column="content" />
+        <result property="desc" column="desc" />
+        <result property="voteCount" column="vote_count" />
+        <result property="startTime" column="start_time" />
+        <result property="endTime" column="end_time" />
+        <result property="topicTypeId" column="topi_type_id" />
+        <result property="parentTopicId" column="parent_topic_id" />
+        <result property="attachment" column="attachment" />
+    </resultMap>
+
+    <resultMap id="TopicOptionMap" type="TopicOption">
+        <id property="id" column="option_id" />
+        <result property="name" column="name" />
+        <association property="topic" javaType="Topic">
+            <id property="topicId" column="topic_id" />
+        </association>
+    </resultMap>
+
+</mapper>

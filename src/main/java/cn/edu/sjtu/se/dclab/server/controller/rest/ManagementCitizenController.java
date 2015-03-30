@@ -59,7 +59,7 @@ public class ManagementCitizenController {
 		return managementCitizenService.findAll(Constants.ROLE_OWNER);
 	}
 	
-	@RequestMapping(value = "TENEMENT", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "tenement", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Collection<ManagementCitizenTransfer> findAllTenments(){
 		return managementCitizenService.findAll(Constants.ROLE_TENEMENT);

@@ -1,5 +1,6 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import java.util.Collection;
 import java.util.Date;
 
 public class Topic {
@@ -13,6 +14,8 @@ public class Topic {
 	private long topicTypeId;
 	private long parentTopicId;
 	private String attachment;
+
+	private Collection<TopicOption> options;
 	
 	public void setTopicId(long id) {
 		this.topicId = id;
@@ -53,7 +56,7 @@ public class Topic {
 		this.startTime = time;
 	}
 	public Date getStartTime(Date time) {
-		return this.startTime;
+		return this.getStartTime();
 	}
 	
 	public void setEndTime(Date time) {
@@ -82,5 +85,17 @@ public class Topic {
 	}
 	public String getAttachment() {
 		return this.attachment;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public Collection<TopicOption> getOptions() {
+		return options;
+	}
+
+	public void setOptions(Collection<TopicOption> options) {
+		this.options = options;
 	}
 }
