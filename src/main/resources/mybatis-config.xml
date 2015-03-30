@@ -40,6 +40,11 @@
         <typeAlias alias="ServiceCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen" />
         <typeAlias alias="WorkReport" type="cn.edu.sjtu.se.dclab.server.entity.WorkReport" />
 
+        <typeAlias alias="Topic" type="cn.edu.sjtu.se.dclab.server.entity.Topic" />
+        <typeAlias alias="TopicOption" type="cn.edu.sjtu.se.dclab.server.entity.TopicOption" />
+        <typeAlias alias="TopicVote" type="cn.edu.sjtu.se.dclab.server.entity.TopicVote" />
+        <typeAlias alias="TopicType" type="cn.edu.sjtu.se.dclab.server.entity.TopicType" />
+
         <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
     </typeAliases>
 

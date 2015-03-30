@@ -43,17 +43,10 @@ public class ApartmentServiceImpl implements ApartmentService {
 	}
 
 	@Override
-    public Collection<ApartmentTransfer> findAll() {
+    public Collection<Apartment> findAll() {
     	Collection<Apartment> apartments = apartmentMapper.findAll();
-    	Collection<ApartmentTransfer> apartmentTransfers = new ArrayList<ApartmentTransfer>();
-    	for(Apartment apartment : apartments){
-    		ApartmentTransfer apartmentTransfer = new ApartmentTransfer(apartment);
-    		Collection<ResidentCitizen> residents = apartmentMapper.findAllCitizenByApartmentId(apartment.getId());
-    		apartmentTransfer.setResidents(residents);
-    		
-    		apartmentTransfers.add(apartmentTransfer);
-    	}
-        return apartmentTransfers;
+
+        return apartments;
     }
 
     @Override

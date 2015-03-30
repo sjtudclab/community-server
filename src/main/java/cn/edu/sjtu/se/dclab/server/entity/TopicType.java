@@ -1,13 +1,9 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 /**
- * Created by Huiyi on 2015/3/16.
+ * Created by Huiyi on 2015/3/30.
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Building {
+public class TopicType {
     private long id;
     private String name;
 

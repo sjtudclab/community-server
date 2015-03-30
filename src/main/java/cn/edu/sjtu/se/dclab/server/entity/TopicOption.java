@@ -1,15 +1,16 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * Created by Huiyi on 2015/3/16.
+ * Created by Huiyi on 2015/3/30.
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Building {
+public class TopicOption {
     private long id;
     private String name;
+
+    @JsonIgnore
+    private Topic topic;
 
     public long getId() {
         return id;
@@ -25,5 +26,13 @@ public class Building {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }
