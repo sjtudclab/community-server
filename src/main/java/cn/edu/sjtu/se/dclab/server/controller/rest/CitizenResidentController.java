@@ -17,7 +17,7 @@ import cn.edu.sjtu.se.dclab.server.transfer.ResidentCitizenTransfer;
  *@author changyi yuan
  */
 @Controller
-@RequestMapping(value = Constants.REST + "/citizenResidents")
+@RequestMapping(value = Constants.REST + "/residentCitizens")
 public class CitizenResidentController {
 	@Autowired
 	private ResidentCitizenService residentCitizenService;
