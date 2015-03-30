@@ -14,7 +14,7 @@
     </select>
 
     <select id="findByUserId" resultMap="UserMap">
-        SELECT * FROM user WHERE user_id = #{id}
+        SELECT * FROM user u LEFT JOIN user_type ut ON u.user_type_id = ut.user_type_id WHERE u.user_id = #{id}
     </select>
     
     <select id="findUserByApartmentId" parameterType="long" resultMap="UserMap">
@@ -42,6 +42,13 @@
         <result property="email" column="email" />
         <result property="enabled" column="enabled" />
         <result property="image" column="image" />
-        <result property="userTypeId" column="user_type_id" />
+        
+        <association property="userType" resultMap="UserTypeMap" />
+    </resultMap>
+    
+    <resultMap type="UserType" id="UserTypeMap">
+    	<id property="id" column="user_type_id" />
+    	<result property="type" column="type" />
+    	<result property="tableName" column="table_name" />
     </resultMap>
 </mapper>

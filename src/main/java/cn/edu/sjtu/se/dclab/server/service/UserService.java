@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 
@@ -24,5 +25,5 @@ public interface UserService extends UserDetailsService{
 	public void updateUserRoles(List<UserRoleTransfer> userRoleTransfers);
 	
 	public UserTransfer authenticateUser(String username,String password);
-	public UserTransfer getUserByUserId(long id);
+	public User getUserByUserId(long id);
 }

@@ -15,7 +15,7 @@ public class User {
 	private String note;
 	private String email;
 	private String image;
-	private int userTypeId;
+	private UserType userType;
 	public long getId() {
 		return id;
 	}
@@ -76,10 +76,10 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public int getUserTypeId() {
-		return userTypeId;
+	public UserType getUserType() {
+		return userType;
 	}
-	public void setUserTypeId(int userTypeId) {
-		this.userTypeId = userTypeId;
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 }

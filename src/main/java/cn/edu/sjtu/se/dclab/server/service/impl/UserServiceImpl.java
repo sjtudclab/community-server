@@ -161,13 +161,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserTransfer getUserByUserId(long id) {
+	public User getUserByUserId(long id) {
 		User user = userMapper.findByUserId(id);
 		UserTransfer userTransfer = new UserTransfer();
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
 		userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
-		return userTransfer;
+		return user;
 	}
 
 	@Override

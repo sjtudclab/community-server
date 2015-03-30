@@ -36,4 +36,9 @@ public class RoleServiceImpl implements RoleService {
 		return roleMapper.findOne(id);
 	}
 
+	@Override
+	public Collection<Role> getRolesByUserId(long userId) {
+		return roleMapper.findByUserId(userId);
+	}
+
 }
