@@ -3,82 +3,85 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
-<title>智慧社区</title>
+<title>述职报告</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description"
 	content="Admin panel developed with the Bootstrap from Twitter."/>
 <meta name="author" content="travis"/>
 
-<link href="../../../css/bootstrap.css" th:href="@{/css/bootstrap.css}"  rel="stylesheet" />
-<link href="../../../css/site.css" th:href="@{/css/site.css}" rel="stylesheet" />
-<link href="../../../css/bootstrap-responsive.css" th:href="@{/css/bootstrap-responsive.css}" rel="stylesheet" />
+<link th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.min.css}"  rel="stylesheet" />
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<script src="../../../js/jquery.js" th:src="@{/js/jquery.js}"></script>
-<script src="../../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-<script src="../../../js/common.js" th:src="@{/js/common.js}"></script>
+<script th:src="@{/zang/js/jquery.min.js}"></script>
+<script th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
 
 </head>
 <body>
 
-<form method="post" action="rest/work_report/" enctype="multipart/form-data">
-	<input id="citizen_id" name="citizenId" type="hidden" value="1"></input>
-	<textarea id="report_content" name="content" rows="3" cols="20"></textarea>
-	<input type="file" name="file" id="attachment" size="50"></input>
-	<input type="submit"></input>
-</form>
+<h1><a href="workreport/add" class="label label-info">编写述职报告</a></h1>
 
 <div id="reportlist">
 </div>
 
-<hr/>
-
-<div id="reportlist2">
-</div>
 
 <script type="text/javascript">
  	var userid = 1;
-/*	$(function() {
-		$("#submit_report").click(function() {
-			alert($("#report_content")[0].value);
-			if ($("#report_content")[0].value != "") {
-				$.ajax({
-					type: "POST",
-					contentType: 'multipart/for-data; charset=utf-8',
-					url: getUrl("rest/work_report/"),
-					data: JSON.stringify({
-						"citizenId": userid,
-						"reportTime": new Date().getTime(),
-						"content": $("#report_content")[0].value,
-						"file": $("#attachment").text()
-					}),
-					success:function(result, status) {}
-					});
-			}
-		});
-	}); */
 	
 	$(document).ready(function() {
 		//userid = currentUserId();
-		$.get(getUrl("rest/work_report/") + userid, function(data) {
+/* 		$.get(getUrl("rest/work_report/") + userid, function(data) {
 			$.each(data, function(index, objval){
 				var attachment = objval["attachment"];
 				var reporttime = objval["reportTime"];
 				var content = objval["content"];
 				$("#reportlist").append("<li>" + content + "<a href='" + attachment + "'>附件</a>");
 			});
-		});
+		}); */
 		
 		$.get(getUrl("rest/work_report/all"), function(data) {
 			$.each(data, function(index, objval){
 				var attachment = objval["attachment"];
 				var reporttime = objval["reportTime"];
 				var content = objval["content"];
-				$("#reportlist2").append("<li>" + content + "<a href='" + attachment + "'>附件</a>");
+				$("#reportlist").append(
+						"<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
+						+ "<div>" + getNowFormatDate(new Date(objval["reportTime"])) + " 述职报告</div>" 
+						+ "</h3></div><div class='panel-body'>" + objval["content"] + "</div>" + "<a href='" + objval["attachment"] + "'>附件</a></div>");
 			});
 		});
 	});
+	
+	function getNowFormatDate(day) 
+	{ 
+		var Year = 0; 
+		var Month = 0; 
+		var Day = 0; 
+		var CurrentDate = ""; 
+
+		Year= day.getFullYear();
+		Month= day.getMonth()+1; 
+		Day = day.getDate();
+		CurrentDate += Year + "-"; 
+		if (Month >= 10 ) 
+		{ 
+		CurrentDate += Month + "-"; 
+		} 
+		else 
+		{ 
+		CurrentDate += "0" + Month + "-"; 
+		} 
+		if (Day >= 10 ) 
+		{ 
+		CurrentDate += Day ; 
+		} 
+		else 
+		{ 
+		CurrentDate += "0" + Day ; 
+		} 
+		return CurrentDate; 
+	} 
 </script>
 
 </body>
