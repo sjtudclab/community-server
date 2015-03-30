@@ -27,4 +27,8 @@ public class CommitteeController {
 		return "block_citizen_detail";
 	}
 
+	@RequestMapping("topic")
+	public String submitTopic() {
+		return "topic_add";
+	}
 }
