@@ -4,19 +4,19 @@
 
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.TopicMapper">
 
-   <insert id="submitTopic" parameterType="Topic" useGeneratedKeys="true" keyProperty="id">
+   <insert id="submitTopic" parameterType="Topic" useGeneratedKeys="true" keyProperty="topicId">
        INSERT INTO topic
-       (name, content, desc, vote_count, start_time, end_time, topic_type_id, parent_topic_id, attachment)
+       (name, content, `desc`, vote_count, start_time, end_time, topic_type_id, parent_topic_id, attachment)
        VALUES
        (#{name}, #{content}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
         #{parentTopicId}, #{attachment})
    </insert>
 
-    <insert id="submitOption" parameterType="Topic" useGeneratedKeys="true" keyProperty="id">
+    <insert id="submitOption" parameterType="Topic" useGeneratedKeys="true" keyProperty="optionId">
         INSERT INTO topic_option
         (name, topic_id)
         VALUES
-        (#{name}, #{topic.id})
+        (#{name}, #{topic.topicId})
     </insert>
 
     <select id="findAllTopics" resultMap="TopicMap">
@@ -40,7 +40,7 @@
         INSERT INTO topic_vote
         (topic_id, user_id, option_id)
         VALUES
-        (#{topic.id}, #{user.id}, #{option.id})
+        (#{topicId}, #{userId}, #{optionId})
     </insert>
 
     <resultMap id="TopicMap" type="Topic">

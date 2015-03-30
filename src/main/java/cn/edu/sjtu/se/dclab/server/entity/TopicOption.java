@@ -1,11 +1,15 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by Huiyi on 2015/3/30.
  */
 public class TopicOption {
     private long id;
     private String name;
+
+    @JsonIgnore
     private Topic topic;
 
     public long getId() {

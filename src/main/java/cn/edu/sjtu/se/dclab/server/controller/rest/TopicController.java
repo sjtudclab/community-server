@@ -15,7 +15,7 @@ import java.util.Collection;
  * Created by Huiyi on 2015/3/30.
  */
 @Controller
-@RequestMapping(Constants.REST + "topic")
+@RequestMapping(Constants.REST + "/topic")
 public class TopicController {
 
     private final TopicService topicService;
@@ -32,6 +32,7 @@ public class TopicController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public void submitTopic(@RequestBody Topic topic) {
         topicService.submitTopic(topic);
     }
@@ -43,6 +44,7 @@ public class TopicController {
     }
 
     @RequestMapping(value = "vote", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public void vote(@RequestBody TopicVote vote) {
         topicService.vote(vote);
     }

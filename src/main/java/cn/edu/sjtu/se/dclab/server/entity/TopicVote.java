@@ -1,43 +1,59 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import cn.edu.sjtu.se.dclab.server.entity.deserializer.TopicVoteDeserializer;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  * Created by Huiyi on 2015/3/30.
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "vote_id")
+@JsonDeserialize(using = TopicVoteDeserializer.class)
 public class TopicVote {
-    private long id;
-    private Topic topic;
-    private User user;
-    private TopicOption option;
 
-    public long getId() {
-        return id;
+    @JsonProperty(value = "vote_id")
+    private long voteId;
+
+    @JsonProperty(value = "topic_id")
+    private long topicId;
+
+    @JsonProperty(value = "user_id")
+    private long userId;
+
+    @JsonProperty(value = "option_id")
+    private long optionId;
+
+    public long getVoteId() {
+        return voteId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setVoteId(long voteId) {
+        this.voteId = voteId;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public long getTopicId() {
+        return topicId;
     }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    public void setTopicId(long topicId) {
+        this.topicId = topicId;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public TopicOption getOption() {
-        return option;
+    public long getOptionId() {
+        return optionId;
     }
 
-    public void setOption(TopicOption option) {
-        this.option = option;
+    public void setOptionId(long optionId) {
+        this.optionId = optionId;
     }
 }

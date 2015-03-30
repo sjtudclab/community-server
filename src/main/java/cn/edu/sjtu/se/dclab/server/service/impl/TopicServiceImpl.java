@@ -29,6 +29,7 @@ public class TopicServiceImpl implements TopicService {
     public void submitTopic(Topic topic) {
         topicMapper.submitTopic(topic);
         for (TopicOption option : topic.getOptions()) {
+            option.setTopic(topic);
             topicMapper.submitOption(option);
         }
     }
