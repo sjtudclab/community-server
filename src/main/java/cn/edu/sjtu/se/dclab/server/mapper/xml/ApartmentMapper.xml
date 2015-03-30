@@ -16,7 +16,7 @@
 
     <select id="findAllCitizenByApartmentId" resultMap="cn.edu.sjtu.se.dclab.server.mapper.CitizenMapper.CitizenMap">
         SELECT *
-        FROM citizen
+        FROM citizen_resident
         WHERE apartment_id = #{id}
     </select>
 
@@ -25,11 +25,8 @@
         <result property="name" column="name" />
         <result property="serialNumber" column="serial_number" />
         <result property="area" column="area" />
-        <association property="owner" javaType="Citizen">
+        <association property="owner" javaType="ResidentCitizen">
             <id property="id" column="owner_id" />
-        </association>
-        <association property="tenant" javaType="Citizen">
-            <id property="id" column="tenant_id" />
         </association>
         <association property="building" javaType="Building">
             <id property="id" column="building_id" />

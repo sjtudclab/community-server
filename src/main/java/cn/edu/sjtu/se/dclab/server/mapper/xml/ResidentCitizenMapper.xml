@@ -4,6 +4,11 @@
 
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.ResidentCitizenMapper">
 
+    <select id="findAll" resultMap="ResidentCitizenMap">
+        SELECT *
+        FROM citizen_resident
+    </select>
+
     <resultMap id="ResidentCitizenMap" type="ResidentCitizen">
         <id property="id" column="citizen_id" />
         <result property="name" column="name" />

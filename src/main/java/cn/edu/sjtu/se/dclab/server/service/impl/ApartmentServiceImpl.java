@@ -3,6 +3,7 @@ package cn.edu.sjtu.se.dclab.server.service.impl;
 
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
+import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.mapper.ApartmentMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserMapper;
@@ -47,8 +48,8 @@ public class ApartmentServiceImpl implements ApartmentService {
     	Collection<ApartmentTransfer> apartmentTransfers = new ArrayList<ApartmentTransfer>();
     	for(Apartment apartment : apartments){
     		ApartmentTransfer apartmentTransfer = new ApartmentTransfer(apartment);
-    		Collection<User> users = userMapper.findUserByApartmentId(apartment.getId());
-    		apartmentTransfer.setUsers(users);
+    		Collection<ResidentCitizen> residents = apartmentMapper.findAllCitizenByApartmentId(apartment.getId());
+    		apartmentTransfer.setResidents(residents);
     		
     		apartmentTransfers.add(apartmentTransfer);
     	}
@@ -61,7 +62,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public Collection<Citizen> findAllCitizenByApartmentId(long id) {
+    public Collection<ResidentCitizen> findAllCitizenByApartmentId(long id) {
         return apartmentMapper.findAllCitizenByApartmentId(id);
     }
 }

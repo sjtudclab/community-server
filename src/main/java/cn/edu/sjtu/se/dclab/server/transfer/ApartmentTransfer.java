@@ -3,8 +3,7 @@ package cn.edu.sjtu.se.dclab.server.transfer;
 import java.util.Collection;
 
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
-import cn.edu.sjtu.se.dclab.server.entity.Citizen;
-import cn.edu.sjtu.se.dclab.server.entity.User;
+import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 
 /**
  *2015年3月17日 下午2:25:36
@@ -12,33 +11,19 @@ import cn.edu.sjtu.se.dclab.server.entity.User;
  */
 public class ApartmentTransfer {
 	private long id;
-    private String floor;
-    private String location;
-    private Citizen owner;
-    private String resident;
+    private String name;
+    private String area;
     private String serialNumber;
-    private Collection<User> users;
+    private Collection<ResidentCitizen> residents;
+
 	public ApartmentTransfer() {
-	}
-   
-	public ApartmentTransfer(long id, String floor, String location,
-			Citizen owner, String resident, String serialNumber) {
-		super();
-		this.id = id;
-		this.floor = floor;
-		this.location = location;
-		this.owner = owner;
-		this.resident = resident;
-		this.serialNumber = serialNumber;
 	}
 
 	public ApartmentTransfer(Apartment apartment) {
-		this.id = apartment.getId();
-		//this.floor = apartment.getFloor();
-		//this.location = apartment.getLocation();
-		this.owner = apartment.getOwner();
-		//this.resident = apartment.getResident();
-		this.serialNumber = apartment.getSerialNumber();
+		this.setId(apartment.getId());
+		this.setName(apartment.getName());
+		this.setArea(apartment.getArea());
+		this.setSerialNumber(apartment.getSerialNumber());
 	}
 
 	public long getId() {
@@ -49,36 +34,20 @@ public class ApartmentTransfer {
 		this.id = id;
 	}
 
-	public String getFloor() {
-		return floor;
+	public String getName() {
+		return name;
 	}
 
-	public void setFloor(String floor) {
-		this.floor = floor;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getArea() {
+		return area;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public Citizen getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Citizen owner) {
-		this.owner = owner;
-	}
-
-	public String getResident() {
-		return resident;
-	}
-
-	public void setResident(String resident) {
-		this.resident = resident;
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	public String getSerialNumber() {
@@ -89,12 +58,11 @@ public class ApartmentTransfer {
 		this.serialNumber = serialNumber;
 	}
 
-	public Collection<User> getUsers() {
-		return users;
+	public Collection<ResidentCitizen> getResidents() {
+		return residents;
 	}
 
-	public void setUsers(Collection<User> users) {
-		this.users = users;
+	public void setResidents(Collection<ResidentCitizen> residents) {
+		this.residents = residents;
 	}
-
 }
