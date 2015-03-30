@@ -90,7 +90,7 @@
         var roleid = getQueryVariable('role_id');
         var backUrl = getQueryVariable('back_url');
         if (backUrl) {
-            $('.back-btn').attr('href', backUrl+'.html');
+            $('.back-btn').attr('href', getUrl('resident/' + backUrl));
         }
 
         $.ajax({

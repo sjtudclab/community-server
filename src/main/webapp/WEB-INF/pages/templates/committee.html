@@ -79,7 +79,6 @@
     }
     
     var userPositionUrl = getUrl("resident/user_position");
-
     (function($){
         $.ajax({
             type: "GET",
@@ -102,7 +101,7 @@
                     var position = el.role.name;
                     var html = 
                         '<div class="image-container shadow">' +
-                        '<a  href="{0}"><img src="{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'Committee'), 
+                        '<a  href="{0}"><img src="{1}" class=""></a>'.format(userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'committee'), 
                         		getUrl('images/' + el.imageUrl)) +
                             '<div class="overlay">' +
                                 '<span class="name-text">{0}</span><br>'.format(name) +
