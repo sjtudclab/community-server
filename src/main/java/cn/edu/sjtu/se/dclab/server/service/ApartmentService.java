@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
+import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.transfer.ApartmentTransfer;
 
@@ -15,5 +16,5 @@ public interface ApartmentService {
 
     public Collection<Apartment> findAllByBuildingId(long id);
 
-    public Collection<Citizen> findAllCitizenByApartmentId(long id);
+    public Collection<ResidentCitizen> findAllCitizenByApartmentId(long id);
 }
