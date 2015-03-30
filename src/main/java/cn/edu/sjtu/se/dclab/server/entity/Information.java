@@ -1,11 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
-import java.sql.SQLException;
 import java.util.Date;
 
-import com.mysql.jdbc.Blob;
-
-import cn.edu.sjtu.se.dclab.server.transfer.InformationTransfer;
 
 public class Information {
 	private long informationId;
@@ -14,26 +10,6 @@ public class Information {
 	private Date submitTime;
 	private int informationType;
 	private String attachment;
-	
-	public Information() {}
-	
-	public Information(InformationTransfer informationTransfer) {
-		this.title = informationTransfer.getTitle();
-		this.submitTime = informationTransfer.getSubmitTime();
-		this.informationType = informationTransfer.getInformationType();
-		this.attachment = informationTransfer.getAttachment();
-		Blob blob = informationTransfer.getContent();
-		try {
-			if (blob == null || blob.length() == 0)
-				content = "";
-			else {
-				content = new String(blob.getBytes((long)1, (int)blob.length()));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public void setInformationId(long id) {
 		this.informationId = id;
