@@ -53,12 +53,17 @@
 							<input type="button" class="button large primary" value="登陆" onclick="login" />
               -->
 				            <button class="button large primary" id="loginBtn">登录</button>
+				            <button class="button large info" style="float:right" id="cardLoginSwitchBtn">卡证登录</button>
 			            </div>
 			
 			            <div style="margin-top: 20px">
 			            </div>
 			        </fieldset>
 			    </form>
+			    <div class="card-login" style="display:none">
+			    	<div>请将读卡器连接到电脑上，然后将身份证放置到读卡器上。</div>
+			    	<button class="button primary" style="margin-top: 15px" id="cardLoginBtn">确认登陆</button>
+			    </div>
             </div>
         </div>
     </div>
@@ -66,13 +71,50 @@
 </div>
 
 <div th:include="login_footer :: copy"></div>
-
 <script type="text/javascript">
 	$('#loginBtn').click(function () {
 		$.ajax({
 			url: getUrl('rest/users/login'),
 			type: "POST",
 			data: $('form#loginForm').serializeArray(),
+			success: function (data) {
+				saveUser(data);
+				var rtl = $('#roleSelection');
+				var value = rtl[0].options[rtl[0].selectedIndex].value;
+				if (value == "居委会")
+					window.location = getUrl('start-screen-committee')
+				else if (value == "业委会")
+					window.location = getUrl('start-screen-owner')
+				else if (value == "楼组长")
+					window.location = getUrl('index')
+				else if (value == "块长")
+					window.location = getUrl('unused')
+			},
+			error: function() {
+				alert("用户名或密码错误")
+			}
+		})
+	});
+
+	$('#cardLoginSwitchBtn').click(function() {
+		$('.card-login').show();
+	});
+
+	$('#cardLoginBtn').click(function () {
+		if (initPlugin() == false) {
+			return;
+		}
+		var idStr = getIDInformation();
+		if (idStr == false) {
+			return;
+		}
+		idStr = idStr.match(/[0-9Xx]*/)[0];
+		idStr = md5(idStr);
+		var dataObj = [{name: "cardtype", value: "idcard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "management"}];
+		$.ajax({
+			url: getUrl('rest/users/hardwarelogin'),
+			type: "POST",
+			data: dataObj,
 			success: function (data) {
 				saveUser(data);
 				var rtl = $('#roleSelection');

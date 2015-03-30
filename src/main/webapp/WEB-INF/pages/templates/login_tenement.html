@@ -46,12 +46,19 @@
 							<input type="button" class="button large primary" value="登陆" onclick="login" />
               -->
 				            <button class="button large primary" id="loginBtn">登录</button>
+				            <button class="button large info" style="float:right" id="cardLoginSwitchBtn">卡证登录</button>
+
 			            </div>
 			
 			            <div style="margin-top: 20px">
 			            </div>
 			        </fieldset>
 			    </form>
+			    <div class="card-login" style="display:none">
+			    	<div>请将读卡器连接到电脑上，然后将身份证放置到读卡器上。</div>
+			    	<button class="button primary" style="margin-top: 15px" id="cardLoginBtn">确认登陆</button>
+			    </div>
+
             </div>
         </div>
     </div>
@@ -75,6 +82,37 @@
 			}
 		})
 	});
+
+	$('#cardLoginSwitchBtn').click(function() {
+		$('.card-login').show();
+	});
+
+	$('#cardLoginBtn').click(function () {
+		if (initPlugin() == false) {
+			return;
+		}
+		var idStr = getIDInformation();
+		if (idStr == false) {
+			return;
+		}
+		idStr = idStr.match(/[0-9Xx]*/)[0];
+		idStr = md5(idStr);
+		var dataObj = [{name: "cardtype", value: "idcard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "service"}];
+		$.ajax({
+			url: getUrl('rest/users/hardwarelogin'),
+			type: "POST",
+			data: dataObj,
+			success: function (data) {
+				saveUser(data);
+				window.location = getUrl('start-screen-tenement')
+			},
+			error: function() {
+				alert("用户名或密码错误")
+			}
+		})
+	});
+
+
 
 	$('form#loginForm').submit(function() {
 		return false;

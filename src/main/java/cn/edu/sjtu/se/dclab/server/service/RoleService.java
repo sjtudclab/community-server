@@ -12,4 +12,6 @@ public interface RoleService {
 	public Collection<Role> getAllRoles();
 
 	public Role findOne(long id);
+	
+	public Collection<Role> getRolesByUserId(long userId);
 }

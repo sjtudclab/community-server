@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<!-- <beans:bean id="passwordEncoder"
+	<beans:bean id="passwordEncoder"
 		class="org.springframework.security.crypto.password.StandardPasswordEncoder">
-		<beans:constructor-arg value="ThisIsASecretSoChangeMe" />
+		<beans:constructor-arg value="dclab@sjtu" />
 	</beans:bean>
- -->
+
 	<beans:bean id="unauthorizedEntryPoint"
 		class="cn.edu.sjtu.se.dclab.server.security.UnauthorizedEntryPoint" />
 
@@ -33,9 +33,9 @@
 
 	<authentication-manager id="authenticationManager">
 		<authentication-provider user-service-ref="userService">
-			<!--
+			
 			<password-encoder ref="passwordEncoder" />
-			-->
+			
 			<!-- <jdbc-user-service data-source-ref="securityDataSource"
 				users-by-username-query="select username,password,enabled from user where username=?"
 				authorities-by-username-query="select u.username,p.name from user u,user_role ur, user_role_permission rp,permission p

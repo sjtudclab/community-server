@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;
 
@@ -18,7 +19,7 @@ import cn.edu.sjtu.se.dclab.server.service.RoleService;
  *@author changyi yuan
  */
 @Controller
-@RequestMapping("/roles")
+@RequestMapping(value = Constants.REST + "/roles")
 public class RoleController {
 	@Autowired
 	private RoleService roleService;

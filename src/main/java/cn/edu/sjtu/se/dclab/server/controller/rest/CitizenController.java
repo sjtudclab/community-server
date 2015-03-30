@@ -1,5 +1,6 @@
 package cn.edu.sjtu.se.dclab.server.controller.rest;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
 import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.service.CitizenService;
@@ -17,7 +18,7 @@ import java.util.Collection;
  * Created by Huiyi on 2015/3/13.
  */
 @Controller
-@RequestMapping("/citizen")
+@RequestMapping(Constants.REST + "/citizen")
 public class CitizenController {
 
     @Autowired

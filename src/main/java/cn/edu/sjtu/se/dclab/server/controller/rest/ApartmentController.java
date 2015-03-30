@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.controller.rest;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
+import cn.edu.sjtu.se.dclab.server.entity.Apartment;
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
 import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
@@ -19,7 +21,7 @@ import java.util.Collection;
  * Created by Huiyi on 2015/3/13.
  */
 @Controller
-@RequestMapping("/apartment")
+@RequestMapping(Constants.REST + "/apartment")
 public class ApartmentController {
 
     @Autowired
@@ -35,7 +37,7 @@ public class ApartmentController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Collection<ApartmentTransfer> findAll() {
+    public Collection<Apartment> findAll() {
         return apartmentService.findAll();
     }
 

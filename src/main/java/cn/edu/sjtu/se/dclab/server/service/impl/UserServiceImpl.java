@@ -74,6 +74,30 @@ public class UserServiceImpl implements UserService {
 
 		return userTransfer;
 	}
+	
+	@Override
+	public UserTransfer getUserByCardInfo(String cardType, String cardNumber, String citizenType) {
+		String tableName = "";
+		if (citizenType.equalsIgnoreCase("management")) {
+			tableName = "citizen_management";
+		} else if (citizenType.equalsIgnoreCase("service")) {
+			tableName = "citizen_service";
+		} else {
+			tableName = "citizen_resident";
+		}
+		
+		User user = userMapper.findByCardInfo(cardType, cardNumber, tableName);
+		if (user == null)
+			return null;
+		Collection<Role> roles = roleMapper.findByUserId(user.getId());
+
+		UserTransfer userTransfer = new UserTransfer();
+		userTransfer.setId(user.getId());
+		userTransfer.setUsername(user.getUsername());
+		userTransfer.setRoles(roles);
+
+		return userTransfer;
+	}
 
 	@Override
 	public Collection<UserTransfer> getAllUsers() {
@@ -161,13 +185,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserTransfer getUserByUserId(long id) {
-		User user = userMapper.findUserByUserId(id);
+	public User getUserByUserId(long id) {
+		User user = userMapper.findByUserId(id);
 		UserTransfer userTransfer = new UserTransfer();
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
 		userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
-		return userTransfer;
+		return user;
 	}
 
 	@Override
@@ -209,4 +233,5 @@ public class UserServiceImpl implements UserService {
 				new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), permissionNames);
 		return myUser ;
 	}
+
 }

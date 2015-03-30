@@ -1,13 +1,17 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  *2015年1月19日 下午9:42:41
  *@author changyi yuan
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
+
 	private long id;
 	private String username;
 	private String password;
@@ -18,7 +22,7 @@ public class User {
 	private String note;
 	private String email;
 	private String image;
-	private int userTypeId;
+	private UserType userType;
 	public long getId() {
 		return id;
 	}
@@ -79,10 +83,10 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public int getUserTypeId() {
-		return userTypeId;
+	public UserType getUserType() {
+		return userType;
 	}
-	public void setUserTypeId(int userTypeId) {
-		this.userTypeId = userTypeId;
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 }

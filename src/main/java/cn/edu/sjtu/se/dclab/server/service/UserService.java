@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 
@@ -14,6 +15,7 @@ import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
  */
 public interface UserService extends UserDetailsService{
 	public UserTransfer getUserByUsername(String username);
+	
 	public Collection<UserTransfer> getAllUsers();
 
 	public Collection<UserTransfer> getUserByCategory(String category);
@@ -24,5 +26,7 @@ public interface UserService extends UserDetailsService{
 	public void updateUserRoles(List<UserRoleTransfer> userRoleTransfers);
 	
 	public UserTransfer authenticateUser(String username,String password);
-	public UserTransfer getUserByUserId(long id);
+	public User getUserByUserId(long id);
+	
+	public UserTransfer getUserByCardInfo(String cardType, String cardNumber, String citizenType);
 }
