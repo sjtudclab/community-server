@@ -72,16 +72,21 @@
         <a href="start-screen-committee.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
         社区公告
     </h1>
-
-    <div class="grid">
-        <div class="row">
-            <div class="span7">
-                <textarea id="content" rows="10" cols="100"></textarea>
-            </div>
-        </div>
-    </div>
-
-    <button class="btn btn-default" id="submitButton">发布</button>
+    
+	<form role="form" method="post" action="../rest/information/" enctype="multipart/form-data">
+	    <div class="grid">
+	        <div class="row">
+	            <div class="span7">
+	                <textarea id="content" name="content" rows="10" cols="100"></textarea>
+		            <input name="infotype" value="1" type="hidden"></input>
+		            附件：<br/>
+		            <input type="file" name="file" id="attachment"></input>
+	            </div>
+	        </div>
+	    </div>
+	
+	    <button class="btn btn-default" id="submitButton">发布</button>
+    </form>
 
 </div>
 
@@ -90,7 +95,7 @@
 <script type="text/javascript">
     $('#submitButton').click(function () {
         $.ajax({
-            url: 'rest/announcement',
+            url: 'rest/information',
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({content:$('textarea#content').val()}),

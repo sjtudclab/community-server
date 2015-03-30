@@ -1,50 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE configuration PUBLIC  
     "-//mybatis.org//DTD Config 3.0//EN"  
-    "http://mybatis.org/dtd/mybatis-3-config.dtd">  
-<configuration>  
-    
-    <typeAliases>
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
 
-        <typeAlias alias="User" type="cn.edu.sjtu.se.dclab.server.entity.User" />
-        <typeAlias alias="MailBox" type="cn.edu.sjtu.se.dclab.server.entity.MailBox" />
-        <typeAlias alias="Role" type="cn.edu.sjtu.se.dclab.server.entity.Role" />
-        <typeAlias alias="RoleType" type="cn.edu.sjtu.se.dclab.server.entity.RoleType" />
-        <typeAlias alias="Permission" type="cn.edu.sjtu.se.dclab.server.entity.Permission" />
-        <typeAlias alias="Citizen" type="cn.edu.sjtu.se.dclab.server.entity.Citizen" />
-        <typeAlias alias="Apartment" type="cn.edu.sjtu.se.dclab.server.entity.Apartment" />
-        <typeAlias alias="Announcement" type="cn.edu.sjtu.se.dclab.server.entity.Announcement" />
-        <typeAlias alias="Building" type="cn.edu.sjtu.se.dclab.server.entity.Building" />
+	<typeAliases>
 
-        <typeAlias alias="Item" type="cn.edu.sjtu.se.dclab.server.entity.Item" />
-        <typeAlias alias="Block_info" type="cn.edu.sjtu.se.dclab.server.entity.Block_info" />
-        <typeAlias alias="Block_manager" type="cn.edu.sjtu.se.dclab.server.entity.Block_manager" />
-        <typeAlias alias="Block_room" type="cn.edu.sjtu.se.dclab.server.entity.Block_room" />
-        <typeAlias alias="Block_task_room" type="cn.edu.sjtu.se.dclab.server.entity.Block_task_room" />
-        <typeAlias alias="Block_task" type="cn.edu.sjtu.se.dclab.server.entity.Block_task" />
-        <typeAlias alias="Block_user" type="cn.edu.sjtu.se.dclab.server.entity.Block_user" />
-        <typeAlias alias="Room_member" type="cn.edu.sjtu.se.dclab.server.entity.Room_member" />
-        <typeAlias alias="Vote" type="cn.edu.sjtu.se.dclab.server.entity.Vote" />
+		<typeAlias alias="User" type="cn.edu.sjtu.se.dclab.server.entity.User" />
+		<typeAlias alias="MailBox"
+			type="cn.edu.sjtu.se.dclab.server.entity.MailBox" />
+		<typeAlias alias="Role" type="cn.edu.sjtu.se.dclab.server.entity.Role" />
+		<typeAlias alias="RoleType"
+			type="cn.edu.sjtu.se.dclab.server.entity.RoleType" />
+		<typeAlias alias="Permission"
+			type="cn.edu.sjtu.se.dclab.server.entity.Permission" />
+		<typeAlias alias="Citizen"
+			type="cn.edu.sjtu.se.dclab.server.entity.Citizen" />
+		<typeAlias alias="Apartment"
+			type="cn.edu.sjtu.se.dclab.server.entity.Apartment" />
+		<typeAlias alias="Announcement"
+			type="cn.edu.sjtu.se.dclab.server.entity.Announcement" />
+		<typeAlias alias="Building"
+			type="cn.edu.sjtu.se.dclab.server.entity.Building" />
 
-        <typeAlias alias="Item" type="cn.edu.sjtu.se.dclab.server.entity.Item" />
-        <typeAlias alias="SecondGoods" type="cn.edu.sjtu.se.dclab.server.entity.SecondGoods" />
-        <typeAlias alias="UserPublishedGoods" type="cn.edu.sjtu.se.dclab.server.entity.UserPublishedGoods" />
-        <typeAlias alias="UserLovedGoods" type="cn.edu.sjtu.se.dclab.server.entity.UserLovedGoods" />
-        <typeAlias alias="Commissioner" type="cn.edu.sjtu.se.dclab.server.entity.Commissioner" />
-        <typeAlias alias="Fsrelation" type="cn.edu.sjtu.se.dclab.server.entity.Fsrelation" />
-        
-        <typeAlias alias="CommunityActivity" type="cn.edu.sjtu.se.dclab.server.entity.CommunityActivity" />
-        <typeAlias alias="ResidentCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen" />
-        <typeAlias alias="ManagementCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen" />
-        <typeAlias alias="ServiceCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen" />
-        <typeAlias alias="WorkReport" type="cn.edu.sjtu.se.dclab.server.entity.WorkReport" />
+		<typeAlias alias="Item" type="cn.edu.sjtu.se.dclab.server.entity.Item" />
+		<typeAlias alias="Block_info"
+			type="cn.edu.sjtu.se.dclab.server.entity.Block_info" />
+		<typeAlias alias="Block_manager"
+			type="cn.edu.sjtu.se.dclab.server.entity.Block_manager" />
+		<typeAlias alias="Block_room"
+			type="cn.edu.sjtu.se.dclab.server.entity.Block_room" />
+		<typeAlias alias="Block_task_room"
+			type="cn.edu.sjtu.se.dclab.server.entity.Block_task_room" />
+		<typeAlias alias="Block_task"
+			type="cn.edu.sjtu.se.dclab.server.entity.Block_task" />
+		<typeAlias alias="Block_user"
+			type="cn.edu.sjtu.se.dclab.server.entity.Block_user" />
+		<typeAlias alias="Room_member"
+			type="cn.edu.sjtu.se.dclab.server.entity.Room_member" />
+		<typeAlias alias="Vote" type="cn.edu.sjtu.se.dclab.server.entity.Vote" />
 
-        <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
-    </typeAliases>
+		<typeAlias alias="Item" type="cn.edu.sjtu.se.dclab.server.entity.Item" />
+		<typeAlias alias="SecondGoods"
+			type="cn.edu.sjtu.se.dclab.server.entity.SecondGoods" />
+		<typeAlias alias="UserPublishedGoods"
+			type="cn.edu.sjtu.se.dclab.server.entity.UserPublishedGoods" />
+		<typeAlias alias="UserLovedGoods"
+			type="cn.edu.sjtu.se.dclab.server.entity.UserLovedGoods" />
+		<typeAlias alias="Commissioner"
+			type="cn.edu.sjtu.se.dclab.server.entity.Commissioner" />
+		<typeAlias alias="Fsrelation"
+			type="cn.edu.sjtu.se.dclab.server.entity.Fsrelation" />
 
-    <typeHandlers>
-        <typeHandler handler="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler"
-                     javaType="String" jdbcType="INTEGER" />
-    </typeHandlers>
-    
+		<typeAlias alias="CommunityActivity"
+			type="cn.edu.sjtu.se.dclab.server.entity.CommunityActivity" />
+		<typeAlias alias="ResidentCitizen"
+			type="cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen" />
+		<typeAlias alias="ManagementCitizen"
+			type="cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen" />
+		<typeAlias alias="ServiceCitizen"
+			type="cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen" />
+		<typeAlias alias="WorkReport"
+			type="cn.edu.sjtu.se.dclab.server.entity.WorkReport" />
+		<typeAlias alias="Information"
+			type="cn.edu.sjtu.se.dclab.server.entity.Information" />
+
+		<typeAlias alias="GenderHandler"
+			type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
+		<typeAlias alias="ContentHandler"
+			type="cn.edu.sjtu.se.dclab.server.entity.converter.ContentHandler" />
+	</typeAliases>
+
+	<typeHandlers>
+		<typeHandler
+			handler="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler"
+			javaType="String" jdbcType="INTEGER" />
+		<typeHandler
+			handler="cn.edu.sjtu.se.dclab.server.entity.converter.ContentHandler"
+			javaType="String" jdbcType="BLOB" />
+	</typeHandlers>
+
 </configuration>  

@@ -42,9 +42,6 @@
 		
 		$.get(getUrl("rest/work_report/all"), function(data) {
 			$.each(data, function(index, objval){
-				var attachment = objval["attachment"];
-				var reporttime = objval["reportTime"];
-				var content = objval["content"];
 				$("#reportlist").append(
 						"<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
 						+ "<div>" + getNowFormatDate(new Date(objval["reportTime"])) + " 述职报告</div>" 
