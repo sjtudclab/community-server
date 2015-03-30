@@ -162,7 +162,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserTransfer getUserByUserId(long id) {
-		User user = userMapper.findUserByUserId(id);
+		User user = userMapper.findByUserId(id);
 		UserTransfer userTransfer = new UserTransfer();
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());

@@ -1,8 +1,5 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  *2015年1月19日 下午9:42:41
  *@author changyi yuan

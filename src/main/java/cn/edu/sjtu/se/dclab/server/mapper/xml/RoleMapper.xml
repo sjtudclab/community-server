@@ -20,7 +20,7 @@
 	</select>
 
 	<resultMap id="RoleMap" type="Role">
-		<id property="role_id" column="role_id" />
+		<id property="id" column="role_id" />
 		<result property="name" column="name" />
 		<result property="description" column="description" />
 		

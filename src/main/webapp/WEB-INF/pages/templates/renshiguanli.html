@@ -31,25 +31,12 @@
 		   $("form").remove();
 		   $("#check").remove();
 		   
-		   $.get(getUrl("rest/users") ,"",function(users,status){
-			   var divs = "<div id=check>";
+		   $.get(getUrl("rest/managementCitizens/committee") ,"",function(users,status){
+			   var divs = "<div id='check'>";
 			   $(users).each(function(index,user){
-				  if(user.username ==  'admin')
-					  return;
-				   
 				   var roleNames = "";
-				   var f = false;
-				   $.each(user.roles,function(n,value){
-					   if(value.name == '业委会委员' || value.name == '业委会工作人员'){
-						   f = true;
-						   return;
-					   }
-					   roleNames += value.name + "、";
-				   });
-				   if(f)
-					   return;
 				   roleNames = roleNames.substring(0,roleNames.length-1);
-				   divs += "<div class='span3' style='text-align:center'><image src='images/" + user.imageUrl + "' width='200' height='250' />";
+				   divs += "<div class='span3' style='text-align:center'><image src='" + getUrl("images/" + user.imageUrl) + "' width='200' height='250' />";
 				   divs += "<p>" + user.username + "：" + roleNames + "</p>";
 				   divs += "</div>";
 			   });

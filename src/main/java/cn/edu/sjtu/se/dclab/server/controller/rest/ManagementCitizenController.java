@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.sjtu.se.dclab.server.common.Constants;
-import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
 import cn.edu.sjtu.se.dclab.server.service.ManagementCitizenService;
+import cn.edu.sjtu.se.dclab.server.transfer.ManagementCitizenTransfer;
 
 /**
  *2015年3月30日 下午3:04:05
@@ -32,9 +32,21 @@ public class ManagementCitizenController {
 		this.managementCitizenService = managementCitizenService;
 	}
 
-	@RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "committee", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<ManagementCitizen> findAll(){
-		return managementCitizenService.findAll();
+	public Collection<ManagementCitizenTransfer> findAllCommittees(){
+		return managementCitizenService.findAll(Constants.ROLE_COMMITTEE);
+	}
+	
+	@RequestMapping(value = "owner", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<ManagementCitizenTransfer> findAllOwners(){
+		return managementCitizenService.findAll(Constants.ROLE_OWNER);
+	}
+	
+	@RequestMapping(value = "TENEMENT", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<ManagementCitizenTransfer> findAllTenments(){
+		return managementCitizenService.findAll(Constants.ROLE_TENEMENT);
 	}
 }

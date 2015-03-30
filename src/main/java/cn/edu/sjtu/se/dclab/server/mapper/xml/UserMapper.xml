@@ -9,20 +9,12 @@
         WHERE username = #{username}
     </select>
     
-    <select id="findUserByUserId" parameterType="long" resultMap="UserMap">
-        SELECT id, username, password, identification, image_url
-        FROM user
-        WHERE id = #{id}
-    </select>
-    
     <select id="findAll" resultMap="UserMap">
     	SELECT * FROM user;
     </select>
 
     <select id="findByUserId" resultMap="UserMap">
-        SELECT id, username
-        FROM user
-        WHERE id = #{userId}
+        SELECT * FROM user WHERE user_id = #{id}
     </select>
     
     <select id="findUserByApartmentId" parameterType="long" resultMap="UserMap">
