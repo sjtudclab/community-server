@@ -1,10 +1,17 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  *2015年1月19日 下午9:42:41
  *@author changyi yuan
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
+
 	private long id;
 	private String username;
 	private String password;

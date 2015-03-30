@@ -14,14 +14,15 @@
         WHERE building_id = #{buildingId}
     </select>
 
-    <select id="findAllCitizenByApartmentId" resultMap="cn.edu.sjtu.se.dclab.server.mapper.CitizenMapper.CitizenMap">
+    <select id="findAllCitizenByApartmentId"
+            resultMap="cn.edu.sjtu.se.dclab.server.mapper.ResidentCitizenMapper.ResidentCitizenMap">
         SELECT *
         FROM citizen_resident
         WHERE apartment_id = #{id}
     </select>
 
     <resultMap type="Apartment" id="ApartmentMap">
-        <id property="id" column="id" />
+        <id property="id" column="apartment_id" />
         <result property="name" column="name" />
         <result property="serialNumber" column="serial_number" />
         <result property="area" column="area" />
