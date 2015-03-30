@@ -2,6 +2,8 @@ package cn.edu.sjtu.se.dclab.server.transfer;
 
 import java.util.List;
 
+import cn.edu.sjtu.se.dclab.server.entity.Role;
+
 /**
  *2015年3月30日 下午3:23:38
  *@author changyi yuan
@@ -11,20 +13,20 @@ public class ManagementCitizenTransfer {
 	private String name;
 	private long userId;
 	private String image;
-	private List<String> roleNames;
+	private List<Role> roles;
 	
 	public ManagementCitizenTransfer(){
 		
 	}
 	
 	public ManagementCitizenTransfer(long id, String name, long userId,
-			String image, List<String> roleNames) {
+			String image, List<Role> roles) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.userId = userId;
 		this.image = image;
-		this.roleNames = roleNames;
+		this.roles = roles;
 	}
 
 	public long getId() {
@@ -52,11 +54,12 @@ public class ManagementCitizenTransfer {
 		this.image = image;
 	}
 
-	public List<String> getRoleNames() {
-		return roleNames;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRoleNames(List<String> roleNames) {
-		this.roleNames = roleNames;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
+
 }

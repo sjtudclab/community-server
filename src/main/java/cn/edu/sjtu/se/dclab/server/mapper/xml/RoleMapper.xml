@@ -5,8 +5,7 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.RoleMapper">
 
 	<select id="findAll" resultMap="RoleMap">
-		SELECT id, name, description
-		FROM role
+		SELECT * FROM role
 	</select>
 
 	<select id="findByUserId" parameterType="long" resultMap="RoleMap">

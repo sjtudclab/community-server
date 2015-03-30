@@ -35,9 +35,12 @@
 			   var divs = "<div id='check'>";
 			   $(users).each(function(index,user){
 				   var roleNames = "";
+				   $.each(user.roles,function(n,value){				  
+					   roleNames += value.name + "、";
+				   });
 				   roleNames = roleNames.substring(0,roleNames.length-1);
-				   divs += "<div class='span3' style='text-align:center'><image src='" + getUrl("images/" + user.imageUrl) + "' width='200' height='250' />";
-				   divs += "<p>" + user.username + "：" + roleNames + "</p>";
+				   divs += "<div class='span3' style='text-align:center'><image src='" + getUrl("images/" + user.image) + "' width='200' height='250' />";
+				   divs += "<p>" + user.name + "：" + roleNames + "</p>";
 				   divs += "</div>";
 			   });
 			   divs += "</div>";
@@ -58,7 +61,7 @@
 		    var thead = $("<thead>");
 	    	var tbody = $("<tbody>");    	
 	    	
-	    	$.get(getUrl("rest/users"),"",function(datas,status){
+	    	$.get(getUrl("rest/managementCitizens/committee"),"",function(datas,status){
 
 	        	var checkboxs = "";
 	    		$.get(getUrl("rest/roles"),"",function(roles,status){
@@ -74,12 +77,10 @@
 	        		
 	        		thead.append("<tr><th>人员</th><th>角色</th></tr>","</thead>");	        		
 	        		$(datas).each(function(index2,user){
-	        			if(user.username == 'admin' || user.username == '林诗音' || user.username == '顾西风' || user.username == '江城子')
-	        				return;
-	        			$('form').serialize().split('userId=')
+	        			$('form').serialize().split('id')
 	        			var n = 0;
 	        			var tr = "<tr>";
-	        			tr += "<td>" + "<input type='hidden' name='userId' value='" + user.id + "'>" + user.username + "</td>";
+	        			tr += "<td>" + "<input type='hidden' name='userId' value='" + user.userId + "'>" + user.name + "</td>";
 	        			var checkboxInput = "";
 	        			
 	        			$(roles).each(function(index1,role){
@@ -148,7 +149,7 @@
 		  
 		   $.ajax({
 			 type: "put",
-			 url: "rest/users",
+			 url: getUrl("rest/managementCitizens"),
 			 contentType: "application/json",
 			 data: JSON.stringify(us),
 			 success: function(data){

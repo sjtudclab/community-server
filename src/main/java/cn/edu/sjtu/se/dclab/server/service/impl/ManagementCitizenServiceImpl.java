@@ -64,14 +64,18 @@ public class ManagementCitizenServiceImpl implements ManagementCitizenService {
 		for (ManagementCitizen citizen : citizens) {
 			User user = userMapper.findByUserId(citizen.getUser().getId());
 			Collection<Role> roles = roleMapper.findByUserId(user.getId());
-			List<String> roleNames = new ArrayList<String>();
+			List<Role> returnRoles = new ArrayList<Role>();
+			boolean flag = false;
 			for (Role role : roles){
 				if(type.equals(role.getRoleType().getType())){
-					roleNames.add(role.getName());
-					ManagementCitizenTransfer transfer = new ManagementCitizenTransfer(
-							citizen.getId(), citizen.getName(), user.getId(), user.getImage(), roleNames);
-					transfers.add(transfer);
+					returnRoles.add(role);
+					flag = true;
 				}
+			}
+			if(flag){
+				ManagementCitizenTransfer transfer = new ManagementCitizenTransfer(
+						citizen.getId(), citizen.getName(), user.getId(), user.getImage(), returnRoles);
+				transfers.add(transfer);
 			}
 		}
 		return transfers;
