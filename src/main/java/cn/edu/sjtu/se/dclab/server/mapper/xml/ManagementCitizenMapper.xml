@@ -7,6 +7,10 @@
 	<select id="findAll" resultMap="ManagementCitizenMap">
 		select * from citizen_management;
 	</select>
+	
+	<select id="findById" resultMap="ManagementCitizenMap">
+		select * from citizen_management where citizen_id = #{id};
+	</select>
 
     <resultMap id="ManagementCitizenMap" type="ManagementCitizen">
         <id property="id" column="citizen_id" />

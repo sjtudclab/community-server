@@ -10,5 +10,7 @@ import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
 public interface ManagementCitizenMapper {
 
 	public Collection<ManagementCitizen> findAll();
+
+	public ManagementCitizen findById(long id);
 	
 }

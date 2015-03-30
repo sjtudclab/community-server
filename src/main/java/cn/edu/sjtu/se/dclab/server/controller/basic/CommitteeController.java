@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/committee")
 public class CommitteeController {
 
-	@RequestMapping("notice")
+	@RequestMapping("notice") 
 	public String notice() {
 		return "community_notice";
 	}

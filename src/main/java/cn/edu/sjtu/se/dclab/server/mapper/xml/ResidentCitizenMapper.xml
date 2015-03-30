@@ -8,6 +8,12 @@
         SELECT *
         FROM citizen_resident
     </select>
+    
+    <select id="findById" resultMap="ResidentCitizenMap">
+    	SELECT *
+        FROM citizen_resident
+        WHERE citizen_id = #{id};
+    </select>
 
     <resultMap id="ResidentCitizenMap" type="ResidentCitizen">
         <id property="id" column="citizen_id" />
