@@ -4,6 +4,10 @@
 
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.ManagementCitizenMapper">
 
+	<select id="findAll" resultMap="ManagementCitizenMap">
+		select * from citizen_management;
+	</select>
+
     <resultMap id="ManagementCitizenMap" type="ManagementCitizen">
         <id property="id" column="citizen_id" />
         <result property="name" column="name" />

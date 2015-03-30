@@ -1,8 +1,12 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * Created by Huiyi on 2015/3/29.
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ManagementCitizen {
     private long id;
     private String name;

@@ -1,6 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
+import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
 import cn.edu.sjtu.se.dclab.server.transfer.ApartmentTransfer;
 
@@ -40,7 +41,7 @@ public class ApartmentController {
 
     @RequestMapping(value = "{id}/citizen", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Collection<Citizen> findUserByApartmentId(@PathVariable(value = "id") long id) {
+    public Collection<ResidentCitizen> findUserByApartmentId(@PathVariable(value = "id") long id) {
         return apartmentService.findAllCitizenByApartmentId(id);
     }
 }

@@ -1,29 +1,76 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * Created by Huiyi on 2015/3/29.
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ResidentCitizen {
 
+    @JsonProperty(value = "id")
     private long id;
+
+    @JsonProperty(value = "name")
     private String name;
+
+    @JsonProperty(value = "identification_type")
     private String identificationType;
+
+    @JsonProperty(value = "identification_value")
     private String identificationValue;
+
+    @JsonProperty(value = "marriage_status")
     private String marriageStatus;
+
+    @JsonProperty(value = "employment_status")
     private String employmentStatus;
+
+    @JsonProperty(value = "residence_category")
     private String residenceCategory;
+
+    @JsonProperty(value = "resident_status")
     private String residentStatus;
+
+    @JsonProperty(value = "education_status")
     private String educationStatus;
+
+    @JsonProperty(value = "politics_status")
     private String politicsStatus;
+
+    @JsonProperty(value = "migration_status")
     private String migrationStatus;
+
+    @JsonProperty(value = "income_status")
     private String incomeStatus;
+
+    @JsonProperty(value = "nation")
     private String nation;
+
+    @JsonProperty(value = "gender")
     private String gender;
+
+    @JsonProperty(value = "age")
     private int age;
+
+    @JsonProperty(value = "status")
     private int status;
+
+    @JsonProperty(value = "phone")
     private String phone;
+
+    @JsonProperty(value = "relationship")
     private String relationship;
+
+    @JsonProperty(value = "user")
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
+
+    @JsonProperty(value = "apartment")
+    @JsonIdentityReference(alwaysAsId = true)
     private Apartment apartment;
 
     public long getId() {

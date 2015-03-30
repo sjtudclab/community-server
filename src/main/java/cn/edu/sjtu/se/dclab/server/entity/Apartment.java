@@ -15,11 +15,13 @@ public class Apartment {
 
     @JsonProperty(value = "owner")
     @JsonIdentityReference(alwaysAsId = true)
-    private Citizen owner;
+    private ResidentCitizen owner;
     private String serialNumber;
+
+    @JsonProperty(value = "building")
+    @JsonIdentityReference(alwaysAsId = true)
     private Building building;
     private String area;
-    private Citizen tenant;
 
     public long getId() {
         return id;
@@ -37,11 +39,11 @@ public class Apartment {
         this.name = name;
     }
 
-    public Citizen getOwner() {
+    public ResidentCitizen getOwner() {
         return owner;
     }
 
-    public void setOwner(Citizen owner) {
+    public void setOwner(ResidentCitizen owner) {
         this.owner = owner;
     }
 
@@ -67,13 +69,5 @@ public class Apartment {
 
     public void setArea(String area) {
         this.area = area;
-    }
-
-    public Citizen getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Citizen tenant) {
-        this.tenant = tenant;
     }
 }

@@ -1,7 +1,9 @@
 package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import cn.edu.sjtu.se.dclab.server.entity.Citizen;
+import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.service.CitizenService;
+import cn.edu.sjtu.se.dclab.server.service.ResidentCitizenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,19 +21,19 @@ import java.util.Collection;
 public class CitizenController {
 
     @Autowired
-    private CitizenService citizenService;
+    private ResidentCitizenService rcService;
 
-    public CitizenService getCitizenService() {
-        return citizenService;
+    public ResidentCitizenService getCitizenService() {
+        return rcService;
     }
 
-    public void setCitizenService(CitizenService citizenService) {
-        this.citizenService = citizenService;
+    public void setCitizenService(ResidentCitizenService rcService) {
+        this.rcService = rcService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Collection<Citizen> findAll() {
-        return citizenService.findAll();
+    public Collection<ResidentCitizen> findAll() {
+        return rcService.findAll();
     }
 }
