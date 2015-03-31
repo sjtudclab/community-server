@@ -33,7 +33,7 @@ public class LogoutBasicController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String logout(HttpServletRequest request){
 		HttpSession session = request.getSession();
-		long userId = (long)session.getAttribute(Constants.SESSION_USER_ID);
+		long userId = (Long)session.getAttribute(Constants.SESSION_USER_ID);
 		User user = userService.getUserByUserId(userId);
 		String userType = user.getUserType().getType();
 		session.invalidate();

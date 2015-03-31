@@ -27,7 +27,7 @@ public class ResidentController {
 
     @RequestMapping("notice")
     public String notice() {
-        return "notice";
+        return "notice_show";
     }
 
     @RequestMapping("neighbor")

@@ -34,7 +34,7 @@ public class TopicDeserializer extends JsonDeserializer<Topic> {
         topic.setVoteCount(0);
 
         String[] options = node.get("options").asText().split(",");
-        Collection<TopicOption> tos = new ArrayList<>();
+        Collection<TopicOption> tos = new ArrayList<TopicOption>();
 
         for (String option : options) {
             TopicOption to = new TopicOption();

@@ -396,8 +396,7 @@ label {
   background-color: rgba(0, 0, 0, 0.05); }
 
 body {
-  background-color: #5bbcd5;
-  padding: 5em 0; }
+  background-color: #ffffff; }
 
 .timeline {
   list-style: none;
@@ -517,7 +516,7 @@ body {
           left: auto;
           right: -41px; }
   .timeline.animated .timeline-row .timeline-content {
-    opacity: 0;
+    opacity: 1;           /*----------------------------------------------------------------------------------------*/
     left: 20px;
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;

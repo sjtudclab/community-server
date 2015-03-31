@@ -49,7 +49,7 @@ public class TopicController {
         topic.setTopicTypeId(Long.parseLong(request.getParameter("topic_type_id")));
 
         String[] options = request.getParameter("options").split(",");
-        Collection<TopicOption> tos = new ArrayList<>();
+        Collection<TopicOption> tos = new ArrayList<TopicOption>();
         for (String option : options) {
             TopicOption to = new TopicOption();
             to.setName(option);
