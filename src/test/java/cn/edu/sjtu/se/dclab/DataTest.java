@@ -56,12 +56,14 @@ public class DataTest {
 		ArrayList<Integer> committeeIds = new ArrayList<Integer>();
 		ArrayList<Integer> tenementIds = new ArrayList<Integer>();
 		ArrayList<Integer> ownerIds = new ArrayList<Integer>();
+		ArrayList<Integer> residentIds = new ArrayList<Integer>();
 		map.put("居委会",committeeIds);
 		map.put("物业", tenementIds);
 		map.put("业委会", ownerIds);
 
 		List<String> committeeList = Arrays.asList(committee);
 		List<String> tenementList = Arrays.asList(tenement);
+		List<String> residentList = Arrays.asList(resident);
 		List<String> ownerList = Arrays.asList(owner);
 		
 		String querySql = "SELECT * FROM permission";
@@ -76,8 +78,30 @@ public class DataTest {
 				tenementIds.add(permissionId);
 			}else if(ownerList.contains(desc)){
 				ownerIds.add(permissionId);
+			}else if(residentList.contains(desc)){
+				residentIds.add(permissionId);
 			}
 		}
+		
+		/*String insertSql = "INSERT INTO user_role_permission (user_role_id,permission_id) values(?,?)";
+		for(int id : committeeIds){
+			pst = conn.prepareStatement(insertSql);
+			pst.setInt(1, 75);
+			pst.setInt(2, id);
+			pst.execute();
+		}
+		for(int id : tenementIds){
+			pst = conn.prepareStatement(insertSql);
+			pst.setInt(1, 76);
+			pst.setInt(2, id);
+			pst.execute();
+		}
+		for(int id : residentIds){
+			pst = conn.prepareStatement(insertSql);
+			pst.setInt(1, 77);
+			pst.setInt(2, id);
+			pst.execute();
+		}*/
 		
 		querySql = "SELECT ur.user_role_id FROM user_role ur, role r, role_type rt "
 				+ "WHERE ur.role_id = r.role_id AND r.role_type_id = rt.role_type_id AND rt.type = ?";
