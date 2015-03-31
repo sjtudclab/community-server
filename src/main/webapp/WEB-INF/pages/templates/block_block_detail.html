@@ -41,8 +41,8 @@
    <!-- All JavaScript at the bottom, except for Modernizr and Respond.
       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-   <script src="scripts/modernizr-2.6.1.min.js"></script>
-   <script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+   <script th:src="@{/scripts/modernizr-2.6.1.min.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
 
    <script language="javascript" type="text/javascript">
     $.extend({
@@ -149,7 +149,7 @@
       {
         $.ajax(
         {
-          url: "rest/apartment",
+          url: "/community-server/rest/apartment",
           dataType: "JSON",
           type: "GET", 
           success: function (data) { 
@@ -162,14 +162,14 @@
     })
 
     var arr1 = new Array();     //序列号
-    var arr2 = new Array();     //地区
-    var arr3 = new Array();     //楼层
-    var arr4 = new Array();     //屋主数量
-    var arr5 = new Array();     //居民
+    var arr2 = new Array();     //名称
+    var arr3 = new Array();     //地区
+    var arr4 = new Array();     //居民数量
+    var arr5 = new Array();     //楼栋
     var arr6 = new Array();     //是否显示
 
     var flag = 0;
-    setTimeout("buildTable()",1000);
+    setTimeout("buildTable()",5000);
 
     function showTable()
     {
@@ -182,10 +182,10 @@
     	var i;
     	for (i = 0; i<data.length; i++){
       		arr1.push(data[i].serialNumber);
-      		arr2.push(data[i].location);
-      		arr3.push(data[i].floor);
+      		arr2.push(data[i].name);
+      		arr3.push(data[i].area);
       		arr4.push(data[i].owner.toString());
-      		arr5.push(data[i].resident);
+      		arr5.push(data[i].building.toString());
           arr6.push(1);
     	}
     }
@@ -296,10 +296,10 @@
         var oSheet = oWB.ActiveSheet;
         var row = 1; var col = 1; var i;
         oSheet.Cells(row,1).value = "序列号";
-        oSheet.Cells(row,2).value = "地区";
-        oSheet.Cells(row,3).value = "楼层";
-        oSheet.Cells(row,4).value = "屋主数量";
-        oSheet.Cells(row,5).value = "居民";
+        oSheet.Cells(row,2).value = "名称";
+        oSheet.Cells(row,3).value = "地区";
+        oSheet.Cells(row,4).value = "居民数量";
+        oSheet.Cells(row,5).value = "楼栋";
 
         for (i = 0; i<arr1.length; i++)
           if (arr6[i]!=0)
@@ -334,7 +334,7 @@
 
   </script>
   
-	<script src="js/common.js"></script>
+	<script th:src="@{/js/common.js}"></script>
 
 
 </head>
