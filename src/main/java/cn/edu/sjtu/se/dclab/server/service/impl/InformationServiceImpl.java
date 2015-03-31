@@ -47,4 +47,8 @@ public class InformationServiceImpl implements InformationService{
 		informationMapper.save(information);
 	}
 
+	public void blockById(long id) {
+		informationMapper.blockById(id);
+	}
+
 }

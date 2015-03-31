@@ -11,4 +11,5 @@ public interface InformationService {
 	public Collection<Information> findByKeyword(String keyword);
 	
 	public void save(Information information);
+	public void blockById(long id);
 }

@@ -92,6 +92,12 @@ public class InformationController {
 		return informationService.findByKeyword(keyword);
 	}
 
+	@RequestMapping(value = "block/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String blockById(@PathVariable(value = "id") long id) {
+		informationService.blockById(id);
+		return "success";
+	}
 	
     private String getFileNameWithoutExt(String filename) {
     	return filename.split("\\.")[0];

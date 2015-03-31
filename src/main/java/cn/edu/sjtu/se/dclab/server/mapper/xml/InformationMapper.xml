@@ -5,11 +5,15 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.InformationMapper">
 
     <select id="findAllByType" resultMap="InformationMap">
-        select * from information where information_type = #{type} order by information_id desc;
+        select * from information where information_type = #{type} AND (status IS NULL OR status >= 0) order by information_id desc;
     </select>
     
     <select id="findById" parameterType="java.lang.Integer" resultMap="InformationMap">
-    	select * from information where information_id = #{id} and information_type = #{type} order by information_id desc;
+    	select * from information where information_id = #{id} AND information_type = #{type} AND (status IS NULL OR status >= 0) order by information_id desc;
+    </select>
+    
+    <select id="findByKeyword" parameterType="java.lang.String" resultMap="InformationMap">
+    	select * from information where content LIKE '%${keyword}%' AND (status IS NULL OR status >= 0) order by information_id desc;
     </select>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="information_id" parameterType="Information">
@@ -19,9 +23,9 @@
         (#{from}, #{to}, #{status}, #{content}, #{title}, #{submitTime},
         #{informationType}, #{attachment});
     </insert>
-
-    <select id="findByKeyword" parameterType="java.lang.String" resultMap="InformationMap">
-    	select * from information where content LIKE '%${keyword}%' order by information_id desc;
+    
+    <select id="blockById" parameterType="java.lang.Integer" resultMap="InformationMap">
+    	UPDATE information SET status = -1 WHERE information_id = #{id};
     </select>
 
     <resultMap type="Information" id="InformationMap">

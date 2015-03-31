@@ -36,21 +36,6 @@
 						</tr>
 					</thead>
 					<tbody id="results-list">
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td><a href="" class="btn btn-default">pingbi</a></td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>屏蔽</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>屏蔽</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -72,7 +57,8 @@
 	}
 
 	(function($) {
-		$('.searchBtn').click(function() {
+		function search() {
+			$("#results-list").empty();
 			$.ajax({
 				url: getUrl('/rest/information/search/' + $('#keyword').val()),
 				type: "GET",
@@ -84,7 +70,7 @@
 						$('#results-list').append('<tr infoid="{0}">'.format(el.informationId) +
 							'<th scope="row">{0}</th>'.format(el.informationId) + 
 							'<td>{0}</td>'.format(el.content) +
-							'<td><a class="btn btn-default btn-block">屏蔽</a></td>' +
+							'<td><a class="btn btn-default btn-block-item">屏蔽</a></td>' +
 						'</tr>') 
 					 });
 				},
@@ -92,19 +78,32 @@
 					console.log(data);
 				}
 			})
-		});
+		}
+		
+		$('.searchBtn').click(search);
+		$('#keyword').keypress(function(e) {
+            if(e.which == 10 || e.which == 13) {
+                search();
+            }
+		})
 
-		$('body').on('click', '.btn-block', function(e) {
-			var id = $(this).parents('tr').attr('infoid');
+		$('body').on('click', '.btn-block-item', function(e) {
+			var $this = $(this);
+			var id = $this.parents('tr').attr('infoid');
 			$.ajax({
-				url: getUrl('/rest/infomation/block/' + id),
+				url: getUrl('/rest/information/block/' + id),
 				type: "GET",
-				//dataType: 'json',
+				dataType: 'text',
 				success: function(data) {
-					console.log(data);
+					if (data == "success") {
+						$this.parents('tr').remove();
+					} else {
+						alert("屏蔽失败");
+					}
 				},
 				error: function(data) {
 					console.log(data);
+					alert("屏蔽失败");
 				}
 			});
 		});
