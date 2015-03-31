@@ -34,6 +34,12 @@ public class InformationServiceImpl implements InformationService{
 		// TODO Auto-generated method stub
 		return informationMapper.findById(id, type);
 	}
+	
+	@Override
+	public Collection<Information> findByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return informationMapper.findByKeyword(keyword);
+	}
 
 	@Override
 	public void save(Information information) {

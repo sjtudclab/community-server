@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+
+<meta name="robots" content="NOODP" />
+<meta http-equiv="Content-Type" content="text/html;charset=gbk" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.css}"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+
+		<div class="col-lg-6">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search for...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Search</button>
+				</span>
+			</div>
+			<!-- /input-group -->
+		</div>
+
+
+		<div class="container">
+			<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<!-- Table -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>关键词</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td><a href="" class="btn btn-default">pingbi</a></td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>屏蔽</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>屏蔽</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

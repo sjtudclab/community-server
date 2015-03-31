@@ -20,6 +20,10 @@
         #{informationType}, #{attachment});
     </insert>
 
+    <select id="findByKeyword" parameterType="java.lang.String" resultMap="InformationMap">
+    	select * from information where content LIKE '%${keyword}%' order by information_id desc;
+    </select>
+
     <resultMap type="Information" id="InformationMap">
         <id property="informationId" column="information_id" />
         <result property="from" column="from" />
