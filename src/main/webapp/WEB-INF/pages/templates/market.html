@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+
+    <script th:src="@{/js/chen/marketInfo.js}"></script>
+
+    <title>以物换物主页</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+        
+        <!-- 返回主页 -->
+        <div class="">
+            <h1><a th:href="@{/start-screen-resident}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>以物换物</h1>
+        </div>
+        <!-- End 返回主页 -->
+
+        <div class="grid fluid">
+            <!-- 用户菜单栏 -->
+            <div class="row">
+
+                    <div class="span3">
+                        <a th:href="@{/resident/market_love}"
+                        class="place-left button bg-darkBlue bg-hover-blue fg-white fg-hover-white bd-white" style="margin-top: 10px">
+                        <h3 style="margin: 10px 40px"><span class="icon-heart-2 on-left"></span>我的关注</h3>
+                        </a>
+                    </div>
+
+                    <div class="span3">
+                        <a th:href="@{/resident/market_add_thing}"
+                        class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-white" style="margin-top: 10px">
+                        <h3 style="margin: 10px 40px"><span class="icon-pencil on-left"></span>发布物品</h3>
+                        </a>
+                    </div>
+
+                    <div class="span3">
+                        <a th:href="@{/resident/market_publish}"
+                        class="place-left button bg-darkGreen bg-hover-green fg-white fg-hover-white bd-white" style="margin-top: 10px">
+                        <h3 style="margin: 10px 40px"><span class="icon-clipboard-2 on-left"></span>我的发布</h3>
+                        </a>
+                    </div>
+
+                    <div class="span3">
+                        <a th:href="@{/resident/market_search}"
+                        class="place-left button bg-darkPink bg-hover-pink fg-white fg-hover-white bd-white" style="margin-top: 10px">
+                        <h3 style="margin: 10px 40px"><span class="icon-search on-left"></span>搜索物品</h3>
+                        </a>
+                    </div>
+
+            </div>
+            <!-- End 用户菜单栏 -->
+
+            <!-- 最近发布的物品 -->
+            <div class="row" id="latestSecondGoods">
+                <h2>最新发布</h2>
+
+                <!--
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/1.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">二手沙发，8成新。适合放在客厅</span>
+                    </div>
+                </div>
+                
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/2.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">电熨斗，8成新。可满足日常需求</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/3.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">美的电风扇，9成新。家中闲置，希望出掉，可与人交换</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/4.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">乐高玩具。适合全家老少</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/5.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">洋娃娃</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/6.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">家中闲置。女士羽绒服一件</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/7.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">油画。提升逼格利器</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/8.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">8成新烟灰缸</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/9.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">工艺品</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/10.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">健身球</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/1.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">二手沙发，8成新。适合放在客厅</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/2.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">电熨斗，8成新。可满足日常需求</span>
+                    </div>
+                </div>
+                -->
+            </div>
+            <!-- End 最近发布的物品 -->
+
+            <!-- 即将交易的物品 -->
+            <div class="row">
+                <h2>即将交换的物品</h2>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/1.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">二手沙发，8成新。适合放在客厅</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/2.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">电熨斗，8成新。可满足日常需求</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/3.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">美的电风扇，9成新。家中闲置，希望出掉，可与人交换</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/4.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">乐高玩具。适合全家老少</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/5.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">洋娃娃</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/6.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">家中闲置。女士羽绒服一件</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/7.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">油画。提升逼格利器</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/8.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">8成新烟灰缸</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/9.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">工艺品</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/10.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">健身球</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/1.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">二手沙发，8成新。适合放在客厅</span>
+                    </div>
+                </div>
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img th:src="@{/images/2.jpg}">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">电熨斗，8成新。可满足日常需求</span>
+                    </div>
+                </div>
+            </div>
+            <!-- End 即将交易的物品 -->
+            
+        </div>
+        
+    </div>
+
+    <div th:include="market_template :: copy"></div>
+</body>
+</html>

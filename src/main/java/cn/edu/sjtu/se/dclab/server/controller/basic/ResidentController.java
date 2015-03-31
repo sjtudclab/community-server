@@ -45,6 +45,26 @@ public class ResidentController {
         return "market";
     }
 
+    @RequestMapping("market_love")
+    public String market_love() {
+        return "market_love";
+    }
+
+    @RequestMapping("market_add_thing")
+    public String market_add_thing() {
+        return "market_add_thing";
+    }
+
+    @RequestMapping("market_publish")
+    public String market_publish() {
+        return "market_publish";
+    }
+
+    @RequestMapping("market_search")
+    public String market_search() {
+        return "market_search";
+    }
+
     @RequestMapping("repair")
     public String repair() {
         return "repair";

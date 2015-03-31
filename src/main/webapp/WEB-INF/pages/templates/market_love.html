@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <script src="js/chen/userLovedGoods.js"></script>
+
+    <title>我的关注</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+        
+        <!-- 返回主页 -->
+        <div class="offset1">
+            <h1><a href="market.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的关注</h1>
+        </div>
+        <!-- End 返回主页 -->
+
+        <div class="grid fluid offset1">
+
+            <!-- 我关注的物品 -->
+            <div class="row">
+                <div id="love_goods">
+                    
+                </div>
+            </div>
+            <!-- End 我关注的物品 -->
+            
+        </div>
+        
+    </div>
+
+    <div th:include="market_template :: copy"></div>
+</body>
+</html>

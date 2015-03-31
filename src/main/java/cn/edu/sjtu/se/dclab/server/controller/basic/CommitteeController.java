@@ -31,4 +31,24 @@ public class CommitteeController {
 	public String submitTopic() {
 		return "topic_add";
 	}
+
+	@RequestMapping("mailbox")
+	public String mailbox() {
+		return "mailbox";
+	}
+
+	@RequestMapping("activity")
+	public String communityActivity() {
+		return "activity_show";
+	}
+
+	@RequestMapping("market")
+	public String market() {
+		return "market";
+	}
+
+	@RequestMapping("workreport")
+	public String workreport() {
+		return "workreport";
+	}
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>物业管理人员页面</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+                <div class="offset1">
+                    <h1>
+                        <a href="start-screen-tenement.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                        物业管理
+                    </h1>
+                </div>
+                <div class="grid fluid">
+                    <div class="row">
+                       
+                            <div class="span3 offset1">
+                                <nav class="sidebar light">
+                                    <ul>
+                                        <li class="title">功能操作</li>
+                                        <li class="stick bg-green"><a href="#"><i class="icon-star"></i>审批维修资格</a></li>
+                                        <li class="stick bg-red active"><a href="#"><i class="icon-user"></i>管理维修人员</a></li>
+                                        <li class="stick bg-blue"><a href="#"><i class="icon-bookmark-2"></i>管理服务评价</a></li>
+                                        <li class="stick bg-yellow"><a href="#"><i class="icon-cycle"></i>管理维修进度</a></li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <!--<div class="span1"></div>-->
+
+                            <div class="span8" >
+                                <!-- 申请物业维修 -->
+                                <div id="fill_form" class="bg-grayLighter" style="display:all">
+                                    <div class="row">
+                                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;维修人员管理</h2>
+                                        <table class="table hovered striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-left">用户名</th>
+                                                <th class="text-left">姓名</th>
+                                                <th class="text-left">维修次数</th>
+                                                <th class="text-left">评分(0~5)</th>
+                                                <th class="text-left">管理</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            <tr><td>维修人员1</td><td class="right">张三</td><td class="right">10</td><td class="right">4.6</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员2</td><td class="right">李四</td><td class="right">23</td><td class="right">3.6</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员3</td><td class="right">王小二</td><td class="right">12</td><td class="right">2.9</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员4</td><td class="right">赵三</td><td class="right">16</td><td class="right">4.8</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员5</td><td class="right">张小迪</td><td class="right">11</td><td class="right">3.7</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员6</td><td class="right">李宇</td><td class="right">6</td><td class="right">4.1</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员1</td><td class="right">张三</td><td class="right">10</td><td class="right">4.6</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员2</td><td class="right">李四</td><td class="right">23</td><td class="right">3.6</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员3</td><td class="right">王小二</td><td class="right">12</td><td class="right">2.9</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员4</td><td class="right">赵三</td><td class="right">16</td><td class="right">4.8</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员5</td><td class="right">张小迪</td><td class="right">11</td><td class="right">3.7</td><td class="right"><button class="default">警告</button></td></tr>
+                                            <tr><td>维修人员6</td><td class="right">李宇</td><td class="right">6</td><td class="right">4.1</td><td class="right"><button class="default">警告</button></td></tr>
+                                            </tbody>
+
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                                <!--End 申请物业维修 -->
+
+                                <!-- 查看报修进度 -->
+                                <div class="bg-green" style="display:none">
+                                    <div class="row">
+                                        <h2>评价本次服务</h2>
+                                    </div>
+                                </div>
+                                <!-- End 查看报修进度 -->
+                            </div>
+
+                    </div>
+                    
+                </div>
+
+    </div>
+    <div th:include="repair_template :: copy"></div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+
+    <title>我的发布</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+        
+        <!-- 返回主页 -->
+        <div class="offset1">
+            <h1><a href="market.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的发布</h1>
+        </div>
+        <!-- End 返回主页 -->
+
+        <div class="grid fluid offset1">
+
+            <!-- 还未审核的物品 -->
+            <div class="row">
+                <h2>待审核物品</h2>
+                <div id="unfinished_goods">
+                	
+                </div>
+                <!-- 
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img src="images/6.jpg">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">家中闲置。女士羽绒服一件</span>
+                    </div>
+                </div>
+                 -->
+
+            </div>
+            <!-- End 还未审核的物品 -->
+
+
+            <!-- 已经审核的物品 -->
+            <div class="row">
+                <h2>已审核物品</h2>
+                
+                <div class="tile double">
+                    <div class="tile-content image">
+                        <img src="images/2.jpg">
+                    </div>
+                    <div class="brand bg-dark opacity">
+                        <span class="text">电熨斗，8成新。可满足日常需求</span>
+                    </div>
+                </div>
+            </div>
+            <!-- End 已经审核的物品 -->
+            
+        </div>
+        
+    </div>
+
+    <div th:include="market_template :: copy"></div>
+</body>
+</html>
