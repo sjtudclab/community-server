@@ -39,7 +39,7 @@ public class CommitteeController {
 
 	@RequestMapping("activity")
 	public String communityActivity() {
-		return "activity_show";
+		return "activity_add";
 	}
 
 	@RequestMapping("market")

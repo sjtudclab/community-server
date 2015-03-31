@@ -23,10 +23,10 @@ public class InformationServiceImpl implements InformationService{
 	}
 	
 	@Override
-	public Collection<Information> findAll(int type) {
+	public Collection<Information> findAllByType(int type) {
 		// TODO Auto-generated method stub
 		
-		return informationMapper.findAll(type);
+		return informationMapper.findAllByType(type);
 	}
 
 	@Override

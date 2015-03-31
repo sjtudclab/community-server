@@ -18,11 +18,13 @@
         社区公告
     </h1>
     
-	<form role="form" method="post" action="../rest/information/" enctype="multipart/form-data" onsubmit="return validate_form(this)">
+	<form role="form" method="post" th:action="@{/rest/information}" enctype="multipart/form-data"
+			id="submitForm">
 	    <div class="grid">
 	        <div class="row">
 	            <div class="span7">
 	                <textarea id="content" name="content" rows="10" cols="100"></textarea>
+					<input name="from" type="hidden" id="from" />
 		            <input name="infotype" value="1" type="hidden"></input>
 		            附件：<br/>
 		            <input type="file" name="file" id="attachment"></input>
@@ -38,21 +40,13 @@
 <div th:include="login_footer :: copy"></div>
 
 <script type="text/javascript">
-    
-    function validate_form(thisForm)
-    {
-    	with(thisForm)
-    	{
-    		if (thisForm.content.value == "") {
-    			thisForm.content.focus();
-    			alert("内容不能为空！")
-    			return false;
-    		} else {
-    			alert("公告发布成功！");
-    			return true;
-    		}
-    	}
-    }
+	$('#from').val(currentUserId());
+
+	$('#submitForm').submit(function() {
+		alert('提交成功');
+		window.location = getUrl('committee/activity');
+		return false;
+	});
 </script>
 
 </body>
