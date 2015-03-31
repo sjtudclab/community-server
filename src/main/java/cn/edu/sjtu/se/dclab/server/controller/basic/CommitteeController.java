@@ -52,8 +52,8 @@ public class CommitteeController {
 		return "workreport";
 	}
 	
-	@RequestMapping("monitor")
-	public String monitor() {
+	@RequestMapping("supervise")
+	public String supervise() {
 		return "monitor";
 	}
 }
