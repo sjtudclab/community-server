@@ -41,7 +41,7 @@ public class InformationController {
 	@RequestMapping(value = "{type}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Collection<Information> findAll(@PathVariable(value = "type")int type) {
-		return informationService.findAll(type);
+		return informationService.findAllByType(type);
 	}
 	
 	@RequestMapping(value = "{type}/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,13 +51,15 @@ public class InformationController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String save(HttpServletRequest request,
+	@ResponseBody
+	public void save(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
 		MultipartFile file = req.getFile("file");
 		
 		String contentString = request.getParameter("content");
 		int type = Integer.valueOf(request.getParameter("infotype"));
+		long from = Long.parseLong(request.getParameter("from"));
 		String attachment = "";
 		
 		if (!file.isEmpty()) {
@@ -73,15 +75,28 @@ public class InformationController {
 		}
 		
 		Information information = new Information();
+		//information.setTitle(title);
+		information.setFrom(from);
 		information.setAttachment(attachment);
 		information.setContent(contentString);
 		information.setInformationType(type);
 		information.setSubmitTime(new Date());
-		
+
+
 		informationService.save(information);
-		
-		
-		return "redirect:/committee/notice";
+	}
+	
+	@RequestMapping(value = "search/{keyword}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<Information> findByKeyword(@PathVariable(value = "keyword")String keyword) {
+		return informationService.findByKeyword(keyword);
+	}
+
+	@RequestMapping(value = "block/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String blockById(@PathVariable(value = "id") long id) {
+		informationService.blockById(id);
+		return "success";
 	}
 	
     private String getFileNameWithoutExt(String filename) {

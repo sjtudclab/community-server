@@ -1,4 +1,4 @@
-package cn.edu.sjtu.se.dclab.server.controller.basic;
+﻿package cn.edu.sjtu.se.dclab.server.controller.basic;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +39,7 @@ public class CommitteeController {
 
 	@RequestMapping("activity")
 	public String communityActivity() {
-		return "activity_show";
+		return "activity_add";
 	}
 
 	@RequestMapping("market")
@@ -50,5 +50,10 @@ public class CommitteeController {
 	@RequestMapping("workreport")
 	public String workreport() {
 		return "workreport";
+	}
+	
+	@RequestMapping("monitor")
+	public String monitor() {
+		return "monitor";
 	}
 }

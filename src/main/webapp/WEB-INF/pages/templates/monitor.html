@@ -1,0 +1,113 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+
+<meta name="robots" content="NOODP" />
+<meta http-equiv="Content-Type" content="text/html;charset=gbk" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.css}"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+
+		<div class="col-lg-6">
+			<div class="input-group">
+				<input type="text" id="keyword" class="form-control" placeholder="Search for...">
+				<span class="input-group-btn">
+					<button class="btn btn-default searchBtn" type="button">Search</button>
+				</span>
+			</div>
+			<!-- /input-group -->
+		</div>
+
+
+		<div class="container">
+			<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<!-- Table -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>关键词</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="results-list">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+	<script type="text/javascript">
+	if (!String.prototype.format) {
+	  String.prototype.format = function() {
+	    var args = arguments;
+	    return this.replace(/{(\d+)}/g, function(match, number) { 
+	      return typeof args[number] != 'undefined'
+	        ? args[number]
+	        : match
+	      ;
+	    });
+	  };
+	}
+
+	(function($) {
+		function search() {
+			$("#results-list").empty();
+			$.ajax({
+				url: getUrl('/rest/information/search/' + $('#keyword').val()),
+				type: "GET",
+				//data: $('keyword').val(),
+				dataType: 'json',
+				success: function(data) {
+					console.log(data);
+					 $(data).each(function(ind, el) {
+						$('#results-list').append('<tr infoid="{0}">'.format(el.informationId) +
+							'<th scope="row">{0}</th>'.format(el.informationId) + 
+							'<td>{0}</td>'.format(el.content) +
+							'<td><a class="btn btn-default btn-block-item">屏蔽</a></td>' +
+						'</tr>') 
+					 });
+				},
+				error: function(data) {
+					console.log(data);
+				}
+			})
+		}
+		
+		$('.searchBtn').click(search);
+		$('#keyword').keypress(function(e) {
+            if(e.which == 10 || e.which == 13) {
+                search();
+            }
+		})
+
+		$('body').on('click', '.btn-block-item', function(e) {
+			var $this = $(this);
+			var id = $this.parents('tr').attr('infoid');
+			$.ajax({
+				url: getUrl('/rest/information/block/' + id),
+				type: "GET",
+				dataType: 'text',
+				success: function(data) {
+					if (data == "success") {
+						$this.parents('tr').remove();
+					} else {
+						alert("屏蔽失败");
+					}
+				},
+				error: function(data) {
+					console.log(data);
+					alert("屏蔽失败");
+				}
+			});
+		});
+	})(jQuery);
+	</script>
+</body>
+</html>

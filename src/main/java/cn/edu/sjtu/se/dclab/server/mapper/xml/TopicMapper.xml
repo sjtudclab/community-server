@@ -6,10 +6,11 @@
 
    <insert id="submitTopic" parameterType="Topic" useGeneratedKeys="true" keyProperty="topicId">
        INSERT INTO topic
-       (name, content, `desc`, vote_count, start_time, end_time, topic_type_id, parent_topic_id, attachment)
+       (name, content, `desc`, vote_count, start_time, end_time, topic_type_id, parent_topic_id,
+        attachment, created_by)
        VALUES
-       (#{name}, #{content,typeHandler=ContentHandler}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
-        #{parentTopicId}, #{attachment})
+       (#{name}, #{content}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
+        #{parentTopicId}, #{attachment}, #{createdBy})
    </insert>
 
     <insert id="submitOption" parameterType="Topic" useGeneratedKeys="true" keyProperty="optionId">
@@ -46,13 +47,14 @@
     <resultMap id="TopicMap" type="Topic">
         <id property="topicId" column="topic_id" />
         <result property="name" column="name" />
-        <result property="content" column="content" typeHandler="ContentHandler" />
+        <result property="content" column="content" />
         <result property="desc" column="desc" />
         <result property="voteCount" column="vote_count" />
         <result property="startTime" column="start_time" />
         <result property="endTime" column="end_time" />
         <result property="topicTypeId" column="topi_type_id" />
         <result property="parentTopicId" column="parent_topic_id" />
+        <result property="createdBy" column="created_by" />
         <result property="attachment" column="attachment" />
     </resultMap>
 

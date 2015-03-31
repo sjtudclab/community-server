@@ -87,7 +87,7 @@
                 var users = [];
                 $(data).each(function(i, d) {
                     for (var r in d.roles) {
-                        users.push({userid: d.id, username: d.username, role: d.roles[r], imageUrl: d.image});
+                        users.push({userid: d.id, username: d.name, role: d.roles[r], imageUrl: d.image});
                     }
                 });
                 var police = $(users).filter(function(i,d) {return d.role.name.includes('民警');})[0];

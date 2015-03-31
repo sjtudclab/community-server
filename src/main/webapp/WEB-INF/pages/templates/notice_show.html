@@ -45,7 +45,9 @@
                 	var dp = "<div class=\"panel timeline-content\">"+"<div class=\"panel-body\">";
                 	var ti = "<div class=\"timeline-time\">";
                 	var de = "</div>";
-                    $('#announce').append(dt+ti+comment.submitTime+de+dp+"<h2>"+comment.title+"</h2>"+"<p>"+comment.content+"</p>"+de+de+de); 
+                	var unixTimestamp = new Date(comment.submitTime); 
+					commonTime = unixTimestamp.toLocaleString();
+                    $('#announce').append(dt+ti+commonTime+de+dp+"<p>"+comment.content+"</p>"+de+de+de); 
                 })
             },//success
             error: function(data) {

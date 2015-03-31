@@ -47,6 +47,7 @@ public class TopicController {
         Topic topic = new Topic();
         topic.setContent(request.getParameter("content"));
         topic.setTopicTypeId(Long.parseLong(request.getParameter("topic_type_id")));
+        topic.setCreatedBy(Long.parseLong(request.getParameter("from")));
 
         String[] options = request.getParameter("options").split(",");
         Collection<TopicOption> tos = new ArrayList<TopicOption>();

@@ -4,22 +4,37 @@
 
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.InformationMapper">
 
-    <select id="findAll" resultMap="InformationMap">
-        select * from information where information_type = #{type} order by information_id desc;
+    <select id="findAllByType" resultMap="InformationMap">
+        select * from information where information_type = #{type} AND (status IS NULL OR status >= 0) order by information_id desc;
     </select>
     
     <select id="findById" parameterType="java.lang.Integer" resultMap="InformationMap">
-    	select * from information where information_id = #{id} and information_type = #{type} order by information_id desc;
+    	select * from information where information_id = #{id} AND information_type = #{type} AND (status IS NULL OR status >= 0) order by information_id desc;
+    </select>
+    
+    <select id="findByKeyword" parameterType="java.lang.String" resultMap="InformationMap">
+    	select * from information where content LIKE '%${keyword}%' AND (status IS NULL OR status >= 0) order by information_id desc;
     </select>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="Information">
-        INSERT INTO information(content, submit_time, information_type, attachment) VALUES(#{content,typeHandler=ContentHandler}, #{submitTime}, #{informationType}, #{attachment});
+    <insert id="save" useGeneratedKeys="true" keyProperty="information_id" parameterType="Information">
+        INSERT INTO information
+        (`from`, `to`, status, content, title, submit_time, information_type, attachment)
+        VALUES
+        (#{from}, #{to}, #{status}, #{content}, #{title}, #{submitTime},
+        #{informationType}, #{attachment});
     </insert>
+    
+    <select id="blockById" parameterType="java.lang.Integer" resultMap="InformationMap">
+    	UPDATE information SET status = -1 WHERE information_id = #{id};
+    </select>
 
     <resultMap type="Information" id="InformationMap">
         <id property="informationId" column="information_id" />
+        <result property="from" column="from" />
+        <result property="to" column="to" />
+        <result property="status" column="status" />
         <result property="submitTime" column="submit_time" />
-        <result property="content" column="content" typeHandler="ContentHandler" />
+        <result property="content" column="content" />
         <result property="title" column="title" />
         <result property="informationType" column="information_type" />
         <result property="attachment" column="attachment" />
