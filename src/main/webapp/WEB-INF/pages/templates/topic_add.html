@@ -23,7 +23,8 @@
         民议广场
     </h1>
 
-    <form role="form" method="post" th:action="@{/rest/topic}" enctype="multipart/form-data">
+    <form role="form" method="post" th:action="@{/rest/topic}" enctype="multipart/form-data"
+            id="subitForm">
         <div class="grid">
             <div class="row">
                 <div class="span7">
@@ -37,6 +38,7 @@
                     附件：<br/>
                     <input type="file" name="file" id="attachment" />
                     </div>
+                    <input name="from" type="hidden" id="from" />
                 </div>
             </div>
         </div>
@@ -49,7 +51,13 @@
 <div th:include="login_footer :: copy"></div>
 
 <script type="text/javascript">
+    $('#from').val(currentUserId());
 
+    $('#submitForm').submit(function() {
+        alert('提交成功');
+        window.location = getUrl('committee/activity');
+        return false;
+    });
 </script>
 
 </body>

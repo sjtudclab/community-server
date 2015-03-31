@@ -43,6 +43,9 @@ public class Topic {
 	@JsonProperty(value = "attachment")
 	private String attachment;
 
+	@JsonProperty(value = "created_by")
+	private long createdBy;
+
 	@JsonProperty(value = "options")
 	private Collection<TopicOption> options;
 	
@@ -126,5 +129,13 @@ public class Topic {
 
 	public void setOptions(Collection<TopicOption> options) {
 		this.options = options;
+	}
+
+	public long getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(long createdBy) {
+		this.createdBy = createdBy;
 	}
 }
