@@ -50,6 +50,7 @@ public class CommitteeController {
 	@RequestMapping("workreport")
 	public String workreport() {
 		return "workreport";
+	}
 	
 	@RequestMapping("monitor")
 	public String monitor() {
