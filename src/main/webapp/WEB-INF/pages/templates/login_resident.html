@@ -91,13 +91,14 @@
 		if (initPlugin() == false) {
 			return;
 		}
-		var idStr = getIDInformation();
+		var idStr = getDeviceSN();
 		if (idStr == false) {
 			return;
 		}
-		idStr = idStr.match(/[0-9Xx]*/)[0];
+		//idStr = idStr.match(/[0-9Xx]*/)[0];
+		idStr = idStr.slice(0, -1);
 		idStr = md5(idStr);
-		var dataObj = [{name: "cardtype", value: "idcard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "resident"}];
+		var dataObj = [{name: "cardtype", value: "readercard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "resident"}];
 		$.ajax({
 			url: getUrl('rest/users/hardwarelogin'),
 			type: "POST",
