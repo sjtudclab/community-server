@@ -1,6 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.entity.converter;
 
 import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -50,8 +51,13 @@ public class ContentHandler extends BaseTypeHandler<String> {
     	if (blob == null || blob.length() == 0)
 			content = "";
 		else {
-			content = new String(blob.getBytes((long)1, (int)blob.length()));
+            try {
+                content = new String(blob.getBytes(1, (int) blob.length()), "utf-8");
+            } catch (UnsupportedEncodingException ex) {
+
+            }
 		}
+
     	return content;
     }
     
