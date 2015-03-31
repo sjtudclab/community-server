@@ -110,7 +110,7 @@
 		<intercept-url pattern="/rest/topic/[1-9]\d*" access="hasRole('rest/topic/id')" />
 		<intercept-url pattern="/rest/topic/vote" access="hasRole('rest/topic/vote')" />
 		
-		<intercept-url pattern="/rest/users/hardwarelogin" access="hasRole('rest/users/hardwarelogin')" />
+		<intercept-url pattern="/rest/users/hardwarelogin" access="permitAll" />
 		<intercept-url pattern="/rest/users/username" access="hasRole('rest/users/username')" />
 		<intercept-url pattern="/rest/users" method="POST" access="hasRole('rest/users/POST')" />
 		<intercept-url pattern="/rest/users" method="PUT" access="hasRole('rest/users/PUT')" />
