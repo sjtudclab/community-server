@@ -95,10 +95,10 @@
 
         $.ajax({
             type: "GET",
-            url: getUrl('rest/users/id/' + userid),
+            url: getUrl('rest/managementCitizens/' + userid),
             success: function(data) {
             	console.log(data);
-                var name = data.username;
+                var name = data.name;
                 $('.username').text(name);
                 var position = $(data.roles).filter(function(i, d) {return d.id == roleid;})[0];
 
@@ -115,7 +115,7 @@
             }
         });
 
-        $('.contactme').attr('href', 'mailbox.html#sendtoid='+userid);
+        $('.contactme').attr('href', getUrl('mailbox#sendtoid='+userid));
         })(jQuery);
 	</script>
 
