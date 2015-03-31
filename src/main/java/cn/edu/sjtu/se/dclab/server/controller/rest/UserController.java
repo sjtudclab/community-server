@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -94,20 +96,22 @@ public class UserController {
 		String citizenType = request.getParameter("citizentype");
 		
 		cardNumber = cardNumber.trim();
-		/*
-		UsernamePasswordAuthenticationToken authenticationToken =
-				new UsernamePasswordAuthenticationToken(username, password);
-		Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		*/
 		
 		UserTransfer transfer = userService.getUserByCardInfo(cardType, cardNumber, citizenType);
-		if (transfer == null) {
+		if (transfer == null) 
 			return "User not found";
-		} else {
-			ObjectMapper mapper = new ObjectMapper();
-			return mapper.writeValueAsString(transfer);
-		}
+		
+		UserDetails userDetails = userService.loadUserByUsername(transfer.getUsername());
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(transfer.getUsername(),
+				userDetails.getPassword(),userDetails.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute(Constants.SESSION_USER_ID, transfer.getId());
+		
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(transfer);
+		
 	}
 
 
