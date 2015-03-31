@@ -9,7 +9,7 @@
        (name, content, `desc`, vote_count, start_time, end_time, topic_type_id, parent_topic_id,
         attachment, created_by)
        VALUES
-       (#{name}, #{content,typeHandler=ContentHandler}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
+       (#{name}, #{content}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
         #{parentTopicId}, #{attachment}, #{createdBy})
    </insert>
 
@@ -47,7 +47,7 @@
     <resultMap id="TopicMap" type="Topic">
         <id property="topicId" column="topic_id" />
         <result property="name" column="name" />
-        <result property="content" column="content" typeHandler="ContentHandler" />
+        <result property="content" column="content" />
         <result property="desc" column="desc" />
         <result property="voteCount" column="vote_count" />
         <result property="startTime" column="start_time" />

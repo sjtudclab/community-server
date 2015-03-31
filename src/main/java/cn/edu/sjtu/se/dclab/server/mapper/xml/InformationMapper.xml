@@ -16,7 +16,7 @@
         INSERT INTO information
         (`from`, `to`, status, content, title, submit_time, information_type, attachment)
         VALUES
-        (#{from}, #{to}, #{status}, #{content,typeHandler=ContentHandler}, #{title}, #{submitTime},
+        (#{from}, #{to}, #{status}, #{content}, #{title}, #{submitTime},
         #{informationType}, #{attachment});
     </insert>
 
@@ -26,7 +26,7 @@
         <result property="to" column="to" />
         <result property="status" column="status" />
         <result property="submitTime" column="submit_time" />
-        <result property="content" column="content" typeHandler="ContentHandler" />
+        <result property="content" column="content" />
         <result property="title" column="title" />
         <result property="informationType" column="information_type" />
         <result property="attachment" column="attachment" />
