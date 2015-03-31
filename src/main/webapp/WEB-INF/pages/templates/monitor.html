@@ -14,9 +14,9 @@
 
 		<div class="col-lg-6">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search for...">
+				<input type="text" id="keyword" class="form-control" placeholder="Search for...">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">Search</button>
+					<button class="btn btn-default searchBtn" type="button">Search</button>
 				</span>
 			</div>
 			<!-- /input-group -->
@@ -35,7 +35,7 @@
 							<th>操作</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="results-list">
 						<tr>
 							<th scope="row">1</th>
 							<td>Mark</td>
@@ -56,5 +56,59 @@
 			</div>
 		</div>
 	</div>
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+	<script type="text/javascript">
+	if (!String.prototype.format) {
+	  String.prototype.format = function() {
+	    var args = arguments;
+	    return this.replace(/{(\d+)}/g, function(match, number) { 
+	      return typeof args[number] != 'undefined'
+	        ? args[number]
+	        : match
+	      ;
+	    });
+	  };
+	}
+
+	(function($) {
+		$('.searchBtn').click(function() {
+			$.ajax({
+				url: getUrl('/rest/information/search/' + $('#keyword').val()),
+				type: "GET",
+				//data: $('keyword').val(),
+				dataType: 'json',
+				success: function(data) {
+					console.log(data);
+					 $(data).each(function(ind, el) {
+						$('#results-list').append('<tr infoid="{0}">'.format(el.informationId) +
+							'<th scope="row">{0}</th>'.format(el.informationId) + 
+							'<td>{0}</td>'.format(el.content) +
+							'<td><a class="btn btn-default btn-block">屏蔽</a></td>' +
+						'</tr>') 
+					 });
+				},
+				error: function(data) {
+					console.log(data);
+				}
+			})
+		});
+
+		$('body').on('click', '.btn-block', function(e) {
+			var id = $(this).parents('tr').attr('infoid');
+			$.ajax({
+				url: getUrl('/rest/infomation/block/' + id),
+				type: "GET",
+				//dataType: 'json',
+				success: function(data) {
+					console.log(data);
+				},
+				error: function(data) {
+					console.log(data);
+				}
+			});
+		});
+	})(jQuery);
+	</script>
 </body>
 </html>
