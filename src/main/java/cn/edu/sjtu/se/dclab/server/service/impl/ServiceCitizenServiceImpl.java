@@ -12,7 +12,6 @@ import cn.edu.sjtu.se.dclab.server.mapper.RoleMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.ServiceCitizenMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserMapper;
 import cn.edu.sjtu.se.dclab.server.service.ServiceCitizenService;
-import cn.edu.sjtu.se.dclab.server.transfer.ResidentCitizenTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.ServiceCitizenTransfer;
 
 /**

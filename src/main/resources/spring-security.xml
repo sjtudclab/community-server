@@ -46,9 +46,81 @@
 	<http entry-point-ref="unauthorizedEntryPoint" use-expressions="true" auto-config="false" access-denied-page="/users/accessDenied" authentication-manager-ref="authenticationManager">
 		
 		<intercept-url pattern="/rest/users/login" access="permitAll" />
+		<intercept-url pattern="/login/resident" access="permitAll" />
+		<intercept-url pattern="/login/committee" access="permitAll" />
+		<intercept-url pattern="/login/tenement" access="permitAll" />
 		<intercept-url pattern="/users/accessDenied" access="permitAll" />
+		<intercept-url pattern="/logout" access="permitAll" />
 		
-		<intercept-url pattern="/rest/users/test" access="hasRole('admin')" />
+		<intercept-url pattern="/start-screen-committee" access="hasRole('start-screen-committee')" />
+		<intercept-url pattern="/start-screen-resident" access="hasRole('start-screen-resident')" />
+		<intercept-url pattern="/start-screen-tenement" access="hasRole('start-screen-tenement')" />
+		<intercept-url pattern="/start-screen-owner" access="hasRole('start-screen-owner')" />
+		
+		<intercept-url pattern="/committee/manage" access="hasRole('committee/manage')" />
+		<intercept-url pattern="/committee/notice" access="hasRole('committee/notice')" />
+		<intercept-url pattern="/committee/apartment" access="hasRole('committee/apartment')" />
+		<intercept-url pattern="/committee/citizen" access="hasRole('committee/citizen')" />
+		<intercept-url pattern="/committee/topic" access="hasRole('committee/topic')" />
+		
+		<intercept-url pattern="/resident/committee" access="hasRole('resident/committee')" />
+		<intercept-url pattern="/resident/owner" access="hasRole('resident/owner')" />
+		<intercept-url pattern="/resident/tenement" access="hasRole('resident/tenement')" />
+		<intercept-url pattern="/resident/notice" access="hasRole('resident/notice')" />
+		<intercept-url pattern="/resident/neighbor" access="hasRole('resident/neighbor')" />
+		<intercept-url pattern="/resident/topic" access="hasRole('resident/topic')" />
+		<intercept-url pattern="/resident/market" access="hasRole('resident/market')" />
+		<intercept-url pattern="/resident/repair" access="hasRole('resident/repair')" />
+		<intercept-url pattern="/resident/activity" access="hasRole('resident/activity')" />
+		<intercept-url pattern="/resident/setting" access="hasRole('resident/setting')" />
+		<intercept-url pattern="/resident/user_position" access="hasRole('resident/user_position')" />
+		
+		<intercept-url pattern="/tenement/mailbox" access="hasRole('tenement/mailbox')" />
+		<intercept-url pattern="/tenement/repair_manage" access="hasRole('tenement/repair_manage')" />
+		<intercept-url pattern="/tenement/setting" access="hasRole('tenement/setting')" />
+		
+		<intercept-url pattern="/workreport" access="hasRole('workreport')" />
+		<intercept-url pattern="/workreport/add" access="hasRole('workreport/add')" />
+		
+		<intercept-url pattern="/rest/apartment" access="hasRole('rest/apartment')" />
+		<intercept-url pattern="/rest/apartment/[1-9]\d*/citizen" access="hasRole('rest/apartment/id/citizen')" />
+		
+		<intercept-url pattern="/buildings" access="hasRole('buildings')" />
+		<intercept-url pattern="/buildings/[1-9]\d*/apartments" access="hasRole('buildings/id/apartments')" />
+		
+		<intercept-url pattern="/rest/managementCitizens/committee" access="hasRole('rest/managementCitizens/committee')" />
+		<intercept-url pattern="/rest/managementCitizens/owner" access="hasRole('rest/managementCitizens/owner')" />
+		<intercept-url pattern="/rest/managementCitizens/tenement" access="hasRole('rest/managementCitizens/tenement')" />
+		<intercept-url pattern="/rest/managementCitizens" access="hasRole('rest/managementCitizens')" />
+		<intercept-url pattern="/rest/managementCitizens/[1-9]\d*" access="hasRole('rest/managementCitizens/id')" />
+		
+		<intercept-url pattern="/rest/residentCitizens/[1-9]\d*" access="hasRole('rest/residentCitizens/id')" />
+		
+		<intercept-url pattern="/rest/serviceCitzens/[1-9]\d*" access="hasRole('rest/serviceCitzens/id')" />
+		
+		<intercept-url pattern="/rest/information/[^\s]+" access="hasRole('rest/information/type')" />
+		<intercept-url pattern="/rest/information/[^\s]+/[1-9]\d*" access="hasRole('rest/information/type/id')" />
+		<intercept-url pattern="/rest/information" access="hasRole('rest/information')" />
+		
+		<intercept-url pattern="/rest/roles" access="hasRole('rest/roles')" />
+		<intercept-url pattern="/rest/roles/[1-9]\d*" access="hasRole('rest/roles/id')" />
+		
+		<intercept-url pattern="/rest/topic" access="hasRole('rest/topic')" />
+		<intercept-url pattern="/rest/topic" method="POST" access="hasRole('rest/topic/POST')" />
+		<intercept-url pattern="/rest/topic/[1-9]\d*" access="hasRole('rest/topic/id')" />
+		<intercept-url pattern="/rest/topic/vote" access="hasRole('rest/topic/vote')" />
+		
+		<intercept-url pattern="/rest/users/hardwarelogin" access="hasRole('rest/users/hardwarelogin')" />
+		<intercept-url pattern="/rest/users/username" access="hasRole('rest/users/username')" />
+		<intercept-url pattern="/rest/users" method="POST" access="hasRole('rest/users/POST')" />
+		<intercept-url pattern="/rest/users" method="PUT" access="hasRole('rest/users/PUT')" />
+		
+		<intercept-url pattern="/vote/create" access="hasRole('vote/create')" />
+		<intercept-url pattern="/vote/all" access="hasRole('vote/all')" />
+		
+		<intercept-url pattern="/rest/work_report/[1-9]\d*" access="hasRole('rest/work_report/id')" />
+		<intercept-url pattern="/rest/work_report/all" access="hasRole('/rest/work_report/all')" />
+		<intercept-url pattern="/rest/work_report" access="hasRole('rest/work_report')" />
 
 		<!-- <custom-filter ref="customAuthenticationProcessingFilter"
 			position="FORM_LOGIN_FILTER" /> -->
