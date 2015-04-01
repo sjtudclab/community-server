@@ -13,7 +13,7 @@ $(document).ready(function(){
 		$("#welcome_repair").css("display", "none");
 
 		$.ajax({
-			url:"rest/SecondGoods/stage/1",
+			url:getUrl("rest/SecondGoods/stage/1"),
 			type:"get",
 			dataType:"json",
 			success:function(obj){
@@ -57,7 +57,7 @@ $(document).ready(function(){
 		$("#welcome_repair").css("display", "none");
 
 		$.ajax({
-			url:"rest/SecondGoods/stage/2",
+			url:getUrl("rest/SecondGoods/stage/2"),
 			type:"get",
 			dataType:"json",
 			success:function(obj){

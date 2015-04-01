@@ -2,7 +2,7 @@ $(document).ready(function(){
 	//alert("获取用户物品信息");
 	var userID = 1;
 	$.ajax({
-		url:"rest/publish/"+userID,
+		url:getUrl("rest/publish/")+userID,
 		type:"get",
 		dataType:"json",
 		success:function(obj){
