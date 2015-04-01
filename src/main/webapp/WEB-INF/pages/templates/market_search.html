@@ -8,7 +8,8 @@
     <meta name="description" content="Simple responsive css framework">
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
-    <script src="js/chen/search_goods.js"></script>
+    <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
+    <script th:src="@{/js/chen/search_goods.js}"></script>
 
     <title>搜索物品</title>
 </head>
@@ -38,7 +39,7 @@
 				</br>
 
                 <div class="input-control text span5">
-            		<input id="search_input" type="text" />
+            		<input id="search_input" type="text" placeholder="请输入搜索关键词"/>
             		<button id="search_button" class="btn-search" onclick="search_goods()"></button>
             	</div>
             	
@@ -47,7 +48,7 @@
             <!-- 搜索到的物品 -->
             <div class="row">
                 <div id="search_goods">
-                    <h2><legend>请输入搜索关键词</legend></h2>
+                    <h2><legend>搜索物品结果</legend></h2>
                     
                 </div>
             </div>

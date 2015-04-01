@@ -7,7 +7,7 @@ $(document).ready(function(){
 		alert("用户:"+$("#user_id").text()+" 已关注物品:"+$("#goods_id").text());
 
 		$.ajax({
-			url:"rest/love/add",
+			url:getUrl("rest/love/add"),
 			type:"get",
 			//dataType:"json",
 			data:{userID:$("#user_id").text(), goodsID:$("#goods_id").text()},

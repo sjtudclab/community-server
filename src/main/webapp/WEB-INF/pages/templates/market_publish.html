@@ -8,6 +8,8 @@
     <meta name="description" content="Simple responsive css framework">
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
+    <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
+    <script th:src="@{/js/chen/userPublishedGoods.js}"></script>
 
     <title>我的发布</title>
 </head>
@@ -48,7 +50,9 @@
             <!-- 已经审核的物品 -->
             <div class="row">
                 <h2>已审核物品</h2>
-                
+                <div id="finished_goods">
+                </div>
+                <!--
                 <div class="tile double">
                     <div class="tile-content image">
                         <img src="images/2.jpg">
@@ -57,6 +61,7 @@
                         <span class="text">电熨斗，8成新。可满足日常需求</span>
                     </div>
                 </div>
+                -->
             </div>
             <!-- End 已经审核的物品 -->
             

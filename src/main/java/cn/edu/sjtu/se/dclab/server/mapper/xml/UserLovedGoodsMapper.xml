@@ -10,7 +10,7 @@
 	
 	<insert id="createLovedGoods" parameterType="UserLovedGoods">
 		insert into user_love_goods (user_id,goods_id,stage) 
-			values (#{user_id},#{goods_id},#{stage});
+			values (#{userID},#{goodsID},#{stage});
 		<selectKey resultType="int">
 			SELECT LAST_INSERT_ID();
 		</selectKey>

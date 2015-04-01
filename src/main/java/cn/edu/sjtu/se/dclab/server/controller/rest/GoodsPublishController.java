@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.SecondGoods;
 import cn.edu.sjtu.se.dclab.server.entity.UserPublishedGoods;
 import cn.edu.sjtu.se.dclab.server.service.SecondGoodsService;
@@ -40,7 +41,7 @@ import cn.edu.sjtu.se.dclab.server.service.UserPublishedGoodsService;
  */
 
 @Controller
-@RequestMapping("/publish/")
+@RequestMapping(Constants.REST + "/publish/")
 public class GoodsPublishController {
 	
 	@Autowired
@@ -82,7 +83,8 @@ public class GoodsPublishController {
 		int id = 0;
 		if(!file.isEmpty()){
 			ServletContext sc = request.getSession().getServletContext();
-			String dir = sc.getRealPath("/uploadimage");    //设定文件保存的目录
+			//String dir = sc.getRealPath("/uploadimage");    //设定文件保存的目录
+			String dir = sc.getRealPath("/WEB-INF/statics/market_goods");    //设定文件保存的目录
 			//sc.getRealPath(arg0)
 			
 			
@@ -91,7 +93,7 @@ public class GoodsPublishController {
 			id = secondGoodsService.getMaxGoodsId()+1;
 			
 			String newFilename = id + "." + getFileType(filename);
-			imagePath = "uploadimage/" + newFilename;
+			imagePath = "/community-server/market_goods/" + newFilename;
 
 			FileUtils.writeByteArrayToFile(new File(dir,newFilename), file.getBytes());
 						
@@ -117,7 +119,7 @@ public class GoodsPublishController {
 		secondGoodsService.createSecondGoods(secondGoods);
 		publishService.createPublishedGoods(1, secondGoods.getId(), "1");
 		
-		return "redirect:/market_thing_info.html?id="+secondGoods.getId();
+		return "redirect:/resident/market_thing_info?id="+secondGoods.getId();
 	}
 	
 	public String getFileType(String filename){
