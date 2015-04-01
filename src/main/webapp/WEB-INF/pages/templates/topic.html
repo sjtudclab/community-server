@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>民议广场</title>
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+
+    <link th:href="@{/css/metro-bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/iconFont.css}" rel="stylesheet">
+    <link th:href="@{/css/docs.css}" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script th:src="@{/js/modernizr.min.js}"></script>
+</head>
+<body class="metro">
+<header class="bg-dark" data-load="header.html"></header>
+<h1>
+    <a th:href="@{/start-screen-resident}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+    民议广场
+</h1>
+
+<div class="timeline animated">
+
+    <span id ="announce"></span>
+
+</div>
+<script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            type: "GET",
+            url: getUrl('rest/information/1'),
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+                $('#announce').empty();
+                $.each(data, function(commentIndex, comment) {
+
+                    console.log(data.length);
+                    console.log(comment.attachment);
+                    var dt = "<div class=\"timeline-row\">"+"<div class=\"timeline-icon\">"+"<div class=\"bg-primary\">"+"<i class=\"fa fa-pencil\"></i></div></div>";
+                    var dp = "<div class=\"panel timeline-content\">"+"<div class=\"panel-body\">";
+                    var ti = "<div class=\"timeline-time\">";
+                    var title = comment.title;
+                    var de = "</div>";
+                    var unixTimestamp = new Date(comment.submitTime);
+                    commonTime = unixTimestamp.toLocaleString();
+
+                    var vote_url = getUrl("resident/vote/" + comment.informationId)
+                    var vote = "<a href=\"" + vote_url + "\"><p>进入投票</p></a>";
+
+                    if (comment.attachment != null) {
+                        var u = comment.attachment;
+                        var images = "<img class=\"img-responsive\"src=\""+getUrl(u)+"\">";
+
+                        $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title + "</p>" + images+"<p>"+comment.content+"</p>" + vote +de+de+de);
+                    } else {
+                        $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title + "</p>" + images+"<p>"+comment.content+"</p>" + vote +de+de+de);
+                    }
+
+
+
+                })
+            },//success
+            error: function(data) {
+                console.log(data);
+            }
+        });//ajax
+    });
+</script>
+
+</body>
+</html>
