@@ -35,7 +35,7 @@
     $(document).ready(function(){
         $.ajax({
             type: "GET",
-            url: getUrl('rest/information/1'),
+            url: getUrl('rest/topic?type=1'),
             dataType: "json",
             success: function(data) {
                 console.log(data);
@@ -49,10 +49,10 @@
                     var ti = "<div class=\"timeline-time\">";
                     var title = comment.title;
                     var de = "</div>";
-                    var unixTimestamp = new Date(comment.submitTime);
+                    var unixTimestamp = new Date(comment.submit_time);
                     commonTime = unixTimestamp.toLocaleString();
 
-                    var vote_url = getUrl("resident/vote/" + comment.informationId)
+                    var vote_url = getUrl("resident/vote/" + comment.topic_id)
                     var vote = "<a href=\"" + vote_url + "\"><p>进入投票</p></a>";
 
                     if (comment.attachment != null) {

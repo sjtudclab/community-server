@@ -13,7 +13,7 @@ public interface TopicService {
 
     public void submitTopic(Topic topic);
 
-    public Collection<Topic> findAllTopics();
+    public Collection<Topic> findAllTopicsByTypeId(long typeId);
 
     public Topic findTopic(long topicId);
 

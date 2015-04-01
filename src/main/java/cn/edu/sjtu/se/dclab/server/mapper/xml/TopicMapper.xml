@@ -7,10 +7,10 @@
    <insert id="submitTopic" parameterType="Topic" useGeneratedKeys="true" keyProperty="topicId">
        INSERT INTO topic
        (name, content, `desc`, vote_count, start_time, end_time, topic_type_id, parent_topic_id,
-        attachment, created_by)
+        attachment, created_by, submit_time)
        VALUES
        (#{name}, #{content}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
-        #{parentTopicId}, #{attachment}, #{createdBy})
+        #{parentTopicId}, #{attachment}, #{createdBy}, #{submitTime})
    </insert>
 
     <insert id="submitOption" parameterType="Topic" useGeneratedKeys="true" keyProperty="optionId">
@@ -20,9 +20,10 @@
         (#{name}, #{topic.topicId})
     </insert>
 
-    <select id="findAllTopics" resultMap="TopicMap">
+    <select id="findAllTopicsByTypeId" resultMap="TopicMap">
       SELECT *
       FROM topic
+      WHERE topic_type_id = #{typeId}
     </select>
 
     <select id="findTopic" resultMap="TopicMap">
@@ -46,7 +47,7 @@
 
     <resultMap id="TopicMap" type="Topic">
         <id property="topicId" column="topic_id" />
-        <result property="name" column="name" />
+        <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="desc" column="desc" />
         <result property="voteCount" column="vote_count" />
@@ -56,6 +57,7 @@
         <result property="parentTopicId" column="parent_topic_id" />
         <result property="createdBy" column="created_by" />
         <result property="attachment" column="attachment" />
+        <result property="submitTime" column="submit_time" />
     </resultMap>
 
     <resultMap id="TopicOptionMap" type="TopicOption">

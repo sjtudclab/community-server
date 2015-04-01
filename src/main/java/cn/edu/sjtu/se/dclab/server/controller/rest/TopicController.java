@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Huiyi on 2015/3/30.
@@ -38,8 +39,9 @@ public class TopicController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Collection<Topic> findAll() {
-        return topicService.findAllTopics();
+    public Collection<Topic> findAllByTypeId(HttpServletRequest request) {
+        long typeId = Long.parseLong(request.getParameter("type"));
+        return topicService.findAllTopicsByTypeId(typeId);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,6 +68,7 @@ public class TopicController {
         MultipartFile file = req.getFile("file");
         String attachment = FileUtil.uploadFile(file, request);
         topic.setAttachment(attachment);
+        topic.setSubmitTime(new Date());
 
         topicService.submitTopic(topic);
     }
@@ -80,14 +83,5 @@ public class TopicController {
     @ResponseBody
     public void vote(@RequestBody TopicVote vote) {
         topicService.vote(vote);
-    }
-
-    private String getFileNameWithoutExt(String filename) {
-        return filename.split("\\.")[0];
-    }
-
-    private String getFileType(String filename){
-        String[] arr = filename.split("\\.");
-        return arr[1];
     }
 }
