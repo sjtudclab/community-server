@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function (){ 
 	//alert("Welcome Second Goods");
 	/*$.ajax({
 		url:"/archetype-server/rest/SecondGoods/3",
@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});*/
 	
 	$.ajax({
-		url:"rest/SecondGoods/latest",
+		url:"/community-server/rest/SecondGoods/latest",
 		type:"get",
 		dataType:"json",
 		success:function(obj){
@@ -57,7 +57,7 @@ $(document).ready(function(){
 	$("body").on("click", ".goods", function(){
 		$goodsID = $(this).find("div").eq(1).find("span").eq(1).text();
 		//alert("id:"+$goodsID);
-		location.href = "market_thing_info.html?id=" + $goodsID;
+		location.href = getUrl("resident/market_thing_info?id=" + $goodsID);
 
 	});
 

@@ -5,6 +5,7 @@ import cn.edu.sjtu.se.dclab.server.entity.Topic;
 import cn.edu.sjtu.se.dclab.server.entity.TopicOption;
 import cn.edu.sjtu.se.dclab.server.entity.TopicVote;
 import cn.edu.sjtu.se.dclab.server.service.TopicService;
+import cn.edu.sjtu.se.dclab.server.util.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -42,9 +43,11 @@ public class TopicController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String submitTopic(HttpServletRequest request,
+    @ResponseBody
+    public void submitTopic(HttpServletRequest request,
                             HttpServletResponse response) throws IOException {
         Topic topic = new Topic();
+        topic.setTitle(request.getParameter("title"));
         topic.setContent(request.getParameter("content"));
         topic.setTopicTypeId(Long.parseLong(request.getParameter("topic_type_id")));
         topic.setCreatedBy(Long.parseLong(request.getParameter("from")));
@@ -61,21 +64,10 @@ public class TopicController {
 
         MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
         MultipartFile file = req.getFile("file");
-        if (!file.isEmpty()) {
-            ServletContext sc = request.getSession().getServletContext();
-            String dir = sc.getRealPath("/uploadimage");    //设定文件保存的目录
-
-            String filename = file.getOriginalFilename();    //得到上传时的文件名
-
-            String newFilename =  getFileNameWithoutExt(filename) + System.currentTimeMillis() + "." + getFileType(filename);
-            topic.setAttachment("uploadimage/" + newFilename);
-
-            FileUtils.writeByteArrayToFile(new File(dir, newFilename), file.getBytes());
-        }
+        String attachment = FileUtil.uploadFile(file, request);
+        topic.setAttachment(attachment);
 
         topicService.submitTopic(topic);
-
-        return "redirect:/start-screen-committee";
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
