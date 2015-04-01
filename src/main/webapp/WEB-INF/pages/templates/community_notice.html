@@ -23,11 +23,17 @@
 	    <div class="grid">
 	        <div class="row">
 	            <div class="span7">
-	                <textarea id="content" name="content" rows="10" cols="100"></textarea>
+					<div>
+						标题：<br><input name="title" />
+					</div>
+					<br>
+					<div>
+	                	正文：<textarea id="content" name="content" rows="10" cols="100"></textarea>
+					</div>
 					<input name="from" type="hidden" id="from" />
-		            <input name="infotype" value="1" type="hidden"></input>
-		            附件：<br/>
-		            <input type="file" name="file" id="attachment"></input>
+		            <input name="infotype" value="1" type="hidden" />
+		            <br/>照片或视频：<br/>
+		            <input type="file" name="file" id="attachment" />
 	            </div>
 	        </div>
 	    </div>
@@ -44,7 +50,7 @@
 
 	$('#submitForm').submit(function() {
 		alert('提交成功');
-		window.location = getUrl('committee/activity');
+		window.location = getUrl('committee/notice');
 		return false;
 	});
 </script>

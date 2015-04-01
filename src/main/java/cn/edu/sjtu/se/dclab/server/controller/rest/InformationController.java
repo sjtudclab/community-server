@@ -56,7 +56,8 @@ public class InformationController {
 			HttpServletResponse response) throws IOException {
 		MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
 		MultipartFile file = req.getFile("file");
-		
+
+		String title = request.getParameter("title");
 		String contentString = request.getParameter("content");
 		int type = Integer.valueOf(request.getParameter("infotype"));
 		long from = Long.parseLong(request.getParameter("from"));
@@ -75,7 +76,7 @@ public class InformationController {
 		}
 		
 		Information information = new Information();
-		//information.setTitle(title);
+		information.setTitle(title);
 		information.setFrom(from);
 		information.setAttachment(attachment);
 		information.setContent(contentString);

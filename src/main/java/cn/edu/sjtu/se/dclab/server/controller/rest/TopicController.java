@@ -42,9 +42,11 @@ public class TopicController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String submitTopic(HttpServletRequest request,
+    @ResponseBody
+    public void submitTopic(HttpServletRequest request,
                             HttpServletResponse response) throws IOException {
         Topic topic = new Topic();
+        topic.setTitle(request.getParameter("title"));
         topic.setContent(request.getParameter("content"));
         topic.setTopicTypeId(Long.parseLong(request.getParameter("topic_type_id")));
         topic.setCreatedBy(Long.parseLong(request.getParameter("from")));
@@ -74,8 +76,6 @@ public class TopicController {
         }
 
         topicService.submitTopic(topic);
-
-        return "redirect:/start-screen-committee";
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
