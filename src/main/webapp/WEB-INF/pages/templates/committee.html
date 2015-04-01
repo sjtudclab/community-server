@@ -13,6 +13,8 @@
     <link th:href="@{/css/docs.css}" rel="stylesheet">
     <link th:href="@{/css/custom.css}" rel="stylesheet">
     <link th:href="@{/js/prettify/prettify.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.min.css}"></link>
+	<link rel="stylesheet" th:href="@{/zang/css/index.css}" type="text/css" media="screen"></link>
 
     <!-- Load JavaScript Libraries -->
     <script th:src="@{/js/jquery/jquery.min.js}"></script>
@@ -20,6 +22,10 @@
     <script th:src="@{/js/jquery/jquery.mousewheel.js}"></script>
     <script th:src="@{/js/prettify/prettify.js}"></script>
     <script th:src="@{/js/holder/holder.js}"></script>
+	<script type="text/javascript" th:src="@{/zang/js/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{/zang/js/tendina.js}"></script>
+	<script type="text/javascript" th:src="@{/zang/js/common.js}"></script>
+	<script type="text/javascript" th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
 
     <!-- Metro UI CSS JavaScript plugins -->
     <script th:src="@{/js/load-metro.js}"></script>
@@ -63,6 +69,28 @@
 
 
     </div> <!-- End of container -->
+    
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+	   aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+				   aria-hidden="true">×
+				</button>
+				<h4 id="sendto" class="modal-title" id="myModalLabel"></h4>
+				<input id="to" type="hidden"></input>
+			 </div>
+			 <div class="modal-body"><textarea id="cont" class="form-control" placeholder="快问候一下吧~"></textarea></div>
+			 <div class="modal-footer">
+				<button type="button" class="btn btn-default" 
+				   data-dismiss="modal">取消</button>
+				<button id="send" type="button" class="btn btn-primary">发送</button>
+			 </div>
+		  </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
     <script th:src="@{/js/hitua.js}"></script>
     <script type="text/javascript">
@@ -98,6 +126,7 @@
                     if (el.userid == police.userid || el.userid == zhucan.userid) {
                         return;
                     }
+                    var userid = el.userid;
                     var name = el.username;
                     var position = el.role.name;
                     var html = 
@@ -105,6 +134,7 @@
                         '<a  href="{0}"><img src="{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'Committee'), 
                         		getUrl('images/' + el.imageUrl)) +
                             '<div class="overlay">' +
+                            	'<input id="sendtoid" type="hidden">{0}</input>'.format(userid) +
                                 '<span class="name-text">{0}</span><br>'.format(name) +
                                 '<span class="position-text">{0}</span>'.format(position) +
                             '</div>' 
