@@ -21,7 +21,7 @@ public class FileUtil {
         String attachment = null;
         if (!file.isEmpty()) {
             ServletContext sc = request.getSession().getServletContext();
-            String dir = sc.getRealPath("/WEB-INF/upload_attachment");    //设定文件保存的目录
+            String dir = sc.getRealPath("/WEB-INF/statics/upload_attachment");    //设定文件保存的目录
 
             String filename = file.getOriginalFilename();    //得到上传时的文件名
 

@@ -44,7 +44,7 @@
 	</authentication-manager>
 
 	<http entry-point-ref="unauthorizedEntryPoint" use-expressions="true" auto-config="false" access-denied-page="/users/accessDenied" authentication-manager-ref="authenticationManager">
-		
+		<!--
 		<intercept-url pattern="/rest/users/login" access="permitAll" />
 		<intercept-url pattern="/login/resident" access="permitAll" />
 		<intercept-url pattern="/login/committee" access="permitAll" />
@@ -121,7 +121,7 @@
 		<intercept-url pattern="/rest/work_report/[1-9]\d*" access="hasRole('rest/work_report/id')" />
 		<intercept-url pattern="/rest/work_report/all" access="hasRole('/rest/work_report/all')" />
 		<intercept-url pattern="/rest/work_report" access="hasRole('rest/work_report')" />
-
+		-->
 		<!-- <custom-filter ref="customAuthenticationProcessingFilter"
 			position="FORM_LOGIN_FILTER" /> -->
 	</http>
