@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +40,7 @@ import cn.edu.sjtu.se.dclab.server.service.UserPublishedGoodsService;
  */
 
 @Controller
-@RequestMapping("/SecondGoods/")
+@RequestMapping(Constants.REST + "SecondGoods")
 public class SecondGoodsController {
 	
 	@Autowired

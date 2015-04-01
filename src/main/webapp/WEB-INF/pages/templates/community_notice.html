@@ -14,7 +14,7 @@
 
 <div class="page">
     <h1>
-        <a href="start-screen-committee.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        <a th:href="@{/start-screen-committee}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
         社区公告
     </h1>
     
@@ -31,6 +31,7 @@
 	                	正文：<textarea id="content" name="content" rows="10" cols="100"></textarea>
 					</div>
 					<input name="from" type="hidden" id="from" />
+					<input name="redirect_url" type="hidden" value="/committee/notice" />
 		            <input name="infotype" value="1" type="hidden" />
 		            <br/>照片或视频：<br/>
 		            <input type="file" name="file" id="attachment" />
@@ -50,8 +51,7 @@
 
 	$('#submitForm').submit(function() {
 		alert('提交成功');
-		window.location = getUrl('committee/notice');
-		return false;
+		return true;
 	});
 </script>
 

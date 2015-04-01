@@ -5,6 +5,7 @@ import cn.edu.sjtu.se.dclab.server.entity.Topic;
 import cn.edu.sjtu.se.dclab.server.entity.TopicOption;
 import cn.edu.sjtu.se.dclab.server.entity.TopicVote;
 import cn.edu.sjtu.se.dclab.server.service.TopicService;
+import cn.edu.sjtu.se.dclab.server.util.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -63,17 +64,8 @@ public class TopicController {
 
         MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
         MultipartFile file = req.getFile("file");
-        if (!file.isEmpty()) {
-            ServletContext sc = request.getSession().getServletContext();
-            String dir = sc.getRealPath("/uploadimage");    //设定文件保存的目录
-
-            String filename = file.getOriginalFilename();    //得到上传时的文件名
-
-            String newFilename =  getFileNameWithoutExt(filename) + System.currentTimeMillis() + "." + getFileType(filename);
-            topic.setAttachment("uploadimage/" + newFilename);
-
-            FileUtils.writeByteArrayToFile(new File(dir, newFilename), file.getBytes());
-        }
+        String attachment = FileUtil.uploadFile(file, request);
+        topic.setAttachment(attachment);
 
         topicService.submitTopic(topic);
     }
