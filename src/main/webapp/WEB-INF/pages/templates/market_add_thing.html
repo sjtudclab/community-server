@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>发布物品页面</title>
+</head>
+
+<script type="text/javascript" language="javascript">
+	function submitYouFrom(){
+		document.getElementById('id_post_form').submit();
+		alert("submit success:");
+		//location.href = "market.html";
+		
+	}
+</script>
+
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+    <div class="">
+
+    <div class="page">
+        <div class="page-region">
+            <div class="page-region-content">
+                
+
+                <!-- 物品单 -->
+                <div class="">
+                    <div class="second__add_cont_main">
+                        <div class="">
+                            <h1>
+                            <a href="market.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                            填写物品信息
+                            </h1>
+                        </div>
+                        <div class="second__add_cont_form">
+                            <!-- enctype="multipart/form-data" -->
+                            <form enctype="multipart/form-data" name="id_post_form" id="id_post_form" method="post"
+                                action="rest/publish/create" onsubmit="">
+                                <table style="width:100%;" class="bg-grayLight">
+                                    <tbody>
+                                        <tr>
+                                            <td><input name="uid" type="text" value="嘻嘻嘻"style="display:none;" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input name="xiaoquid" type="text"value="1" style="display:none;" /></td>
+                                        </tr>
+                                        <tr id="id_tr_deal_type">
+                                            <td width="1%"><i> * </i></td>
+                                            <td width="18%">类型</td>
+                                            <td class="space" id="deal_type">
+                                                <label for="id_deal_type_0" style="display:inherit;"> 
+                                                    <input id="id_deal_type_0" name="dealType" value="1"autocomplete="off" type="radio" checked="checked"> 
+                                                    <span>转让&nbsp;&nbsp;</span>
+                                                </label> 
+                                                <label for="id_deal_type_3" style="display:inherit;"> 
+                                                    <input id="id_deal_type_3" name="dealType" value="4"autocomplete="off" type="radio"> 
+                                                    <span>免费赠送&nbsp;&nbsp;</span> 
+                                                </label> 
+                                                <span id="tip_span_deal_type"></span>
+                                            </td>
+                                        </tr>
+                                        <tr id="id_tr_title">
+                                            <td><i> * </i></td>
+                                            <td>标题</td>
+                                            <td align="left">
+                                                <label for="textfield"></label>
+                                                <div class="input-control text span4">
+                                                    <input type="text" autocomplete="off" name="goodsTitle" id="id_title" />
+                                                </div> 
+                                                <span id="tip_span_title" style="display:none;">6-30字，简单说说要卖什么。</span>
+                                                <span id="titleErr" class="validatorMsg validatorError"
+                                                style="display:none;">6-30字，简单说说要卖什么。</span> 
+                                                <span id="titleRig" class="validatorRight"></span> 
+                                                <span id="titleNull" class="validatorNull validatorError">忘记填写标题了哦</span>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td><i> * </i></td>
+                                            <td>描述</td>
+                                            <td align="left">
+                                                <div class="input-control textarea span4" style="float:left;">
+                                                    <textarea name="goodsDescribe" id="id_description" autocomplete="off"></textarea>
+                                                </div>
+                                                <div style="float:left;">
+                                                    <span id="tip_span_description" style="display:none;">10-2000字，介绍一下具体情况</span> 
+                                                    <span id="descriptionErr"class="validatorMsg validatorError" style="display:none;">10-2000字，介绍一下具体情况</span>
+                                                    <span id="describeRig" class="validatorRight"></span>
+                                                    <span id="describeNull" class="validatorNull validatorError">忘记填写描述啦！</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr id="id_tr_minor_category">
+                                            <td valign="top"><i> * </i></td>
+                                            <td valign="top"><span id="title_minor_category">您转让的是</span></td>
+                                            <td>
+                                                <div class="input-control select span4">
+                                                    <select name="type1" autocomplete="off" id="id_type">
+                                                    <option value="">请选择</option>
+                                                        <option value="1">家具</option>
+                                                        <option value="2">家用电器</option>
+                                                        <option value="3">家居百货</option>
+                                                        <option value="4">设备/办公用品</option>
+                                                        <option value="5">母婴/儿童用品</option>
+                                                        <option value="6">老年用品</option>
+                                                        <option value="7">服饰/箱包</option>
+                                                        <option value="8">美容护肤/化妆品</option>
+                                                        <option value="9">图书/音乐/运动</option>
+                                                        <option value="11">食品/保健品</option>
+                                                        <option value="12">闲置礼品</option>
+                                                        <option value="13">二手手机</option>
+                                                        <option value="14">二手笔记本</option>
+                                                        <option value="15">台式电脑/网络</option>
+                                                        <option value="16">电子数码</option>
+                                                        <option value="17">虚拟物品</option>
+                                                        <option value="216">出行车辆</option>
+                                                        <option value="18">其他物品</option>
+                                                    </select>
+                                                </div> 
+                                                 <span id="categoryNull" class="validatorMsg validatorError"style="display:none;">忘记选择分类啦</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><i> * </i></td>
+                                            <td id="change_phone">交易地点</td>
+                                            <td width="88%">
+                                                <div class="input-control select span4"> 
+                                                    <select id="id_district"name="address" autocomplete="off">
+                                                        <option>小区居委会</option>
+                                                    </select> 
+                                                </div> 
+                                                <span class="tips_wrap"> 
+                                                    <span id="tip_span_address"></span>
+                                                    <span id="addressErr" class="validatorMsg validatorError"style="display:none;">请选择地址</span> 
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><i> * </i></td>
+                                            <td id="change_phone">联系电话</td>
+                                            <td width="88%">
+                                                <div class="input-control text span4">
+                                                    <input type="text" autocomplete="off" name="contactTel"id="id_phone" />
+                                                </div>
+                                             <span class="tips_wrap"> 
+                                                <span id="tip_span_phone"></span> 
+                                                <span id="phoneErr" class="validatorMsg validatorError"style="display:none;">电话格式不对哦</span> 
+                                                    <span id="phoneRig"class="validatorRight"></span> 
+                                                    <span id="phoneNull"class="validatorNull validatorError">忘记填写联系电话啦！</span> 
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><i> * </i></td>
+                                            <td>联系人</td>
+                                            <td>
+                                                <div class="input-control text span4">
+                                                    <input type="text" autocomplete="off" name="contactName"id="id_person" />
+                                                </div>
+                                                 <span id="tip_span_person"></span> 
+                                                 <span id="personErr"class="validatorMsg validatorError" style="display:none;">2-6个字母或汉字</span>
+                                                 <span id="personRig" class="validatorRight"></span> 
+                                                 <span id="personNull" class="validatorNull validatorError">忘记填写联系人啦！</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">&nbsp;</td>
+                                            <td valign="top">上传照片</td>
+                                            <td style="width:660px;">
+                                                <div class="ui-uploader" id="uploader_container">
+                                                    <div class="ui-uploader-action">
+                                                        <div class="ui-uploader-iframe-container">
+                                                            <div>
+                                                                <input type="file" name="file" id="file"
+                                                                    onchange="fileUpLoad(this.value)" style=";" />
+                                                                <div id="pic1" class="pic1"
+                                                                    onmouseover="this.style.cursor='pointer'"></div>
+                                                            </div>
+                                                        </div>
+                                                        <a href="###" class="ui-uploader-cloud-photo-btn"data-puid="">&nbsp;</a> 
+                                                        <span id="tip_span_input_upload_image"></span>
+                                                    </div>
+                                                    
+                                                    <ul class="ui-uploader-thumbImages ui-uploader-sortable" id="imglist"></ul>
+                                                </div> 
+                                                <input id="input_upload_image" name="images" type="hidden">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                
+                                                <button id="pub_submit" class="default large"  style="margin-left: 184px;" 
+                                                	onclick="submitYouFrom()">发布</button>
+                                                
+                                                <!-- 
+                                                <input type="submit" value="提交">
+                                                 -->
+                                                 <!-- 
+                                                 <input type="button" value="提交1" onclick="submitYouFrom()"/>
+                                                  -->
+                                            </td>
+                                        </tr>
+                                        <tr></tr>
+
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 物品单 -->
+
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="page-footer-content">
+                <!--<div data-load="header.html"></div>-->
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div th:include="market_template :: copy"></div>
+</body>
+</html>

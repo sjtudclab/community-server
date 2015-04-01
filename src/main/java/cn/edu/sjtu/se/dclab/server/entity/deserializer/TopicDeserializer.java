@@ -23,18 +23,18 @@ public class TopicDeserializer extends JsonDeserializer<Topic> {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
         Topic topic = new Topic();
-        topic.setName(node.get("name").asText());
+        //topic.setName(node.get("name").asText());
         topic.setContent(node.get("content").asText());
-        topic.setDesc(node.get("desc").asText());
+        //topic.setDesc(node.get("desc").asText());
         topic.setAttachment(node.get("attachment").asText());
-        topic.setStartTime(new Date(node.get("start_time").asLong()));
-        topic.setEndTime(new Date(node.get("end_time").asLong()));
-        topic.setParentTopicId(node.get("parent_topic_id").asLong());
+        //topic.setStartTime(new Date(node.get("start_time").asLong()));
+        //topic.setEndTime(new Date(node.get("end_time").asLong()));
+        //topic.setParentTopicId(node.get("parent_topic_id").asLong());
         topic.setTopicTypeId(node.get("topic_type_id").asLong());
         topic.setVoteCount(0);
 
         String[] options = node.get("options").asText().split(",");
-        Collection<TopicOption> tos = new ArrayList<>();
+        Collection<TopicOption> tos = new ArrayList<TopicOption>();
 
         for (String option : options) {
             TopicOption to = new TopicOption();

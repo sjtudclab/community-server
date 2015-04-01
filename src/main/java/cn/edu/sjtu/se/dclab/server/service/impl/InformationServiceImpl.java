@@ -23,10 +23,10 @@ public class InformationServiceImpl implements InformationService{
 	}
 	
 	@Override
-	public Collection<Information> findAll(int type) {
+	public Collection<Information> findAllByType(int type) {
 		// TODO Auto-generated method stub
 		
-		return informationMapper.findAll(type);
+		return informationMapper.findAllByType(type);
 	}
 
 	@Override
@@ -34,11 +34,21 @@ public class InformationServiceImpl implements InformationService{
 		// TODO Auto-generated method stub
 		return informationMapper.findById(id, type);
 	}
+	
+	@Override
+	public Collection<Information> findByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return informationMapper.findByKeyword(keyword);
+	}
 
 	@Override
 	public void save(Information information) {
 		// TODO Auto-generated method stub
 		informationMapper.save(information);
+	}
+
+	public void blockById(long id) {
+		informationMapper.blockById(id);
 	}
 
 }

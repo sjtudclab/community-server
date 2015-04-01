@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>物业服务人员页面</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+                <div class="offset1">
+                    <h1>
+                        <a href="/"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                        物业维修
+                    </h1>
+                </div>
+                <div class="grid fluid">
+                    <div class="row">
+                       
+                            <div class="span3 offset1">
+                                <nav class="sidebar light">
+                                    <ul>
+                                        <li class="title">功能操作</li>
+                                        <li class="stick bg-green"><a href="#"><i class="icon-pencil"></i>申请维修资格</a></li>
+                                        <li class="stick bg-red"><a href="#"><i class="icon-cycle"></i>查询审批进度</a></li>
+                                        <li class="stick bg-blue"><a href="#"><i class="icon-cube"></i>查看物业维修单</a></li>
+                                        <li class="stick bg-yellow"><a href="#"><i class="icon-comments"></i>记录物业维修情况</a></li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <!--<div class="span1"></div>-->
+
+                            <div class="span6 offset1" >
+                                <!-- 申请物业维修 -->
+                                <div id="fill_form" class="bg-grayLighter" style="display:all">
+                                    <div class="row">
+                                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;申请维修资格</h2>
+                                        <div>
+                                            
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>真实姓名：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control text" data-role="input-control">
+                                                        <input type="text" value="" placeholder="您的姓名"/>
+                                                        <button class="btn-clear"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>是否具有资格证：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control radio default-style">
+                                                        <label>
+                                                            <input type="radio" name="radio_apply" checked />
+                                                            <span class="check"></span>
+                                                            是
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="radio_apply"/>
+                                                            <span class="check"></span>
+                                                            否
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>从事维修时间：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control select">
+                                                        <select>
+                                                            <option>两年以内</option>
+                                                            <option>两到五年</option>
+                                                            <option>五年以上</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>联系地址：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control text" data-role="input-control">
+                                                        <input type="text" value="" placeholder="联系地址"/>
+                                                        <button class="btn-clear"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>联系电话：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control text" data-role="input-control">
+                                                        <input type="text" value="" placeholder="联系电话"/>
+                                                        <button class="btn-clear"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>对自己的评价：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control textarea">
+                                                        <textarea autocomplete="off"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="span2 offset4">
+                                                    <button class=" bg-blue">申请</button>
+                                                </div>
+                                                <div class="span2">
+                                                    <button class="">取消</button>
+                                                </div>
+                                            </div>
+                                            <div class="row"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End 申请物业维修 -->
+
+                                <!-- 查看报修进度 -->
+                                <div class="bg-green" style="display:none">
+                                    <div class="row">
+                                        <h2>评价本次服务</h2>
+                                    </div>
+                                </div>
+                                <!-- End 查看报修进度 -->
+                            </div>
+
+                    </div>
+                    
+                </div>
+
+    </div>
+    <div th:include="repair_template :: copy"></div>
+</body>
+</html>

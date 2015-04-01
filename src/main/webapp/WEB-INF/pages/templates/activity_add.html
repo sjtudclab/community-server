@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>社区活动</title>
+</head>
+<body class="metro">
+
+<div class="page">
+    <h1>
+        <a th:href="@{/start-screen-committee}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        社区活动
+    </h1>
+
+	<form role="form" method="post" th:action="@{/rest/information}" id="submitForm"
+		  enctype="multipart/form-data">
+		<div class="grid">
+			<div class="row">
+				<div class="span7">
+					<textarea id="content" name="content" rows="10" cols="100"></textarea>
+					<input name="from" type="hidden" id="from" />
+					<input name="infotype" value="2" type="hidden" />
+					附件：<br/>
+					<input type="file" name="file" id="attachment" />
+				</div>
+			</div>
+		</div>
+
+		<button class="btn btn-default" id="submitButton">发布</button>
+	</form>
+
+</div>
+
+<div th:include="login_footer :: copy"></div>
+
+<script type="text/javascript">
+	$('#from').val(currentUserId());
+
+	$('#submitForm').submit(function() {
+		alert('提交成功');
+		window.location = getUrl('committee/activity');
+		return false;
+	});
+</script>
+
+</body>
+</html>

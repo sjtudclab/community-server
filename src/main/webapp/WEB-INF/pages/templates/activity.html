@@ -1,0 +1,63 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<html>
+  <head>
+    <title>社区公告</title>
+    
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    
+    <link th:href="@{/css/metro-bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/iconFont.css}" rel="stylesheet">
+    <link th:href="@{/css/docs.css}" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script th:src="@{/js/modernizr.min.js}"></script>    
+  </head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+                <h1>
+                    <a th:href="@{/start-screen-resident}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+					社区活动
+                </h1>
+  
+    <div class="timeline animated"> 
+      
+    <span id ="announce"></span>  
+      
+    </div>    
+    <script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+   	<script type="text/javascript">
+   	$(document).ready(function(){
+   		$.ajax({
+            type: "GET",
+            url: getUrl('rest/information/1'),
+            dataType: "json",
+            success: function(data) {
+            	console.log(data);
+            	$('#announce').empty();
+                $.each(data,function(commentIndex, comment) {
+                	var dt = "<div class=\"timeline-row\">"+"<div class=\"timeline-icon\">"+"<div class=\"bg-primary\">"+"<i class=\"fa fa-pencil\"></i></div></div>";
+                	var dp = "<div class=\"panel timeline-content\">"+"<div class=\"panel-body\">";
+                	var ti = "<div class=\"timeline-time\">";
+                	var u = "rest/"+comment.attach;
+                	var images = "<img class=\"img-responsive\"src=\""+getUrl(u)+"\">";
+                	var de = "</div>";
+                	var unixTimestamp = new Date(comment.submitTime); 
+					commonTime = unixTimestamp.toLocaleString();
+                    $('#announce').append(dt+ti+commonTime+de+dp+images+"<p>"+comment.content+"</p>"+de+de+de); 
+                })
+            },//success
+            error: function(data) {
+            	console.log(data);
+            }
+        });//ajax
+   	});
+   	</script>
+   
+  </body>
+</html>

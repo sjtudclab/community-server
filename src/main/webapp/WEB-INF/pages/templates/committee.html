@@ -107,7 +107,6 @@
     }
     
     var userPositionUrl = getUrl("resident/user_position");
-
     (function($){
         $.ajax({
             type: "GET",
@@ -116,7 +115,7 @@
                 var users = [];
                 $(data).each(function(i, d) {
                     for (var r in d.roles) {
-                        users.push({userid: d.id, username: d.username, role: d.roles[r], imageUrl: d.image});
+                        users.push({userid: d.id, username: d.name, role: d.roles[r], imageUrl: d.image});
                     }
                 });
                 var police = $(users).filter(function(i,d) {return d.role.name.includes('民警');})[0];
@@ -131,13 +130,13 @@
                     var position = el.role.name;
                     var html = 
                         '<div class="image-container shadow">' +
-                        '<a  href="{0}"><img src="{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'Committee'), 
+                        '<a  href="{0}"><img src="{1}" class=""></a>'.format(userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'committee'), 
                         		getUrl('images/' + el.imageUrl)) +
                             '<div class="overlay">' +
                             	'<input id="sendtoid" type="hidden">{0}</input>'.format(userid) +
                                 '<span class="name-text">{0}</span><br>'.format(name) +
                                 '<span class="position-text">{0}</span>'.format(position) +
-                            '</div>' 
+                            '</div>' +
                         '</div>';
                     $('.person-list-container').append($(html));
                 });

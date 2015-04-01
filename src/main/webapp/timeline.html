@@ -1,33 +1,61 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
 <html>
   <head>
-    <title>Timeline</title>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" media="all" rel="stylesheet">
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" media="all" rel="stylesheet">
-    <link href="css/metro-bootstrap.css" rel="stylesheet">
-    <link href="css/iconFont.css" rel="stylesheet">
-    <link href="css/docs.css" rel="stylesheet">
-    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/styles.css" media="all" rel="stylesheet">
-    <script src="js/modernizr.min.js"></script>
+    <title>绀惧尯鍏憡</title>
+    
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    
+    <link th:href="@{/css/metro-bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/metro-bootstrap-responsive.css}" rel="stylesheet">
+    <link th:href="@{/css/iconFont.css}" rel="stylesheet">
+    <link th:href="@{/css/docs.css}" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script th:src="@{/js/modernizr.min.js}"></script>    
   </head>
 <body class="metro">
     <header class="bg-dark" data-load="header.html"></header>
                 <h1>
                     <a href="/start-screen-resident.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
-					社区公告
+					绀惧尯鍏憡
                 </h1>
   
     <div class="timeline animated"> 
       
+      
+      <div class="timeline-row">
+        <div class="timeline-time">
+          <small>Oct 30</small>4:53 PM
+        </div>
+        <div class="timeline-icon">
+          <div class="bg-primary">
+            <i class="fa fa-pencil"></i>
+          </div>
+        </div>
+        <div class="panel timeline-content">
+          <div class="panel-body">
+            <h2>
+              This is a title for this timeline post
+            </h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      
+      
     <span id ="announce"></span>  
       
     </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-   	<script src="js/common.js"></script>
+    <script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+   	<script th:src="@{/js/common.js}"></script>
    	<script type="text/javascript">
    	$(document).ready(function(){
    		$.ajax({

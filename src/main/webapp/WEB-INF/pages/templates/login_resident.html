@@ -55,7 +55,7 @@
 			        </fieldset>
 			    </form>
 			    <div class="card-login" style="display:none">
-			    	<div>请将读卡器连接到电脑上，然后将身份证放置到读卡器上。</div>
+			    	<div>请将读卡器连接到电脑上，然后点击确认登陆。</div>
 			    	<button class="button primary" style="margin-top: 15px" id="cardLoginBtn">确认登陆</button>
 			    </div>
 
@@ -91,13 +91,14 @@
 		if (initPlugin() == false) {
 			return;
 		}
-		var idStr = getIDInformation();
+		var idStr = getDeviceSN();
 		if (idStr == false) {
 			return;
 		}
-		idStr = idStr.match(/[0-9Xx]*/)[0];
+		//idStr = idStr.match(/[0-9Xx]*/)[0];
+		idStr = idStr.slice(0, -1);
 		idStr = md5(idStr);
-		var dataObj = [{name: "cardtype", value: "idcard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "resident"}];
+		var dataObj = [{name: "cardtype", value: "readercard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "resident"}];
 		$.ajax({
 			url: getUrl('rest/users/hardwarelogin'),
 			type: "POST",

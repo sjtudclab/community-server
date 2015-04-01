@@ -5,3 +5,4 @@ target/
 .project
 .idea/
 community-server.iml
+/bin/

@@ -10,4 +10,6 @@ import java.util.Collection;
 public interface ResidentCitizenMapper {
 
     public Collection<ResidentCitizen> findAll();
+
+	public ResidentCitizen findById(long id);
 }
