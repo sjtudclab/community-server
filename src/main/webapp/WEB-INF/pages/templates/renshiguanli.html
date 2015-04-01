@@ -25,11 +25,26 @@
 	  var checkFlag = false;
 	  var adjustFlag = false;
 	  
+	  $("#frameworkCheck").click(function(){
+		 $(this).attr("class","active");
+		 $("#personnelAdjust").attr("class","");
+		 $("#personnelCheck").attr("class","");
+		 $("#check").remove();
+		 $('form').remove();
+		 $('#framework').remove();
+		 
+		 var div = "<div id='framework'><image src='" + getUrl("images/framework.jpg") + "'/></div>";
+		 $("div.span9").append(div);
+		 return false;
+	  });
+	  
 	  $("#personnelCheck").click(function(){
-		  $(this).attr("class","active");
+		   $(this).attr("class","active");
 		   $("#personnelAdjust").attr("class","");
+		   $("#frameworkCheck").attr("class","");
 		   $("form").remove();
 		   $("#check").remove();
+		   $('#framework').remove();
 		   
 		   $.get(getUrl("rest/managementCitizens/committee") ,"",function(users,status){
 			   var divs = "<div id='check'>";
@@ -53,9 +68,11 @@
 	  $("#personnelAdjust").click(function(){
 		   $(this).attr("class","active");
 		   $("#personnelCheck").attr("class","");
+		   $("#frameworkCheck").attr("class","");
 		   $("#check").remove();
 		   $('form').remove();
-		  
+		   $('#framework').remove();
+		   
 		    var form = $("<form>");
 		    var table = $("<table  class='table table-bordered' contenteditable='true'>")
 		    var thead = $("<thead>");
@@ -175,7 +192,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a> <a class="brand" href="#">人事管理系统</a>
 				<div class="btn-group pull-right">
-					<a class="btn" href="my-profile.html"><i class="icon-user"></i>
+					<a class="btn" href="#"><i class="icon-user"></i>
 						管理员</a> <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 						<span class="caret"></span>
 					</a>
@@ -199,6 +216,7 @@
 				<div class="well sidebar-nav">
 		            <ul class="nav nav-list">
 		             <!--  <li class="nav-header"><i class="icon-wrench"></i> 人事管理</li> -->
+		              <li id="frameworkCheck"><a href="#">人事架构</a></li>
 		              <li class="active" id="personnelCheck"><a  href="#">查看人事</a></li>
 		              <li id="personnelAdjust"><a href="#">调整人事</a></li>
 		            </ul>
