@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.UserPublishedGoodsMapper">
 
 	<select id="getPublishedInfoById" parameterType="java.lang.Integer" resultMap="dataResultMap">
-		select * from user_publish_goods where userID=#{id};
+		select * from user_publish_goods where user_id=#{id};
 	</select>
 	
 	<select id="getGoodsByStage" parameterType="java.lang.String" resultMap="dataResultMap">
@@ -13,22 +13,22 @@
 	</select>
 	
 	<insert id="createPublishedGoods" parameterType="UserPublishedGoods">
-		insert into user_publish_goods (userID,goodsID,stage) 
-			values (#{userID},#{goodsID},#{stage});
+		insert into user_publish_goods (user_id,goods_id,stage) 
+			values (#{user_id},#{goods_id},#{stage});
 		<selectKey resultType="int">
 			SELECT LAST_INSERT_ID();
 		</selectKey>
 	</insert>
 	
 	<update id="updateGoodsStage" parameterType="UserPublishedGoods">
-		update user_publish_goods set stage = #{stage} where goodsID = #{goodsID};
+		update user_publish_goods set stage = #{stage} where goods_id = #{goods_id};
 	</update>
 	
 	
 
 	<resultMap type="UserPublishedGoods" id="dataResultMap">
-		<id property="userID" column="userID" />
-		<result property="goodsID" column="goodsID" />
+		<id property="userID" column="user_id" />
+		<result property="goodsID" column="goods_id" />
 		<result property="stage" column="stage" />
 	</resultMap>
 	

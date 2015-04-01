@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.SecondGoodsMapper">
 
 	<select id="getSecondGoodsById" parameterType="java.lang.Integer" resultMap="secondGoodsResultMap">
-		select * from second_goods where id=#{id};
+		select * from second_goods where goods_id=#{goods_id};
 	</select>
 	
 	<select id="getAllSecondGoods" parameterType="java.lang.Integer" resultMap="secondGoodsResultMap">
@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="getMaxGoodsId" resultType="java.lang.Integer">
-		select max(id) from second_goods;
+		select max(goods_id) from second_goods;
 	</select>
 	
 	<select id="searchGoodsByCategory" parameterType="java.lang.String" resultMap="secondGoodsResultMap">
@@ -21,8 +21,8 @@
 	</select>
 	
 	<insert id="createSecondGoods" parameterType="SecondGoods">
-		insert into second_goods (id,category,type,title,imagePath,`desc`,owner,phone) 
-			values (#{id},#{category},#{type},#{title},#{imagePath},#{desc},#{owner},#{phone});
+		insert into second_goods (goods_id,category,type,title,imagePath,`desc`,owner,phone) 
+			values (#{goods_id},#{category},#{type},#{title},#{imagePath},#{desc},#{owner},#{phone});
 		<selectKey resultType="int">
 			SELECT LAST_INSERT_ID();
 		</selectKey>
@@ -30,7 +30,7 @@
 	
 
 	<resultMap type="SecondGoods" id="secondGoodsResultMap">
-		<id property="id" column="id" />
+		<id property="id" column="goods_id" />
 		<result property="category" column="category" />
 		<result property="type" column="type" />
 		<result property="title" column="title" />

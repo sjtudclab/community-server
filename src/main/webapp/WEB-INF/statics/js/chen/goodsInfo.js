@@ -27,7 +27,7 @@ $(document).ready(function(){
 	//alert("通过URL获取参数:" + $goodsID);
 
 	$.ajax({
-		url:"rest/SecondGoods/" + $goodsID,
+		url:"/community-server/rest/SecondGoods/" + $goodsID,
 		type:"get",
 		dataType:"json",
 		success:function(obj){
