@@ -16,8 +16,8 @@ public class Topic {
 	@JsonProperty(value = "topic_id")
 	private long topicId;
 
-	@JsonProperty(value = "name")
-	private String name;
+	@JsonProperty(value = "title")
+	private String title;
 
 	@JsonProperty(value = "content")
 	private String content;
@@ -56,11 +56,11 @@ public class Topic {
 		return this.topicId;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getName() {
-		return this.name;
+	public String getTitle() {
+		return this.title;
 	}
 	
 	public void setContent(String content) {

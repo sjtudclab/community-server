@@ -6,17 +6,19 @@
 <meta name="robots" content="NOODP" />
 <meta http-equiv="Content-Type" content="text/html;charset=gbk" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.css}"
-	rel="stylesheet">
 </head>
-<body>
+<body class="metro">
 	<div class="container">
+        <h1>
+            <a th:href="@{/start-screen-committee}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+          	  舆情管理<small class="on-right"></small>
+        </h1>
 
-		<div class="col-lg-6">
+		<div class="col-lg-6" style="margin-bottom:15px">
 			<div class="input-group">
-				<input type="text" id="keyword" class="form-control" placeholder="Search for...">
+				<input type="text" id="keyword" class="form-control" placeholder="搜索关键字...">
 				<span class="input-group-btn">
-					<button class="btn btn-default searchBtn" type="button">Search</button>
+					<button class="button primary searchBtn" type="button">搜索</button>
 				</span>
 			</div>
 			<!-- /input-group -->
@@ -27,12 +29,12 @@
 			<div class="panel panel-default">
 				<!-- Default panel contents -->
 				<!-- Table -->
-				<table class="table">
+				<table class="table hovered bordered">
 					<thead>
 						<tr>
-							<th>#</th>
-							<th>关键词</th>
-							<th>操作</th>
+							<th class="text-left">#</th>
+							<th class="text-left">关键词</th>
+							<th class="text-left">操作</th>
 						</tr>
 					</thead>
 					<tbody id="results-list">
@@ -41,6 +43,12 @@
 			</div>
 		</div>
 	</div>
+	<!-- <link th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.css}" rel="stylesheet"> -->
+	
+	<link th:href="@{/css/metro-bootstrap.css}" rel="stylesheet">
+	<link th:href="@{/css/metro-bootstrap-responsive.css}" rel="stylesheet">
+    <link th:href="@{/css/iconFont.css}" rel="stylesheet">
+
     <script th:src="@{/js/jquery/jquery.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
 	<script type="text/javascript">
@@ -70,7 +78,7 @@
 						$('#results-list').append('<tr infoid="{0}">'.format(el.informationId) +
 							'<th scope="row">{0}</th>'.format(el.informationId) + 
 							'<td>{0}</td>'.format(el.content) +
-							'<td><a class="btn btn-default btn-block-item">屏蔽</a></td>' +
+							'<td><a class="button info btn-block-item">屏蔽</a></td>' +
 						'</tr>') 
 					 });
 				},
