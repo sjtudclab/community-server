@@ -39,7 +39,6 @@
 	</resultMap>
 	
 	<resultMap type="UserRelation" id="UserRelationMap">
-		<id property="id" column="user_relation_id" />
 		<result property="followerId" column="follower_id" />
 		<result property="followedId" column="followed_id" />
 		<association property="relationType" column="relation_type_id" resultMap="RelationTypeMap" />

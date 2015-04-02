@@ -4,9 +4,16 @@ package cn.edu.sjtu.se.dclab.server.entity;
  *@author changyi yuan
  */
 public class UserRelation {
+	private int id;
 	private long followerId;
 	private long followedId;
-	private RelationType type;
+	private RelationType relationType;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public long getFollowerId() {
 		return followerId;
 	}
@@ -19,10 +26,10 @@ public class UserRelation {
 	public void setFollowedId(long followedId) {
 		this.followedId = followedId;
 	}
-	public RelationType getType() {
-		return type;
+	public RelationType getRelationType() {
+		return relationType;
 	}
-	public void setType(RelationType type) {
-		this.type = type;
+	public void setRelationType(RelationType relationType) {
+		this.relationType = relationType;
 	}
 }

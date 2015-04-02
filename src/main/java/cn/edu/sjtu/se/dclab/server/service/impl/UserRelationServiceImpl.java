@@ -59,7 +59,7 @@ public class UserRelationServiceImpl implements UserRelationService {
 		UserRelation relation = userRelationMapper.findByFromIdAndToIdAndType(fromId, toId, type);
 		if(relation == null)
 			return null;
-		User user = userMapper.findByUserId(relation.getFollowerId());
+		User user = userMapper.findByUserId(relation.getFollowedId());
 		return user;
 	}
 
