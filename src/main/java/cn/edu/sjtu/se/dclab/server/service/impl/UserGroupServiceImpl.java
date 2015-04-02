@@ -1,6 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import cn.edu.sjtu.se.dclab.server.entity.UserGroup;
 import cn.edu.sjtu.se.dclab.server.mapper.UserGroupMapper;
@@ -10,6 +11,7 @@ import cn.edu.sjtu.se.dclab.server.service.UserGroupService;
  *2015年4月2日 下午4:28:21
  *@author changyi yuan
  */
+@Service
 public class UserGroupServiceImpl implements UserGroupService {
 	
 	@Autowired

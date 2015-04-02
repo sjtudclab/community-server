@@ -107,6 +107,17 @@ public class InformationServiceImpl implements InformationService {
 		Collection<Information> infos = informationMapper
 				.findByFromIdAndToIdAndType(userId, friendId,
 						Constants.INFORMATION_FRIEND_MESSAGE);
+		return resolve(infos, startId, count);
+	}
+
+	@Override
+	public Collection<Information> findByToIdAndType(long toId, String type,
+			long startId, long count) {
+		Collection<Information> infos = informationMapper.findByToIdAndType(toId, type);
+		return resolve(infos, startId, count);
+	}
+	
+	private Collection<Information> resolve(Collection<Information> infos, long startId,long count){
 		if(infos == null)
 			return null;
 		Information[] infoArray = new Information[infos.size()];

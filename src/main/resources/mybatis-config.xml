@@ -53,6 +53,7 @@
         
         
         <typeAlias alias="Group" type="cn.edu.sjtu.se.dclab.server.entity.Group" />
+        <typeAlias alias="UserGroup" type="cn.edu.sjtu.se.dclab.server.entity.UserGroup" />
 
         <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
 		<typeAlias alias="ContentHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.ContentHandler" />

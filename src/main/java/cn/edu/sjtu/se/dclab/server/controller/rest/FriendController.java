@@ -22,6 +22,7 @@ import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.ApplicationTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.FriendTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
+import cn.edu.sjtu.se.dclab.server.util.TransferUtil;
 
 /**
  * 2015年4月2日 上午9:52:05
@@ -133,7 +134,7 @@ public class FriendController {
 				friendId, startId, count);
 		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
 		for (Information info : infos)
-			transfers.add(convertInformationToMessageTransfer(info));
+			transfers.add(TransferUtil.convertInformationToMessageTransfer(info));
 		return transfers;
 	}
 	
@@ -163,11 +164,4 @@ public class FriendController {
 				user.getName(), user.getImage(), info.getContent());
 	}
 
-	private MessageTransfer convertInformationToMessageTransfer(
-			Information information) {
-		if (information == null)
-			return new MessageTransfer();
-		return new MessageTransfer(information.getInformationId(),
-				information.getContent(), information.getSubmitTime());
-	}
 }
