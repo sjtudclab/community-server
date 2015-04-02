@@ -18,4 +18,6 @@ public interface TopicService {
     public Topic findTopic(long topicId);
 
     public void vote(TopicVote vote);
+
+    public Collection<TopicOption> getResult(long topicId);
 }

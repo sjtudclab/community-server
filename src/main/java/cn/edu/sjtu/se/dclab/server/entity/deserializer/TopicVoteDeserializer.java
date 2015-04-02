@@ -22,7 +22,7 @@ public class TopicVoteDeserializer extends JsonDeserializer<TopicVote> {
         vote.setOptionId(node.get("option_id").asLong());
         vote.setUserId(node.get("user_id").asLong());
         vote.setTopicId(node.get("topic_id").asLong());
-        
+
         return vote;
     }
 }

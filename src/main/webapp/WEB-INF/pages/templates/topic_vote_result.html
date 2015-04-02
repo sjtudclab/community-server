@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>投票结果</title>
+</head>
+<body class="metro">
+
+<div class="page">
+    <h1>
+        <a th:href="@{/resident/topic}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        投票结果
+    </h1>
+
+    <div class="container">
+        <div class="row show-grid">
+            <div id="display_region">
+                <h1 id="title"></h1>
+                <img src="attachment" />
+                <p id="content"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <div th:include="login_footer :: copy"></div>
+
+    <style type="text/css">
+        img[src="null"] {
+            display:none;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //alert("Goods Info Page");
+
+            $.extend({
+                getTopicId: function() {
+                    return window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
+                }
+            });
+
+            $topicId = $.getTopicId();
+
+            $.ajax({
+                url: getUrl('rest/topic/' + $topicId),
+                type:"get",
+                dataType:"json",
+                success:function(obj){
+                    $("#title").html(obj.title);
+                    $("#attachment").attr("src", obj.attachment);
+                    $("#content").html(decodeURI(obj.content));
+
+                    $.each(obj.options, function(index, option) {
+                        $("#display_region").append("<p>{0} : {1} 票</p>".format(option.name, option.voteCount));
+                    })
+                },
+                error:function(){
+                    alert("获取物品"+$goodsID+"信息失败");
+                }
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

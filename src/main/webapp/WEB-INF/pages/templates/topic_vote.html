@@ -7,11 +7,12 @@
     <meta name="description" content="Simple responsive css framework">
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
-    <title>社区公告</title>
+    <title>参与投票</title>
 </head>
 <body class="metro">
-
+<header class="bg-dark"></header>
 <div class="page">
+
     <h1>
         <a th:href="@{/resident/topic}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
         参与投票
@@ -50,15 +51,22 @@
 </style>
 
 <script type="text/javascript">
+    var topicId = 0;
+
     function submit() {
+        var jsonData = {};
+        jsonData["option_id"] = $('input[name="option"]:checked').val();
+        jsonData["user_id"] = currentUserId();
+        jsonData["topic_id"] = topicId;
         $.ajax({
             url: getUrl('rest/topic/vote'),
             type: "post",
-            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(jsonData),
             success:function() {
                 alert("投票成功");
             }
-        });
+        })
     }
 
     $(document).ready(function(){
@@ -70,10 +78,10 @@
             }
         });
 
-        $topicId = $.getTopicId();
+        topicId = $.getTopicId();
 
         $.ajax({
-            url: getUrl('rest/topic/' + $topicId),
+            url: getUrl('rest/topic/' + topicId),
             type:"get",
             dataType:"json",
             success:function(obj){
@@ -84,7 +92,7 @@
                 $.each(obj.options, function(optionIndex, option) {
                     var start = "<tr><th style=\"text-align:left\"><label>";
                     var end = "</label></th></tr>";
-                    var option = "<input type=\"checkbox\" value=\"" + option.id + "\">" + option.name;
+                    var option = "<input type=\"radio\" value=\"" + option.id + "\" name=\"option\">" + option.name;
 
                     $('#vote_table').append(start + option + end);
                 })
@@ -92,7 +100,7 @@
                 $('#vote_table').append("<tr><th><button onclick=\"submit()\">确定</button></th></tr>");
             },
             error:function(){
-                alert("获取物品"+$goodsID+"信息失败");
+                alert("获取物品" + $goodsID + "信息失败");
             }
         });
     });

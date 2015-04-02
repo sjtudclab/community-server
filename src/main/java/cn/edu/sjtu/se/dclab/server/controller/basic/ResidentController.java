@@ -89,6 +89,11 @@ public class ResidentController {
     
     @RequestMapping("setting")
     public String settings() {
-    	return "settings";
+        return "settings";
+    }
+
+    @RequestMapping(value = "vote/result/{id}", method = RequestMethod.GET)
+    public String voteResult() {
+        return "topic_vote_result";
     }
 }

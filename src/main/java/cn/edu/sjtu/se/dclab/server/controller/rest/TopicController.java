@@ -84,4 +84,10 @@ public class TopicController {
     public void vote(@RequestBody TopicVote vote) {
         topicService.vote(vote);
     }
+
+    @RequestMapping(value = "vote/result/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Collection<TopicOption> voteResult(@PathVariable(value = "id") long id) {
+        return topicService.getResult(id);
+    }
 }
