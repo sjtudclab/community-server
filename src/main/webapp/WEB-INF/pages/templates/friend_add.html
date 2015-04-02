@@ -1,6 +1,14 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>社区公告</title>
+</head>
 <body class="metro">
 <div class="page">
     <h1>
@@ -75,8 +83,7 @@
             success: function(data) {
                 var apartmentList = "";
                 $.each(data, function(index, value) {
-                    var apartment = "<option value=\"" + value.id + "\">" + value.name + "</option>";
-                    apartmentList += apartment;
+                    var apartment = "<option value=\"" + value.user + "\">" + value.name + "</option>";
                     apartmentList += apartment;
                 });
 
