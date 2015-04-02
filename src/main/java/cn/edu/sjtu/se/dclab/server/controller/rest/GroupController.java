@@ -98,7 +98,7 @@ public class GroupController {
 	public String addIntoGroup(@PathVariable long groupId,
 			@PathVariable long userId) {
 		UserGroup userGroup = new UserGroup();
-		userGroup.setGourId(groupId);
+		userGroup.setGroupId(groupId);
 		userGroup.setUserId(userId);
 
 		userGroupService.create(userGroup);
