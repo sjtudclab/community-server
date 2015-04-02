@@ -23,10 +23,10 @@
         
         <!-- 返回主页 -->
         <div class="offset1">
-            <h1><a href="修改为用户页面url"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的好友</h1>
+            <h1><a th:href="@{/resident/neighbor}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的好友</h1>
             <ul class="nav nav-pills">
-            	<li class="active"><a href="添加好友页面">添加好友</a></li>
-            	<li><a href="好友申请处理页面">好友申请<span id="requestnum" class="badge"></span></a></li>
+            	<li class="active"><a th:href="@{/resident/neighbor/friend/add}">添加好友</a></li>
+            	<li><a th:href="@{/resident/neighbor/friend/request}">好友申请<span id="requestnum" class="badge"></span></a></li>
             </ul>
         </div>
         <!-- End 返回主页 -->

@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+
+    <!-- 返回主页 -->
+    <div class="offset1">
+        <h1><a th:href="@{/resident/neighbor/friend}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>好友申请</h1>
+    </div>
+    <!-- End 返回主页 -->
+
+    <div class="grid fluid offset1">
+
+        <!-- 我关注的物品 -->
+        <div>
+            <p>选择楼栋</p>
+            <select id="building_selection" onchange="building_selection_changed(this)">
+            </select>
+            <p>选择单元</p>
+            <select id="apartment_selection">
+            </select>
+            <p>选择居民</p>
+            <select id="citizen_selection">
+            </select>
+        </div>
+        <!-- End 我关注的物品 -->
+
+    </div>
+
+</div>
+
+<script type="application/javascript">
+    function building_selection_changed(obj) {
+        $.ajax({
+            url: getUrl('rest/building/' + obj.value + '/apartments')
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                var apartmentList = "";
+                $.each(data, function(index, value) {
+                    var apartment = "<option value=\"" + value.id + "\">" + value.name + "</option>";
+                    apartmentList += apartment;
+                });
+
+                $('#apartment_selection').empty().append(apartmentList);
+            }
+        })
+    };
+
+    function apartment_selection_changed(obj) {
+
+    };
+
+    $(document).ready(function() {
+        $.ajax({
+            url: getUrl('rest/buildings'),
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                var bdList = "";
+                $.each(data, function(index, value) {
+                    var bd = "<option value=\"" + value.id + "\">" + value.name + "</option>";
+                    bdList += bd;
+                })
+
+                $('#building_selection').append(bdList);
+            }
+        })
+    });
+</script>
+</div>
+</body>
+</html>
