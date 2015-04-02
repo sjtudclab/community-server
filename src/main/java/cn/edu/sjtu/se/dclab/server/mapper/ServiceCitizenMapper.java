@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen;
 
 /**
@@ -8,4 +10,6 @@ import cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen;
 public interface ServiceCitizenMapper {
 
 	public ServiceCitizen findById(long id);
+
+	public ServiceCitizen findByUserId(@Param("userId") long userId);
 }

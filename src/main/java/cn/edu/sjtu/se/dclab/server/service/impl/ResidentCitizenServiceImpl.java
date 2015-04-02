@@ -66,7 +66,7 @@ public class ResidentCitizenServiceImpl implements ResidentCitizenService {
 	}
 
 	@Override
-	public ResidentCitizenService findByUserId(long userId) {
-		return null;
+	public ResidentCitizen findByUserId(long userId) {
+		return rcMapper.findByUserId(userId);
 	}
 }

@@ -6,9 +6,9 @@ import java.util.Collection;
 import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
 import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
+import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.User;
-import cn.edu.sjtu.se.dclab.server.service.ResidentCitizenService;
 import cn.edu.sjtu.se.dclab.server.transfer.CitizenTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.FriendTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
@@ -47,17 +47,30 @@ public class TransferUtil {
 	public static CitizenTransfer convertUserAndCitizenToCitizenTransfer(
 			User user, ManagementCitizen citizen) {
 		return new CitizenTransfer(user.getId(), citizen.getId(),
-				user.getUsername(), user.getImage(), user.getName(), citizen.getName(),
-				citizen.getGender(), citizen.getAge(), citizen.getPhone(), user.getEmail(), Constants.IDENTIFICATION_TYPE_ID.equals(citizen.getIdentificationType()));
+				user.getUsername(), user.getImage(), user.getName(),
+				citizen.getName(), citizen.getGender(), citizen.getAge(),
+				citizen.getPhone(), user.getEmail(),
+				Constants.IDENTIFICATION_TYPE_ID.equals(citizen
+						.getIdentificationType()));
 	}
 
 	public static CitizenTransfer convertUserAndCitizenToCitizenTransfer(
-			User user, ResidentCitizenService citizen) {
-		return null;
+			User user, ResidentCitizen citizen) {
+		return new CitizenTransfer(user.getId(), citizen.getId(),
+				user.getUsername(), user.getImage(), user.getName(),
+				citizen.getName(), citizen.getGender(), citizen.getAge(),
+				citizen.getPhone(), user.getEmail(),
+				Constants.IDENTIFICATION_TYPE_ID.equals(citizen
+						.getIdentificationType()));
 	}
 
 	public static CitizenTransfer convertUserAndCitizenToCitizenTransfer(
 			User user, ServiceCitizen citizen) {
-		return null;
+		return new CitizenTransfer(user.getId(), citizen.getId(),
+				user.getUsername(), user.getImage(), user.getName(),
+				citizen.getName(), citizen.getGender(), citizen.getAge(),
+				citizen.getPhone(), user.getEmail(),
+				Constants.IDENTIFICATION_TYPE_ID.equals(citizen
+						.getIdentificationType()));
 	}
 }

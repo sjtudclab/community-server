@@ -22,23 +22,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
+import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.User;
-import cn.edu.sjtu.se.dclab.server.service.CitizenService;
 import cn.edu.sjtu.se.dclab.server.service.ManagementCitizenService;
 import cn.edu.sjtu.se.dclab.server.service.ResidentCitizenService;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;
 import cn.edu.sjtu.se.dclab.server.service.ServiceCitizenService;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.CitizenTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 import cn.edu.sjtu.se.dclab.server.util.TransferUtil;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 2015年3月11日 下午6:24:50
@@ -188,7 +187,7 @@ public class UserController {
 			return TransferUtil.convertUserAndCitizenToCitizenTransfer(user,citizen);
 		} else if (Constants.USER_TYPE_RESIDNET.equals(user.getUserType()
 				.getType())) {
-			ResidentCitizenService citizen = residentCitizenService
+			ResidentCitizen citizen = residentCitizenService
 					.findByUserId(user.getId());
 			return TransferUtil.convertUserAndCitizenToCitizenTransfer(user,citizen);
 		} 

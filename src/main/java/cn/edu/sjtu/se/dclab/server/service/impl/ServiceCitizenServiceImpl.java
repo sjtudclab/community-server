@@ -65,7 +65,7 @@ public class ServiceCitizenServiceImpl implements ServiceCitizenService {
 
 	@Override
 	public ServiceCitizen findByUserId(long userId) {
-		return null;
+		return serviceCitizenMapper.findByUserId(userId);
 	}
 
 }

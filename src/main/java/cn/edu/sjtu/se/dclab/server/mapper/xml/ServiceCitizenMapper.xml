@@ -8,6 +8,10 @@
 		select * from citizen_service where citizen_id = #{id};
 	</select>
 
+	<select id="findByUserId" resultMap="ServiceCitizenMap">
+		select * from citizen_service where user_id = #{userId};
+	</select>
+
     <resultMap id="ServiceCitizenMap" type="ServiceCitizen">
         <id property="id" column="citizen_id" />
         <result property="name" column="name" />
