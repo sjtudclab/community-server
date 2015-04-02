@@ -117,14 +117,16 @@ public class GroupController {
 		return transfers;
 	}
 	
-	@RequestMapping(value = "{groupId}/users/{userId}/messages", method = RequestMethod.POST)
+	@RequestMapping(value = "{groupId}/users/{userId}/messages", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String sendMessage(@PathVariable long groupId, @PathVariable long userId, @RequestBody String message){
+		Map<String,Object> map = DataUtil.getFromJson(message);
 		Information information = new Information();
 		information.setFrom(userId);
 		information.setTo(groupId);
-		information.setContent(message);
+		information.setContent((String)map.get("message"));
 		information.setStatus(Constants.INFORMATION_DONE_STATUS);
+		information.setSubmitTime(new Date());
 		informationService.create(information, Constants.INFROMATION_GROUP_MESSAGE);
 		return Result.SUCCESS;
 	}

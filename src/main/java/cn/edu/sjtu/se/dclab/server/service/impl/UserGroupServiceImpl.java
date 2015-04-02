@@ -3,7 +3,9 @@ package cn.edu.sjtu.se.dclab.server.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.edu.sjtu.se.dclab.server.entity.Group;
 import cn.edu.sjtu.se.dclab.server.entity.UserGroup;
+import cn.edu.sjtu.se.dclab.server.mapper.GroupMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserGroupMapper;
 import cn.edu.sjtu.se.dclab.server.service.UserGroupService;
 
@@ -16,6 +18,16 @@ public class UserGroupServiceImpl implements UserGroupService {
 	
 	@Autowired
 	private UserGroupMapper userGroupMapper;
+	@Autowired
+	private GroupMapper groupMapper;
+
+	public GroupMapper getGroupMapper() {
+		return groupMapper;
+	}
+
+	public void setGroupMapper(GroupMapper groupMapper) {
+		this.groupMapper = groupMapper;
+	}
 
 	public UserGroupMapper getUserGroupMapper() {
 		return userGroupMapper;
@@ -28,6 +40,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 	@Override
 	public void create(UserGroup userGroup) {
 		userGroupMapper.save(userGroup);
+		Group group = groupMapper.findById(userGroup.getGroupId());
+		group.setCount(group.getCount() + 1);
+		groupMapper.update(group);
 	}
 
 }

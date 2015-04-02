@@ -146,8 +146,12 @@ public class InformationServiceImpl implements InformationService {
 		}
 		
 		for(Information info : infoArray){
-			if(info.getInformationId() < startId && (i++) < count)
-				results.add(info);
+			if(i < count){
+				if(info.getInformationId() < startId){
+					results.add(info);
+					i++;
+				}
+			}
 			else
 				break;
 		}

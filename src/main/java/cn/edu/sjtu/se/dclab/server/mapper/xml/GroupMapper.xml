@@ -10,10 +10,20 @@
 		WHERE g.group_id = ug.group_id AND ug.user_id = #{userId};
 	</select>
 	
-	<insert id="save" parameterType="Group" useGeneratedKeys="true" keyColumn="group_id">
+	<insert id="save" parameterType="Group" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO `group` (name, count, status, owner, create_time)
 		VALUES(#{name}, #{count}, #{status}, #{owner}, #{createTime});
 	</insert>
+	
+	<select id="findById" parameterType="long" resultMap="GroupMap">
+		SELECT * FROM `group` 
+		WHERE group_id = #{groupId};
+	</select>
+	
+	<update id="update" parameterType="Group">
+		UPDATE `group` SET name = #{name}, count = #{count}, status = #{status}
+		WHERE group_id = #{id};
+	</update>
 	
 	<resultMap type="Group" id="GroupMap">
 		<id property="id" column="group_id" />
