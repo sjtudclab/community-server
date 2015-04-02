@@ -26,6 +26,11 @@ public class NeighborController {
     	return "neighborgroup";
     }
     
+    @RequestMapping("/group/invitation")
+    public String invitation() {
+    	return "groupinvitation";
+    }
+    
     @RequestMapping("/friendchat")
     public String friendchat() {
     	return "friendchat";
