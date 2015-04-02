@@ -1,0 +1,217 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
+    <meta name="product" content="Metro UI CSS Framework">
+
+    <title>个人设置</title>
+</head>
+<body class="metro">
+
+
+    <div class="container">
+        <h1>
+            <a href="Committee.html" class="back-btn"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+          	  <span class="position-name">个人设置</span><small class="on-right"></small>
+        </h1>
+
+        <h3>
+            <strong>姓名: </strong><span class="username">{name}</span>
+        </h3>
+
+        <div class="person-list">
+            <div style="margin-top: 20px" class="person-list-container">
+            </div>
+        </div>
+
+        <div class="detail" style="width: 400px">
+
+			<fieldset style="margin-bottom: 30px">
+				<legend>详细信息</legend>
+
+				<label>用户昵称</label>
+				<div class="input-control text" data-role="input-control">
+					<input type="text" id="nickname" value="{nickName}"
+						placeholder="请添加昵称" />
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+				</div>
+
+				<label>性别</label>
+				<div class="input-control text" data-role="input-control">
+					<div>
+						<div class="input-control radio default-style"
+							data-role="input-control">
+							<label> <input type="radio" name="gender"
+								id="gender-male"> <span class="check"></span> 男
+							</label>
+						</div>
+						<div class="input-control radio  default-style"
+							data-role="input-control">
+							<label> <input type="radio" name="gender"
+								id="gender-female"> <span class="check"></span> 女
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<label>年龄</label>
+				<div class="input-control text" data-role="input-control">
+					<input type="text" id="age" value="{age}" placeholder="请输入年龄" />
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+				</div>
+
+				<label>邮箱地址</label>
+				<div class="input-control text" data-role="input-control">
+					<input type="email" id="email" value="{email}" placeholder="请输入邮箱" />
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+				</div>
+
+				<label>电话</label>
+				<div class="input-control text" data-role="input-control">
+					<input type="text" id="phone" value="{phone}" placeholder="请输入邮箱" />
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+				</div>
+
+				<button class="button large primary" id="btnSubmit">提交</button>
+
+			</fieldset>
+
+			<fieldset style="margin-bottom: 30px">
+				<legend>身份认证</legend>
+				<div class="unverified">
+					<div style="margin-bottom: 10px">
+						您的身份还没有确认，请插入读卡器，然后将身份证放到读卡器上，点击“认证身份”
+					</div>
+					<button class="button large info" id="btnVerify">认证身份</button>
+				</div>
+				
+				<div class="verified">
+					<div style="margin-bottom: 10px; display:none">
+						您的身份已经确认。
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend>其他设置</legend>
+				<div class="input-control text" data-role="input-control">
+					<input type="password" id="oldpw" placeholder="请输入原始密码" />
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+				</div>
+
+				<div class="input-control text" data-role="input-control">
+					<input type="password" id="newpw" placeholder="请输入新密码" />
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+				</div>
+
+				<div class="input-control text" data-role="input-control">
+					<input type="password" id="confirmnewpd" placeholder="请再输入一遍新密码" />
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+				</div>
+
+				<button class="button large info" id="btnChangePw">修改密码</button>
+        	</fieldset>
+        	
+        </div>
+
+    </div> <!-- End of container -->
+
+    <div th:include="metro_header :: copy"></div>
+    
+    <script type="text/javascript">
+					(function($) {
+						$
+								.ajax({
+									type : "GET",
+									url : getUrl('rest/managementCitizens/committee'),
+									success : function(data) {
+										var users = [];
+										$(data).each(function(i, d) {
+											for ( var r in d.roles) {
+												users.push({
+													userid : d.id,
+													username : d.name,
+													role : d.roles[r],
+													imageUrl : d.image
+												});
+											}
+										});
+										var police = $(users).filter(
+												function(i, d) {
+													return d.role.name
+															.includes('民警');
+												})[0];
+										var zhucan = $(users).filter(
+												function(i, d) {
+													return d.role.name
+															.includes('助残员');
+												})[0];
+
+										$(users)
+												.each(
+														function(ind, el) {
+															if (el.userid == police.userid
+																	|| el.userid == zhucan.userid) {
+																return;
+															}
+															var name = el.username;
+															var position = el.role.name;
+															var html = '<div class="image-container shadow">'
+																	+ '<a  href="{0}"><img src="{1}" class=""></a>'
+																			.format(
+																					userPositionUrl
+																							+ '?user_id={0}&role_id={1}&back_url={2}'
+																									.format(
+																											el.userid,
+																											el.role.id,
+																											'committee'),
+																					getUrl('images/'
+																							+ el.imageUrl))
+																	+ '<div class="overlay">'
+																	+ '<span class="name-text">{0}</span><br>'
+																			.format(name)
+																	+ '<span class="position-text">{0}</span>'
+																			.format(position)
+																	+ '</div>'
+															'</div>';
+															$(
+																	'.person-list-container')
+																	.append(
+																			$(html));
+														});
+
+										$('.police .prname').text(
+												police.username);
+										$('.zhucan .prname').text(
+												zhucan.username);
+										$('.police .prname')
+												.attr(
+														'href',
+														userPositionUrl
+																+ '?user_id={0}&role_id={1}&back_url={2}'
+																		.format(
+																				police.userid,
+																				police.role.id,
+																				'committee'))
+										$('.zhucan .prname')
+												.attr(
+														'href',
+														userPositionUrl
+																+ '?user_id={0}&role_id={1}&back_url={2}'
+																		.format(
+																				zhucan.userid,
+																				zhucan.role.id,
+																				'committee'))
+
+									},
+									error : function(obj) {
+										console.log(obj);
+									}
+								});
+					})(jQuery);
+				</script>
+
+</body>
+</html>

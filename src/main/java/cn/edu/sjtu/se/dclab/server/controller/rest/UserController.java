@@ -133,7 +133,7 @@ public class UserController {
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
 		userTransfer.setRoles(roles);
-		userTransfer.setImageUrl(user.getImage());
+		userTransfer.setImage(user.getImage());
 		return userTransfer;
 	}
 

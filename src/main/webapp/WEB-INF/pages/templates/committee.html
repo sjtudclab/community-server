@@ -5,28 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
     <meta name="product" content="Metro UI CSS Framework">
-    <meta name="description" content="Simple responsive css framework">
-
-    <link th:href="@{/css/metro-bootstrap.css}" rel="stylesheet">
-    <link th:href="@{/css/metro-bootstrap-responsive.css}" rel="stylesheet">
-    <link th:href="@{/css/iconFont.css}" rel="stylesheet">
-    <link th:href="@{/css/docs.css}" rel="stylesheet">
-    <link th:href="@{/css/custom.css}" rel="stylesheet">
-    <link th:href="@{/js/prettify/prettify.css}" rel="stylesheet">
-
-    <!-- Load JavaScript Libraries -->
-    <script th:src="@{/js/jquery/jquery.min.js}"></script>
-    <script th:src="@{/js/jquery/jquery.widget.min.js}"></script>
-    <script th:src="@{/js/jquery/jquery.mousewheel.js}"></script>
-    <script th:src="@{/js/prettify/prettify.js}"></script>
-    <script th:src="@{/js/holder/holder.js}"></script>
-
-    <!-- Metro UI CSS JavaScript plugins -->
-    <script th:src="@{/js/load-metro.js}"></script>
-    <script th:src="@{/js/common.js}"></script>
-
-    <!-- Local JavaScript -->
-
+    <meta name="description" content="Simple responsive css framework">    
     <title>居委会</title>
 </head>
 <body class="metro">
@@ -63,20 +42,9 @@
 
 
     </div> <!-- End of container -->
+    <div th:include="metro_header :: copy"></div>
 
-    <script th:src="@{/js/hitua.js}"></script>
     <script type="text/javascript">
-    if (!String.prototype.format) {
-      String.prototype.format = function() {
-        var args = arguments;
-        return this.replace(/{(\d+)}/g, function(match, number) { 
-          return typeof args[number] != 'undefined'
-            ? args[number]
-            : match
-          ;
-        });
-      };
-    }
     
     var userPositionUrl = getUrl("resident/user_position");
 
@@ -88,7 +56,7 @@
                 var users = [];
                 $(data).each(function(i, d) {
                     for (var r in d.roles) {
-                        users.push({userid: d.id, username: d.username, role: d.roles[r], imageUrl: d.image});
+                        users.push({userid: d.id, username: d.name, role: d.roles[r], imageUrl: d.image});
                     }
                 });
                 var police = $(users).filter(function(i,d) {return d.role.name.includes('民警');})[0];
@@ -102,7 +70,7 @@
                     var position = el.role.name;
                     var html = 
                         '<div class="image-container shadow">' +
-                        '<a  href="{0}"><img src="{1}" class=""></a>'.format('user_position.html?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'Committee'), 
+                        '<a  href="{0}"><img src="{1}" class=""></a>'.format(userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'committee'), 
                         		getUrl('images/' + el.imageUrl)) +
                             '<div class="overlay">' +
                                 '<span class="name-text">{0}</span><br>'.format(name) +
@@ -114,8 +82,8 @@
 
                 $('.police .prname').text(police.username);
                 $('.zhucan .prname').text(zhucan.username);
-                $('.police .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}'.format(police.userid, police.role.id))
-                $('.zhucan .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}'.format(zhucan.userid, zhucan.role.id))
+                $('.police .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(police.userid, police.role.id, 'committee'))
+                $('.zhucan .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(zhucan.userid, zhucan.role.id, 'committee'))
 
             },
             error: function(obj) {
