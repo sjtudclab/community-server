@@ -24,4 +24,7 @@ public class Constants {
 	public final static String INFORMATION_FRIEND_MESSAGE = "friend_message";
 	public final static String INFROMATION_GROUP_MESSAGE = "group_message";
 	public final static String INFORMATION_CIRCLE_MESSAGE = "circle_message";
+	
+	public final static int INFORMATION_UNDO_STATUS = 0;
+	public final static int INFORMATION_DONE_STATUS = 1;
 }
