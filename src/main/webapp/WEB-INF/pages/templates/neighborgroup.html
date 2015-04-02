@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
+    <link th:href="@{/zang/bootstrap-3.3.2-dist/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <script th:src="@{/zang/js/jquery.min.js}"></script>
+    <script th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
+
+    <title>我的好友</title>
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="header.html"></header>
+
+    <div class="container">
+        
+        <!-- 返回主页 -->
+        <div class="offset1">
+            <h1><a href="修改为用户页面url"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的邻里群</h1>
+            <ul class="nav nav-pills">
+            	<li class="active"><a href="创建群页面">创建群组</a></li>
+            	<li><a href="好友申请处理页面">邀友入群</a></li>
+            </ul>
+        </div>
+        <!-- End 返回主页 -->
+
+        <div class="grid fluid offset1">
+
+            <!-- 我的群组列表 -->
+            <div class="row">
+                <div id="grouplist">
+                    
+                </div>
+            </div>
+            <!-- End 我的群组列表 -->
+            
+        </div>
+        
+    </div>
+
+    <div th:include="market_template :: copy"></div>
+    
+    <script type="text/javascript">
+    var userid;
+	$(document).ready(function() {
+		userid = currentUserId();
+		$.ajax({
+			url: getUrl("groups/" + userid),
+			type:"get",
+			dataType:"json",
+			success:function(obj){
+				console.log("success:"+obj);
+				var groupList = "";
+				$.each(obj, function (n, value) {
+					//alert(n +" "+ value.title);
+					var group = "";
+					group =
+					"<div class=\"tile double goods\">" +
+	                    "<div class=\"tile-content image\">" +
+	                        "<a href='groupchat.html?id='" + value.id + "'><img src=\""+value.imagePath+"\"></a>" +
+	                    "</div>" +
+
+	                    "<div class=\"brand bg-dark opacity\">" +
+	                        "<span class=\"text\">"+decodeURI(value.title)+"</span>" + 
+	                        "<span style=\"display:none\">"+value.id+"</span>" +
+	                    "</div>" +
+	                "</div>";
+
+	                groupList += group;
+				});
+
+				$("#grouplist").append(groupList);
+			},
+
+			error:function(){
+				alert("获取群组信息失败！");
+			}
+
+		});
+		
+	});
+    </script>
+    
+</body>
+</html>

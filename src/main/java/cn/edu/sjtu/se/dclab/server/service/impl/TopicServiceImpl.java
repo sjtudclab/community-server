@@ -36,8 +36,8 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     @Transactional
-    public Collection<Topic> findAllTopics() {
-        return topicMapper.findAllTopics();
+    public Collection<Topic> findAllTopicsByTypeId(long typeId) {
+        return topicMapper.findAllTopicsByTypeId(typeId);
     }
 
     @Override

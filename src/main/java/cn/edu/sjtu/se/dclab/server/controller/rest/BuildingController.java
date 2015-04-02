@@ -1,8 +1,8 @@
 package cn.edu.sjtu.se.dclab.server.controller.rest;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Apartment;
 import cn.edu.sjtu.se.dclab.server.entity.Building;
-import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.ApartmentService;
 import cn.edu.sjtu.se.dclab.server.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Collection;
  * Created by Huiyi on 2015/3/16.
  */
 @Controller
-@RequestMapping("/buildings")
+@RequestMapping(value = Constants.REST + "/buildings")
 public class BuildingController {
 
     @Autowired

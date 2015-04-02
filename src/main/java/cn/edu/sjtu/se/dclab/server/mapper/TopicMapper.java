@@ -15,7 +15,7 @@ public interface TopicMapper {
 
     public void submitOption(TopicOption option);
 
-    public Collection<Topic> findAllTopics();
+    public Collection<Topic> findAllTopicsByTypeId(long typeId);
 
     public Topic findTopic(long topicId);
 
