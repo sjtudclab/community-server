@@ -12,7 +12,7 @@
 		select * from citizen_management where citizen_id = #{id};
 	</select>
 	
-	<select id="findByUserId" parameterType="long" "ManagementCitizenMap">
+	<select id="findByUserId" parameterType="long" resultMap="ManagementCitizenMap">
 		SELECT * FROM citizen_management where user_id = #{userId};
 	</select>
 
