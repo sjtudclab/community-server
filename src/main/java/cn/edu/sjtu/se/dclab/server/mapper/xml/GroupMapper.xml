@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.GroupMapper">
+
+	<select id="findByUserId" parameterType="long" resultMap="GroupMap">
+		SELECT g.group_id, g.name, g.count, g.status, g.owner, g.create_time 
+		FROM group g, user_group ug 
+		WHERE g.group_id = ug.group_id AND g.user_id = #{userId};
+	</select>
+	
+	<insert id="save" parameterType="Group" useGeneratedKeys="true" keyColumn="group_id">
+		INSERT INTO group (name, count, status, owner, create_time)
+		VALUES(#{name}, #{count}, #{status}, #{owner}, #{creatTime});
+	</insert>
+	
+	<resultMap type="Group" id="GroupMap">
+		<id property="id" column="group_id" />
+		<result property="name" column="name" />
+		<result property="count" column="count" />
+		<result property="status" column="status" />
+		<result property="owner" column="owner" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+	
+</mapper>
