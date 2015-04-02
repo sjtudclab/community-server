@@ -95,4 +95,9 @@ public class ManagementCitizenServiceImpl implements ManagementCitizenService {
 		return transfer;
 	}
 
+	@Override
+	public ManagementCitizen findByUserId(long userId) {
+		return null;
+	}
+
 }

@@ -64,4 +64,9 @@ public class ResidentCitizenServiceImpl implements ResidentCitizenService {
 
 		return transfer;
 	}
+
+	@Override
+	public ResidentCitizenService findByUserId(long userId) {
+		return null;
+	}
 }

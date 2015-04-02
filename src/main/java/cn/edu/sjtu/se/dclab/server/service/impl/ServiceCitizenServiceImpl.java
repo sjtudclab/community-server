@@ -63,4 +63,9 @@ public class ServiceCitizenServiceImpl implements ServiceCitizenService {
 		return transfer;
 	}
 
+	@Override
+	public ServiceCitizen findByUserId(long userId) {
+		return null;
+	}
+
 }
