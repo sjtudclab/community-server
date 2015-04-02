@@ -1,11 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.controller.basic;
 
-import cn.edu.sjtu.se.dclab.server.service.TopicService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by Huiyi on 2015/3/29.
@@ -68,11 +64,6 @@ public class ResidentController {
     public String market_search() {
         return "market_search";
     }
-    
-    @RequestMapping("market_thing_info")
-    public String market_thing_info() {
-        return "market_thing_info";
-    }
 
     @RequestMapping("repair")
     public String repair() {
@@ -92,10 +83,5 @@ public class ResidentController {
     @RequestMapping("user_position")
     public String userPosition() {
     	return "user_position";
-    }
-
-    @RequestMapping(value = "vote/{id}", method = RequestMethod.GET)
-    public String vote(@PathVariable(value = "id") long topicId) {
-        return "topic_vote";
     }
 }
