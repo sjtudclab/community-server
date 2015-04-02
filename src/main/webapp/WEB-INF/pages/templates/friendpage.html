@@ -48,9 +48,9 @@
     <div th:include="market_template :: copy"></div>
     
     <script type="text/javascript">
-    var userid = 1;
+    var userid;
 	$(document).ready(function() {
-//		userid = currentUserId();
+		userid = currentUserId();
 		$.ajax({
 			url: getUrl("rest/friends/" + userid + "/relations"),
 			type:"get",
@@ -64,11 +64,11 @@
 					friend =
 					"<div class=\"tile double goods\">" +
 	                    "<div class=\"tile-content image\">" +
-	                        "<a href='friendchat.html?id='" + value.id + "'><img src=\""+value.imagePath+"\"></a>" +
+	                        "<a href='friendchat?id=" + value.id + "&name=" + value.name +"><img src=\""+value.imagePath+"\"></a>" +
 	                    "</div>" +
 
 	                    "<div class=\"brand bg-dark opacity\">" +
-	                        "<span class=\"text\">"+decodeURI(value.title)+"</span>" + 
+	                        "<span class=\"text\">"+ value.name +"</span>" + 
 	                        "<span style=\"display:none\">"+value.id+"</span>" +
 	                    "</div>" +
 	                "</div>";

@@ -13,7 +13,7 @@
     <script th:src="@{/zang/js/jquery.min.js}"></script>
     <script th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
 
-    <title>我的好友</title>
+    <title>我的邻里群</title>
 </head>
 <body class="metro">
     <header class="bg-dark" data-load="header.html"></header>
@@ -51,7 +51,7 @@
 	$(document).ready(function() {
 		userid = currentUserId();
 		$.ajax({
-			url: getUrl("groups/" + userid),
+			url: getUrl("groups/0/users/" + userid),
 			type:"get",
 			dataType:"json",
 			success:function(obj){
@@ -63,12 +63,12 @@
 					group =
 					"<div class=\"tile double goods\">" +
 	                    "<div class=\"tile-content image\">" +
-	                        "<a href='groupchat.html?id='" + value.id + "'><img src=\""+value.imagePath+"\"></a>" +
+	                        "<a href='groupchat?id=" + value.groupId + "&name=" + value.name + "'></a>" +
 	                    "</div>" +
 
 	                    "<div class=\"brand bg-dark opacity\">" +
-	                        "<span class=\"text\">"+decodeURI(value.title)+"</span>" + 
-	                        "<span style=\"display:none\">"+value.id+"</span>" +
+	                        "<span class=\"text\">"+value.name+"</span>" + 
+	                        "<span style=\"display:none\">"+value.groupId+"</span>" +
 	                    "</div>" +
 	                "</div>";
 

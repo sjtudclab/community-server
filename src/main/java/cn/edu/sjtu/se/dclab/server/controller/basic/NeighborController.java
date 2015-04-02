@@ -15,6 +15,26 @@ public class NeighborController {
     public String friendRequest() {
         return "friend_request";
     }
+    
+    @RequestMapping("/friend")
+    public String getFriendPage() {
+    	return "friendpage";
+    }
+    
+    @RequestMapping("/group")
+    public String getGroupPage() {
+    	return "neighborgroup";
+    }
+    
+    @RequestMapping("/friendchat")
+    public String friendchat() {
+    	return "friendchat";
+    }
+    
+    @RequestMapping("/groupchat")
+    public String groupchat() {
+    	return "groupchat";
+    }
 
     @RequestMapping("friend/add")
     public String friendAdd() {
