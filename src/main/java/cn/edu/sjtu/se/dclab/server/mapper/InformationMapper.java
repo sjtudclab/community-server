@@ -21,6 +21,8 @@ public interface InformationMapper {
 
 	public Collection<Information> findByFromIdAndType(
 			@Param("fromId") long fromId, @Param("type") String type);
+	public Collection<Information> findByToIdAndType(
+			@Param("toId") long toId, @Param("type") String type);
 
 	public Information findByIdAndType(
 			@Param("informationId") long informationId,

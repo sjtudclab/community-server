@@ -16,4 +16,9 @@ public interface InformationService {
 	public Collection<Information> findByFromIdAndType(long fromId, String type);
 
 	public void updateFriendApplicationById(long informationId);
+
+	public void create(Information information, String type);
+
+	public Collection<Information> findByToIdAndType(long toId,
+			String type);
 }

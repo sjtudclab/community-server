@@ -67,6 +67,11 @@ public class InformationServiceImpl implements InformationService{
 		return informationMapper.findByFromIdAndType(fromId,type);
 	}
 	@Override
+	public Collection<Information> findByToIdAndType(long toId,
+			String type) {
+		return informationMapper.findByToIdAndType(toId,type);
+	}
+	@Override
 	public void updateFriendApplicationById(long applicationId) {
 		Information information = informationMapper.findByIdAndType(applicationId,Constants.INFORMATION_ADD_FRIEND);
 		UserRelation relation = new UserRelation();
@@ -74,6 +79,10 @@ public class InformationServiceImpl implements InformationService{
 		relation.setFollowedId(information.getTo());
 		relation.setType(userRelationMapper.findByType(Constants.RELATOIN_FRIEND));
 		userRelationMapper.create(relation);
+	}
+	@Override
+	public void create(Information information, String type) {
+		//InformationType infoType = informationMapper.findInfrom
 	}
 
 }

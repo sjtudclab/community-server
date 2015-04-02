@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.common.Result;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
+import cn.edu.sjtu.se.dclab.server.entity.InformationType;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.InformationService;
 import cn.edu.sjtu.se.dclab.server.service.UserRelationService;
@@ -80,11 +81,11 @@ public class FriendController {
 		return convertUserToFriendTransfer(user);
 	}
 
-	@RequestMapping(value = "{fromId}/applications", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{toId}/applications", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<ApplicationTransfer> getFriendApplications(@PathVariable long fromId){
-		Collection<Information> informations = informationService.findByFromIdAndType(fromId,Constants.INFORMATION_ADD_FRIEND);
-		User user = userService.getUserByUserId(fromId);
+	public Collection<ApplicationTransfer> getFriendApplications(@PathVariable long toId){
+		Collection<Information> informations = informationService.findByToIdAndType(toId,Constants.INFORMATION_ADD_FRIEND);
+		User user = userService.getUserByUserId(toId);
 		Collection<ApplicationTransfer> transfers = new ArrayList<ApplicationTransfer>();
 		for(Information information : informations)
 			transfers.add(convertUserAndInformationToApplicationTransfer(user, information));
@@ -93,7 +94,13 @@ public class FriendController {
 	
 	@RequestMapping(value = "{fromId}/applications/toId", method = RequestMethod.POST)
 	@ResponseBody
-	public String createFriendApplications(@RequestBody String message){
+	public String createFriendApplications(@PathVariable long fromId, @PathVariable long toId, @RequestBody String message){
+		Information information = new Information();
+		information.setFrom(fromId);
+		information.setTo(toId);
+		information.setContent(message);
+		
+		informationService.create(information,Constants.INFORMATION_ADD_FRIEND);
 		
 		return Result.SUCCESS;
 	}
