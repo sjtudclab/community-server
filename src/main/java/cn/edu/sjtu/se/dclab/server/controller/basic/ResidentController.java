@@ -77,11 +77,6 @@ public class ResidentController {
         return "activity";
     }
 
-    @RequestMapping("setting")
-    public String setting() {
-        return "setting";
-    }
-    
     @RequestMapping("user_position")
     public String userPosition() {
     	return "user_position";
@@ -92,7 +87,7 @@ public class ResidentController {
         return "topic_vote";
     }
     
-    @RequestMapping("settings")
+    @RequestMapping("setting")
     public String settings() {
     	return "settings";
     }
