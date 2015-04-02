@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 public class Information {
-	private long informationId;
+	private long id;
 	private long from;
 	private long to;
 	private int status;
@@ -14,12 +14,12 @@ public class Information {
 	private int informationType;
 	private String attachment;
 
-	public long getInformationId() {
-		return informationId;
+	public long getId() {
+		return id;
 	}
 
-	public void setInformationId(long informationId) {
-		this.informationId = informationId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public long getFrom() {

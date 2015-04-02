@@ -152,7 +152,7 @@ public class InformationServiceImpl implements InformationService {
 
 		for (Information info : infoArray) {
 			if (i < count) {
-				if (info.getInformationId() < startId) {
+				if (info.getId() < startId) {
 					results.add(info);
 					i++;
 				}

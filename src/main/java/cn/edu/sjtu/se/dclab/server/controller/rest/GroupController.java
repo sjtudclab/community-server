@@ -18,10 +18,12 @@ import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.common.Result;
 import cn.edu.sjtu.se.dclab.server.entity.Group;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.entity.UserGroup;
 import cn.edu.sjtu.se.dclab.server.service.GroupService;
 import cn.edu.sjtu.se.dclab.server.service.InformationService;
 import cn.edu.sjtu.se.dclab.server.service.UserGroupService;
+import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.GroupTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
 import cn.edu.sjtu.se.dclab.server.util.DataUtil;
@@ -42,6 +44,16 @@ public class GroupController {
 	private UserGroupService userGroupService;
 	@Autowired
 	private InformationService informationService;
+	@Autowired
+	private UserService userService;
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 
 	public InformationService getInformationService() {
 		return informationService;
@@ -112,8 +124,10 @@ public class GroupController {
 			@PathVariable long count) {
 		Collection<Information> infos = informationService.findByToIdAndType(groupId, Constants.INFROMATION_GROUP_MESSAGE, startId, count);
 		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
-		for (Information info : infos)
-			transfers.add(TransferUtil.convertInformationToMessageTransfer(info));
+		for (Information info : infos){
+			User user = userService.getUserByUserId(info.getFrom());
+			transfers.add(TransferUtil.convertInformationAndUserToMessageTransfer(info,user));
+		}
 		return transfers;
 	}
 	

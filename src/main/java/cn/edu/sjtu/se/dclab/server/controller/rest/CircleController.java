@@ -21,6 +21,7 @@ import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.entity.UserRelation;
 import cn.edu.sjtu.se.dclab.server.service.InformationService;
 import cn.edu.sjtu.se.dclab.server.service.UserRelationService;
+import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.FriendTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
 import cn.edu.sjtu.se.dclab.server.util.DataUtil;
@@ -38,6 +39,16 @@ public class CircleController {
 	private UserRelationService userRelationService;
 	@Autowired
 	private InformationService informationService;
+	@Autowired
+	private UserService userService;
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 
 	public InformationService getInformationService() {
 		return informationService;
@@ -89,9 +100,11 @@ public class CircleController {
 		Collection<Information> infos = informationService.findByFromIdAndType(
 				userId, Constants.INFORMATION_CIRCLE_MESSAGE, startId, count);
 		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
-		for (Information info : infos)
+		for (Information info : infos){
+			User user = userService.getUserByUserId(info.getFrom());
 			transfers.add(TransferUtil
-					.convertInformationToMessageTransfer(info));
+					.convertInformationAndUserToMessageTransfer(info,user));
+		}
 		return transfers;
 	}
 	

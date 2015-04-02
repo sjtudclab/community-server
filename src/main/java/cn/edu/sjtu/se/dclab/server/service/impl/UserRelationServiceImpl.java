@@ -2,6 +2,8 @@ package cn.edu.sjtu.se.dclab.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,11 +47,24 @@ public class UserRelationServiceImpl implements UserRelationService {
 	@Override
 	public Collection<User> findByFollowerIdAndType(long fromId,
 			String type) {
-		Collection<UserRelation> relations = userRelationMapper.findByFromIdAndType(fromId, type);
+		Collection<UserRelation> relations =  new ArrayList<UserRelation>();
+		Set<Long> ids = new HashSet<Long>();
+		if(Constants.RELATOIN_FRIEND.equals(type)){
+			Collection<UserRelation> followers = userRelationMapper.findByFromIdAndType(fromId, type);
+			Collection<UserRelation> followeds = userRelationMapper.findByToIdAndType(fromId, type);
+			for(UserRelation relation : followers)
+				ids.add(relation.getFollowedId());
+			for(UserRelation relation : followeds)
+				ids.add(relation.getFollowerId());
+		}else{
+			relations = userRelationMapper.findByFromIdAndType(fromId, type);
+			for(UserRelation relation : relations)
+				ids.add(relation.getFollowedId());
+		}
 		Collection<User> users = new ArrayList<User>();
-		if(relations != null)
-			for(UserRelation relation : relations){
-				User user = userMapper.findByUserId(relation.getFollowedId());
+		if(ids.size() != 0)
+			for(Long id : ids){
+				User user = userMapper.findByUserId(id);
 				users.add(user);
 			}
 		return users;
@@ -58,10 +73,22 @@ public class UserRelationServiceImpl implements UserRelationService {
 	@Override
 	public User findByFollowerIdAndType(long fromId, long toId,
 			String type) {
-		UserRelation relation = userRelationMapper.findByFromIdAndToIdAndType(fromId, toId, type);
-		if(relation == null)
+		long friendId = 0;
+		if(Constants.RELATOIN_FRIEND.equals(type)){
+			UserRelation follower = userRelationMapper.findByFromIdAndToIdAndType(fromId, toId, type);
+			if(follower != null)
+				friendId = follower.getFollowedId();
+			UserRelation followed = userRelationMapper.findByFromIdAndToIdAndType(toId, fromId, type);
+			if(followed != null)
+				friendId = followed.getFollowerId();
+		}else{
+			UserRelation relation = userRelationMapper.findByFromIdAndToIdAndType(fromId, toId, type);
+			if(relation != null)
+				friendId = relation.getFollowedId();
+		}
+		if(friendId == 0)
 			return null;
-		User user = userMapper.findByUserId(relation.getFollowedId());
+		User user = userMapper.findByUserId(friendId);
 		return user;
 	}
 

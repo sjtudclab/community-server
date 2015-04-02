@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,6 +23,7 @@ import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.ApplicationTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.FriendTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
+import cn.edu.sjtu.se.dclab.server.util.DataUtil;
 import cn.edu.sjtu.se.dclab.server.util.TransferUtil;
 
 /**
@@ -101,14 +103,15 @@ public class FriendController {
 		return transfers;
 	}
 
-	@RequestMapping(value = "{fromId}/applications/toId", method = RequestMethod.POST)
+	@RequestMapping(value = "{fromId}/applications/{toId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String createFriendApplications(@PathVariable long fromId,
 			@PathVariable long toId, @RequestBody String message) {
+		Map<String,Object> map = DataUtil.getFromJson(message);
 		Information information = new Information();
 		information.setFrom(fromId);
 		information.setTo(toId);
-		information.setContent(message);
+		information.setContent((String)map.get("message"));
 		information.setStatus(Constants.INFORMATION_UNDO_STATUS);
 
 		informationService
@@ -133,8 +136,10 @@ public class FriendController {
 		Collection<Information> infos = informationService.findChats(userId,
 				friendId, startId, count);
 		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
-		for (Information info : infos)
-			transfers.add(TransferUtil.convertInformationToMessageTransfer(info));
+		for (Information info : infos){
+			User user = userService.getUserByUserId(info.getFrom());
+			transfers.add(TransferUtil.convertInformationAndUserToMessageTransfer(info,user));
+		}
 		return transfers;
 	}
 	
@@ -152,7 +157,7 @@ public class FriendController {
  
 	private ApplicationTransfer convertUserAndInformationToApplicationTransfer(
 			User user, Information info) {
-		return new ApplicationTransfer(info.getInformationId(), user.getId(),
+		return new ApplicationTransfer(info.getId(), user.getId(),
 				user.getName(), user.getImage(), info.getContent());
 	}
 

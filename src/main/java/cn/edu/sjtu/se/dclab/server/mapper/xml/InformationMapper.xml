@@ -25,7 +25,7 @@
     </insert>
     
     <select id="blockById" parameterType="java.lang.Integer" resultMap="InformationMap">
-    	UPDATE information SET status = -1 WHERE information_id = #{id};
+    	UPDATE information SET status = -1 WHERE id = #{id};
     </select>
     
     <select id="findByFromIdAndType" resultMap="InformationMap">
@@ -66,7 +66,7 @@
     </update>
     
     <resultMap type="Information" id="InformationMap">
-        <id property="informationId" column="information_id" />
+        <id property="id" column="information_id" />
         <result property="from" column="from" />
         <result property="to" column="to" />
         <result property="status" column="status" />

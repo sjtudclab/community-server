@@ -14,12 +14,13 @@ import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
  * @author changyi yuan
  */
 public class TransferUtil {
-	public static MessageTransfer convertInformationToMessageTransfer(
-			Information information) {
+	public static MessageTransfer convertInformationAndUserToMessageTransfer(
+			Information information, User user) {
 		if (information == null)
 			return new MessageTransfer();
-		return new MessageTransfer(information.getInformationId(),
-				information.getContent(), information.getSubmitTime());
+		return new MessageTransfer(information.getId(),
+				information.getContent(), information.getSubmitTime(),
+				user.getId(), user.getName(), user.getImage());
 	}
 
 	public static FriendTransfer convertUserToFriendTransfer(User user) {
@@ -29,10 +30,12 @@ public class TransferUtil {
 				user.getName(), user.getImage());
 		return transfer;
 	}
-	public static Collection<FriendTransfer> convertUserToFriendTransfer(Collection<User> users){
+
+	public static Collection<FriendTransfer> convertUserToFriendTransfer(
+			Collection<User> users) {
 		Collection<FriendTransfer> transfers = new ArrayList<FriendTransfer>();
 		for (User user : users)
 			transfers.add(convertUserToFriendTransfer(user));
 		return transfers;
 	}
-} 
+}
