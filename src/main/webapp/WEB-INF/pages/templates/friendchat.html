@@ -49,6 +49,9 @@
     
     <script type="text/javascript">
     var userid;
+    var sendtoid;
+    var sendtoname;
+    var startid = 0;
 	$(document).ready(function() {
 		userid = currentUserId();
 		
@@ -57,7 +60,8 @@
 		var sendtoid = Request['id'];
 		var sendtoname = Request['name'];
 		$("#chatuser").text(sendtoname);
-		
+		GetMessage(sendtoid, 0, 5);
+		//self.setInterval(function(){GetMessage(sendtoid, startid, 5)}, 1000);
 	});
 	
 	function GetRequest() {
@@ -75,7 +79,7 @@
 	
 	function GetMessage(friendid, startid, count) {
 		$.ajax({
-			url: getUrl("friends/" + userid + "/users/" + friendid + "/messages/" + startid + "/counts/" + count),
+			url: getUrl("rest/friends/" + userid + "/users/" + friendid + "/messages/" + startid + "/counts/" + count),
 			type:"get",
 			dataType:"json",
 			success:function(obj){
@@ -84,11 +88,8 @@
 					var chatinfo = $("#chatinfo");
 					chatinfo.val(chatinfo.val() + "\n" + value.name + "说：\n" + value.info);
 					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;	
+					startid = value.startid;
 				});
-			},
-
-			error:function(){
-				alert("获取好友消息失败！");
 			}
 
 		});

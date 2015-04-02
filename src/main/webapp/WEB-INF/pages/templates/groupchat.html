@@ -61,7 +61,7 @@
 		groupname = Request['name'];
 		$("#chatuser").text(groupname);
 		GetMessage(groupid, 0, 5);
-		
+		//self.setInterval(function(){GetMessage(sendtoid, startid, 5)}, 1000);
 	});
 	
 	function GetRequest() {
@@ -90,10 +90,6 @@
 					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;
 					startid = value.startid;
 				});
-			},
-
-			error:function(){
-				alert("获取群组消息失败！");
 			}
 
 		});
