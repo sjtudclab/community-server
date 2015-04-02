@@ -15,4 +15,9 @@ public class NeighborController {
     public String friendRequest() {
         return "friend_request";
     }
+
+    @RequestMapping("friend/add")
+    public String friendAdd() {
+        return "friend_add";
+    }
 }

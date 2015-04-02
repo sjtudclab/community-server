@@ -1,14 +1,12 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<body>
-<div class="container">
-
-    <!-- 返回主页 -->
-    <div class="offset1">
-        <h1><a th:href="@{/resident/neighbor/friend}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>好友申请</h1>
-    </div>
-    <!-- End 返回主页 -->
+<body class="metro">
+<div class="page">
+    <h1>
+        <a th:href="@{/resident/neighbor/friend}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        好友申请
+    </h1>
 
     <div class="grid fluid offset1">
 
@@ -18,11 +16,13 @@
             <select id="building_selection" onchange="building_selection_changed(this)">
             </select>
             <p>选择单元</p>
-            <select id="apartment_selection">
+            <select id="apartment_selection" onchange="apartment_selection_changed(this)">
             </select>
             <p>选择居民</p>
             <select id="citizen_selection">
             </select>
+
+            <button onclick="apply()">添加</button>
         </div>
         <!-- End 我关注的物品 -->
 
@@ -30,10 +30,28 @@
 
 </div>
 
+<div th:include="login_footer :: copy"></div>
+
 <script type="application/javascript">
+    var citizenId = 0;
+
+    function apply() {
+        if (citizenId != 0) {
+            $.ajax({
+                url: getUrl('rest/friends/' + currentUserId() + '/applications/' + citizenId),
+                type: 'post',
+                success: function() {
+                    alert('好友申请已添加。');
+                }
+            })
+        } else {
+            alert("请完成选择！");
+        }
+    }
+
     function building_selection_changed(obj) {
         $.ajax({
-            url: getUrl('rest/building/' + obj.value + '/apartments')
+            url: getUrl('rest/buildings/' + obj[obj.selectedIndex].value + '/apartments'),
             type: 'get',
             dataType: 'json',
             success: function(data) {
@@ -44,12 +62,30 @@
                 });
 
                 $('#apartment_selection').empty().append(apartmentList);
+                $('#apartment_selection').selectedIndex = 0;
             }
-        })
+        });
     };
 
     function apartment_selection_changed(obj) {
+        $.ajax({
+            url: getUrl('rest/apartment/' + obj[obj.selectedIndex].value + '/citizen'),
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                var apartmentList = "";
+                $.each(data, function(index, value) {
+                    var apartment = "<option value=\"" + value.id + "\">" + value.name + "</option>";
+                    apartmentList += apartment;
+                    apartmentList += apartment;
+                });
 
+                var citizen_sel = $('#citizen_selection')
+                citizen_sel.empty().append(apartmentList);
+                citizen_sel.selectedIndex = 0;
+                citizenId = citizen_sel[citizen_sel.selectedIndex].value;
+            }
+        })
     };
 
     $(document).ready(function() {
@@ -65,6 +101,7 @@
                 })
 
                 $('#building_selection').append(bdList);
+                $('#building_selection').selectedIndex = 0;
             }
         })
     });
