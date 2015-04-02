@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
+import cn.edu.sjtu.se.dclab.server.entity.InformationType;
 import cn.edu.sjtu.se.dclab.server.entity.UserRelation;
 import cn.edu.sjtu.se.dclab.server.mapper.InformationMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserRelationMapper;
@@ -82,7 +83,7 @@ public class InformationServiceImpl implements InformationService{
 	}
 	@Override
 	public void create(Information information, String type) {
-		//InformationType infoType = informationMapper.findInfrom
+		InformationType infoType = informationMapper.findByType(type);
 	}
 
 }

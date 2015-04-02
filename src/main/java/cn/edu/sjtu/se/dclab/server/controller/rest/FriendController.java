@@ -85,10 +85,11 @@ public class FriendController {
 	@ResponseBody
 	public Collection<ApplicationTransfer> getFriendApplications(@PathVariable long toId){
 		Collection<Information> informations = informationService.findByToIdAndType(toId,Constants.INFORMATION_ADD_FRIEND);
-		User user = userService.getUserByUserId(toId);
 		Collection<ApplicationTransfer> transfers = new ArrayList<ApplicationTransfer>();
-		for(Information information : informations)
+		for(Information information : informations){
+			User user = userService.getUserByUserId(information.getFrom());
 			transfers.add(convertUserAndInformationToApplicationTransfer(user, information));
+		}
 		return transfers;
 	}
 	
