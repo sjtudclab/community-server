@@ -12,6 +12,6 @@ public interface GroupMapper {
 
 	public Collection<Group> findByUserId(long userId);
 
-	public Group save(Group group);
+	public void save(Group group);
 
 }

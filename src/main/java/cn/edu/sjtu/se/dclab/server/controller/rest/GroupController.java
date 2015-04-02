@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,13 +80,14 @@ public class GroupController {
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String createGroup(@RequestBody String groupInfo) {
-		Map<String, String> map = DataUtil.getFromJson(groupInfo);
-		long userId = Long.valueOf(map.get("userId"));
-		String name = map.get("name");
+		Map<String, Object> map = DataUtil.getFromJson(groupInfo);
+		long userId = (int) map.get("userId");
+		String name = (String) map.get("name");
 		Group group = new Group();
 		group.setName(name);
 		group.setOwner(userId);
 		group.setCount(1);
+		group.setCreateTime(new Date());
 
 		groupService.create(group);
 		return Result.SUCCESS;

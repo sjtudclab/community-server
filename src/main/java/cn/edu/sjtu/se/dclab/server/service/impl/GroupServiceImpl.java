@@ -46,10 +46,10 @@ public class GroupServiceImpl implements GroupService {
 
 	@Override
 	public void create(Group group) {
-		Group result = groupMapper.save(group);
+		groupMapper.save(group);
 		UserGroup userGroup = new UserGroup();
-		userGroup.setGourId(result.getId());
-		userGroup.setUserId(result.getOwner());
+		userGroup.setGroupId(group.getId());
+		userGroup.setUserId(group.getOwner());
 		userGroupMapper.save(userGroup);
 	}
 

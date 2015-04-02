@@ -4,13 +4,13 @@ package cn.edu.sjtu.se.dclab.server.entity;
  *@author changyi yuan
  */
 public class UserGroup {
-	private long gourId;
+	private long groupId;
 	private long userId;
-	public long getGourId() {
-		return gourId;
+	public long getGroupId() {
+		return groupId;
 	}
-	public void setGourId(long gourId) {
-		this.gourId = gourId;
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
 	}
 	public long getUserId() {
 		return userId;

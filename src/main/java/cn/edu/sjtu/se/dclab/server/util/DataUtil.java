@@ -3,6 +3,7 @@ package cn.edu.sjtu.se.dclab.server.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -10,11 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *@author changyi yuan
  */
 public class DataUtil {
-	public static Map getFromJson(String jsonStr){
+	public static Map<String,Object> getFromJson(String jsonStr){
 		ObjectMapper mapper = new ObjectMapper();
-		HashMap<String,String> map = null;
+		HashMap<String,Object> map = null;
 		try{
-			map = (HashMap<String,String>) mapper.readValue(jsonStr,HashMap.class);
+			map = (HashMap<String,Object>) mapper.readValue(jsonStr,HashMap.class);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

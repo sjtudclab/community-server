@@ -6,13 +6,13 @@
 
 	<select id="findByUserId" parameterType="long" resultMap="GroupMap">
 		SELECT g.group_id, g.name, g.count, g.status, g.owner, g.create_time 
-		FROM group g, user_group ug 
-		WHERE g.group_id = ug.group_id AND g.user_id = #{userId};
+		FROM `group` g, user_group ug 
+		WHERE g.group_id = ug.group_id AND ug.user_id = #{userId};
 	</select>
 	
 	<insert id="save" parameterType="Group" useGeneratedKeys="true" keyColumn="group_id">
-		INSERT INTO group (name, count, status, owner, create_time)
-		VALUES(#{name}, #{count}, #{status}, #{owner}, #{creatTime});
+		INSERT INTO `group` (name, count, status, owner, create_time)
+		VALUES(#{name}, #{count}, #{status}, #{owner}, #{createTime});
 	</insert>
 	
 	<resultMap type="Group" id="GroupMap">
