@@ -55,7 +55,7 @@
 
     function submit() {
         var jsonData = {};
-        jsonData["option_id"] = $("input[name='option'][checked]").val();
+        jsonData["option_id"] = $('input[name="option"]:checked').val();
         jsonData["user_id"] = currentUserId();
         jsonData["topic_id"] = topicId;
         $.ajax({
@@ -63,7 +63,6 @@
             type: "post",
             contentType: 'application/json',
             data: JSON.stringify(jsonData),
-            dataType: "json",
             success:function() {
                 alert("投票成功");
             }

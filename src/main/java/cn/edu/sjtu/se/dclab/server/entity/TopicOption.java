@@ -12,6 +12,8 @@ public class TopicOption {
     @JsonIgnore
     private Topic topic;
 
+    private int voteCount;
+
     public long getId() {
         return id;
     }
@@ -34,5 +36,13 @@ public class TopicOption {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
     }
 }

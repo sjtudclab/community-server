@@ -19,26 +19,13 @@
 
     <div class="container">
         <div class="row show-grid">
-            <table style="width:60%" border="0" align="center" id="vote_table">
-                <tbody id="full_table">
-                <tr>
-                    <th><h1 id="title"></h1></th>
-                </tr>
-                <tr>
-                    <th>
-                        <img id="attachment" src="" />
-                    </th>
-                </tr>
-                <tr>
-                    <th style="text-align:left">
-                        <p id="content"></p>
-                    </th>
-                </tr>
+            <div id="display_region">
+                <h1 id="title"></h1>
+                <img src="attachment" />
+                <p id="content"></p>
+            </div>
 
-                </tbody>
-            </table>
         </div>
-
     </div>
 
     <div th:include="login_footer :: copy"></div>
@@ -50,17 +37,6 @@
     </style>
 
     <script type="text/javascript">
-        function submit() {
-            $.ajax({
-                url: getUrl('rest/topic/vote'),
-                type: "post",
-                dataType: "json",
-                success:function() {
-                    alert("投票成功");
-                }
-            });
-        }
-
         $(document).ready(function(){
             //alert("Goods Info Page");
 
@@ -81,15 +57,9 @@
                     $("#attachment").attr("src", obj.attachment);
                     $("#content").html(decodeURI(obj.content));
 
-                    $.each(obj.options, function(optionIndex, option) {
-                        var start = "<tr><th style=\"text-align:left\"><label>";
-                        var end = "</label></th></tr>";
-                        var option = "<input type=\"checkbox\" value=\"" + option.id + "\">" + option.name;
-
-                        $('#vote_table').append(start + option + end);
+                    $.each(obj.options, function(index, option) {
+                        $("#display_region").append("<p>{0} : {1} 票</p>".format(option.name, option.voteCount));
                     })
-
-                    $('#vote_table').append("<tr><th><button onclick=\"submit()\">确定</button></th></tr>");
                 },
                 error:function(){
                     alert("获取物品"+$goodsID+"信息失败");

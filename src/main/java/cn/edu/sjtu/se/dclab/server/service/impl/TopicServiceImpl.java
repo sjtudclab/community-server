@@ -46,6 +46,10 @@ public class TopicServiceImpl implements TopicService {
         Topic topic = topicMapper.findTopic(topicId);
         topic.setOptions(topicMapper.findTopicOptions(topicId));
 
+        for (TopicOption option : topic.getOptions()) {
+            option.setVoteCount(topicMapper.getOptionCount(option.getId()));
+        }
+
         return topic;
     }
 
@@ -53,5 +57,15 @@ public class TopicServiceImpl implements TopicService {
     @Transactional
     public void vote(TopicVote vote) {
         topicMapper.vote(vote);
+    }
+
+    @Override
+    public Collection<TopicOption> getResult(long topicId) {
+        Collection<TopicOption> options = topicMapper.findTopicOptions(topicId);
+        for (TopicOption option : options) {
+            option.setVoteCount(topicMapper.getOptionCount(option.getId()));
+        }
+
+        return options;
     }
 }

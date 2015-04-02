@@ -92,7 +92,7 @@ public class ResidentController {
         return "settings";
     }
 
-    @RequestMapping(value = "vote/{id}/result", method = RequestMethod.GET)
+    @RequestMapping(value = "vote/result/{id}", method = RequestMethod.GET)
     public String voteResult() {
         return "topic_vote_result";
     }

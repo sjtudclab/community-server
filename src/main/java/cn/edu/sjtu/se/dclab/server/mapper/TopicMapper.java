@@ -22,4 +22,6 @@ public interface TopicMapper {
     public Collection<TopicOption> findTopicOptions(long topicId);
 
     public void vote(TopicVote vote);
+
+    public int getOptionCount(long optionId);
 }
