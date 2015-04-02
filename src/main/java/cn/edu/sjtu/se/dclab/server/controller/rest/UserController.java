@@ -21,9 +21,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.sjtu.se.dclab.server.common.Constants;
+import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
+import cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.User;
+import cn.edu.sjtu.se.dclab.server.service.CitizenService;
+import cn.edu.sjtu.se.dclab.server.service.ManagementCitizenService;
+import cn.edu.sjtu.se.dclab.server.service.ResidentCitizenService;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;
+import cn.edu.sjtu.se.dclab.server.service.ServiceCitizenService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,6 +52,38 @@ public class UserController {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private ManagementCitizenService managementCitizenService;
+	@Autowired
+	private ServiceCitizenService serviceCitizenService;
+	@Autowired
+	private ResidentCitizenService residentCitizenService;
+
+	public ManagementCitizenService getManagementCitizenService() {
+		return managementCitizenService;
+	}
+
+	public void setManagementCitizenService(
+			ManagementCitizenService managementCitizenService) {
+		this.managementCitizenService = managementCitizenService;
+	}
+
+	public ServiceCitizenService getServiceCitizenService() {
+		return serviceCitizenService;
+	}
+
+	public void setServiceCitizenService(ServiceCitizenService serviceCitizenService) {
+		this.serviceCitizenService = serviceCitizenService;
+	}
+
+	public ResidentCitizenService getResidentCitizenService() {
+		return residentCitizenService;
+	}
+
+	public void setResidentCitizenService(
+			ResidentCitizenService residentCitizenService) {
+		this.residentCitizenService = residentCitizenService;
+	}
 
 	public AuthenticationManager getAuthenticationManager() {
 		return authenticationManager;
@@ -128,6 +166,22 @@ public class UserController {
 		return convertUserToUserTransfer(user, roles);
 	}
 	
+	@RequestMapping(value = "{id}/citizens", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String getAllUserInfo(@PathVariable long id){
+		User user = userService.getUserByUserId(id);
+		if(user == null)
+			return "";
+		if(Constants.USER_TYPE_MANAGEMENT.equals(user.getUserType().getType())){
+			ManagementCitizen citizen = managementCitizenService.findByUserId(user.getId());
+		}else if(Constants.USER_TYPE_RESIDNET.equals(user.getUserType().getType())){
+			ResidentCitizenService citizen = residentCitizenService.findByUserId(user.getId());
+		}else if(Constants.USER_TYPE_SERVICE.equals(user.getUserType().getType())){
+			ServiceCitizen citizen = serviceCitizenService.findByUserId(user.getId());
+		}
+		return "";
+	}
+	
 	private UserTransfer convertUserToUserTransfer(User user,Collection<Role> roles){
 		UserTransfer userTransfer = new UserTransfer();
 		userTransfer.setId(user.getId());
@@ -143,7 +197,7 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 	
-	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String updateUser(@RequestBody UserTransfer userTransfer){
 		userService.updateUser(userTransfer);

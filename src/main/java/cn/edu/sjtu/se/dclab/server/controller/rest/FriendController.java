@@ -143,13 +143,14 @@ public class FriendController {
 		return transfers;
 	}
 	
-	@RequestMapping(value = "{userId}/users/{friendId}/messages", method = RequestMethod.POST)
+	@RequestMapping(value = "{userId}/users/{friendId}/messages", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String sendMessage(@PathVariable long userId, @PathVariable long friendId, @RequestBody String message){
+		Map<String,Object> map = DataUtil.getFromJson(message);
 		Information information = new Information();
 		information.setFrom(userId);
 		information.setTo(friendId);
-		information.setContent(message);
+		information.setContent((String)map.get("message"));
 		information.setStatus(Constants.INFORMATION_DONE_STATUS);
 		informationService.create(information, Constants.INFORMATION_FRIEND_MESSAGE);
 		return Result.SUCCESS;
