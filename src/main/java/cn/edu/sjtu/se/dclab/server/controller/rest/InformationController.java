@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.edu.sjtu.se.dclab.server.util.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -51,29 +52,16 @@ public class InformationController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public void save(HttpServletRequest request,
+	public String save(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
-		MultipartFile file = req.getFile("file");
-
 		String title = request.getParameter("title");
 		String contentString = request.getParameter("content");
 		int type = Integer.valueOf(request.getParameter("infotype"));
 		long from = Long.parseLong(request.getParameter("from"));
-		String attachment = "";
-		
-		if (!file.isEmpty()) {
-			ServletContext sc = request.getSession().getServletContext();
-			String dir = sc.getRealPath("/uploadimage");    //设定文件保存的目录
-			
-			String filename = file.getOriginalFilename();    //得到上传时的文件名
-			
-			String newFilename =  getFileNameWithoutExt(filename) + System.currentTimeMillis() + "." + getFileType(filename);
-			attachment = "uploadimage/" + newFilename;
 
-			FileUtils.writeByteArrayToFile(new File(dir,newFilename), file.getBytes());
-		}
+		MultipartHttpServletRequest req = (MultipartHttpServletRequest)request;
+		MultipartFile file = req.getFile("file");
+		String attachment = FileUtil.uploadFile(file, request);
 		
 		Information information = new Information();
 		information.setTitle(title);
@@ -83,8 +71,9 @@ public class InformationController {
 		information.setInformationType(type);
 		information.setSubmitTime(new Date());
 
-
 		informationService.save(information);
+
+		return "redirect:" + request.getParameter("redirect_url");
 	}
 	
 	@RequestMapping(value = "search/{keyword}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -98,14 +87,5 @@ public class InformationController {
 	public String blockById(@PathVariable(value = "id") long id) {
 		informationService.blockById(id);
 		return "success";
-	}
-	
-    private String getFileNameWithoutExt(String filename) {
-    	return filename.split("\\.")[0];
-    }
-    
-	private String getFileType(String filename){
-		String[] arr = filename.split("\\.");
-		return arr[1];
 	}
 }

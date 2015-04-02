@@ -12,7 +12,7 @@ function search_goods(){
 	alert("开始搜索物品");
 	var content = $("#search_input")[0].value;
 	$.ajax({
-		url:"rest/SecondGoods/search/" + content,
+		url:getUrl("rest/SecondGoods/search/") + content,
 		type:"get",
 		dataType:"json",
 		success:function(obj) {

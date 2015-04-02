@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 		
 		$.ajax({
-			url:"rest/SecondGoods/stage/update",
+			url:getUrl("rest/SecondGoods/stage/update"),
 			type:"get",
 			//dataType:"json",
 			data:{goodsID:$("#goods_id").text(), stage:"2"},
@@ -31,7 +31,7 @@ $(document).ready(function(){
 		alert("用户:"+$("#user_id").text()+" 已审核物品:"+$("#goods_id").text());
 
 		$.ajax({
-			url:"rest/SecondGoods/stage/update",
+			url:getUrl("rest/SecondGoods/stage/update"),
 			type:"get",
 			//dataType:"json",
 			data:{goodsID:$("#goods_id").text(), stage:"3"},
