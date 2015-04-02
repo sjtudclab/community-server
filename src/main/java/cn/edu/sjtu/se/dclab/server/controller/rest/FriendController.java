@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +153,7 @@ public class FriendController {
 		information.setTo(friendId);
 		information.setContent((String)map.get("message"));
 		information.setStatus(Constants.INFORMATION_DONE_STATUS);
+		information.setSubmitTime(new Date());
 		informationService.create(information, Constants.INFORMATION_FRIEND_MESSAGE);
 		return Result.SUCCESS;
 	}

@@ -13,6 +13,10 @@ public class UserTransfer {
 	private String username;
 	private String image;
 	private Collection<Role> roles;
+	private String nickName;
+	private String realName;
+	private String gendar;
+	
 	public long getId() {
 		return id;
 	}
