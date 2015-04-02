@@ -46,6 +46,9 @@ public class Topic {
 	@JsonProperty(value = "created_by")
 	private long createdBy;
 
+	@JsonProperty(value = "submit_time")
+	private Date submitTime;
+
 	@JsonProperty(value = "options")
 	private Collection<TopicOption> options;
 	
@@ -137,5 +140,13 @@ public class Topic {
 
 	public void setCreatedBy(long createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public Date getSubmitTime() {
+		return submitTime;
+	}
+
+	public void setSubmitTime(Date submitTime) {
+		this.submitTime = submitTime;
 	}
 }

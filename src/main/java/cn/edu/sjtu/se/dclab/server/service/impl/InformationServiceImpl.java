@@ -83,7 +83,7 @@ public class InformationServiceImpl implements InformationService{
 	}
 	@Override
 	public void create(Information information, String type) {
-		InformationType infoType = informationMapper.findByType(type);
+		//InformationType infoType = informationMapper.findByType(type);
 	}
 
 }
