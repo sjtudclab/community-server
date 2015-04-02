@@ -35,4 +35,9 @@ public class NeighborController {
     public String groupchat() {
     	return "groupchat";
     }
+
+    @RequestMapping("friend/add")
+    public String friendAdd() {
+        return "friend_add";
+    }
 }

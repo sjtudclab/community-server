@@ -9,7 +9,7 @@
     </select>
 
     <resultMap type="Building" id="BuildingMap">
-        <id property="id" column="id" />
+        <id property="id" column="building_id" />
         <result property="name" column="name" />
     </resultMap>
 

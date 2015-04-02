@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+    <script th:src="@{/js/start-screen.js}"></script>
+
+    <title>左邻右舍</title>
+</head>
+<body class="metro">
+<div class="tile-area tile-area-dark">
+    <h1 class="tile-area-title fg-white">左邻右舍</h1>
+    <div class="tile-group eight">
+
+
+        <a th:href="@{/resident/neighbor/friend}" class="tile double bg-magenta" data-click="transform">
+            <div class="tile-content icon">
+                <span class="icon-home"></span>
+            </div>
+            <div class="brand">
+                <div class="label">我的好友</div>
+            </div>
+        </a>
+
+        <a class="tile double bg-yellow" data-click="transform" th:href="@{/resident/neighbor/group}">
+            <div class="tile-content icon">
+                <span class="icon-bell"></span>
+            </div>
+            <div class="brand">
+                <div class="label">邻里群</div>
+            </div>
+        </a>
+
+        <a th:href="@{/start-screen-resident}" class="tile bg-olive" data-click="transform">
+            <div class="tile-content icon">
+                <span class="icon-exit"></span>
+            </div>
+            <div class="brand">
+                <div class="label">返回首页</div>
+            </div>
+        </a>
+
+    </div> <!-- End group -->
+
+</div>
+
+<div th:include="login_footer :: copy"></div>
+
+</body>
+</html>

@@ -42,13 +42,29 @@
     	WHERE info.to = #{toId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
     </select>
     
+    <select id="findByFromIdAndToIdAndType" resultMap="InformationMap">
+    	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
+    	info.title, info.information_type, info.attachment
+    	FROM information info, information_type infoType
+    	WHERE info.from = #{fromId} AND info.to = #{toId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
+    </select>
+    
     <select id="findByIdAndType" resultMap="InformationMap">
     	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
     	info.title, info.information_type, info.attachment
     	FROM information info, information_type infoType
     	WHERE info.information_id = #{informationId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
     </select>
-
+    
+    <select id="findByType" resultMap="InformationTypeMap">
+    	SELECT * FROM information_type WHERE type = #{type};
+    </select>
+    
+    <update id="update" parameterType="Information">
+    	UPDATE information SET `from` = #{from}, `to` = #{to}, status = #{status}, content = #{content}, title = #{title} 
+    	WHERE information_id = #{id};
+    </update>
+    
     <resultMap type="Information" id="InformationMap">
         <id property="informationId" column="information_id" />
         <result property="from" column="from" />
@@ -59,6 +75,12 @@
         <result property="title" column="title" />
         <result property="informationType" column="information_type" />
         <result property="attachment" column="attachment" />
+    </resultMap>
+    
+    <resultMap type="InformationType" id="InformationTypeMap">
+        <id property="id" column="information_type_id" />
+        <result property="type" column="type" />
+        <result property="description" column="description" />
     </resultMap>
 
 </mapper>

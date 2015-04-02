@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.UserGroupMapper">
+
+	<insert id="save" parameterType="UserGroup" useGeneratedKeys="true" keyColumn="group_id">
+		INSERT INTO user_group (group_id, user_id)
+		VALUES(#{groupId}, #{userId});
+	</insert>
+	
+	<resultMap type="UserGroup" id="UserGroupMap">
+		<id property="groupId" column="group_id" />
+		<result property="userId" column="user_id" />
+	</resultMap>
+	
+</mapper>

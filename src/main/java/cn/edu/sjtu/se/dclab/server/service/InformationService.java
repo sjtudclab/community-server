@@ -21,4 +21,7 @@ public interface InformationService {
 
 	public Collection<Information> findByToIdAndType(long toId,
 			String type);
+
+	public Collection<Information> findChats(long userId, long friendId,
+			long startId, long count);
 }

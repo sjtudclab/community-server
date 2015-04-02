@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.common.Result;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
-import cn.edu.sjtu.se.dclab.server.entity.InformationType;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.service.InformationService;
 import cn.edu.sjtu.se.dclab.server.service.UserRelationService;
 import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.ApplicationTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.FriendTransfer;
+import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
 
 /**
  * 2015年4月2日 上午9:52:05
@@ -76,52 +76,98 @@ public class FriendController {
 
 	@RequestMapping(value = "{fromId}/relations/{toId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public FriendTransfer getFriend(@PathVariable long fromId, @PathVariable long toId) {
-		User user = userRelationService.findByFollowerIdAndType(fromId,toId,Constants.RELATOIN_FRIEND);
+	public FriendTransfer getFriend(@PathVariable long fromId,
+			@PathVariable long toId) {
+		User user = userRelationService.findByFollowerIdAndType(fromId, toId,
+				Constants.RELATOIN_FRIEND);
 		return convertUserToFriendTransfer(user);
 	}
 
 	@RequestMapping(value = "{toId}/applications", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<ApplicationTransfer> getFriendApplications(@PathVariable long toId){
-		Collection<Information> informations = informationService.findByToIdAndType(toId,Constants.INFORMATION_ADD_FRIEND);
+	public Collection<ApplicationTransfer> getFriendApplications(
+			@PathVariable long toId) {
+		Collection<Information> informations = informationService
+				.findByToIdAndType(toId, Constants.INFORMATION_ADD_FRIEND);
 		Collection<ApplicationTransfer> transfers = new ArrayList<ApplicationTransfer>();
-		for(Information information : informations){
-			User user = userService.getUserByUserId(information.getFrom());
-			transfers.add(convertUserAndInformationToApplicationTransfer(user, information));
+		for (Information information : informations) {
+			if (information.getStatus() == Constants.INFORMATION_UNDO_STATUS) {
+				User user = userService.getUserByUserId(information.getFrom());
+				transfers.add(convertUserAndInformationToApplicationTransfer(
+						user, information));
+			}
 		}
 		return transfers;
 	}
-	
+
 	@RequestMapping(value = "{fromId}/applications/toId", method = RequestMethod.POST)
 	@ResponseBody
-	public String createFriendApplications(@PathVariable long fromId, @PathVariable long toId, @RequestBody String message){
+	public String createFriendApplications(@PathVariable long fromId,
+			@PathVariable long toId, @RequestBody String message) {
 		Information information = new Information();
 		information.setFrom(fromId);
 		information.setTo(toId);
 		information.setContent(message);
-		
-		informationService.create(information,Constants.INFORMATION_ADD_FRIEND);
-		
+		information.setStatus(Constants.INFORMATION_UNDO_STATUS);
+
+		informationService
+				.create(information, Constants.INFORMATION_ADD_FRIEND);
+
 		return Result.SUCCESS;
 	}
-	
+
 	@RequestMapping(value = "{fromId}/applications/{applicationId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String updateFriendApplications(@PathVariable long fromId, @PathVariable long applicationId){
+	public String updateFriendApplications(@PathVariable long fromId,
+			@PathVariable long applicationId) {
 		informationService.updateFriendApplicationById(applicationId);
-		return "success";
+		return Result.SUCCESS;
+	}
+
+	@RequestMapping(value = "{userId}/users/{friendId}/messages/{startId}/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<MessageTransfer> getMessages(@PathVariable long userId,
+			@PathVariable long friendId, @PathVariable long startId,
+			@PathVariable long count) {
+		Collection<Information> infos = informationService.findChats(userId,
+				friendId, startId, count);
+		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
+		for (Information info : infos)
+			transfers.add(convertInformationToMessageTransfer(info));
+		return transfers;
 	}
 	
+	@RequestMapping(value = "{userId}/users/{friendId}/messages", method = RequestMethod.POST)
+	@ResponseBody
+	public String sendMessage(@PathVariable long userId, @PathVariable long friendId, @RequestBody String message){
+		Information information = new Information();
+		information.setFrom(userId);
+		information.setTo(friendId);
+		information.setContent(message);
+		information.setStatus(Constants.INFORMATION_DONE_STATUS);
+		informationService.create(information, Constants.INFORMATION_FRIEND_MESSAGE);
+		return Result.SUCCESS;
+	}
+ 
 	private FriendTransfer convertUserToFriendTransfer(User user) {
-		if(user == null)
+		if (user == null)
 			return new FriendTransfer();
 		FriendTransfer transfer = new FriendTransfer(user.getId(),
 				user.getName(), user.getImage());
 		return transfer;
 	}
 
-	private ApplicationTransfer convertUserAndInformationToApplicationTransfer(User user, Information info){
-		return new ApplicationTransfer(info.getInformationId(),user.getId(), user.getName(), user.getImage(), info.getContent());
+	private ApplicationTransfer convertUserAndInformationToApplicationTransfer(
+			User user, Information info) {
+		return new ApplicationTransfer(info.getInformationId(), user.getId(),
+				user.getName(), user.getImage(), info.getContent());
+	}
+
+	private MessageTransfer convertInformationToMessageTransfer(
+			Information information) {
+		if (information == null)
+			return new MessageTransfer();
+		return new MessageTransfer(information.getInformationId(),
+				information.getContent(), information.getSubmitTime());
 	}
 }
