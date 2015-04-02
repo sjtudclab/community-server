@@ -19,7 +19,7 @@
 
     <!-- 返回主页 -->
     <div class="offset1">
-        <h1><a th:href="@{/resident/neighbor/friend}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的好友</h1>
+        <h1><a th:href="@{/resident/neighbor/friend}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>好友申请</h1>
     </div>
     <!-- End 返回主页 -->
 
@@ -39,9 +39,9 @@
 
 <div th:include="market_template :: copy"></div>
 <script type="application/javascript">
-    function confirm() {
+    function confirm(obj) {
         $.ajax({
-            url: getUrl('friends/' + currentUserId() + '/applications/' + $(this).value),
+            url: getUrl('friends/' + currentUserId() + '/applications/' + obj.value),
             type: 'put',
             success:function(data) {
                 alert('已同意好友申请');
@@ -61,13 +61,13 @@
                     var request =
                             "<div class=\"tile double goods\" id=\"" + value.id + "\">" +                // class goods用于查看物品的详细信息
                             "<div class=\"tile-content image\">" +
-                            "<img src=\""+value.imagePath+"\">" +
+                            "<img src=\""+value.image+"\">" +
                             "</div>" +
 
                             "<div class=\"brand bg-dark opacity\">" +
-                            "<span class=\"text\">"+ decodeURI(value.name) + "</span>" +
-                            "<span style=\"display:none\">"+value.id+"</span>" +
-                            "<button onclick=\"confirm()\" value=\"" + value.id +  "\">同意</button>" +
+                            "<span class=\"text\">"+ value.name + "</span>" +
+                            "<span class=\"text\">"+ value.message + "</span>" +
+                            "<button onclick=\"confirm(this)\" value=\"" + value.applicationId +  "\">同意</button>" +
                             "</div>" +
                             "</div>";
 
