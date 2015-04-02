@@ -89,7 +89,7 @@ public class InformationServiceImpl implements InformationService {
 		UserRelation relation = new UserRelation();
 		relation.setFollowerId(information.getFrom());
 		relation.setFollowedId(information.getTo());
-		relation.setType(userRelationMapper
+		relation.setRelationType(userRelationMapper
 				.findByType(Constants.RELATOIN_FRIEND));
 		userRelationMapper.create(relation);
 	}
