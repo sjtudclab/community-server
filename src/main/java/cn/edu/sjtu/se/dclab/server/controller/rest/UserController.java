@@ -35,8 +35,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.edu.sjtu.se.dclab.server.service.UserService;
+import cn.edu.sjtu.se.dclab.server.transfer.CitizenTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
+import cn.edu.sjtu.se.dclab.server.util.TransferUtil;
 
 /**
  * 2015年3月11日 下午6:24:50
@@ -72,7 +74,8 @@ public class UserController {
 		return serviceCitizenService;
 	}
 
-	public void setServiceCitizenService(ServiceCitizenService serviceCitizenService) {
+	public void setServiceCitizenService(
+			ServiceCitizenService serviceCitizenService) {
 		this.serviceCitizenService = serviceCitizenService;
 	}
 
@@ -89,7 +92,8 @@ public class UserController {
 		return authenticationManager;
 	}
 
-	public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+	public void setAuthenticationManager(
+			AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}
 
@@ -100,7 +104,7 @@ public class UserController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	public RoleService getRoleService() {
 		return roleService;
 	}
@@ -111,78 +115,91 @@ public class UserController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public UserTransfer login(HttpServletRequest request){
+	public UserTransfer login(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		UsernamePasswordAuthenticationToken authenticationToken =
-				new UsernamePasswordAuthenticationToken(username, password);
-		Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+				username, password);
+		Authentication authentication = this.authenticationManager
+				.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		HttpSession session = request.getSession();
 		UserTransfer userTransfer = userService.getUserByUsername(username);
 		session.setAttribute(Constants.SESSION_USER_ID, userTransfer.getId());
-		
+
 		return userTransfer;
 	}
-	
+
 	@RequestMapping(value = "hardwarelogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String hardwareLogin(HttpServletRequest request) throws JsonProcessingException{
+	public String hardwareLogin(HttpServletRequest request)
+			throws JsonProcessingException {
 		String cardNumber = request.getParameter("cardnumber");
 		String cardType = request.getParameter("cardtype");
 		String citizenType = request.getParameter("citizentype");
-		
+
 		cardNumber = cardNumber.trim();
-		
-		UserTransfer transfer = userService.getUserByCardInfo(cardType, cardNumber, citizenType);
-		if (transfer == null) 
+
+		UserTransfer transfer = userService.getUserByCardInfo(cardType,
+				cardNumber, citizenType);
+		if (transfer == null)
 			return "User not found";
-		
-		UserDetails userDetails = userService.loadUserByUsername(transfer.getUsername());
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(transfer.getUsername(),
-				userDetails.getPassword(),userDetails.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-		
+
+		UserDetails userDetails = userService.loadUserByUsername(transfer
+				.getUsername());
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+				transfer.getUsername(), userDetails.getPassword(),
+				userDetails.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(
+				authenticationToken);
+
 		HttpSession session = request.getSession();
 		session.setAttribute(Constants.SESSION_USER_ID, transfer.getId());
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(transfer);
-		
-	}
 
+	}
 
 	@RequestMapping(value = "{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public UserTransfer getUserByUsername(@PathVariable String username) {
 		return userService.getUserByUsername(username);
 	}
+
 	@RequestMapping(value = "id/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public UserTransfer getUserByUserId(@PathVariable long id){
+	public UserTransfer getUserByUserId(@PathVariable long id) {
 		User user = userService.getUserByUserId(id);
 		Collection<Role> roles = roleService.getRolesByUserId(user.getId());
 		return convertUserToUserTransfer(user, roles);
 	}
-	
+
 	@RequestMapping(value = "{id}/citizens", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String getAllUserInfo(@PathVariable long id){
+	public CitizenTransfer getAllUserInfo(@PathVariable long id) {
 		User user = userService.getUserByUserId(id);
-		if(user == null)
-			return "";
-		if(Constants.USER_TYPE_MANAGEMENT.equals(user.getUserType().getType())){
-			ManagementCitizen citizen = managementCitizenService.findByUserId(user.getId());
-		}else if(Constants.USER_TYPE_RESIDNET.equals(user.getUserType().getType())){
-			ResidentCitizenService citizen = residentCitizenService.findByUserId(user.getId());
-		}else if(Constants.USER_TYPE_SERVICE.equals(user.getUserType().getType())){
-			ServiceCitizen citizen = serviceCitizenService.findByUserId(user.getId());
-		}
-		return "";
+		if (user == null)
+			return new CitizenTransfer();
+		if (Constants.USER_TYPE_MANAGEMENT.equals(user.getUserType().getType())) {
+			ManagementCitizen citizen = managementCitizenService
+					.findByUserId(user.getId());
+			return TransferUtil.convertUserAndCitizenToCitizenTransfer(user,citizen);
+		} else if (Constants.USER_TYPE_RESIDNET.equals(user.getUserType()
+				.getType())) {
+			ResidentCitizenService citizen = residentCitizenService
+					.findByUserId(user.getId());
+			return TransferUtil.convertUserAndCitizenToCitizenTransfer(user,citizen);
+		} 
+		ServiceCitizen citizen = serviceCitizenService.findByUserId(user
+					.getId());
+		return TransferUtil.convertUserAndCitizenToCitizenTransfer(user,citizen);
+		
 	}
-	
-	private UserTransfer convertUserToUserTransfer(User user,Collection<Role> roles){
+
+	private UserTransfer convertUserToUserTransfer(User user,
+			Collection<Role> roles) {
 		UserTransfer userTransfer = new UserTransfer();
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
@@ -196,17 +213,18 @@ public class UserController {
 	public Collection<UserTransfer> getAllUsers() {
 		return userService.getAllUsers();
 	}
-	
+
 	@RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String updateUser(@RequestBody UserTransfer userTransfer){
+	public String updateUser(@RequestBody UserTransfer userTransfer) {
 		userService.updateUser(userTransfer);
 		return "success";
 	}
-	
+
 	@RequestMapping(value = "", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String updateUsers(@RequestBody List<UserRoleTransfer> userRoleTransfers){
+	public String updateUsers(
+			@RequestBody List<UserRoleTransfer> userRoleTransfers) {
 		userService.updateUserRoles(userRoleTransfers);
 		return "success";
 	}
@@ -231,7 +249,7 @@ public class UserController {
 
 	@RequestMapping(value = "test", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String test(){
+	public String test() {
 		return "test";
 	}
 

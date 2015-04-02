@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,9 +108,15 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public Collection<Information> findChats(long userId, long friendId,
 			long startId, long count) {
-		Collection<Information> infos = informationMapper
+		Collection<Information> infos = new ArrayList<Information>();
+		Collection<Information> sendInfos = informationMapper
 				.findByFromIdAndToIdAndType(userId, friendId,
 						Constants.INFORMATION_FRIEND_MESSAGE);
+		Collection<Information> receiveInfos = informationMapper
+				.findByFromIdAndToIdAndType(friendId, userId,
+						Constants.INFORMATION_FRIEND_MESSAGE);
+		infos.addAll(sendInfos);
+		infos.addAll(receiveInfos);
 		return resolve(infos, startId, count);
 	}
 
@@ -139,7 +146,7 @@ public class InformationServiceImpl implements InformationService {
 			}
 		});
 
-		Collection<Information> results = new ArrayList<Information>();
+		Collection<Information> results = new Stack<Information>();
 		int i = 0;
 
 		if (startId == 0) {
@@ -168,26 +175,27 @@ public class InformationServiceImpl implements InformationService {
 		if (Constants.INFORMATION_CIRCLE_MESSAGE.equals(type)) {
 			Set<Long> circles = new HashSet<Long>();
 			Collection<Information> results = new ArrayList<Information>();
-			
+
 			Collection<UserRelation> followers = userRelationMapper
 					.findByFromIdAndType(fromId, Constants.RELATION_CIRCLE);
 			Collection<UserRelation> followeds = userRelationMapper
 					.findByToIdAndType(fromId, Constants.RELATION_CIRCLE);
-			
-			for(UserRelation relation : followers){
+
+			for (UserRelation relation : followers) {
 				circles.add(relation.getFollowerId());
 				circles.add(relation.getFollowedId());
 			}
-			for(UserRelation relation : followeds){
+			for (UserRelation relation : followeds) {
 				circles.add(relation.getFollowerId());
 				circles.add(relation.getFollowedId());
 			}
-			
-			for(long userId : circles){
-				Collection<Information> infos = informationMapper.findByFromIdAndType(userId, type);
+
+			for (long userId : circles) {
+				Collection<Information> infos = informationMapper
+						.findByFromIdAndType(userId, type);
 				results.addAll(infos);
 			}
-			
+
 			return resolve(results, startId, count);
 		}
 		return informationMapper.findByFromIdAndType(fromId, type);

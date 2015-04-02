@@ -27,4 +27,6 @@ public class Constants {
 	
 	public final static int INFORMATION_UNDO_STATUS = 0;
 	public final static int INFORMATION_DONE_STATUS = 1;
+	
+	public final static String IDENTIFICATION_TYPE_ID = "居民身份证";
 }

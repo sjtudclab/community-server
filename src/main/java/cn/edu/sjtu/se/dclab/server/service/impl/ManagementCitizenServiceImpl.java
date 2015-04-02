@@ -97,7 +97,7 @@ public class ManagementCitizenServiceImpl implements ManagementCitizenService {
 
 	@Override
 	public ManagementCitizen findByUserId(long userId) {
-		return null;
+		return managementCitizenMapper.findByUserId(userId);
 	}
 
 }

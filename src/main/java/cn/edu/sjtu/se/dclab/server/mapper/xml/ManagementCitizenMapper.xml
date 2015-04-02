@@ -11,6 +11,10 @@
 	<select id="findById" resultMap="ManagementCitizenMap">
 		select * from citizen_management where citizen_id = #{id};
 	</select>
+	
+	<select id="findByUserId" parameterType="long" "ManagementCitizenMap">
+		SELECT * FROM citizen_management where user_id = #{userId};
+	</select>
 
     <resultMap id="ManagementCitizenMap" type="ManagementCitizen">
         <id property="id" column="citizen_id" />
