@@ -40,11 +40,16 @@
         <typeAlias alias="ServiceCitizen" type="cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen" />
         <typeAlias alias="WorkReport" type="cn.edu.sjtu.se.dclab.server.entity.WorkReport" />
         <typeAlias alias="Information" type="cn.edu.sjtu.se.dclab.server.entity.Information" />
+        <typeAlias alias="InformationType" type="cn.edu.sjtu.se.dclab.server.entity.InformationType" />
 
         <typeAlias alias="Topic" type="cn.edu.sjtu.se.dclab.server.entity.Topic" />
         <typeAlias alias="TopicOption" type="cn.edu.sjtu.se.dclab.server.entity.TopicOption" />
         <typeAlias alias="TopicVote" type="cn.edu.sjtu.se.dclab.server.entity.TopicVote" />
         <typeAlias alias="TopicType" type="cn.edu.sjtu.se.dclab.server.entity.TopicType" />
+        
+        
+        <typeAlias alias="UserRelation" type="cn.edu.sjtu.se.dclab.server.entity.UserRelation" />
+        <typeAlias alias="RelationType" type="cn.edu.sjtu.se.dclab.server.entity.RelationType" />
 
         <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
 		<typeAlias alias="ContentHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.ContentHandler" />

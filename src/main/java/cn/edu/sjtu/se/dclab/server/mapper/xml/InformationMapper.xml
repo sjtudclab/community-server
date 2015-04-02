@@ -27,6 +27,20 @@
     <select id="blockById" parameterType="java.lang.Integer" resultMap="InformationMap">
     	UPDATE information SET status = -1 WHERE information_id = #{id};
     </select>
+    
+    <select id="findByFromIdAndType" resultMap="InformationMap">
+    	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
+    	info.title, info.information_type, info.attachment
+    	FROM information info, information_type infoType
+    	WHERE info.from = #{fromId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
+    </select>
+    
+    <select id="findByIdAndType" resultMap="InformationMap">
+    	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
+    	info.title, info.information_type, info.attachment
+    	FROM information info, information_type infoType
+    	WHERE info.information_id = #{informationId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
+    </select>
 
     <resultMap type="Information" id="InformationMap">
         <id property="informationId" column="information_id" />

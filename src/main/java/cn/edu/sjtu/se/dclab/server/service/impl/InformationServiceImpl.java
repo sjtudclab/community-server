@@ -5,8 +5,11 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
+import cn.edu.sjtu.se.dclab.server.entity.UserRelation;
 import cn.edu.sjtu.se.dclab.server.mapper.InformationMapper;
+import cn.edu.sjtu.se.dclab.server.mapper.UserRelationMapper;
 import cn.edu.sjtu.se.dclab.server.service.InformationService;
 
 @Service
@@ -14,7 +17,15 @@ public class InformationServiceImpl implements InformationService{
 
 	@Autowired
 	InformationMapper informationMapper;
+	@Autowired
+	UserRelationMapper userRelationMapper;
 	
+	public UserRelationMapper getUserRelationMapper() {
+		return userRelationMapper;
+	}
+	public void setUserRelationMapper(UserRelationMapper userRelationMapper) {
+		this.userRelationMapper = userRelationMapper;
+	}
 	public void setInformationMapper(InformationMapper informationMapper) {
 		this.informationMapper = informationMapper;
 	}
@@ -49,6 +60,20 @@ public class InformationServiceImpl implements InformationService{
 
 	public void blockById(long id) {
 		informationMapper.blockById(id);
+	}
+	@Override
+	public Collection<Information> findByFromIdAndType(long fromId,
+			String type) {
+		return informationMapper.findByFromIdAndType(fromId,type);
+	}
+	@Override
+	public void updateFriendApplicationById(long applicationId) {
+		Information information = informationMapper.findByIdAndType(applicationId,Constants.INFORMATION_ADD_FRIEND);
+		UserRelation relation = new UserRelation();
+		relation.setFollowerId(information.getFrom());
+		relation.setFollowedId(information.getTo());
+		relation.setType(userRelationMapper.findByType(Constants.RELATOIN_FRIEND));
+		userRelationMapper.create(relation);
 	}
 
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.UserRelationMapper">
+
+	<select id="findByType" parameterType="String" resultMap="RelationTypeMap">
+		SELECT　* FROM relation_type 
+		WHERE type = #{type};
+	</select>
+	
+	<select id="findByFromIdAndType" resultMap="UserRelationMap">
+		SELECT ur.user_relation_id, ur.follower_id, ur.followed_id, ur.relation_type_id 
+		FROM user_relation ur, relation_type rt 
+		WHERE ur.follower_id = #{fromId} AND ur.relation_type_id = rt.relation_type_id AND rt.type = #{type};
+	</select>
+	
+	<select id="findByToIdAndType" resultMap="UserRelationMap">
+		SELECT ur.user_relation_id, ur.follower_id, ur.followed_id, ur.relation_type_id 
+		FROM user_relation ur, relation_type rt 
+		WHERE ur.followed_id = #{toId} AND ur.relation_type_id = rt.relation_type_id AND rt.type = #{type};
+	</select>
+	
+	<select id="findByFromIdAndToIdAndType" resultMap="UserRelationMap">
+		SELECT ur.user_relation_id, ur.follower_id, ur.followed_id, ur.relation_type_id 
+		FROM user_relation ur, relation_type rt 
+		WHERE ur.follower_id = #{fromId} AND ur.followed_id = #{toId} AND ur.relation_type_id = rt.relation_type_id AND rt.type = #{type};
+	</select>
+
+	<insert id="create" parameterType="UserRelation">
+		INSERT INTO user_relation (type,description) 
+		VALUES (#{type}, #{description});
+	</insert>
+
+	<resultMap type="RelationType" id="RelationTypeMap">
+		<id property="id" column="relation_type_id" />
+		<result property="type" column="type" />
+		<result property="description" column="description" />
+	</resultMap>
+	
+	<resultMap type="UserRelation" id="UserRelationMap">
+		<id property="id" column="user_relation_id" />
+		<result property="followerId" column="follower_id" />
+		<result property="followedId" column="followed_id" />
+		<association property="relationType" column="relation_type_id" resultMap="RelationTypeMap" />
+	</resultMap>
+	
+</mapper>

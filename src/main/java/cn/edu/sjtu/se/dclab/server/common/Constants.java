@@ -16,4 +16,12 @@ public class Constants {
 	public final static String USER_TYPE_RESIDNET = "resident";
 	
 	public final static String SESSION_USER_ID = "userId";
+	
+	public final static String RELATOIN_FRIEND = "friend";
+	public final static String RELATION_CIRCLE = "circle";
+	
+	public final static String INFORMATION_ADD_FRIEND = "add_friend_apply";
+	public final static String INFORMATION_FRIEND_MESSAGE = "friend_message";
+	public final static String INFROMATION_GROUP_MESSAGE = "group_message";
+	public final static String INFORMATION_CIRCLE_MESSAGE = "circle_message";
 }
