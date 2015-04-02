@@ -14,6 +14,7 @@
     <script th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
 
+
     <title>我的好友</title>
 </head>
 <body class="metro">
@@ -35,7 +36,7 @@
 
             <!-- 我的好友列表 -->
             <div class="row">
-                <div id="fiendlist">
+                <div id="friendlist">
                     
                 </div>
             </div>
@@ -51,39 +52,28 @@
     var userid;
 	$(document).ready(function() {
 		userid = currentUserId();
-		$.ajax({
-			url: getUrl("rest/friends/" + userid + "/relations"),
-			type:"get",
-			dataType:"json",
-			success:function(obj){
-				console.log("success:"+obj);
-				var friendList = "";
-				$.each(obj, function (n, value) {
-					//alert(n +" "+ value.title);
-					var friend = "";
-					friend =
-					"<div class=\"tile double goods\">" +
-	                    "<div class=\"tile-content image\">" +
-	                        "<a href='friendchat?id=" + value.id + "&name=" + value.name +"><img src=\""+value.imagePath+"\"></a>" +
-	                    "</div>" +
+		$("#friendlist").html("");
+		$.get(getUrl("rest/friends/" + userid + "/relations"), function(data) {
+			$.each(data, function (n, value) {
+				var friend = "";
+				friend =
+				"<div class=\"tile double goods\">" +
+                    "<div class=\"tile-content image\">" +
+                        "<a href='friendchat?id=" + value.friendId + "&name=" + value.name +
+                        "'><img src=\""+value.image+"\"></a>" +
+                    "</div>" +
 
-	                    "<div class=\"brand bg-dark opacity\">" +
-	                        "<span class=\"text\">"+ value.name +"</span>" + 
-	                        "<span style=\"display:none\">"+value.id+"</span>" +
-	                    "</div>" +
-	                "</div>";
-
-	                friendList += friend;
-				});
-
-				$("#friendlist").append(friendList);
-			},
-
-			error:function(){
-				alert("获取好友信息失败！");
-			}
-
+                    "<div class=\"brand bg-dark opacity\">" +
+                    	"<a href='friendchat?id=" + value.friendId + "&name=" + value.name + "'>" +
+                        "<span class=\"text\">"+ value.name +"</span>" + 
+                        "<span style=\"display:none\">"+value.friendId+"</span>" +
+                         "</a>"
+                    "</div>" +
+                "</div>";
+                $("#friendlist").append(friend);
+			});
 		});
+
 		
 		$.get(getUrl("rest/friends/" + userid + "/applications"), function(data) {
 			var count = 0;
