@@ -6,6 +6,8 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
+import cn.edu.sjtu.se.dclab.server.entity.RelationType;
 import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.entity.UserRelation;
 import cn.edu.sjtu.se.dclab.server.mapper.UserMapper;
@@ -61,6 +63,26 @@ public class UserRelationServiceImpl implements UserRelationService {
 			return null;
 		User user = userMapper.findByUserId(relation.getFollowedId());
 		return user;
+	}
+
+	@Override
+	public void createAttention(UserRelation relation) {
+		RelationType relationType = userRelationMapper.findByType(Constants.RELATION_CIRCLE);
+		relation.setRelationType(relationType);
+		userRelationMapper.create(relation);
+	}
+
+	@Override
+	public Collection<User> findFollowedIdAndType(long userId,
+			String type) {
+		Collection<UserRelation> relations = userRelationMapper.findByToIdAndType(userId, type);
+		Collection<User> users = new ArrayList<User>();
+		if(relations != null)
+			for(UserRelation relation : relations){
+				User user = userMapper.findByUserId(relation.getFollowerId());
+				users.add(user);
+			}
+		return users;
 	}
 
 }

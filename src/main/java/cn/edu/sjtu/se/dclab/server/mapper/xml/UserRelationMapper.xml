@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.UserRelationMapper">
 
 	<select id="findByType" parameterType="String" resultMap="RelationTypeMap">
-		SELECT　* FROM relation_type 
+		SELECT * FROM relation_type 
 		WHERE type = #{type};
 	</select>
 	
@@ -28,8 +28,8 @@
 	</select>
 
 	<insert id="create" parameterType="UserRelation">
-		INSERT INTO user_relation (type,description) 
-		VALUES (#{type}, #{description});
+		INSERT INTO user_relation (follower_id,followed_id,relation_type_id) 
+		VALUES (#{followerId}, #{followedId}, #{relationType.id});
 	</insert>
 
 	<resultMap type="RelationType" id="RelationTypeMap">

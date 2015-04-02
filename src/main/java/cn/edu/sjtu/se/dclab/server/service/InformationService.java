@@ -13,6 +13,7 @@ public interface InformationService {
 	public void save(Information information);
 	public void blockById(long id);
 
+	public Collection<Information> findByFromIdAndType(long fromId,String type,long startId,long count);
 	public Collection<Information> findByFromIdAndType(long fromId, String type);
 
 	public void updateFriendApplicationById(long informationId);

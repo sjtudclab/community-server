@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
 import cn.edu.sjtu.se.dclab.server.entity.InformationType;
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import cn.edu.sjtu.se.dclab.server.entity.UserRelation;
 import cn.edu.sjtu.se.dclab.server.mapper.InformationMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserRelationMapper;
@@ -113,49 +116,81 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public Collection<Information> findByToIdAndType(long toId, String type,
 			long startId, long count) {
-		Collection<Information> infos = informationMapper.findByToIdAndType(toId, type);
+		Collection<Information> infos = informationMapper.findByToIdAndType(
+				toId, type);
 		return resolve(infos, startId, count);
 	}
-	
-	private Collection<Information> resolve(Collection<Information> infos, long startId,long count){
-		if(infos == null)
+
+	private Collection<Information> resolve(Collection<Information> infos,
+			long startId, long count) {
+		if (infos == null)
 			return null;
 		Information[] infoArray = new Information[infos.size()];
 		infos.toArray(infoArray);
-		Arrays.sort(infoArray,new Comparator<Information>() {
+		Arrays.sort(infoArray, new Comparator<Information>() {
 
 			@Override
 			public int compare(Information info1, Information info2) {
-				if(info1.getSubmitTime().before(info2.getSubmitTime()))
+				if (info1.getSubmitTime().before(info2.getSubmitTime()))
 					return 1;
-				if(info1.getSubmitTime().after(info2.getSubmitTime()))
+				if (info1.getSubmitTime().after(info2.getSubmitTime()))
 					return -1;
 				return 0;
 			}
 		});
-		
+
 		Collection<Information> results = new ArrayList<Information>();
 		int i = 0;
-		
+
 		if (startId == 0) {
-			for(Information info : infoArray){
-				if((i++) == count)
+			for (Information info : infoArray) {
+				if ((i++) == count)
 					return results;
 				results.add(info);
 			}
 		}
-		
-		for(Information info : infoArray){
-			if(i < count){
-				if(info.getInformationId() < startId){
+
+		for (Information info : infoArray) {
+			if (i < count) {
+				if (info.getInformationId() < startId) {
 					results.add(info);
 					i++;
 				}
-			}
-			else
+			} else
 				break;
 		}
 		return results;
+	}
+
+	@Override
+	public Collection<Information> findByFromIdAndType(long fromId,
+			String type, long startId, long count) {
+		if (Constants.INFORMATION_CIRCLE_MESSAGE.equals(type)) {
+			Set<Long> circles = new HashSet<Long>();
+			Collection<Information> results = new ArrayList<Information>();
+			
+			Collection<UserRelation> followers = userRelationMapper
+					.findByFromIdAndType(fromId, Constants.RELATION_CIRCLE);
+			Collection<UserRelation> followeds = userRelationMapper
+					.findByToIdAndType(fromId, Constants.RELATION_CIRCLE);
+			
+			for(UserRelation relation : followers){
+				circles.add(relation.getFollowerId());
+				circles.add(relation.getFollowedId());
+			}
+			for(UserRelation relation : followeds){
+				circles.add(relation.getFollowerId());
+				circles.add(relation.getFollowedId());
+			}
+			
+			for(long userId : circles){
+				Collection<Information> infos = informationMapper.findByFromIdAndType(userId, type);
+				results.addAll(infos);
+			}
+			
+			return resolve(results, startId, count);
+		}
+		return informationMapper.findByFromIdAndType(fromId, type);
 	}
 
 }

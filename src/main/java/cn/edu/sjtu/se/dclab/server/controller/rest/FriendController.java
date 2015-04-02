@@ -71,7 +71,7 @@ public class FriendController {
 				fromId, Constants.RELATOIN_FRIEND);
 		Collection<FriendTransfer> transfers = new ArrayList<FriendTransfer>();
 		for (User user : friends)
-			transfers.add(convertUserToFriendTransfer(user));
+			transfers.add(TransferUtil.convertUserToFriendTransfer(user));
 		return transfers;
 	}
 
@@ -81,7 +81,7 @@ public class FriendController {
 			@PathVariable long toId) {
 		User user = userRelationService.findByFollowerIdAndType(fromId, toId,
 				Constants.RELATOIN_FRIEND);
-		return convertUserToFriendTransfer(user);
+		return TransferUtil.convertUserToFriendTransfer(user);
 	}
 
 	@RequestMapping(value = "{toId}/applications", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -150,14 +150,6 @@ public class FriendController {
 		return Result.SUCCESS;
 	}
  
-	private FriendTransfer convertUserToFriendTransfer(User user) {
-		if (user == null)
-			return new FriendTransfer();
-		FriendTransfer transfer = new FriendTransfer(user.getId(),
-				user.getName(), user.getImage());
-		return transfer;
-	}
-
 	private ApplicationTransfer convertUserAndInformationToApplicationTransfer(
 			User user, Information info) {
 		return new ApplicationTransfer(info.getInformationId(), user.getId(),
