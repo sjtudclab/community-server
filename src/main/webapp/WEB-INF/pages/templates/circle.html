@@ -1,0 +1,78 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-frameset-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">    
+    <title>我的圈子</title>
+</head>
+<body class="metro">
+
+
+    <div class="container">
+        <h1>
+            <a th:href="@{/login/committee}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+              我的圈子<small class="on-right"></small>
+        </h1>
+		<div class="grid">
+		<div class="foll-info row">
+			<div class="follower padding10 span4 border" >
+				关注我的人：<a classs="follow" href="{my-followers}">{number}</a>
+			</div>
+			<div class="following padding10 span4 border" style="float:left">
+				我关注的人：<a classs="follow" href="{my-followers}">{number}</a>
+			</div>
+		</div>
+		</div>
+		
+		<div class="timeline">
+			<div class="info-block">
+				<div class="avatar-container tile" style="float: left" style><img class="avatar" src="/community-server/images/default.jpg" /></div>
+				<div class="panel">
+					<div class="panel-header bg-lightBlue fg-white">
+					<span class="user-name" style="font-size: 20px">{username}</span>
+					<span class="post-time" style="font-size: 20px">{post-time}</span>					
+					</div>
+					<div class="panel-content">
+						<p>{info - content} <br />
+						xxxxxxx
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="info-block">
+				<div class="avatar-container tile" style="float: left" style><img class="avatar" src="/community-server/images/default.jpg" /></div>
+				<div class="panel">
+					<div class="panel-header bg-lightBlue fg-white">
+					<span class="user-name" style="font-size: 20px">{username}</span>
+					<span class="post-time" style="font-size: 20px">{post-time}</span>					
+					</div>
+					<div class="panel-content">
+						<p>{info - content} <br />
+						xxxxxxx
+						sdfsdfsdf <br />
+						second line
+						</p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+    </div> <!-- End of container -->
+    <div th:include="metro_header :: copy"></div>
+	<style type="text/css">
+		.info-block {margin-bottom: 20px;}
+	</style>
+	
+    <script type="text/javascript">
+    
+    (function($){
+
+        })(jQuery);
+    </script>
+
+</body>
+</html>

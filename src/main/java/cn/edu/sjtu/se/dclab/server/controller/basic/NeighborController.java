@@ -1,6 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.controller.basic;
 
 import cn.edu.sjtu.se.dclab.server.common.Constants;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,6 +27,11 @@ public class NeighborController {
     	return "neighborgroup";
     }
     
+    @RequestMapping("/group/invitation")
+    public String invitation() {
+    	return "groupinvitation";
+    }
+    
     @RequestMapping("/friendchat")
     public String friendchat() {
     	return "friendchat";
@@ -39,5 +45,10 @@ public class NeighborController {
     @RequestMapping("friend/add")
     public String friendAdd() {
         return "friend_add";
+    }
+    
+    @RequestMapping("/circle")
+    public String circle() {
+    	return "circle";
     }
 }
