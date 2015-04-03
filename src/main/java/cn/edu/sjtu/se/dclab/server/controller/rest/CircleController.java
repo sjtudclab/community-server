@@ -93,12 +93,27 @@ public class CircleController {
 		return TransferUtil.convertUserToFriendTransfer(relations);
 	}
 
-	@RequestMapping(value = "{userId}/messages/{startId}/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{userId}/messages/{startId}/forward/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<MessageTransfer> getMessages(@PathVariable long userId,
+	public Collection<MessageTransfer> getFowardMessages(@PathVariable long userId,
 			@PathVariable long startId, @PathVariable long count) {
 		Collection<Information> infos = informationService.findByFromIdAndType(
-				userId, Constants.INFORMATION_CIRCLE_MESSAGE, startId, count);
+				userId, Constants.INFORMATION_CIRCLE_MESSAGE, startId, count, Constants.MESSAGE_FORWARD);
+		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
+		for (Information info : infos){
+			User user = userService.getUserByUserId(info.getFrom());
+			transfers.add(TransferUtil
+					.convertInformationAndUserToMessageTransfer(info,user));
+		}
+		return transfers;
+	}
+	
+	@RequestMapping(value = "{userId}/messages/{startId}/back/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<MessageTransfer> getBackMessages(@PathVariable long userId,
+			@PathVariable long startId, @PathVariable long count) {
+		Collection<Information> infos = informationService.findByFromIdAndType(
+				userId, Constants.INFORMATION_CIRCLE_MESSAGE, startId, count, Constants.MESSAGE_BACK);
 		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
 		for (Information info : infos){
 			User user = userService.getUserByUserId(info.getFrom());
