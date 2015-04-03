@@ -1,4 +1,5 @@
-<!doctype html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -18,30 +19,30 @@
    <meta name="keywords" content="metro, metroui, metro-ui, metro ui, windows 8, metro style, bootstrap, framework, web framework, css, html" />
    <meta name="author" content="AozoraLabs by Marcello Palmitessa"/>
    
-   <link rel="stylesheet" type="text/css" href="content/css/bootstrap.css">
-   <link rel="stylesheet" type="text/css" href="content/css/bootstrap-responsive.css">
-   <link rel="stylesheet" type="text/css" href="content/css/bootmetro.css">
-   <link rel="stylesheet" type="text/css" href="content/css/bootmetro-tiles.css">
-   <link rel="stylesheet" type="text/css" href="content/css/bootmetro-charms.css">
-   <link rel="stylesheet" type="text/css" href="content/css/metro-ui-light.css">
-   <link rel="stylesheet" type="text/css" href="content/css/icomoon.css">
+   <link rel="stylesheet" type="text/css" th:href="@{/@{/content/css/bootstrap.css}}">
+   <link rel="stylesheet" type="text/css" th:href="@{/content/css/bootstrap-responsive.css}">
+   <link rel="stylesheet" type="text/css" th:href="@{/content/css/bootmetro.css}">
+   <link rel="stylesheet" type="text/css" th:href="@{/content/css/bootmetro-tiles.css}">
+   <link rel="stylesheet" type="text/css" th:href="@{/content/css/bootmetro-charms.css}">
+   <link rel="stylesheet" type="text/css" th:href="@{/content/css/metro-ui-light.css}">
+   <link rel="stylesheet" type="text/css" th:href="@{/content/css/icomoon.css}">
 
    <!--  these two css are to use only for documentation -->
-   <link rel="stylesheet" type="text/css" href="content/css/demo.css">
-   <link rel="stylesheet" type="text/css" href="scripts/google-code-prettify/prettify.css" >
+   <link rel="stylesheet" type="text/css" th:href="@{/content/css/demo.css}">
+   <link rel="stylesheet" type="text/css" th:href="@{/scripts/google-code-prettify/prettify.css}" >
 
    <!-- Le fav and touch icons -->
-   <link rel="shortcut icon" href="content/ico/favicon.ico">
-   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="content/ico/apple-touch-icon-144-precomposed.png">
-   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="content/ico/apple-touch-icon-114-precomposed.png">
-   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="content/ico/apple-touch-icon-72-precomposed.png">
-   <link rel="apple-touch-icon-precomposed" href="content/ico/apple-touch-icon-57-precomposed.png">
+   <link rel="shortcut icon" th:href="@{/content/ico/favicon.ico}">
+   <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/content/ico/apple-touch-icon-144-precomposed.png}">
+   <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/content/ico/apple-touch-icon-114-precomposed.png}">
+   <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/content/ico/apple-touch-icon-72-precomposed.png}">
+   <link rel="apple-touch-icon-precomposed" th:href="@{/content/ico/apple-touch-icon-57-precomposed.png}">
   
    <!-- All JavaScript at the bottom, except for Modernizr and Respond.
       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-   <script src="scripts/modernizr-2.6.1.min.js"></script>
-   <script src="scripts/jquery-1.7.2.min.js"></script>
+   <script th:src="@{/scripts/modernizr-2.6.1.min.js}"></script>
+   <script th:src="@{/scripts/jquery-1.7.2.min.js}"></script>
    <link rel="stylesheet" href="http://dreamsky.github.io/main/blog/common/init.css">
    <style>
       body {
@@ -163,14 +164,14 @@
 	}
 
 	</script>
-	<script src="js/common.js"></script>
+	<script th:src="@{/js/common.js}"></script>
 
 </head>
 
 <body data-accent="blue" >
   <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
        chromium.org/developers/how-tos/chrome-frame-getting-started -->
-  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a th:href="@{/http://browsehappy.com/}">Upgrade to a different browser</a> or <a th:href="@{/http://www.google.com/chromeframe/?redirect=true}">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
    <!-- Header
    ================================================== -->
@@ -179,7 +180,7 @@
       <div class="row-fluid">
          <div class="span8">
             <div id="header-container">
-               <a id="backbutton" class="win-backbutton" href="./index.html"></a>
+               <a id="backbutton" class="win-backbutton" th:href="@{logout}"></a>
                <h4 id="showtime" style="color:white;">显示时间的位置</h4>
                <div class="dropdown">
                   <select id="showBlock" onchange="showRoom()">
@@ -189,7 +190,7 @@
             </div>
          </div>
          <div id="top-info" class="pull-right">
-         <a href="#" class="pull-left">
+         <a th:href="@{/#}" class="pull-left">
             <div class="top-info-block">
                <h3 id = "showname">Admin</h3>
                <h4 id = "showdescription">admin</h4>
@@ -199,7 +200,7 @@
             </div>
          </a>
          <hr class="separator pull-left"/>
-         <a id="settings" class="pull-left" href="#">
+         <a id="settings" class="pull-left" th:href="@{/#}">
             <b class="icon-settings"></b>
          </a>
       </div>
@@ -219,16 +220,16 @@
    
                   <h2><font color="white">其他功能</font></h2>
    
-                  <a class="tile app bg-color-orange" href="task.html?id=block1">
+                  <a class="tile app bg-color-orange" th:href="@{/task.html?id=block1}">
                      <div class="image-wrapper">
-                        <img src="content/img/page1_1.png" alt="" />
+                        <img th:src="@{/content/img/page1_1.png}" alt="" />
                      </div>
                      <span class="app-label">任务统计</span>
                   </a>
    
-                  <a class="tile app bg-color-red" href="./javascript.html">
+                  <a class="tile app bg-color-red" th:href="@{/./javascript.html}">
                      <div class="image-wrapper">
-                        <img src="content/img/page1_2.png" alt="" />
+                        <img th:src="@{/content/img/page1_2.png}" alt="" />
                      </div>
                      <span class="app-label">楼组活动</span>
                   </a>
@@ -247,7 +248,7 @@
    
       <div id="theme-charms-section" class="charms-section">
          <div class="charms-header">
-            <a href="#" class="close-charms win-command">
+            <a th:href="@{/#}" class="close-charms win-command">
                <span class="win-commandimage win-commandring">&#xe05d;</span>
             </a>
             <h2>Settings</h2>
@@ -272,14 +273,14 @@
    </div>
 
    <script src="http://dreamsky.github.io/main/blog/common/jquery.min.js"></script>
-   <script type="text/javascript" src="scripts/google-code-prettify/prettify.js"></script>
-   <script type="text/javascript" src="scripts/jquery.mousewheel.js"></script>
-   <script type="text/javascript" src="scripts/jquery.scrollTo.js"></script>
-   <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-   <script type="text/javascript" src="scripts/bootmetro.js"></script>
-   <script type="text/javascript" src="scripts/bootmetro-charms.js"></script>
-   <script type="text/javascript" src="scripts/demo.js"></script>
-   <script type="text/javascript" src="scripts/holder.js"></script>
+   <script type="text/javascript" th:src="@{/scripts/google-code-prettify/prettify.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/jquery.mousewheel.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/jquery.scrollTo.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/bootstrap.min.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/bootmetro.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/bootmetro-charms.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/demo.js}"></script>
+   <script type="text/javascript" th:src="@{/scripts/holder.js}"></script>
 <!--   <script src="http://dreamsky.github.io/main/blog/common/init.js"></script>-->
    <script type="text/javascript">
       $(".metro").metro();

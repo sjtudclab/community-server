@@ -29,4 +29,9 @@ public class BasicController {
     public String ownerIndex() {
         return "start-screen-owner";
     }
+
+    @RequestMapping("index")
+    public String index() {
+        return "index";
+    }
 }
