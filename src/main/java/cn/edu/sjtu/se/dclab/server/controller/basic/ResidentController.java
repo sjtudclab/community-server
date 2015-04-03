@@ -96,9 +96,4 @@ public class ResidentController {
     public String voteResult() {
         return "topic_vote_result";
     }
-    
-    @RequestMapping("circle")
-    public String circle() {
-    	return "circle";
-    }
 }
