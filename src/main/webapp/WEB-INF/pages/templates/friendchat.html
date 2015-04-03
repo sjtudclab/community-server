@@ -51,17 +51,18 @@
     var userid;
     var sendtoid;
     var sendtoname;
-    var startid = 0;
+    startid = 0;
 	$(document).ready(function() {
 		userid = currentUserId();
 		
 		var Request = new Object();
 		Request = GetRequest();
-		var sendtoid = Request['id'];
-		var sendtoname = Request['name'];
+		sendtoid = Request['id'];
+		sendtoname = Request['name'];
 		$("#chatuser").text(sendtoname);
+		$("#chatinfo").text("");
 		GetMessage(sendtoid, 0, 5);
-		//self.setInterval(function(){GetMessage(sendtoid, startid, 5)}, 1000);
+		self.setInterval(function(){GetMessage(sendtoid, startid, 1)}, 2000);
 	});
 	
 	function GetRequest() {
@@ -77,18 +78,30 @@
 	   return theRequest;
 	}
 	
-	function GetMessage(friendid, startid, count) {
+	function GetMessage(friendid, start, count) {
 		$.ajax({
-			url: getUrl("rest/friends/" + userid + "/users/" + friendid + "/messages/" + startid + "/counts/" + count),
+			url: getUrl("rest/friends/" + userid + "/users/" + friendid + "/messages/" + start + "/forward/counts/" + count),
 			type:"get",
 			dataType:"json",
 			success:function(obj){
 				console.log("success:"+obj);
+/*				for (var i = obj.length - 1; i >= 0; i--) {
+					var chatinfo = $("#chatinfo");
+					if (obj[i].userId == userid)
+						chatinfo.val(chatinfo.val() + "\n" + "我 说:\n" + obj[i].content);
+					else
+						chatinfo.val(chatinfo.val() + "\n" + obj[i].name + " 说：\n" + obj[i].content);
+					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;	
+					startid = obj[i].messageId;
+				}*/
 				$.each(obj, function (n, value) {
 					var chatinfo = $("#chatinfo");
-					chatinfo.val(chatinfo.val() + "\n" + value.name + "说：\n" + value.info);
+					if (value.userId == userid)
+						chatinfo.val(chatinfo.val() + "\n我 说：\n" + value.content);
+					else
+						chatinfo.val(chatinfo.val() + "\n" + value.name + " 说：\n" + value.content);
 					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;	
-					startid = value.startid;
+					startid = value.messageId;
 				});
 			}
 
@@ -99,17 +112,15 @@
 		$("#send").click(function() {
 			var chatinfo = $("#chatinfo");
 			var sendinfo = $("#sendinfo");
-			chatinfo.val(chatinfo.val() + "\n我说：\n" + sendinfo.val());
-			document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;
 			if (sendinfo.val() != "") {
 				chatinfo.val(chatinfo.val() + "\n我说：\n" + sendinfo.val());
 				document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;
 				$.ajax({
 					type: "POST",
 					contentType: 'application/json; charset=utf-8',
-					url: getUrl("/rest/groups/" + groupid + "/users/" + userid + "/messages"),
+					url: getUrl("/rest/friends/" + userid + "/users/" + sendtoid + "/messages"),
 					data: JSON.stringify({
-						
+						"message": sendinfo.val()
 					}),
 					success:function(result, status){}
 				});

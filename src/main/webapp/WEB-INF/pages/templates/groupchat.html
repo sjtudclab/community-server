@@ -77,19 +77,27 @@
 	   return theRequest;
 	}
 	
-	function GetMessage(groupid, startid, count) {
+	function GetMessage(groupid, start, count) {
 		$.ajax({
-			url: getUrl("rest/groups/" + groupid + "/users/" + userid),
+			url: getUrl("rest/groups/" + groupid + "/users/" + userid + "/messages/" + start + "/counts/" + count),
 			type:"get",
 			dataType:"json",
 			success:function(obj){
 				console.log("success:"+obj);
-				$.each(obj, function (n, value) {
+				
+				for (var i = obj.length - 1; i >= 0; i--) {
 					var chatinfo = $("#chatinfo");
-					chatinfo.val(chatinfo.val() + "\n" + value.name + "说：\n" + value.info);
+					chatinfo.val(chatinfo.val() + "\n" + obj[i].name + " 说：\n" + obj[i].content);
+					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;	
+					startid = obj[i].messageId;
+				}
+				
+/*				$.each(obj, function (n, value) {
+					var chatinfo = $("#chatinfo");
+					chatinfo.val(chatinfo.val() + "\n" + value.name + " 说：\n" + value.info);
 					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;
 					startid = value.startid;
-				});
+				});*/
 			}
 
 		});
