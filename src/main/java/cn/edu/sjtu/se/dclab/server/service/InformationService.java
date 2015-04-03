@@ -22,7 +22,7 @@ public interface InformationService {
 
 	public Collection<Information> findByToIdAndType(long toId,
 			String type);
-	public Collection<Information> findByToIdAndType(long toId,String type,long startId,long count);
+	public Collection<Information> findByToIdAndType(long toId,String type,long startId,long count, String messageType);
 
 	public Collection<Information> findChats(long userId, long friendId,
 			long startId, long count, String messageType);

@@ -124,10 +124,12 @@ public class InformationServiceImpl implements InformationService {
 
 	@Override
 	public Collection<Information> findByToIdAndType(long toId, String type,
-			long startId, long count) {
+			long startId, long count, String messagetType) {
 		Collection<Information> infos = informationMapper.findByToIdAndType(
 				toId, type);
-		return resolveBack(infos, startId, count);
+		if(Constants.MESSAGE_BACK.equals(messagetType))
+			return resolveBack(infos, startId, count);
+		return resolveForward(infos, startId, count);
 	}
 	
 	private Collection<Information> resolveForward(Collection<Information> infos,
