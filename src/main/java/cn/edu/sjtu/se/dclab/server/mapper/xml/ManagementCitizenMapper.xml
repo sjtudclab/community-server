@@ -15,6 +15,13 @@
 	<select id="findByUserId" parameterType="long" resultMap="ManagementCitizenMap">
 		SELECT * FROM citizen_management where user_id = #{userId};
 	</select>
+	
+	<update id="update" parameterType="ManagementCitizen">
+		UPDATE citizen_management SET
+		name = #{name}, gender = #{gender typeHandler=GenderHandler}, 
+		age = #{age}, phone = #{phone}
+		WHERE citizen_id = #{id};
+	</update>
 
     <resultMap id="ManagementCitizenMap" type="ManagementCitizen">
         <id property="id" column="citizen_id" />

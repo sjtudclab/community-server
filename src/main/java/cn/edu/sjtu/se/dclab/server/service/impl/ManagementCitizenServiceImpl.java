@@ -100,4 +100,9 @@ public class ManagementCitizenServiceImpl implements ManagementCitizenService {
 		return managementCitizenMapper.findByUserId(userId);
 	}
 
+	@Override
+	public void update(ManagementCitizen citizen) {
+		managementCitizenMapper.update(citizen);
+	}
+
 }

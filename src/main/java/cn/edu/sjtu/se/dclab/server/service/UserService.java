@@ -29,4 +29,6 @@ public interface UserService extends UserDetailsService{
 	public User getUserByUserId(long id);
 	
 	public UserTransfer getUserByCardInfo(String cardType, String cardNumber, String citizenType);
+
+	public void updateUser(User user);
 }

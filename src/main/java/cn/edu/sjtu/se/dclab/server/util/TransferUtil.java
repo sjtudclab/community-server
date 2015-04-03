@@ -66,6 +66,8 @@ public class TransferUtil {
 
 	public static CitizenTransfer convertUserAndCitizenToCitizenTransfer(
 			User user, ServiceCitizen citizen) {
+		if(user == null || citizen == null)
+			return new CitizenTransfer();
 		return new CitizenTransfer(user.getId(), citizen.getId(),
 				user.getUsername(), user.getImage(), user.getName(),
 				citizen.getName(), citizen.getGender(), citizen.getAge(),

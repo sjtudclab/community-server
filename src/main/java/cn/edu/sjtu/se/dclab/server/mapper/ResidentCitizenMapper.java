@@ -17,4 +17,6 @@ public interface ResidentCitizenMapper {
 	public ResidentCitizen findById(long id);
 
 	public ResidentCitizen findByUserId(@Param("userId") long userId);
+
+	public void update(ResidentCitizen citizen);
 }

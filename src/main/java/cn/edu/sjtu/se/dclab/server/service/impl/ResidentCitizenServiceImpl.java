@@ -69,4 +69,9 @@ public class ResidentCitizenServiceImpl implements ResidentCitizenService {
 	public ResidentCitizen findByUserId(long userId) {
 		return rcMapper.findByUserId(userId);
 	}
+
+	@Override
+	public void update(ResidentCitizen citizen) {
+		rcMapper.update(citizen);
+	}
 }

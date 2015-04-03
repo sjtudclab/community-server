@@ -15,7 +15,7 @@ public class CitizenTransfer {
 	private String image;
 	private String nickName;
 	private String realName;
-	private String gendar;
+	private String gender;
 	private int age;
 	private String phone;
 	private String email;
@@ -27,7 +27,7 @@ public class CitizenTransfer {
 	
 	public CitizenTransfer(long userId, long citizenId, String username,
 			String image, String nickName,
-			String realName, String gendar, int age, String phone,
+			String realName, String gender, int age, String phone,
 			String email, boolean hasIdentityCard) {
 		super();
 		this.userId = userId;
@@ -36,7 +36,7 @@ public class CitizenTransfer {
 		this.image = image;
 		this.nickName = nickName;
 		this.realName = realName;
-		this.gendar = gendar;
+		this.gender = gender;
 		this.age = age;
 		this.phone = phone;
 		this.email = email;
@@ -78,11 +78,11 @@ public class CitizenTransfer {
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-	public String getGendar() {
-		return gendar;
+	public String getGender() {
+		return gender;
 	}
-	public void setGendar(String gendar) {
-		this.gendar = gendar;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public int getAge() {
 		return age;

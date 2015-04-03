@@ -20,4 +20,5 @@ public interface UserMapper {
 	public void insertUserRole(@Param("userId") long userId,@Param("roleId") long roleId);
 	
     public User findByCardInfo(@Param("cardType") String cardType, @Param("cardNumber") String cardNumber,@Param("tableName") String tableName);
+	public void update(User user);
 }

@@ -15,5 +15,7 @@ public interface ResidentCitizenService {
 	public ResidentCitizenTransfer findById(long id);
 
 	public ResidentCitizen findByUserId(long userId);
+
+	public void update(ResidentCitizen citizen);
     
 }

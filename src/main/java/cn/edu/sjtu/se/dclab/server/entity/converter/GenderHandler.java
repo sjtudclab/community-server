@@ -19,18 +19,19 @@ public class GenderHandler extends BaseTypeHandler<String> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String s, JdbcType jdbcType) throws SQLException {
         if (s.equals(MAN)) {
-            preparedStatement.setInt(i, 0);
-        } else {
             preparedStatement.setInt(i, 1);
+        } else {
+            preparedStatement.setInt(i, 0);
         }
     }
 
     @Override
     public String getNullableResult(ResultSet resultSet, String s) throws SQLException {
-        if (resultSet.wasNull())
+        int value = resultSet.getInt(s);
+    	if (resultSet.wasNull())
             return null;
 
-        if (resultSet.getInt(s) == 0) {
+        if (value == 1) {
             return MAN;
         } else {
             return WOMEN;
@@ -39,26 +40,28 @@ public class GenderHandler extends BaseTypeHandler<String> {
 
     @Override
     public String getNullableResult(ResultSet resultSet, int i) throws SQLException {
-        if (resultSet.wasNull())
-            return null;
+    	 int value = resultSet.getInt(i);
+     	if (resultSet.wasNull())
+             return null;
 
-        if (resultSet.getInt(i) == 0) {
-            return MAN;
-        } else {
-            return WOMEN;
-        }
+         if (value == 1) {
+             return MAN;
+         } else {
+             return WOMEN;
+         }
     }
 
     @Override
     public String getNullableResult(CallableStatement callableStatement, int i) throws SQLException {
-        if (callableStatement.wasNull())
-            return null;
+    	 int value = callableStatement.getInt(i);
+     	if (callableStatement.wasNull())
+             return null;
 
-        if (callableStatement.getInt(i) == 0) {
-            return MAN;
-        } else {
-            return WOMEN;
-        }
+         if (value == 1) {
+             return MAN;
+         } else {
+             return WOMEN;
+         }
     }
 }
 

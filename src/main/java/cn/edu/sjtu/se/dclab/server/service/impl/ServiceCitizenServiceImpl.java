@@ -68,4 +68,9 @@ public class ServiceCitizenServiceImpl implements ServiceCitizenService {
 		return serviceCitizenMapper.findByUserId(userId);
 	}
 
+	@Override
+	public void update(ServiceCitizen citizen) {
+		serviceCitizenMapper.update(citizen);
+	}
+
 }

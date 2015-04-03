@@ -230,4 +230,9 @@ public class UserServiceImpl implements UserService {
 		return myUser ;
 	}
 
+	@Override
+	public void updateUser(User user) {
+		userMapper.update(user);
+	}
+
 }

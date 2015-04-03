@@ -129,13 +129,28 @@ public class FriendController {
 		return Result.SUCCESS;
 	}
 
-	@RequestMapping(value = "{userId}/users/{friendId}/messages/{startId}/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{userId}/users/{friendId}/messages/{startId}/forward/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<MessageTransfer> getMessages(@PathVariable long userId,
+	public Collection<MessageTransfer> getForwardMessages(@PathVariable long userId,
 			@PathVariable long friendId, @PathVariable long startId,
 			@PathVariable long count) {
 		Collection<Information> infos = informationService.findChats(userId,
-				friendId, startId, count);
+				friendId, startId, count, Constants.MESSAGE_FORWARD);
+		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
+		for (Information info : infos){
+			User user = userService.getUserByUserId(info.getFrom());
+			transfers.add(TransferUtil.convertInformationAndUserToMessageTransfer(info,user));
+		}
+		return transfers;
+	}
+	
+	@RequestMapping(value = "{userId}/users/{friendId}/messages/{startId}/back/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<MessageTransfer> getBackMessages(@PathVariable long userId,
+			@PathVariable long friendId, @PathVariable long startId,
+			@PathVariable long count) {
+		Collection<Information> infos = informationService.findChats(userId,
+				friendId, startId, count,Constants.MESSAGE_BACK);
 		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
 		for (Information info : infos){
 			User user = userService.getUserByUserId(info.getFrom());

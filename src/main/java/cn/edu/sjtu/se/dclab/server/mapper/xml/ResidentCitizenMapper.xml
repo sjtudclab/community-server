@@ -20,6 +20,13 @@
         FROM citizen_resident
         WHERE user_id = #{userId};
     </select>
+    
+    <update id="update" parameterType="ResidentCitizen">
+    	UPDATE citizen_resident SET
+    	name = #{name}, gender = #{gender typeHandler=GenderHandler}, 
+		age = #{age}, phone = #{phone}
+		WHERE citizen_id = #{id};
+    </update>
 
     <resultMap id="ResidentCitizenMap" type="ResidentCitizen">
         <id property="id" column="citizen_id" />

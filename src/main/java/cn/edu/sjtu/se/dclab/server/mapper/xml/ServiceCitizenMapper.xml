@@ -11,13 +11,20 @@
 	<select id="findByUserId" resultMap="ServiceCitizenMap">
 		select * from citizen_service where user_id = #{userId};
 	</select>
+	
+	<update id="update" parameterType="ServiceCitizen">
+		UPDATE citizen_service SET
+		name = #{name}, gender = #{gender typeHandler=GenderHandler}, 
+		age = #{age}, phone = #{phone}
+		WHERE citizen_id = #{id};
+	</update>
 
     <resultMap id="ServiceCitizenMap" type="ServiceCitizen">
         <id property="id" column="citizen_id" />
         <result property="name" column="name" />
         <result property="identificationType" column="identification_type" />
         <result property="identificationValue" column="identification_value" />
-
+		 <result property="gender" column="gender" typeHandler="GenderHandler" />
         <result property="age" column="age" />
         <result property="status" column="status" />
         <result property="phone" column="phone" />

@@ -12,4 +12,6 @@ public interface ServiceCitizenMapper {
 	public ServiceCitizen findById(long id);
 
 	public ServiceCitizen findByUserId(@Param("userId") long userId);
+
+	public void update(ServiceCitizen citizen);
 }

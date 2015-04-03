@@ -11,5 +11,7 @@ public interface ServiceCitizenService {
 	public ServiceCitizenTransfer findById(long id);
 
 	public ServiceCitizen findByUserId(long userId);
+
+	public void update(ServiceCitizen citizen);
     
 }

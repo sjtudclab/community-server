@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.sjtu.se.dclab.server.common.Constants;
+import cn.edu.sjtu.se.dclab.server.common.Result;
 import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
@@ -34,6 +37,7 @@ import cn.edu.sjtu.se.dclab.server.service.UserService;
 import cn.edu.sjtu.se.dclab.server.transfer.CitizenTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserRoleTransfer;
 import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
+import cn.edu.sjtu.se.dclab.server.util.DataUtil;
 import cn.edu.sjtu.se.dclab.server.util.TransferUtil;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -59,6 +63,16 @@ public class UserController {
 	private ServiceCitizenService serviceCitizenService;
 	@Autowired
 	private ResidentCitizenService residentCitizenService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	public PasswordEncoder getPasswordEncoder() {
+		return passwordEncoder;
+	}
+
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	public ManagementCitizenService getManagementCitizenService() {
 		return managementCitizenService;
@@ -175,7 +189,7 @@ public class UserController {
 		return convertUserToUserTransfer(user, roles);
 	}
 
-	@RequestMapping(value = "{id}/citizens", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{id}/citizen", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public CitizenTransfer getAllUserInfo(@PathVariable long id) {
 		User user = userService.getUserByUserId(id);
@@ -213,11 +227,117 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{userId}/citizen", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String updateUser(@RequestBody UserTransfer userTransfer) {
-		userService.updateUser(userTransfer);
-		return "success";
+	public String updateUser(@PathVariable long userId,@RequestBody String str) {
+		Map<String,Object> map = DataUtil.getFromJson(str);
+		User user = userService.getUserByUserId(userId);
+		if(user == null)
+			return "the user not found";
+		if(!updateUser(map, user))
+			return "data error";
+		if(!updateCitizen(map, user))
+			return "the citizen not found";
+		userService.updateUser(user);
+		return Result.SUCCESS;
+	}
+	
+	private boolean updateUser(Map<String,Object> map,User user){
+		if(map.containsKey("oldPassword")){
+			String oldPassword = (String) map.get("oldPassword");
+			if(!passwordEncoder.matches(oldPassword, user.getPassword()))
+				return false;
+			if(map.containsKey("newPassword")){
+				String newPassword = (String) map.get("newPassword");
+				user.setPassword(passwordEncoder.encode(newPassword));
+			}
+		}
+		if(map.containsKey("image")){
+			String image = (String) map.get("image");
+			user.setImage(image);
+		}
+		if(map.containsKey("nickName")){
+			String nickName = (String) map.get("nickName");
+			user.setName(nickName);;
+		}
+		if(map.containsKey("email")){
+			String email = (String) map.get("email");
+			user.setEmail(email);;
+		}
+		return true;
+	}
+	
+	private boolean updateCitizen(Map<String,Object> map,User user){
+		if (Constants.USER_TYPE_MANAGEMENT.equals(user.getUserType().getType())) {
+			ManagementCitizen citizen = managementCitizenService
+					.findByUserId(user.getId());
+			if(citizen == null)
+				return false;
+			if(map.containsKey("realName")){
+				String realName = (String) map.get("realName");
+				citizen.setName(realName);
+			}
+			if(map.containsKey("gender")){
+				String gender = (String) map.get("gender");
+				citizen.setGender(gender);
+			}
+			if(map.containsKey("age")){
+				int age = (int) map.get("age");
+				citizen.setAge(age);
+			}
+			if(map.containsKey("phone")){
+				String phone = (String) map.get("phone");
+				citizen.setPhone(phone);
+			}
+			managementCitizenService.update(citizen);
+			return true;
+		} else if (Constants.USER_TYPE_RESIDNET.equals(user.getUserType()
+				.getType())) {
+			ResidentCitizen citizen = residentCitizenService
+					.findByUserId(user.getId());
+			if(citizen == null)
+				return false;
+			if(map.containsKey("realName")){
+				String realName = (String) map.get("realName");
+				citizen.setName(realName);
+			}
+			if(map.containsKey("gender")){
+				String gender = (String) map.get("gender");
+				citizen.setGender(gender);
+			}
+			if(map.containsKey("age")){
+				int age = (int) map.get("age");
+				citizen.setAge(age);
+			}
+			if(map.containsKey("phone")){
+				String phone = (String) map.get("phone");
+				citizen.setPhone(phone);
+			}
+			residentCitizenService.update(citizen);
+			return true;
+		} 
+		ServiceCitizen citizen = serviceCitizenService.findByUserId(user
+					.getId());
+		if(citizen == null)
+			return false;
+		if(map.containsKey("realName")){
+			String realName = (String) map.get("realName");
+			citizen.setName(realName);
+		}
+		if(map.containsKey("gender")){
+			String gender = (String) map.get("gender");
+			citizen.setGender(gender);
+		}
+		if(map.containsKey("age")){
+			int age = (int) map.get("age");
+			citizen.setAge(age);
+		}
+		if(map.containsKey("phone")){
+			String phone = (String) map.get("phone");
+			citizen.setPhone(phone);
+		}
+		serviceCitizenService.update(citizen);
+		return true;
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -251,5 +371,5 @@ public class UserController {
 	public String test() {
 		return "test";
 	}
-
+	
 }
