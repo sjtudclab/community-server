@@ -87,8 +87,8 @@
 					<button class="button large info" id="btnVerify">认证身份</button>
 				</div>
 				
-				<div class="verified">
-					<div style="margin-bottom: 10px; display:none">
+				<div class="verified" style="display:none">
+					<div style="margin-bottom: 10px">
 						您的身份已经确认。
 					</div>
 				</div>
@@ -143,6 +143,14 @@
 				    $('#age').val(data.age == null ? '' : data.age);
 				    $('#email').val(data.email == null ? '' : data.email);
 				    $('#phone').val(data.phone == null ? '' : data.phone);
+				    
+				    if (data.hasIdentityCard) {
+                		$('.unverified').hide();
+                		$('.verified').show();
+				    } else {
+                		$('.unverified').show();
+                		$('.verified').hide();
+				    }
                 },
                 error: function(obj) {
                     console.log(obj);
@@ -176,8 +184,18 @@
 	                };
 		    		type = 'changepw';
 		    	} else {
+		    		if (initPlugin() == false) {
+		    			return;
+		    		}
+		    		var idStr = getIDInformation();
+		    		if (idStr == false) {
+		    			return;
+		    		}
+		    		//idStr = idStr.match(/[0-9Xx]*/)[0];
+		    		idStr = idStr.slice(0, -1);
+		    		idStr = md5(idStr);
 		    		data = {
-		    			
+		    			identityNumber: idStr
 		    		};
 		    		type = 'verify';
 		    	}
@@ -206,7 +224,7 @@
                         	} else if (type == 'baseinfo') {
                             	alert("修改失败");
                         	} else {
-                            	alert("修改密码失败");
+                            	alert("修改密码失败，原密码错误");
                         	}
                         }
                     }, 
@@ -219,44 +237,6 @@
 		    	return false;
 		    });
 		    
-		    
-		    $('#btnVerify').click(function(event) {
-		    	if (initPlugin() == false) {
-                    return;
-                }
-                var idStr = getDeviceSN();
-                if (idStr == false) {
-                    return;
-                }
-                //idStr = idStr.match(/[0-9Xx]*/)[0];
-                idStr = idStr.slice(0, -1);
-                idStr = md5(idStr);
-                var dataObj = [{name: "cardtype", value: "readercard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "management"}];
-                $.ajax({
-                    url: getUrl('rest/users/hardwarelogin'),
-                    type: "POST",
-                    data: dataObj,
-                    success: function (data) {
-                        saveUser(data);
-                        var rtl = $('#roleSelection');
-                        var value = rtl[0].options[rtl[0].selectedIndex].value;
-                        if (value == "居委会")
-                            window.location = getUrl('start-screen-committee')
-                        else if (value == "业委会")
-                            window.location = getUrl('start-screen-owner')
-                        else if (value == "楼组长")
-                            window.location = getUrl('index')
-                        else if (value == "块长")
-                            window.location = getUrl('unused')
-                    },
-                    error: function() {
-                        alert("用户名或密码错误")
-                    }
-                })
-
-		    	
-		    	return false;
-		    });
         })(jQuery);
         </script>
 
