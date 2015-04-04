@@ -51,4 +51,10 @@ public class NeighborController {
     public String circle() {
     	return "circle";
     }
+    
+    @RequestMapping("/circle/followlist")
+    public String circleFollowList() {
+    	return "followlist";
+    }
+    
 }

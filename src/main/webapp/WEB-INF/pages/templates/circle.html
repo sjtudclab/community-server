@@ -3,7 +3,7 @@
     xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
+    <meta name="viewport" content="width=620px,initial-scale=1,target-density, dpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
     <meta name="product" content="Metro UI CSS Framework">
     <meta name="description" content="Simple responsive css framework">    
     <title>我的圈子</title>
@@ -18,15 +18,23 @@
         </h1>
 		<div class="grid">
 		<div class="foll-info row">
-			<div class="follower padding10 span4 border" >
-				关注我的人：<a classs="follow" href="{my-followers}">{number}</a>
+			<div class="padding10 span4 border" >
+				关注我的人：<a class="follower" th:href="@{circle/followlist?type=follower}">{number}</a>
 			</div>
-			<div class="following padding10 span4 border" style="float:left">
-				我关注的人：<a classs="follow" href="{my-followers}">{number}</a>
+			<div class="padding10 span4 border" style="float:left">
+				我关注的人：<a class="following" th:href="@{circle/followlist?type=following}">{number}</a>
 			</div>
 		</div>
 		</div>
-		
+
+		<div class="post-message" style="margin-bottom: 30px">
+			<div class="input-control textarea">
+				<textarea class="post-content" placeholder="想说点什么" style="font-size: 16px"></textarea>
+			</div>
+			<button class="button primary large post-button" style="float:right">发布</button>
+			<div class="clearfix"></div>
+		</div>
+
 		<div class="timeline">
 			<div class="info-block">
 				<div class="avatar-container tile" style="float: left" style><img class="avatar" src="/community-server/images/default.jpg" /></div>
@@ -70,8 +78,31 @@
     <script type="text/javascript">
     
     (function($){
-
-        })(jQuery);
+		// Init
+		$.ajax({
+			type: "GET",
+			url: getUrl('/rest/circles/{0}/users'.format(currentUserId())),
+			dataType: 'json',
+			success: function(data) {
+				$('.following').text(data.length);
+			},
+			error: function(data) {
+				console.log(data);
+			}
+		})
+		
+		$.ajax({
+			type: "GET",
+			url: getUrl('/rest/circles/{0}/users/0'.format(currentUserId())),
+			dataType: 'json',
+			success: function(data) {
+				$('.follower').text(data.length);
+			},
+			error: function(data) {
+				console.log(data);
+			}
+		})
+    })(jQuery);
     </script>
 
 </body>
