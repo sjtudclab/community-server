@@ -107,7 +107,7 @@
 				</div>
 
 				<div class="input-control text" data-role="input-control">
-					<input type="password" id="confirmnewpd" placeholder="请再输入一遍新密码" />
+					<input type="password" id="confirmnewpw" placeholder="请再输入一遍新密码" />
 					<button class="btn-clear" tabindex="-1" type="button"></button>
 				</div>
 
@@ -149,8 +149,9 @@
                 }
             });
 		    
-		    $('#btnSubmit, #btnChangePw').click(function(event) {
+		    $('#btnSubmit, #btnChangePw, #btnVerify').click(function(event) {
 		    	var data;
+		    	var type;
 		    	if ($(this).is('#btnSubmit')) {
 		    		data = {
 	                    "nickName": $('#nickname').val(),
@@ -160,10 +161,11 @@
 	                    "phone": $('#phone').val(),
 	                    "email": $('#email').val(),
 	                };
-		    	} else {
+		    		type  = 'baseinfo';
+		    	} else if ($(this).is('#btnChangePw')){
 		    		var oldpw = $('#oldpw').val();
-		    		var newpw = $('newpw').val();
-		    		var newpwcf = $('confirmnewpw').val();
+		    		var newpw = $('#newpw').val();
+		    		var newpwcf = $('#confirmnewpw').val();
 		    		if (newpw != newpwcf) {
 		    			alert('新密码不一致！');
 		    			return;
@@ -172,6 +174,12 @@
 	                    "oldPassword":oldpw,
 	                    "newPassword":newpw,
 	                };
+		    		type = 'changepw';
+		    	} else {
+		    		data = {
+		    			
+		    		};
+		    		type = 'verify';
 		    	}
 
                 $.ajax({
@@ -182,9 +190,29 @@
                     dataType: 'text',
                     success: function(data) {
                         console.log(data);
+                        if (data == "success") {
+                        	if (type == 'verify') {
+                        		alert('验证成功');
+                        		$('.unverified').hide();
+                        		$('.verified').show();
+                        	} else if (type == 'baseinfo') {
+                            	alert("修改成功");
+                        	} else {
+                            	alert("修改密码成功！");
+                        	}
+                        } else {
+                        	if (type == 'verify') {
+                        		alert('验证失败');
+                        	} else if (type == 'baseinfo') {
+                            	alert("修改失败");
+                        	} else {
+                            	alert("修改密码失败");
+                        	}
+                        }
                     }, 
                     error: function(data) {
                         console.log(data);
+                    	alert("修改失败");
                     }
                 })
 
