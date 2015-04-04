@@ -29,9 +29,9 @@
 
 		<div class="post-message" style="margin-bottom: 30px">
 			<div class="input-control textarea">
-				<textarea class="post-content" placeholder="想说点什么" style="font-size: 16px"></textarea>
+				<textarea id="post-content" placeholder="想说点什么" style="font-size: 16px"></textarea>
 			</div>
-			<button class="button primary large post-button" style="float:right">发布</button>
+			<button class="button primary large" id="post-button" style="float:right">发布</button>
 			<div class="clearfix"></div>
 		</div>
 
@@ -71,8 +71,12 @@
 		</div>
     </div> <!-- End of container -->
     <div th:include="metro_header :: copy"></div>
+    <script th:src="@{/js/dateformat.js}"></script>
 	<style type="text/css">
-		.info-block {margin-bottom: 20px;}
+		.info-block {
+			margin-bottom: 20px;
+			overflow: auto;
+		}
 	</style>
 	
     <script type="text/javascript">
@@ -89,7 +93,7 @@
 			error: function(data) {
 				console.log(data);
 			}
-		})
+		});
 		
 		$.ajax({
 			type: "GET",
@@ -101,7 +105,76 @@
 			error: function(data) {
 				console.log(data);
 			}
-		})
+		});
+		
+		$('#post-button').click(function(event) {
+			var content = $('#post-content').val();
+			if (content.length == 0) {
+				alert('请输入内容！');
+				return;
+			}
+			var data = {message: content};
+			$.ajax({
+				type: 'POST',
+				url: getUrl('rest/circles/{0}/messages'.format(currentUserId())),
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				dataType: 'text',
+				success: function(data) {
+					if (data == "success") {
+						alert("Success!");
+						refreshList();
+						$("#post-content").val('');
+					} else {
+						alert("发送失败！")
+					}
+				},
+				error: function(data) {
+					console.log(data);
+					alert("发送失败！")
+				}
+			});
+		});
+		
+		var template = 
+			'{{~it :item:index}}' +
+			'<div class="info-block" postid="{{=item.messageId}}">'+
+			'<div class="avatar-container tile" style="float: left" style><img class="avatar" src="{{=item.image}}" /></div>' +
+			'<div class="panel">' +
+				'<div class="panel-header bg-lightBlue fg-white">' +
+				'<span class="user-name" style="font-size: 20px">{{=item.name}}</span>' +
+				'<span class="post-time" style="font-size: 20px; float:right">{{=item.submitTime}}</span>' +				
+				'</div>' +
+				'<div class="panel-content">' +
+					'<p>{{=item.content}}</p>' +
+				'</div>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'{{~}}';
+			
+		function refreshList() {
+			$.ajax({
+				type: 'GET',
+				url: getUrl('rest/circles/{0}/messages/{1}/forward/counts/{2}'.format(currentUserId(), 0, 1000)),
+				dataType: 'json',
+				success: function(data) {
+					var processedData = data.reverse().map(function(d) {
+						var ad = d;
+						ad.image = getUrl('images/' + d.image);
+						ad.submitTime = (new Date(d.submitTime)).format('yyyy-mm-dd HH:MM');
+						return ad;
+					});
+					var tempFn = doT.template(template);
+					$('.timeline').html(tempFn(processedData));
+				},
+				error: function(data) {
+					console.log(data);
+				}
+			});
+		}
+		
+		refreshList();
     })(jQuery);
     </script>
 
