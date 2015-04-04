@@ -44,13 +44,13 @@
 						<div class="input-control radio default-style"
 							data-role="input-control">
 							<label> <input type="radio" name="gender"
-								id="gender-male"> <span class="check"></span> 男
+								id="gender-male" value="male"> <span class="check"></span> 男
 							</label>
 						</div>
 						<div class="input-control radio  default-style"
 							data-role="input-control">
 							<label> <input type="radio" name="gender"
-								id="gender-female"> <span class="check"></span> 女
+								id="gender-female" value="female"> <span class="check"></span> 女
 							</label>
 						</div>
 					</div>
@@ -119,99 +119,118 @@
     </div> <!-- End of container -->
 
     <div th:include="metro_header :: copy"></div>
+    <script type="text/javascript" th:src="@{/js/cardlogin.js}"></script>
+    <script type="text/javascript" th:src="@{/js/md5.js}"></script>
     
-    <script type="text/javascript">
-					(function($) {
-						$
-								.ajax({
-									type : "GET",
-									url : getUrl('rest/managementCitizens/committee'),
-									success : function(data) {
-										var users = [];
-										$(data).each(function(i, d) {
-											for ( var r in d.roles) {
-												users.push({
-													userid : d.id,
-													username : d.name,
-													role : d.roles[r],
-													imageUrl : d.image
-												});
-											}
-										});
-										var police = $(users).filter(
-												function(i, d) {
-													return d.role.name
-															.includes('民警');
-												})[0];
-										var zhucan = $(users).filter(
-												function(i, d) {
-													return d.role.name
-															.includes('助残员');
-												})[0];
+    <script type = "text/javascript" >
+        (function($) {
+		    var $radios = $('input:radio[name=gender]');
+		    if($radios.is(':checked') === false) {
+		        $radios.filter('[value=male]').prop('checked', true);
+		    }
 
-										$(users)
-												.each(
-														function(ind, el) {
-															if (el.userid == police.userid
-																	|| el.userid == zhucan.userid) {
-																return;
-															}
-															var name = el.username;
-															var position = el.role.name;
-															var html = '<div class="image-container shadow">'
-																	+ '<a  href="{0}"><img src="{1}" class=""></a>'
-																			.format(
-																					userPositionUrl
-																							+ '?user_id={0}&role_id={1}&back_url={2}'
-																									.format(
-																											el.userid,
-																											el.role.id,
-																											'committee'),
-																					getUrl('images/'
-																							+ el.imageUrl))
-																	+ '<div class="overlay">'
-																	+ '<span class="name-text">{0}</span><br>'
-																			.format(name)
-																	+ '<span class="position-text">{0}</span>'
-																			.format(position)
-																	+ '</div>'
-															'</div>';
-															$(
-																	'.person-list-container')
-																	.append(
-																			$(html));
-														});
+		    // Load user info
+            $.ajax({
+                type: "GET",
+                url: getUrl('rest/users/{0}/citizen'.format(currentUserId())),
+                success: function(data) {					
+					$('.username').text(data.username);
+					$('#nickname').val(data.nickName);
+					
+				    var genderStr = data.gender == '女' ? "female" : "male";
+				    $radios.filter('[value={0}]'.format(genderStr)).prop('checked', true);
+				
+				    $('#age').val(data.age == null ? '' : data.age);
+				    $('#email').val(data.email == null ? '' : data.email);
+				    $('#phone').val(data.phone == null ? '' : data.phone);
+                },
+                error: function(obj) {
+                    console.log(obj);
+                }
+            });
+		    
+		    $('#btnSubmit, #btnChangePw').click(function(event) {
+		    	var data;
+		    	if ($(this).is('#btnSubmit')) {
+		    		data = {
+	                    "nickName": $('#nickname').val(),
+	                    //"realName":"a",
+	                    "gender":$('input:radio[name=gender]:checked').val() == 'female' ? '女' : '男',
+	                    "age": parseInt($('#age').val()) || 0,
+	                    "phone": $('#phone').val(),
+	                    "email": $('#email').val(),
+	                };
+		    	} else {
+		    		var oldpw = $('#oldpw').val();
+		    		var newpw = $('newpw').val();
+		    		var newpwcf = $('confirmnewpw').val();
+		    		if (newpw != newpwcf) {
+		    			alert('新密码不一致！');
+		    			return;
+		    		}
+		    		data = {
+	                    "oldPassword":oldpw,
+	                    "newPassword":newpw,
+	                };
+		    	}
 
-										$('.police .prname').text(
-												police.username);
-										$('.zhucan .prname').text(
-												zhucan.username);
-										$('.police .prname')
-												.attr(
-														'href',
-														userPositionUrl
-																+ '?user_id={0}&role_id={1}&back_url={2}'
-																		.format(
-																				police.userid,
-																				police.role.id,
-																				'committee'))
-										$('.zhucan .prname')
-												.attr(
-														'href',
-														userPositionUrl
-																+ '?user_id={0}&role_id={1}&back_url={2}'
-																		.format(
-																				zhucan.userid,
-																				zhucan.role.id,
-																				'committee'))
+                $.ajax({
+                    type: 'PUT', 
+                    url: getUrl('rest/users/{0}/citizen'.format(currentUserId())),
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    dataType: 'text',
+                    success: function(data) {
+                        console.log(data);
+                    }, 
+                    error: function(data) {
+                        console.log(data);
+                    }
+                })
 
-									},
-									error : function(obj) {
-										console.log(obj);
-									}
-								});
-					})(jQuery);
-				</script>
+		    	return false;
+		    });
+		    
+		    
+		    $('#btnVerify').click(function(event) {
+		    	if (initPlugin() == false) {
+                    return;
+                }
+                var idStr = getDeviceSN();
+                if (idStr == false) {
+                    return;
+                }
+                //idStr = idStr.match(/[0-9Xx]*/)[0];
+                idStr = idStr.slice(0, -1);
+                idStr = md5(idStr);
+                var dataObj = [{name: "cardtype", value: "readercard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "management"}];
+                $.ajax({
+                    url: getUrl('rest/users/hardwarelogin'),
+                    type: "POST",
+                    data: dataObj,
+                    success: function (data) {
+                        saveUser(data);
+                        var rtl = $('#roleSelection');
+                        var value = rtl[0].options[rtl[0].selectedIndex].value;
+                        if (value == "居委会")
+                            window.location = getUrl('start-screen-committee')
+                        else if (value == "业委会")
+                            window.location = getUrl('start-screen-owner')
+                        else if (value == "楼组长")
+                            window.location = getUrl('index')
+                        else if (value == "块长")
+                            window.location = getUrl('unused')
+                    },
+                    error: function() {
+                        alert("用户名或密码错误")
+                    }
+                })
+
+		    	
+		    	return false;
+		    });
+        })(jQuery);
+        </script>
 
 </body>
 </html>
