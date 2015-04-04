@@ -23,6 +23,7 @@ public class User {
 	private String email;
 	private String image;
 	private UserType userType;
+	private String identityNumber;
 	public long getId() {
 		return id;
 	}
@@ -88,5 +89,11 @@ public class User {
 	}
 	public void setUserType(UserType userType) {
 		this.userType = userType;
+	}
+	public String getIdentityNumber() {
+		return identityNumber;
+	}
+	public void setIdentityNumber(String identityNumber) {
+		this.identityNumber = identityNumber;
 	}
 }

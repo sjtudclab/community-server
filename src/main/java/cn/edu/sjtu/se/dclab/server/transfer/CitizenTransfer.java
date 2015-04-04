@@ -1,9 +1,5 @@
 package cn.edu.sjtu.se.dclab.server.transfer;
 
-import java.util.Collection;
-
-import cn.edu.sjtu.se.dclab.server.entity.Role;
-
 /**
  *2015年4月2日 下午10:35:26
  *@author changyi yuan

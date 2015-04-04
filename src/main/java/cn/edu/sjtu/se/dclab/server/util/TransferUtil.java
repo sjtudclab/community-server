@@ -50,8 +50,7 @@ public class TransferUtil {
 				user.getUsername(), user.getImage(), user.getName(),
 				citizen.getName(), citizen.getGender(), citizen.getAge(),
 				citizen.getPhone(), user.getEmail(),
-				Constants.IDENTIFICATION_TYPE_ID.equals(citizen
-						.getIdentificationType()));
+				(user.getIdentityNumber() != null)&&(user.getIdentityNumber().length()!=0));
 	}
 
 	public static CitizenTransfer convertUserAndCitizenToCitizenTransfer(
@@ -60,8 +59,7 @@ public class TransferUtil {
 				user.getUsername(), user.getImage(), user.getName(),
 				citizen.getName(), citizen.getGender(), citizen.getAge(),
 				citizen.getPhone(), user.getEmail(),
-				Constants.IDENTIFICATION_TYPE_ID.equals(citizen
-						.getIdentificationType()));
+				(user.getIdentityNumber() != null)&&(user.getIdentityNumber().length()!=0));
 	}
 
 	public static CitizenTransfer convertUserAndCitizenToCitizenTransfer(
@@ -72,7 +70,6 @@ public class TransferUtil {
 				user.getUsername(), user.getImage(), user.getName(),
 				citizen.getName(), citizen.getGender(), citizen.getAge(),
 				citizen.getPhone(), user.getEmail(),
-				Constants.IDENTIFICATION_TYPE_ID.equals(citizen
-						.getIdentificationType()));
+				(user.getIdentityNumber() != null)&&(user.getIdentityNumber().length()!=0));
 	}
 }

@@ -264,6 +264,10 @@ public class UserController {
 			String email = (String) map.get("email");
 			user.setEmail(email);;
 		}
+		if(map.containsKey("identityNumber")){
+			String identityNumber = (String) map.get("identityNumber");
+			user.setIdentityNumber(identityNumber);;
+		}
 		return true;
 	}
 	
