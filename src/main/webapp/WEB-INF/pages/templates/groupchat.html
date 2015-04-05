@@ -51,7 +51,7 @@
     var userid;
     var groupid;
     var groupname;
-    var startid;
+    startid = 0;
 	$(document).ready(function() {
 		userid = currentUserId();
 		
@@ -60,8 +60,9 @@
 		groupid = Request['id'];
 		groupname = Request['name'];
 		$("#chatuser").text(groupname);
+		$("#chatinfo").text("");
 		GetMessage(groupid, 0, 5);
-		//self.setInterval(function(){GetMessage(sendtoid, startid, 1)}, 2000);
+		self.setInterval(function(){GetMessage(groupid, startid, 1)}, 2000);
 	});
 	
 	function GetRequest() {
@@ -95,11 +96,11 @@
 				$.each(obj, function (n, value) {
 					var chatinfo = $("#chatinfo");
 					if (value.userId == userid)
-						chatinfo.val(chatinfo.val() + "\n我 说:\n" + value.info);
+						chatinfo.val(chatinfo.val() + "\n我 说:\n" + value.content);
 					else
-						chatinfo.val(chatinfo.val() + "\n" + value.name + " 说：\n" + value.info);
+						chatinfo.val(chatinfo.val() + "\n" + value.name + " 说：\n" + value.content);
 					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;
-					startid = value.startid;
+					startid = value.messageId;
 				});
 			}
 
@@ -111,7 +112,7 @@
 			var chatinfo = $("#chatinfo");
 			var sendinfo = $("#sendinfo");
 			if (sendinfo.val() != "") {
-				chatinfo.val(chatinfo.val() + "\n我说：\n" + sendinfo.val());
+				chatinfo.val(chatinfo.val() + "\n我 说：\n" + sendinfo.val());
 				document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;
 				$.ajax({
 					type: "POST",
