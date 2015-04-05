@@ -14,7 +14,7 @@
 	
 	<update id="update" parameterType="ServiceCitizen">
 		UPDATE citizen_service SET
-		name = #{name}, gender = #{gender typeHandler=GenderHandler}, 
+		name = #{name}, gender = #{gender,typeHandler=GenderHandler}, 
 		age = #{age}, phone = #{phone}
 		WHERE citizen_id = #{id};
 	</update>

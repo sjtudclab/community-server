@@ -124,10 +124,12 @@ public class InformationServiceImpl implements InformationService {
 
 	@Override
 	public Collection<Information> findByToIdAndType(long toId, String type,
-			long startId, long count) {
+			long startId, long count, String messagetType) {
 		Collection<Information> infos = informationMapper.findByToIdAndType(
 				toId, type);
-		return resolveBack(infos, startId, count);
+		if(Constants.MESSAGE_BACK.equals(messagetType))
+			return resolveBack(infos, startId, count);
+		return resolveForward(infos, startId, count);
 	}
 	
 	private Collection<Information> resolveForward(Collection<Information> infos,
@@ -217,7 +219,7 @@ public class InformationServiceImpl implements InformationService {
 
 	@Override
 	public Collection<Information> findByFromIdAndType(long fromId,
-			String type, long startId, long count) {
+			String type, long startId, long count, String messageType) {
 		if (Constants.INFORMATION_CIRCLE_MESSAGE.equals(type)) {
 			Set<Long> circles = new HashSet<Long>();
 			Collection<Information> results = new ArrayList<Information>();
@@ -241,8 +243,9 @@ public class InformationServiceImpl implements InformationService {
 						.findByFromIdAndType(userId, type);
 				results.addAll(infos);
 			}
-
-			return resolveBack(results, startId, count);
+			if(Constants.MESSAGE_BACK.equals(messageType))
+				return resolveBack(results, startId, count);
+			return resolveForward(results, startId, count);
 		}
 		return informationMapper.findByFromIdAndType(fromId, type);
 	}

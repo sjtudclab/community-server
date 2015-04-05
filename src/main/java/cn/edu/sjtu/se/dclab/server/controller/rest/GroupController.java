@@ -117,31 +117,53 @@ public class GroupController {
 		return Result.SUCCESS;
 	}
 
-	@RequestMapping(value = "{groupId}/users/{userId}/messages/{startId}/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{groupId}/users/{userId}/messages/{startId}/forward/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Collection<MessageTransfer> getMessages(@PathVariable long groupId,
-			@PathVariable long userId, @PathVariable long startId,
-			@PathVariable long count) {
-		Collection<Information> infos = informationService.findByToIdAndType(groupId, Constants.INFROMATION_GROUP_MESSAGE, startId, count);
+	public Collection<MessageTransfer> getForwardMessages(
+			@PathVariable long groupId, @PathVariable long userId,
+			@PathVariable long startId, @PathVariable long count) {
+		Collection<Information> infos = informationService.findByToIdAndType(
+				groupId, Constants.INFROMATION_GROUP_MESSAGE, startId, count,
+				Constants.MESSAGE_FORWARD);
 		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
-		for (Information info : infos){
+		for (Information info : infos) {
 			User user = userService.getUserByUserId(info.getFrom());
-			transfers.add(TransferUtil.convertInformationAndUserToMessageTransfer(info,user));
+			transfers.add(TransferUtil
+					.convertInformationAndUserToMessageTransfer(info, user));
 		}
 		return transfers;
 	}
 	
+	@RequestMapping(value = "{groupId}/users/{userId}/messages/{startId}/back/counts/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<MessageTransfer> getBackMessages(
+			@PathVariable long groupId, @PathVariable long userId,
+			@PathVariable long startId, @PathVariable long count) {
+		Collection<Information> infos = informationService.findByToIdAndType(
+				groupId, Constants.INFROMATION_GROUP_MESSAGE, startId, count,
+				Constants.MESSAGE_BACK);
+		Collection<MessageTransfer> transfers = new ArrayList<MessageTransfer>();
+		for (Information info : infos) {
+			User user = userService.getUserByUserId(info.getFrom());
+			transfers.add(TransferUtil
+					.convertInformationAndUserToMessageTransfer(info, user));
+		}
+		return transfers;
+	}
+
 	@RequestMapping(value = "{groupId}/users/{userId}/messages", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String sendMessage(@PathVariable long groupId, @PathVariable long userId, @RequestBody String message){
-		Map<String,Object> map = DataUtil.getFromJson(message);
+	public String sendMessage(@PathVariable long groupId,
+			@PathVariable long userId, @RequestBody String message) {
+		Map<String, Object> map = DataUtil.getFromJson(message);
 		Information information = new Information();
 		information.setFrom(userId);
 		information.setTo(groupId);
-		information.setContent((String)map.get("message"));
+		information.setContent((String) map.get("message"));
 		information.setStatus(Constants.INFORMATION_DONE_STATUS);
 		information.setSubmitTime(new Date());
-		informationService.create(information, Constants.INFROMATION_GROUP_MESSAGE);
+		informationService.create(information,
+				Constants.INFROMATION_GROUP_MESSAGE);
 		return Result.SUCCESS;
 	}
 
