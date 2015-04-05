@@ -61,7 +61,7 @@
 		groupname = Request['name'];
 		$("#chatuser").text(groupname);
 		GetMessage(groupid, 0, 5);
-		//self.setInterval(function(){GetMessage(sendtoid, startid, 5)}, 1000);
+		//self.setInterval(function(){GetMessage(sendtoid, startid, 1)}, 2000);
 	});
 	
 	function GetRequest() {
@@ -79,25 +79,28 @@
 	
 	function GetMessage(groupid, start, count) {
 		$.ajax({
-			url: getUrl("rest/groups/" + groupid + "/users/" + userid + "/messages/" + start + "/counts/" + count),
+			url: getUrl("rest/groups/" + groupid + "/users/" + userid + "/messages/" + start + "/forward/counts/" + count),
 			type:"get",
 			dataType:"json",
 			success:function(obj){
 				console.log("success:"+obj);
 				
-				for (var i = obj.length - 1; i >= 0; i--) {
+/*				for (var i = obj.length - 1; i >= 0; i--) {
 					var chatinfo = $("#chatinfo");
 					chatinfo.val(chatinfo.val() + "\n" + obj[i].name + " 说：\n" + obj[i].content);
 					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;	
 					startid = obj[i].messageId;
-				}
+				}*/
 				
-/*				$.each(obj, function (n, value) {
+				$.each(obj, function (n, value) {
 					var chatinfo = $("#chatinfo");
-					chatinfo.val(chatinfo.val() + "\n" + value.name + " 说：\n" + value.info);
+					if (value.userId == userid)
+						chatinfo.val(chatinfo.val() + "\n我 说:\n" + value.info);
+					else
+						chatinfo.val(chatinfo.val() + "\n" + value.name + " 说：\n" + value.info);
 					document.getElementById('chatinfo').scrollTop = document.getElementById('chatinfo').scrollHeight;
 					startid = value.startid;
-				});*/
+				});
 			}
 
 		});
@@ -115,7 +118,7 @@
 					contentType: 'application/json; charset=utf-8',
 					url: getUrl("/rest/groups/" + groupid + "/users/" + userid + "/messages"),
 					data: JSON.stringify({
-						
+						"message": sendinfo.val()
 					}),
 					success:function(result, status){}
 				});
