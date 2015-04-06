@@ -57,6 +57,12 @@
 
         <typeAlias alias="GenderHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.GenderHandler" />
 		<typeAlias alias="ContentHandler" type="cn.edu.sjtu.se.dclab.server.entity.converter.ContentHandler" />
+		
+		<typeAlias alias="TenementManage" type="cn.edu.sjtu.se.dclab.server.entity.TenementManage" />
+		<typeAlias alias="TenementOrder" type="cn.edu.sjtu.se.dclab.server.entity.TenementOrder" />
+		<typeAlias alias="TenementServeForm" type="cn.edu.sjtu.se.dclab.server.entity.TenementServeForm" />
+		<typeAlias alias="TenementServiceApplication" type="cn.edu.sjtu.se.dclab.server.entity.TenementServiceApplication" />
+		<typeAlias alias="TenementServiceman" type="cn.edu.sjtu.se.dclab.server.entity.TenementServiceman" />
     </typeAliases>
 
     <typeHandlers>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.TenementManageMapper">
+	
+	<insert id="createServiceManage" parameterType="TenementManage">
+		insert into tenement_serviceman_manage (serve_id,stage) 
+			values (#{serve_id},#{stage});
+	</insert>
+	
+	<select id="getServicemanInfo" parameterType="java.lang.String" resultMap="ResultMap2">
+		select serve_id, count(*) as times ,avg(user_score) as score
+		from tenement_order natural join tenement_serve_form
+		where stage=#{stage} group by serve_id;
+	</select>
+	
+
+	<resultMap type="TenementManage" id="ResultMap">
+		<id property="serve_id" column="serve_id" />
+		<result property="stage" column="stage" />
+	</resultMap>
+	
+	<resultMap type="TenementServiceman" id="ResultMap2">
+		<id property="serve_id" column="serve_id" />
+		<result property="times" column="times" />
+		<result property="score" column="score" />
+	</resultMap>
+	
+</mapper>

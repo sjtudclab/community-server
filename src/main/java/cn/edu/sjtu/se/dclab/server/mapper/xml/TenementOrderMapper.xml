@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.TenementOrderMapper">
+	
+	<insert id="createOrder" parameterType="TenementOrder">
+		insert into tenement_order (order_id,user_id,order_name,order_address,contact_name,contact_phone,stage,serve_id) 
+			values (#{order_id},#{user_id},#{order_name},#{order_address},#{contact_name},#{contact_phone},#{stage},#{serve_id});
+	</insert>
+	
+	<select id="getTenementOrderByUserId" parameterType="java.lang.Integer" resultMap="ResultMap">
+		select * from tenement_order where user_id=#{user_id};
+	</select>
+	
+	<select id="getUserOrderByType" parameterType="TenementOrder" resultMap="ResultMap">
+		select * from tenement_order where user_id=#{user_id} and stage=#{stage};
+	</select>
+	
+	
+	<update id="updateTenementOrderStatus" parameterType="TenementOrder">
+		update tenement_order set stage=#{stage}
+			where order_id = #{order_id};
+	</update>
+	
+	<select id="getServicemanOrderByType" parameterType="TenementOrder" resultMap="ResultMap">
+		select * from tenement_order where serve_id=#{serve_id} and stage=#{stage};
+	</select>
+	
+	<select id="getAllOrderByType" parameterType="java.lang.String" resultMap="ResultMap">
+		select * from tenement_order where stage=#{stage};
+	</select>
+	
+	<select id="getAllOrder" resultMap="ResultMap">
+		select * from tenement_order;
+	</select>
+	
+	<select id="getOneOrderByOrderId" parameterType="java.lang.String" resultMap="ResultMap">
+		select * from tenement_order where order_id=#{order_id};
+	</select>
+	
+	
+
+	<resultMap type="TenementOrder" id="ResultMap">
+		<id property="order_id" column="order_id" />
+		<result property="user_id" column="user_id" />
+		<result property="order_name" column="order_name" />
+		<result property="order_address" column="order_address" />
+		<result property="contact_name" column="contact_name" />
+		<result property="contact_phone" column="contact_phone" />
+		<result property="stage" column="stage" />
+		<result property="serve_id" column="serve_id" />
+	</resultMap>
+	
+</mapper>
