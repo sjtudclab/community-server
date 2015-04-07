@@ -26,6 +26,11 @@ public class NeighborController {
     public String getGroupPage() {
     	return "neighborgroup";
     }
+
+    @RequestMapping("/group/create")
+    public String getGroupCreatePage() {
+        return "group_create";
+    }
     
     @RequestMapping("/group/invitation")
     public String invitation() {

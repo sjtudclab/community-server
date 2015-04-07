@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <title>创建群组</title>
+</head>
+<body class="metro">
+<header class="bg-dark"></header>
+<div class="page">
+
+    <h1>
+        <a th:href="@{/resident/neighbor/group}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        我的群组
+    </h1>
+
+    <div class="grid">
+        <div class="row">
+            <div class="span7">
+                <div>
+                    群组名称：<br><input id="group_name" />
+                </div>
+                <br>
+                <input name="from" type="hidden" id="from" />
+                <button class="btn btn-default" id="submitButton" onclick="submit()">创建</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:include="login_footer :: copy"></div>
+
+<script type="text/javascript">
+
+    function submit() {
+        $.ajax({
+            url: getUrl('rest/groups'),
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "userId": currentUserId(),
+                "name": $('#group_name').val()
+            }),
+            success: function() {
+                alert('群组创建成功')
+            }
+        })
+    }
+</script>
+
+</body>
+</html>
