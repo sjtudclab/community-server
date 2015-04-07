@@ -22,7 +22,7 @@
         
         <!-- 返回主页 -->
         <div class="offset1">
-            <h1><a href="friend"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>聊天页</h1>
+            <h1><a href="group"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>聊天页</h1>
             <ul class="nav nav-pills nav-stacked" style="max-midth:260px;">
             	<a href="#" id="chatuser">leizi</a> 群聊中
             </ul>
@@ -94,6 +94,8 @@
 				}*/
 				
 				$.each(obj, function (n, value) {
+					if (value.messageId <= startid)
+						return;
 					var chatinfo = $("#chatinfo");
 					if (value.userId == userid)
 						chatinfo.val(chatinfo.val() + "\n我 说:\n" + value.content);
@@ -121,7 +123,9 @@
 					data: JSON.stringify({
 						"message": sendinfo.val()
 					}),
-					success:function(result, status){}
+					success:function(data){
+						startid = data.messageId;
+					}
 				});
 			}
 			sendinfo.val("");

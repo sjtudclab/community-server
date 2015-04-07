@@ -95,6 +95,8 @@
 					startid = obj[i].messageId;
 				}*/
 				$.each(obj, function (n, value) {
+					if (value.messageId <= startid)
+						return;
 					var chatinfo = $("#chatinfo");
 					if (value.userId == userid)
 						chatinfo.val(chatinfo.val() + "\n我 说：\n" + value.content);
@@ -122,13 +124,16 @@
 					data: JSON.stringify({
 						"message": sendinfo.val()
 					}),
-					success:function(result, status){}
+					success:function(data){
+						startid = data.messageId;
+					}
 				});
 			}
 			sendinfo.val("");
 			sendinfo.focus();
 		});
 	});
+	
     </script>
     
 </body>
