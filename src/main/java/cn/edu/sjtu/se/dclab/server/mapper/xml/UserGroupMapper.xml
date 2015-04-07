@@ -9,6 +9,10 @@
 		VALUES(#{groupId}, #{userId});
 	</insert>
 	
+	<select id="userIsInGroup" resultType="BOOLEAN">
+		SELECT IFNULL((SELECT 1 FROM user_group WHERE user_id = #{userId} AND group_id = #{groupId}),0);		
+	</select>
+	
 	<resultMap type="UserGroup" id="UserGroupMap">
 		<id property="groupId" column="group_id" />
 		<result property="userId" column="user_id" />

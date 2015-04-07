@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.service.impl;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,10 +41,18 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 	@Override
 	public void create(UserGroup userGroup) {
+		if(userGroupMapper.userIsInGroup(userGroup.getUserId(), userGroup.getGroupId()))
+			return;
 		userGroupMapper.save(userGroup);
 		Group group = groupMapper.findById(userGroup.getGroupId());
 		group.setCount(group.getCount() + 1);
 		groupMapper.update(group);
+	}
+
+	@Override
+	public void createGroups(Collection<UserGroup> groups) {
+		for(UserGroup group : groups)
+			create(group);
 	}
 
 }
