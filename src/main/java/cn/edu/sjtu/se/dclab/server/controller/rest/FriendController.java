@@ -161,7 +161,7 @@ public class FriendController {
 	
 	@RequestMapping(value = "{userId}/users/{friendId}/messages", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String sendMessage(@PathVariable long userId, @PathVariable long friendId, @RequestBody String message){
+	public MessageTransfer sendMessage(@PathVariable long userId, @PathVariable long friendId, @RequestBody String message){
 		Map<String,Object> map = DataUtil.getFromJson(message);
 		Information information = new Information();
 		information.setFrom(userId);
@@ -170,7 +170,10 @@ public class FriendController {
 		information.setStatus(Constants.INFORMATION_DONE_STATUS);
 		information.setSubmitTime(new Date());
 		informationService.create(information, Constants.INFORMATION_FRIEND_MESSAGE);
-		return Result.SUCCESS;
+		
+		MessageTransfer transfer = new MessageTransfer();
+		transfer.setMessageId(information.getId());
+		return transfer;
 	}
  
 	private ApplicationTransfer convertUserAndInformationToApplicationTransfer(

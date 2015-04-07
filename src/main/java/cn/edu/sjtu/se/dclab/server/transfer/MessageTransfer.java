@@ -2,16 +2,29 @@ package cn.edu.sjtu.se.dclab.server.transfer;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  *2015年4月2日 下午2:09:00
  *@author changyi yuan
  */
 public class MessageTransfer {
 	private long messageId;
+	
+	@JsonInclude(Include.NON_NULL) 
 	private String content;
+	
+	@JsonInclude(Include.NON_NULL) 
 	private Date submitTime;
+	
+	@JsonInclude(Include.NON_DEFAULT) 
 	private long userId;
+	
+	@JsonInclude(Include.NON_NULL) 
 	private String name;
+	
+	@JsonInclude(Include.NON_NULL) 
 	private String image;
 	
 	public MessageTransfer(){

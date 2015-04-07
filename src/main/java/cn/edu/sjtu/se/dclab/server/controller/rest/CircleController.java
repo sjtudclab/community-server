@@ -125,7 +125,7 @@ public class CircleController {
 	
 	@RequestMapping(value = "{userId}/messages", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String sendMessage(@PathVariable long userId, @RequestBody String message){
+	public MessageTransfer sendMessage(@PathVariable long userId, @RequestBody String message){
 		Map<String,Object> map = DataUtil.getFromJson(message);
 		Information information = new Information();
 		information.setFrom(userId);
@@ -133,6 +133,10 @@ public class CircleController {
 		information.setStatus(Constants.INFORMATION_DONE_STATUS);
 		information.setSubmitTime(new Date());
 		informationService.create(information, Constants.INFORMATION_CIRCLE_MESSAGE);
-		return Result.SUCCESS;
+		
+		MessageTransfer transfer = new MessageTransfer();
+		transfer.setMessageId(information.getId());
+		
+		return transfer;
 	}
 }

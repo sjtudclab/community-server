@@ -16,7 +16,7 @@
     	select * from information where content LIKE '%${keyword}%' AND (status IS NULL OR status >= 0) order by information_id desc;
     </select>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="information_id" parameterType="Information">
+    <insert id="save" useGeneratedKeys="true" keyColumn="information_id" keyProperty="id" parameterType="Information">
         INSERT INTO information
         (`from`, `to`, status, content, title, submit_time, information_type, attachment)
         VALUES
