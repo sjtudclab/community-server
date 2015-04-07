@@ -1,5 +1,10 @@
 package cn.edu.sjtu.se.dclab.server.service.impl;
 
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.entity.User;
@@ -8,12 +13,6 @@ import cn.edu.sjtu.se.dclab.server.mapper.RoleMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserMapper;
 import cn.edu.sjtu.se.dclab.server.service.ResidentCitizenService;
 import cn.edu.sjtu.se.dclab.server.transfer.ResidentCitizenTransfer;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Huiyi on 2015/3/30.
@@ -57,7 +56,7 @@ public class ResidentCitizenServiceImpl implements ResidentCitizenService {
 	public ResidentCitizenTransfer findById(long id) {
 		ResidentCitizen citizen = rcMapper.findById(id);
 		User user = userMapper.findByUserId(citizen.getUser().getId());
-		List<Role> roles = (List<Role>) roleMapper.findByUserId(user.getId());
+		Collection<Role> roles = roleMapper.findByUserId(user.getId());
 		ResidentCitizenTransfer transfer = new ResidentCitizenTransfer(
 				citizen.getId(), citizen.getName(), user.getId(),
 				user.getImage(), roles);

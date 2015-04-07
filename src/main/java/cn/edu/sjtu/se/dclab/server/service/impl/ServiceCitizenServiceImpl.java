@@ -1,6 +1,6 @@
 package cn.edu.sjtu.se.dclab.server.service.impl;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,7 @@ public class ServiceCitizenServiceImpl implements ServiceCitizenService {
 	public ServiceCitizenTransfer findById(long id) {
 		ServiceCitizen citizen = serviceCitizenMapper.findById(id);
 		User user = userMapper.findByUserId(citizen.getUser().getId());
-		List<Role> roles = (List<Role>) roleMapper.findByUserId(user.getId());
+		Collection<Role> roles = roleMapper.findByUserId(user.getId());
 		ServiceCitizenTransfer transfer = new ServiceCitizenTransfer(
 				citizen.getId(), citizen.getName(), user.getId(),
 				user.getImage(), roles);

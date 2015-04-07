@@ -7,16 +7,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
-import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.entity.User;
+import cn.edu.sjtu.se.dclab.server.entity.UserRole;
 import cn.edu.sjtu.se.dclab.server.mapper.ManagementCitizenMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.RoleMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserMapper;
 import cn.edu.sjtu.se.dclab.server.service.ManagementCitizenService;
 import cn.edu.sjtu.se.dclab.server.transfer.ManagementCitizenTransfer;
-import cn.edu.sjtu.se.dclab.server.transfer.ResidentCitizenTransfer;
 
 /**
  * 2015年3月30日 下午3:08:51
@@ -82,12 +82,38 @@ public class ManagementCitizenServiceImpl implements ManagementCitizenService {
 		}
 		return transfers;
 	}
+	
+	@Override
+	public Collection<ManagementCitizenTransfer> findBlockLeaders() {
+		String type = Constants.ROLE_BLOCKLEADER;
+		Collection<ManagementCitizenTransfer> transfers = new ArrayList<ManagementCitizenTransfer>();
+		Collection<ManagementCitizen> citizens = managementCitizenMapper
+				.findAll();
+		for (ManagementCitizen citizen : citizens) {
+			User user = userMapper.findByUserId(citizen.getUser().getId());
+			Collection<UserRole> userRoles = roleMapper.findUserRoleByUserId(user.getId());
+			List<UserRole> returnUserRoles = new ArrayList<UserRole>();
+			boolean flag = false;
+			for (UserRole userRole : userRoles){
+				if(type.equals(userRole.getRole().getRoleType().getType())){
+					returnUserRoles.add(userRole);
+					flag = true;
+				}
+			}
+			if(flag){
+				ManagementCitizenTransfer transfer = new ManagementCitizenTransfer(
+						citizen.getId(), citizen.getName(), user.getId(), user.getImage(), null, returnUserRoles);
+				transfers.add(transfer);
+			}
+		}
+		return transfers;
+	}
 
 	@Override
 	public ManagementCitizenTransfer findById(long id) {
 		ManagementCitizen citizen = managementCitizenMapper.findById(id);
 		User user = userMapper.findByUserId(citizen.getUser().getId());
-		List<Role> roles = (List<Role>) roleMapper.findByUserId(user.getId());
+		Collection<Role> roles = roleMapper.findByUserId(user.getId());
 		ManagementCitizenTransfer transfer = new ManagementCitizenTransfer(
 				citizen.getId(), citizen.getName(), user.getId(),
 				user.getImage(), roles);

@@ -80,4 +80,10 @@ public class CitizenManagementController {
 	public ManagementCitizenTransfer getCitizenById(@PathVariable long id) {
 		return managementCitizenService.findById(id);
 	}
+	
+	@RequestMapping(value = "blockLeader", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<ManagementCitizenTransfer> getBlockLeaders(){
+		return managementCitizenService.findBlockLeaders();
+	}
 }

@@ -1,5 +1,6 @@
 package cn.edu.sjtu.se.dclab.server.controller.rest;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.entity.ServiceCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.User;
+import cn.edu.sjtu.se.dclab.server.entity.UserRole;
 import cn.edu.sjtu.se.dclab.server.service.ManagementCitizenService;
 import cn.edu.sjtu.se.dclab.server.service.ResidentCitizenService;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;

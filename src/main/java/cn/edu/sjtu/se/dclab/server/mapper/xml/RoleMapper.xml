@@ -9,8 +9,15 @@
 	</select>
 
 	<select id="findByUserId" parameterType="long" resultMap="RoleMap">
-		SELECT r.role_id, r.name, r.description, r.role_type_id, rt.role_type_id, rt.type 
-		FROM role r, user_role ur, role_type rt 
+		SELECT r.role_id, r.name, r.description, r.role_type_id, rt.role_type_id, rt.type
+		FROM role r, user_role ur, role_type rt
+		WHERE ur.role_id = r.role_id AND r.role_type_id = rt.role_type_id AND ur.user_id = #{id};
+	</select>
+	
+	<select id="findUserRoleByUserId" parameterType="long" resultMap="UserRoleMap">
+		SELECT r.role_id, r.name, r.description, r.role_type_id, rt.role_type_id, rt.type,
+		ur.user_role_id, ur.description user_role_description, ur.description_detail user_role_description_detail
+		FROM role r, user_role ur, role_type rt
 		WHERE ur.role_id = r.role_id AND r.role_type_id = rt.role_type_id AND ur.user_id = #{id};
 	</select>
 
@@ -24,6 +31,14 @@
 		<result property="description" column="description" />
 		
 		<association property="roleType" resultMap="RoleTypeMap" />
+	</resultMap>
+	
+	<resultMap id="UserRoleMap" type="UserRole">
+		<id property="id" column="user_role_id" />
+		<result property="userRoleDescription" column="user_role_description" />
+		<result property="userRoleDescriptionDetail" column="user_role_description_detail" />
+		
+		<association property="role" resultMap="RoleMap" />
 	</resultMap>
 	
 	<resultMap type="RoleType" id="RoleTypeMap">

@@ -22,9 +22,10 @@
 <script type="text/javascript">
     
   $(document).ready(function(){
+	  
 	  var checkFlag = false;
 	  var adjustFlag = false;
-	  
+ 	  
 	  $("#frameworkCheck").click(function(){
 		 $(this).attr("class","active");
 		 $("#personnelAdjust").attr("class","");
@@ -33,11 +34,41 @@
 		 $('form').remove();
 		 $('#framework').remove();
 		 
-		 var div = "<div id='framework'><image src='" + getUrl("images/framework.jpg") + "'/></div>";
-		 $("div.span9").append(div);
+		 
+		 
+		 $.get(getUrl("rest/managementCitizens/blockLeader"), "", function(users, status){
+			
+			 var div = $("<div id='framework'><div><image src='" + getUrl("images/framework.jpg") + "'/></div>");
+			 var table = $("<table class='table table-bordered' contenteditable='true'>")
+			 var thead = $("<thead><tr><th>责任块区</th><th>块长</th><th>责任区域</th></tr></thead>");
+		     var tbody = $("<tbody>"); 
+		     
+		    
+		     $(users).each(function(index,user){
+		    	
+				var desc = "";
+				var descDetail = "";
+		    	 $(user.userRoles).each(function(i,userRole){
+		    		 desc += userRole.userRoleDescription + ",";
+		    		 descDetail += userRole.userRoleDescriptionDetail + ",";
+		    	 });
+		    	 
+		    	 desc = desc.substring(0,desc.length-1);
+		    	 descDetail = descDetail.substring(0,descDetail.length-1);
+		    	 
+		    	 tbody.append("<tr><td>" + desc + "</td><td>" + user.name +"</td><td>" + descDetail +"</td><tr>");
+		     });
+		  
+			 tbody.append("</tbody>");
+			 table.append(thead,tbody,"</table>");
+			 div.append(table,"</div>");
+			 $("div.span9").append(div); 
+		 
+		 });
+		 
 		 return false;
 	  });
-	  
+	   
 	  $("#personnelCheck").click(function(){
 		   $(this).attr("class","active");
 		   $("#personnelAdjust").attr("class","");
@@ -133,7 +164,7 @@
 	        		});
 	        		
 	        		tbody.append("</tbody>");
-	        		table.append(thead,tbody,"</tbody>");
+	        		table.append(thead,tbody,"</table>");
 	        		form.append(table,"<button class='btn submit1'>提交</button>","</form>");
 	        		$("div.span9").append(form);
 	        		adjustFlag = true;
@@ -178,6 +209,8 @@
 		  }); 
 		  return false;
 	  });
+	  
+	  $("#frameworkCheck").click();
 	  
     }); 
     </script>

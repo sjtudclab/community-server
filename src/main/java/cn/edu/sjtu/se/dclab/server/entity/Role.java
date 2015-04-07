@@ -1,5 +1,8 @@
 package cn.edu.sjtu.se.dclab.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * Created by Huiyi on 2015/3/11.
  */
@@ -7,6 +10,13 @@ public class Role {
     private long id;
     private String name;
     private String description;
+    
+    @JsonInclude(Include.NON_NULL) 
+    private String userRoleDescription;
+    
+    @JsonInclude(Include.NON_NULL) 
+    private String userRoleDescriptionDetail;
+    
     private RoleType roleType;
 
     public RoleType getRoleType() {
@@ -40,4 +50,20 @@ public class Role {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public String getUserRoleDescription() {
+		return userRoleDescription;
+	}
+
+	public void setUserRoleDescription(String userRoleDescription) {
+		this.userRoleDescription = userRoleDescription;
+	}
+
+	public String getUserRoleDescriptionDetail() {
+		return userRoleDescriptionDetail;
+	}
+
+	public void setUserRoleDescriptionDetail(String userRoleDescriptionDetail) {
+		this.userRoleDescriptionDetail = userRoleDescriptionDetail;
+	}
 }
