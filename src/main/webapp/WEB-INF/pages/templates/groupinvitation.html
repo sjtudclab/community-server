@@ -85,18 +85,22 @@
 		});
 		
 		$('#send-invitation').click(function(event) {
-			var ids = $('.friend-item.selected .user-id').map(function(i, m) {return m.innerText;});
+			var ids = [];
+			$('.friend-item.selected .user-id').each(function(ind, el) {
+				ids.push(parseInt(el.innerText));
+			});
+			
 			var dataObj = {userIds: ids};
 			$.ajax({
 				type: "POST",
-				url: getUrl('rest/groups/{groupId}/users'),
+				url: getUrl('rest/groups/{0}/users'.format(groupid)),
 				data: JSON.stringify(dataObj),
 				contentType: 'application/json',
 				dataType: 'text',
 				success: function(data) {
 					console.log(data);
 					alert('邀请成功');
-					$('a.back').click();
+					window.location = $('a.back').attr('href');
 				},
 				error: function(data) {
 					console.log(data);
