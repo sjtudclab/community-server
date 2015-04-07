@@ -52,14 +52,11 @@
 		userid = currentUserId();
 		
 		$("#grouplist").html("");
-		$.get(getUrl("groups/0/users/" + userid), function(data) {
+		$.get(getUrl("rest/groups/0/users/" + userid), function(data) {
 			$.each(data, function (n, value) {
 				var group = "";
 				group =
-				"<div class=\"tile double goods\">" +
-                    "<div class=\"tile-content image\">" +
-                        "<a href='groupchat?id=" + value.groupId + "&name=" + value.name + "\"></a>" +
-                    "</div>" +
+				"<div class=\"tile  goods\">" +
 
                     "<div class=\"brand bg-dark opacity\">" +
                     	"<a href='groupchat?id=" + value.groupId + "&name=" + value.name + "'>" +

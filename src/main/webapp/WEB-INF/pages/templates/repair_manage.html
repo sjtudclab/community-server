@@ -8,6 +8,9 @@
     <meta name="description" content="Simple responsive css framework">
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
+    <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
+    <script th:src="@{/js/chen/repair_manage.js}"></script>
+
     <title>物业管理人员页面</title>
 </head>
 <body class="metro">
@@ -27,10 +30,10 @@
                                 <nav class="sidebar light">
                                     <ul>
                                         <li class="title">功能操作</li>
-                                        <li class="stick bg-green"><a href="#"><i class="icon-star"></i>审批维修资格</a></li>
-                                        <li class="stick bg-red active"><a href="#"><i class="icon-user"></i>管理维修人员</a></li>
-                                        <li class="stick bg-blue"><a href="#"><i class="icon-bookmark-2"></i>管理服务评价</a></li>
-                                        <li class="stick bg-yellow"><a href="#"><i class="icon-cycle"></i>管理维修进度</a></li>
+                                        <li id="l1" class="stick bg-green" onclick="get_all_serve_id()"><a href="#"><i class="icon-star"></i>审批维修资格</a></li>
+                                        <li id="l2" class="stick bg-red" onclick="get_serviceman_info()"><a href="#"><i class="icon-user"></i>管理维修人员</a></li>
+                                        <li id="l3" class="stick bg-blue" onclick="get_comment_order_id()"><a href="#"><i class="icon-bookmark-2"></i>管理服务评价</a></li>
+                                        <li id="l4" class="stick bg-yellow" onclick="get_all_order_id()"><a href="#"><i class="icon-cycle"></i>管理维修进度</a></li>
 
                                     </ul>
                                 </nav>
@@ -39,10 +42,13 @@
                             <!--<div class="span1"></div>-->
 
                             <div class="span8" >
-                                <!-- 申请物业维修 -->
-                                <div id="fill_form" class="bg-grayLighter" style="display:all">
+                                <!-- 管理维修人员 -->
+                                <div id="manage_serviceman" class="bg-grayLighter" style="display:none">
                                     <div class="row">
                                         <h2>&nbsp;&nbsp;&nbsp;&nbsp;维修人员管理</h2>
+                                        <div id="serviceman_data"></div>
+
+                                        <!--
                                         <table class="table hovered striped">
                                             <thead>
                                             <tr>
@@ -70,20 +76,193 @@
                                             </tbody>
 
                                             <tfoot></tfoot>
-                                        </table>
+                                        </table>-->
                                     </div>
 
 
                                 </div>
-                                <!--End 申请物业维修 -->
+                                <!--End 管理维修人员 -->
 
-                                <!-- 查看报修进度 -->
-                                <div class="bg-green" style="display:none">
+                                <!-- 审批维修资格 -->
+                                <div id="manage_prove" class="bg-grayLighter" style="display:none">
                                     <div class="row">
-                                        <h2>评价本次服务</h2>
+                                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;审批维修资格</h2>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>查看申请服务人员：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <div class="input-control select">
+                                                    <select id="serve_id" onchange="get_serviceman_apply(this.value)"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>真实姓名：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="real_name"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>是否具有资格证：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="cert"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>从事维修时间：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="serve_time"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>联系地址：</p>
+                                             </div>
+                                             <div class="span7">
+                                                <span id="contact_address"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>联系电话：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="contact_phone"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>对自己的评价：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="desc"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row"> 
+                                            <div class="span2 offset4">
+                                                <button class=" bg-blue" onclick="pass_serviceman()">通过</button>
+                                            </div>
+                                            <div class="span2">
+                                                <button onclick="unpass_serviceman()">不通过</button>
+                                            </div>
+                                        </div>
+                                        <div class="row"></div>
+
                                     </div>
                                 </div>
-                                <!-- End 查看报修进度 -->
+                                <!-- End 审批维修资格 -->
+
+                                <!-- 管理服务评价 -->
+                                <div id="manage_comment" class="bg-grayLighter" style="display:none">
+                                    <div class="row">
+                                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;管理服务评价</h2>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>查看报修单评价</p>
+                                            </div>
+                                            <div class="span7">
+                                                <div class="input-control select">
+                                                    <select id="order_id" onchange="get_selected_comment(this.value)"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>维修人员号码：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="order_serve_id"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>居民评分：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="order_score"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>居民评价：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="order_comment"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End 管理服务评价 -->
+
+
+                                <!-- 管理维修进度 -->
+                                <div id="manage_serving_progress" class="bg-green" style="display:none">
+                                    <div class="row">
+                                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;管理维修进度</h2>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>查看报修单进度：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <div class="input-control select">
+                                                    <select id="order_id_2" onchange="get_selected_order(this.value)"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>维修单状态：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="progress_status"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>报修项目：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="progress_type"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>房屋地址：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="progress_address"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>联系人：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="progress_contact_name"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span3 offset1">
+                                                <p>联系电话：</p>
+                                            </div>
+                                            <div class="span7">
+                                                <span id="progress_contact_phone"></span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!-- End 管理维修进度 -->
+
                             </div>
 
                     </div>

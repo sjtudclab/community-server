@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.TenementApplicationMapper">
+	
+	<insert id="createServiceApplication" parameterType="TenementServiceApplication">
+		insert into tenement_service_application (serve_id,real_name,certification,serve_time,contact_address,contact_phone,description,stage) 
+			values (#{serve_id},#{real_name},#{certification},#{serve_time},#{contact_address},#{contact_phone},#{description},#{stage});
+	</insert>
+	
+	<select id="getApplicationById" parameterType="java.lang.Integer" resultMap="ResultMap">
+		select * from tenement_service_application where serve_id=#{serve_id};
+	</select>
+	
+	<select id="getAllApplicationByStage" parameterType="java.lang.String" resultMap="ResultMap">
+		select * from tenement_service_application where stage=#{stage};
+	</select>
+	
+	<update id="updateApplicationStatus" parameterType="TenementServiceApplication">
+		update tenement_service_application set stage=#{stage}
+			where serve_id = #{serve_id};
+	</update>
+	
+
+	<resultMap type="TenementServiceApplication" id="ResultMap">
+		<id property="serve_id" column="serve_id" />
+		<result property="real_name" column="real_name" />
+		<result property="certification" column="certification" />
+		<result property="serve_time" column="serve_time" />
+		<result property="contact_address" column="contact_address" />
+		<result property="contact_phone" column="contact_phone" />
+		<result property="description" column="description" />
+		<result property="stage" column="stage" />
+	</resultMap>
+	
+</mapper>

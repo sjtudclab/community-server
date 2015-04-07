@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.TenementServeFormMapper">
+	
+	<insert id="createServeForm" parameterType="TenementServeForm">
+		insert into tenement_serve_form (order_id,serve_id,serve_record,user_score,user_comment) 
+			values (#{order_id},#{serve_id},#{serve_record},#{user_score},#{user_comment});
+	</insert>
+	
+	<update id="updateUserComment" parameterType="TenementServeForm">
+		update tenement_serve_form set user_score=#{user_score}, user_comment=#{user_comment} 
+			where order_id = #{order_id};
+	</update>
+	
+	<update id="updateServingRecord" parameterType="TenementServeForm">
+		update tenement_serve_form set serve_record=#{serve_record} 
+			where order_id = #{order_id};
+	</update>
+	
+	<select id="getUserCommentByOrderId" parameterType="java.lang.String" resultMap="ResultMap">
+		select * from tenement_serve_form where order_id=#{order_id};
+	</select>
+	
+
+	<resultMap type="TenementServeForm" id="ResultMap">
+		<id property="order_id" column="order_id" />
+		<result property="serve_id" column="serve_id" />
+		<result property="serve_record" column="serve_record" />
+		<result property="user_score" column="user_score" />
+		<result property="user_comment" column="user_comment" />
+	</resultMap>
+	
+</mapper>

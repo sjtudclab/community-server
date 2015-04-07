@@ -37,4 +37,10 @@ public class TenementController {
 	public String setting() {
 		return "setting";
 	}
+	
+	// this is for test
+	@RequestMapping("repair_serving")
+	public String repairServing() {
+		return "repair_serving";
+	}
 }

@@ -8,6 +8,7 @@
     <meta name="description" content="Simple responsive css framework">
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
+    <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
     <script th:src="@{/js/chen/repair.js}"></script>
 
     <title>物业报修页面</title>
@@ -29,9 +30,9 @@
                                 <nav class="sidebar light">
                                     <ul>
                                         <li class="title">功能操作</li>
-                                        <li id="l1" class="stick bg-green"><a href="#"><i class="icon-cycle"></i>查看报修进度</a></li>
+                                        <li id="l1" class="stick bg-green" onclick="check_order()"><a href="#"><i class="icon-cycle"></i>查看报修信息</a></li>
                                         <li id="l2" class="stick bg-red"><a href="#"><i class="icon-pencil"></i>填写报修信息</a></li>
-                                        <li id="l3" class="stick bg-blue"><a href="#"><i class="icon-comments"></i>评价物业服务</a></li>
+                                        <li id="l3" class="stick bg-blue" onclick="get_finished_order()"><a href="#"><i class="icon-comments"></i>评价物业服务</a></li>
 
                                     </ul>
                                 </nav>
@@ -93,18 +94,32 @@
                                                 </div>
                                                 <div class="span7">
                                                     <div class="input-control text" data-role="input-control">
-                                                        <input type="text" value="" placeholder="联系电话"/>
+                                                        <input id="fill_form_phone" type="text" value="" placeholder="联系电话"/>
                                                         <button class="btn-clear"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="span3 offset1">
+                                                    <p>选择人员：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control select">
+                                                        <select id="fill_form_serve_id">
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 
                                                 <div class="span2 offset4">
-                                                    <button class=" bg-blue">报修</button>
+                                                    <button onclick="order_submit()" class=" bg-blue">报修</button>
                                                 </div>
                                                 <div class="span2">
-                                                    <button class="">取消</button>
+                                                    <button onclick="order_cancel()">取消</button>
                                                 </div>
                                             </div>
                                             <div class="row"></div>
@@ -114,47 +129,10 @@
                                 <!--End 填写物业报修信息 -->
 
                                 <!-- 查看报修进度 -->
-                                <div id="check_progress" class="" style="display:none">
-                                    <div class="row">
-                                        <h3>您的维修已受理，维修人员0023正在为你服务。</h3>
-                                    </div>
+                                <div id="check_progress" class="" style="display:none" >
 
-                                    <div class="row">
-                                        <span>当前阶段：维修人员0023服务中</span>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="span6 bg-blue">
-                                            <span>2015-02-15 18:15:30</span>
-                                            <span>维修订单受理</span>
-                                        </div>
-                                            
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="span6 bg-blue">
-                                            <span>2015-02-15 18:20:30</span>
-                                            <span>维修人员分派</span>
-                                        </div>
-                                            
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="span6 bg-blue">
-                                            <span>2015-02-16 08:30:10</span>
-                                            <span>维修人员服务</span>
-                                        </div>
-                                            
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="span6 bg-grayLighter">
-                                            <div style="color:#787878">
-                                            <span></span>
-                                            <span>维修已完成</span>
-                                            </div>
-                                        </div>
-                                            
+                                    <div id="order_data">
+                                        
                                     </div>
 
                                 </div>
@@ -167,26 +145,39 @@
                                         <div>
                                             <div class="row">
                                                 <div class="span3 offset1">
+                                                    <p>报修单号：</p>
+                                                </div>
+                                                <div class="span7">
+                                                    <div class="input-control select">
+                                                        <select id="comment_order_id">
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="span3 offset1">
                                                     <p>满意度：</p>
                                                 </div>
                                                 <div class="span7">
                                                     <div class="input-control radio default-style">
                                                         <label>
-                                                            <input type="radio" name="star" />
+                                                            <input type="radio" name="star" value="5" />
                                                             <span class="check"></span>
                                                             满意
                                                         </label>
                                                     </div>
                                                     <div class="input-control radio default-style">
                                                         <label>
-                                                            <input type="radio" name="star" />
+                                                            <input type="radio" name="star" value="3" />
                                                             <span class="check"></span>
                                                             一般
                                                         </label>
                                                     </div>
                                                     <div class="input-control radio default-style">
                                                         <label>
-                                                            <input type="radio" name="star" />
+                                                            <input type="radio" name="star" value="1" />
                                                             <span class="check"></span>
                                                             不满意
                                                         </label>
@@ -199,14 +190,14 @@
                                                 </div>
                                                 <div class="span7">
                                                     <div class="input-control textarea">
-                                                        <textarea></textarea>
+                                                        <textarea id="user_comment"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row">    
                                                 <div class="span2 offset4">
-                                                    <button class=" bg-blue">提交</button>
+                                                    <button class=" bg-blue" onclick="comment_order()">提交</button>
                                                 </div>
                                             </div>
                                             <div class="row"></div>
