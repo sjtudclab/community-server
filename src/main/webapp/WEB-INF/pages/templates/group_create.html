@@ -47,7 +47,8 @@
                 "name": $('#group_name').val()
             }),
             success: function() {
-                alert('群组创建成功')
+                alert('群组创建成功');
+                window.location = getUrl("resident/neighbor/group");
             }
         })
     }

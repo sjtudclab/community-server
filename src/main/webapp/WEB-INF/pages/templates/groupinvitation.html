@@ -24,7 +24,7 @@
         
         <!-- 返回主页 -->
         <div class="offset1">
-            <h1><a th:href="@{/resident/neighbor}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的好友</h1>
+            <h1><a th:href="@{/resident/neighbor}" class="back"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>邀请好友</h1>
         </div>
         <!-- End 返回主页 -->
 
@@ -39,7 +39,7 @@
             <!-- End 我的好友列表 -->
             
             <div class="action-class">
-					<button class="button large info send-invitation" id="btnVerify">认证身份</button>
+				<button class="button large info" id="send-invitation">确认邀请</button>
             </div>
             
         </div>
@@ -52,14 +52,17 @@
     var userid;
 	$(document).ready(function() {
 		userid = currentUserId();
+		var groupid = getQueryVariable('groupid');
+		var groupname = getQueryVariable('groupname');
 		$("#friendlist").html("");
+		$('a.back').attr('href', getUrl('resident/neighbor/groupchat?id={0}&name={1}'.format(groupid, groupname)));
 		$.get(getUrl("rest/friends/" + userid + "/relations"), function(data) {
 			$.each(data, function (n, value) {
 				var friend = "";
 				friend =
 				"<div class=\"tile double goods friend-item\" style='cursor:pointer'>" +
                     "<div class=\"tile-content image\">" +
-                        "<a href='#' class='forbita'><img src=\"" + getUrl('images/'+ value.image) + "\"></a>" +
+                        "<a href='#' class='forbida'><img src=\"" + getUrl('images/'+ value.image) + "\"></a>" +
                     "</div>" +
 
                     "<div class=\"brand bg-dark opacity\">" +
@@ -69,11 +72,6 @@
                 "</div>";
                 $("#friendlist").append(friend);
 			});
-		});
-		
-		$('body').on('click', '.forbida', function(event) {
-			event.preventDefault();
-			return false;
 		});
 		
 		$('body').on('click', '.friend-item', function(event) {
@@ -86,9 +84,25 @@
 			}
 		});
 		
-		$('.send-invitation').click(function(event) {
-			var ids = $('.user-id').map(function(i, m) {return m.innerText;});
-			// 拿着ids这个数组去请求吧！GoodFUCK!
+		$('#send-invitation').click(function(event) {
+			var ids = $('.friend-item.selected .user-id').map(function(i, m) {return m.innerText;});
+			var dataObj = {userIds: ids};
+			$.ajax({
+				type: "POST",
+				url: getUrl('rest/groups/{groupId}/users'),
+				data: JSON.stringify(dataObj),
+				contentType: 'application/json',
+				dataType: 'text',
+				success: function(data) {
+					console.log(data);
+					alert('邀请成功');
+					$('a.back').click();
+				},
+				error: function(data) {
+					console.log(data);
+					alert('邀请失败');
+				}
+			});
 		});
 
 		

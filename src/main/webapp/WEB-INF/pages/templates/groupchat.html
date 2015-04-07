@@ -23,9 +23,10 @@
         <!-- 返回主页 -->
         <div class="offset1">
             <h1><a th:href="@{/resident/neighbor/group}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>聊天页</h1>
-            <ul class="nav nav-pills nav-stacked" style="max-midth:260px;">
-            	<a href="#" id="chatuser">leizi</a> 群聊中
-            </ul>
+            <div class="subhead" style="max-width: 260px; padding-left: 30px; margin-bottom: 10px; overflow:auto">
+                <div><a class="button" style="float:right" id="invite-btn" th:href="@{/resident/neighbor/group/invitation}">邀友入群</a></div>
+            	<div style="line-height:2"><a href="#" id="chatuser">leizi</a><span>群聊中</span></div>
+            </div>
         </div>
         <!-- End 返回主页 -->
 
@@ -63,6 +64,9 @@
 		$("#chatinfo").text("");
 		GetMessage(groupid, 0, 5);
 		self.setInterval(function(){GetMessage(groupid, startid, 1)}, 2000);
+		
+		$('#invite-btn').attr('href', getUrl('/resident/neighbor/group/invitation?groupid=' + groupid + '&groupname= ' + groupname));
+		
 	});
 	
 	function GetRequest() {
@@ -132,6 +136,7 @@
 			sendinfo.focus();
 		});
 	});
+	
     </script>
     
 </body>
