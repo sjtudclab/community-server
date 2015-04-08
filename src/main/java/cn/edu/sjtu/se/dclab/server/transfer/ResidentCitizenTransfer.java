@@ -1,8 +1,9 @@
 package cn.edu.sjtu.se.dclab.server.transfer;
 
-import java.util.List;
+import java.util.Collection;
 
 import cn.edu.sjtu.se.dclab.server.entity.Role;
+import cn.edu.sjtu.se.dclab.server.entity.UserRole;
 
 /**
  *2015年3月30日 下午3:23:38
@@ -13,14 +14,14 @@ public class ResidentCitizenTransfer {
 	private String name;
 	private long userId;
 	private String image;
-	private List<Role> roles;
+	private Collection<Role> roles;
 	
 	public ResidentCitizenTransfer(){
 		
 	}
 	
 	public ResidentCitizenTransfer(long id, String name, long userId,
-			String image, List<Role> roles) {
+			String image, Collection<Role> roles) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -28,6 +29,7 @@ public class ResidentCitizenTransfer {
 		this.image = image;
 		this.roles = roles;
 	}
+
 
 	public long getId() {
 		return id;
@@ -54,11 +56,11 @@ public class ResidentCitizenTransfer {
 		this.image = image;
 	}
 
-	public List<Role> getRoles() {
+	public Collection<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
 

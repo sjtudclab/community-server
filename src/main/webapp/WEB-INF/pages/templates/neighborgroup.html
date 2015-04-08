@@ -24,9 +24,10 @@
         <div class="offset1">
             <h1><a th:href="@{/resident/neighbor}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的邻里群</h1>
             <ul class="nav nav-pills">
-            	<li class="active"><a href="创建群页面">创建群组</a></li>
-            	<li><a href="好友申请处理页面">邀友入群</a></li>
-            </ul>
+            	<li class="active"><a th:href="@{/resident/neighbor/group/create}">创建群组</a></li>
+<!--             	<li><a th:href="@{/resident/neighbor/group/invitation}">邀友入群</a></li>
+ -->            
+ 			</ul>
         </div>
         <!-- End 返回主页 -->
 
@@ -56,15 +57,12 @@
 			$.each(data, function (n, value) {
 				var group = "";
 				group =
-				"<div class=\"tile  goods\">" +
-
+				'<a class="tile goods group-tile" href="{0}">'.format('groupchat?id=' + value.groupId + '&name=' + value.name) +
                     "<div class=\"brand bg-dark opacity\">" +
-                    	"<a href='groupchat?id=" + value.groupId + "&name=" + value.name + "'>" +
                         "<span class=\"text\">"+ value.name +"</span>" + 
                         "<span style=\"display:none\">"+value.groupId+"</span>" +
-                         "</a>"
                     "</div>" +
-                "</div>";
+                "</a>";
                 $("#grouplist").append(group);
 			});
 		});

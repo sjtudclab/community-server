@@ -17,4 +17,6 @@ public interface ManagementCitizenService {
 	public ManagementCitizen findByUserId(long userId);
 
 	public void update(ManagementCitizen citizen);
+
+	public Collection<ManagementCitizenTransfer> findBlockLeaders();
 }

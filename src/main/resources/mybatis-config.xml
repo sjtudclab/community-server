@@ -9,6 +9,7 @@
         <typeAlias alias="User" type="cn.edu.sjtu.se.dclab.server.entity.User" />
         <typeAlias alias="UserType" type="cn.edu.sjtu.se.dclab.server.entity.UserType" />
         <typeAlias alias="MailBox" type="cn.edu.sjtu.se.dclab.server.entity.MailBox" />
+        <typeAlias alias="UserRole" type="cn.edu.sjtu.se.dclab.server.entity.UserRole" />
         <typeAlias alias="Role" type="cn.edu.sjtu.se.dclab.server.entity.Role" />
         <typeAlias alias="RoleType" type="cn.edu.sjtu.se.dclab.server.entity.RoleType" />
         <typeAlias alias="Permission" type="cn.edu.sjtu.se.dclab.server.entity.Permission" />

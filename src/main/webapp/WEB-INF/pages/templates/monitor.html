@@ -76,7 +76,7 @@
 					console.log(data);
 					 $(data).each(function(ind, el) {
 						$('#results-list').append('<tr infoid="{0}">'.format(el.informationId) +
-							'<th scope="row">{0}</th>'.format(el.informationId) + 
+							'<th scope="row">{0}</th>'.format(el.id) + 
 							'<td>{0}</td>'.format(el.content) +
 							'<td><a class="button info btn-block-item">屏蔽</a></td>' +
 						'</tr>') 

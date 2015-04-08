@@ -56,4 +56,9 @@ public class CommitteeController {
 	public String supervise() {
 		return "monitor";
 	}
+
+	@RequestMapping("setting")
+	public String setting() {
+		return "settings";
+	}
 }

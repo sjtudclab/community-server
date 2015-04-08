@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.edu.sjtu.se.dclab.server.entity.Role;
+import cn.edu.sjtu.se.dclab.server.entity.UserRole;
 import cn.edu.sjtu.se.dclab.server.mapper.RoleMapper;
 import cn.edu.sjtu.se.dclab.server.service.RoleService;
 
@@ -39,6 +40,11 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Collection<Role> getRolesByUserId(long userId) {
 		return roleMapper.findByUserId(userId);
+	}
+
+	@Override
+	public Collection<UserRole> getRoleUsersByUserId(long id) {
+		return roleMapper.findUserRoleByUserId(id);
 	}
 
 }

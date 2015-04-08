@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.service;
 
+import java.util.Collection;
+
 import cn.edu.sjtu.se.dclab.server.entity.UserGroup;
 
 /**
@@ -9,5 +11,7 @@ import cn.edu.sjtu.se.dclab.server.entity.UserGroup;
 public interface UserGroupService {
 
 	public void create(UserGroup userGroup);
+
+	public void createGroups(Collection<UserGroup> groups);
 
 }

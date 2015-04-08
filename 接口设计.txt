@@ -1,0 +1,65 @@
+
+1、我的好友
+	1）获取所有居民  
+	GET  
+	buildings/
+	buildings/{id}/apartments  
+	apartments/{id}/citizen
+
+	2）获取所有好友
+	GET friends/{userId}/relations             [{"friendId":1,"name":"test","image":""}]
+	GET friends/{userId}/relations/{toId}
+
+	3）添加好友申请
+	POST friends/{userId}/applications/{friendId}  {"message":""}
+
+	4）好友聊天(发消息)
+	POST friends/{userId}/users/{friendId}/messages {"message":""}
+
+	5）好友聊天(收消息)
+	GET friends/{userId}/users/{friendId}/messages/{startId}/counts/{count}  
+	[{"messageId":1,"content":"","submitTime":""},{}]
+	startId=0表示最近的消息
+
+	6）获取好友申请
+	GET friends/{userId}/applications         [{"userId":"name":"","image":"","message":""}]
+
+	7）确认好友申请
+	PUT friends/{userId}/applications/{applicationId}
+
+2、邻里圈
+	1）创建邻里圈
+	POST groups/     ｛"userId":1,"name":"test"｝
+
+	2）加入邻里圈
+	POST groups/{groupId}/users/{userId}
+
+	3）邻里圈聊天(发消息)
+	POST groups/{groupId}/users/{userId}/messages
+
+	4）邻里圈聊天(收消息)
+	GET groups/{groupId}/users/{userId}/messages/{startId}/counts/{count}
+
+	5）获取我的邻里圈
+	GET groups/0/users/{userId}    [{"groupId":1,"name":""},{}]
+
+3、我的圈子
+	1）关注
+	POST circles/{userId}/users/{attentionId}
+
+	2）获取我关注的人
+	GET circles/{userId}/users  [{"userId","name":"","image",""},{}]
+
+	3）获取关注我的人
+	GET circles/{userId}/users/0
+
+	4）查看圈子动态（收信息）
+	GET circles/{userId}/messages/{startId}/counts/{count}
+
+	5）在圈子发动态（发信息）
+	POST circles/{userId}/messages  {"message":""}
+
+4、设置
+	1）更新用户信息
+	GET users/{userId}/citizen   
+	PUT users/{userId}/citizen       {""}

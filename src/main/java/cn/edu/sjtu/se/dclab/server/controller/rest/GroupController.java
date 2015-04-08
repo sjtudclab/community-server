@@ -105,15 +105,20 @@ public class GroupController {
 		return Result.SUCCESS;
 	}
 
-	@RequestMapping(value = "/{groupId}/users/{userId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{groupId}/users", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String addIntoGroup(@PathVariable long groupId,
-			@PathVariable long userId) {
-		UserGroup userGroup = new UserGroup();
-		userGroup.setGroupId(groupId);
-		userGroup.setUserId(userId);
+	public String addIntoGroup(@PathVariable long groupId, @RequestBody String str) {
+		Map<String,Object> map = DataUtil.getFromJson(str);
+		Collection<Integer> userIds = (Collection<Integer>)map.get("userIds");
+		Collection<UserGroup> groups = new ArrayList<UserGroup>();
+		for(int userId : userIds){
+			UserGroup userGroup = new UserGroup();
+			userGroup.setGroupId(groupId);
+			userGroup.setUserId(userId);
+			groups.add(userGroup);
+		}
 
-		userGroupService.create(userGroup);
+		userGroupService.createGroups(groups);
 		return Result.SUCCESS;
 	}
 

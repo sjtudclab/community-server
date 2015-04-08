@@ -3,7 +3,6 @@ package cn.edu.sjtu.se.dclab.server.util;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Information;
 import cn.edu.sjtu.se.dclab.server.entity.ManagementCitizen;
 import cn.edu.sjtu.se.dclab.server.entity.ResidentCitizen;

@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.edu.sjtu.se.dclab.server.entity.UserGroup;
 
 /**
@@ -9,5 +11,7 @@ import cn.edu.sjtu.se.dclab.server.entity.UserGroup;
 public interface UserGroupMapper {
 
 	public void save(UserGroup userGroup);
+	
+	public boolean userIsInGroup(@Param("userId") long userId, @Param("groupId") long groupId);
 	
 }

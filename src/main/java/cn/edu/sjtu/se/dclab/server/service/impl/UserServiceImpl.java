@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import cn.edu.sjtu.se.dclab.server.entity.Permission;
 import cn.edu.sjtu.se.dclab.server.entity.Role;
 import cn.edu.sjtu.se.dclab.server.entity.User;
+import cn.edu.sjtu.se.dclab.server.entity.UserRole;
 import cn.edu.sjtu.se.dclab.server.mapper.PermissionMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.RoleMapper;
 import cn.edu.sjtu.se.dclab.server.mapper.UserMapper;
@@ -65,12 +66,11 @@ public class UserServiceImpl implements UserService {
 		User user = userMapper.findByUserName(username);
 		if (user == null)
 			return null;
-		Collection<Role> roles = roleMapper.findByUserId(user.getId());
 
 		UserTransfer userTransfer = new UserTransfer();
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
-		userTransfer.setRoles(roles);
+		userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
 
 		return userTransfer;
 	}
@@ -89,12 +89,11 @@ public class UserServiceImpl implements UserService {
 		User user = userMapper.findByCardInfo(cardType, cardNumber, tableName);
 		if (user == null)
 			return null;
-		Collection<Role> roles = roleMapper.findByUserId(user.getId());
-
+		
 		UserTransfer userTransfer = new UserTransfer();
 		userTransfer.setId(user.getId());
 		userTransfer.setUsername(user.getUsername());
-		userTransfer.setRoles(roles);
+		userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
 
 		return userTransfer;
 	}
@@ -171,12 +170,11 @@ public class UserServiceImpl implements UserService {
 		if (user == null)
 			return null;
 		if (user.getPassword().equals(password)) {
-			Collection<Role> roles = roleMapper.findByUserId(user.getId());
 
 			UserTransfer userTransfer = new UserTransfer();
 			userTransfer.setId(user.getId());
 			userTransfer.setUsername(user.getUsername());
-			userTransfer.setRoles(roles);
+			userTransfer.setRoles(roleMapper.findByUserId(user.getId()));
 
 			return userTransfer;
 		} else {
