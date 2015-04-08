@@ -19,7 +19,7 @@
     </h1>
 
 	<form role="form" method="post" th:action="@{/rest/information}" id="submitForm"
-		  enctype="multipart/form-data">
+		  enctype="multipart/form-data" id="submitForm">
 		<div class="grid">
 			<div class="row">
 				<div class="span7">
@@ -30,6 +30,7 @@
 					<div>
 						正文：<textarea id="content" name="content" rows="10" cols="100"></textarea>
 					</div>
+					<input name="redirect_url" type="hidden" value="/committee/activity" />
 					<input name="from" type="hidden" id="from" />
 					<input name="infotype" value="2" type="hidden" />
 					<br/>照片或视频：<br/>
@@ -50,8 +51,7 @@
 
 	$('#submitForm').submit(function() {
 		alert('提交成功');
-		window.location = getUrl('committee/activity');
-		return false;
+		return true;
 	});
 </script>
 

@@ -214,8 +214,31 @@
 		
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>lab</id>
+			<properties>
+				<build.profile.id>lab</build.profile.id>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<build.profile.id>prod</build.profile.id>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>community-server</finalName>
+
+		<filters>
+			<filter>profiles/${build.profile.id}/config.properties</filter>
+		</filters>
 
 		<resources>
 			<resource>
@@ -225,6 +248,7 @@
 				</excludes>
 			</resource>
 			<resource>
+				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources</directory>
 			</resource>
 		</resources>
