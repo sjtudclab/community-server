@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import cn.edu.sjtu.se.dclab.server.transfer.MailBoxSaveTransfer;
 import cn.edu.sjtu.se.dclab.server.util.MailBoxStatus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.MailBox;
 import cn.edu.sjtu.se.dclab.server.service.MailBoxService;
 import cn.edu.sjtu.se.dclab.server.transfer.MailBoxTransfer;
@@ -23,7 +25,7 @@ import cn.edu.sjtu.se.dclab.server.transfer.MailBoxTransfer;
  * @author changyi yuan
  */
 @Controller
-@RequestMapping("/mailboxs")
+@RequestMapping(value = Constants.REST + "/mailboxs")
 public class MailBoxController {
 	@Autowired
 	private MailBoxService mailBoxService;

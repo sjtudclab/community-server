@@ -97,7 +97,7 @@
 
 		$('body').on('click', '.btn-block-item', function(e) {
 			var $this = $(this);
-			var id = $this.parents('tr').attr('infoid');
+			var id = $this.parent().parent().children()[0].innerHTML;
 			$.ajax({
 				url: getUrl('/rest/information/block/' + id),
 				type: "GET",

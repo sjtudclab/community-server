@@ -16,7 +16,7 @@ public interface UserMapper {
     public Collection<User> findAll();
 	public Collection<User> findUserByApartmentId(long id);
     
-	public void deleteUserRole(long userId);
+	public void deleteUserRole(@Param("userId") long userId);
 	public void insertUserRole(@Param("userId") long userId,@Param("roleId") long roleId);
 	
     public User findByCardInfo(@Param("cardType") String cardType, @Param("cardNumber") String cardNumber,@Param("tableName") String tableName);

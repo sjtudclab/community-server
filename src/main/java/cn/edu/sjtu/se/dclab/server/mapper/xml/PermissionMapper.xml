@@ -5,8 +5,8 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.PermissionMapper">
 	
 	<select id="findPermissionsByUserId" resultMap="permissionResultMap">
-		select p.permission_id, p.name, p.description from user_role ur, user_role_permission urp,permission p
-				where p.permission_id = urp.permission_id and urp.user_role_id = ur.user_role_id and ur.user_id = #{userId};
+		select p.permission_id, p.name, p.description from user_role ur, role_permission rp,permission p
+				where p.permission_id = rp.permission_id and rp.role_id = ur.role_id and ur.user_id = #{userId};
 	</select>
 
 	<resultMap id="permissionResultMap" type="Permission">

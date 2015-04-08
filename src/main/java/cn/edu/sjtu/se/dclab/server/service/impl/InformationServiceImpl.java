@@ -226,17 +226,20 @@ public class InformationServiceImpl implements InformationService {
 
 			Collection<UserRelation> followers = userRelationMapper
 					.findByFromIdAndType(fromId, Constants.RELATION_CIRCLE);
+/*
 			Collection<UserRelation> followeds = userRelationMapper
 					.findByToIdAndType(fromId, Constants.RELATION_CIRCLE);
-
+*/
+			circles.add(fromId);
+			
 			for (UserRelation relation : followers) {
-				circles.add(relation.getFollowerId());
+				//circles.add(relation.getFollowerId());
 				circles.add(relation.getFollowedId());
 			}
-			for (UserRelation relation : followeds) {
+			/*for (UserRelation relation : followeds) {
 				circles.add(relation.getFollowerId());
 				circles.add(relation.getFollowedId());
-			}
+			}*/
 
 			for (long userId : circles) {
 				Collection<Information> infos = informationMapper

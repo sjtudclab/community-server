@@ -25,35 +25,39 @@
     </insert>
     
     <select id="blockById" parameterType="java.lang.Integer" resultMap="InformationMap">
-    	UPDATE information SET status = -1 WHERE id = #{id};
+    	UPDATE information SET status = -1 WHERE information_id = #{id};
     </select>
     
     <select id="findByFromIdAndType" resultMap="InformationMap">
     	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
     	info.title, info.information_type, info.attachment
     	FROM information info, information_type infoType
-    	WHERE info.from = #{fromId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
+    	WHERE info.from = #{fromId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type} 
+    	AND (status IS NULL OR status >= 0);
     </select>
     
     <select id="findByToIdAndType" resultMap="InformationMap">
     	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
     	info.title, info.information_type, info.attachment
     	FROM information info, information_type infoType
-    	WHERE info.to = #{toId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
+    	WHERE info.to = #{toId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type} 
+    	AND (status IS NULL OR status >= 0);
     </select>
     
     <select id="findByFromIdAndToIdAndType" resultMap="InformationMap">
     	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
     	info.title, info.information_type, info.attachment
     	FROM information info, information_type infoType
-    	WHERE info.from = #{fromId} AND info.to = #{toId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
+    	WHERE info.from = #{fromId} AND info.to = #{toId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type}
+    	AND (status IS NULL OR status >= 0);
     </select>
     
     <select id="findByIdAndType" resultMap="InformationMap">
     	SELECT info.information_id, info.from, info.to, info.status, info.submit_time, info.content,
     	info.title, info.information_type, info.attachment
     	FROM information info, information_type infoType
-    	WHERE info.information_id = #{informationId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type};
+    	WHERE info.information_id = #{informationId} AND info.information_type = infoType.information_type_id AND infoType.type = #{type}
+    	AND (status IS NULL OR status >= 0);
     </select>
     
     <select id="findByType" resultMap="InformationTypeMap">
@@ -62,7 +66,7 @@
     
     <update id="update" parameterType="Information">
     	UPDATE information SET `from` = #{from}, `to` = #{to}, status = #{status}, content = #{content}, title = #{title} 
-    	WHERE information_id = #{id};
+    	WHERE information_id = #{id} AND (status IS NULL OR status >= 0);
     </update>
     
     <resultMap type="Information" id="InformationMap">

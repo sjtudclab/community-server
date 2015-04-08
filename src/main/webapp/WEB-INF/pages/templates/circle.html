@@ -119,15 +119,15 @@
 				url: getUrl('rest/circles/{0}/messages'.format(currentUserId())),
 				contentType: 'application/json',
 				data: JSON.stringify(data),
-				dataType: 'text',
+				dataType: 'json',
 				success: function(data) {
-					if (data == "success") {
-						alert("Success!");
+					//if (data == "success") {
+						alert("发送成功!");
 						refreshList();
-						$("#post-content").val('');
+					/* 	$("#post-content").val('');
 					} else {
 						alert("发送失败！")
-					}
+					} */
 				},
 				error: function(data) {
 					console.log(data);
