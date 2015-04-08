@@ -61,8 +61,8 @@
 		groupname = Request['name'];
 		$("#chatuser").text(groupname);
 		$("#chatinfo").text("");
-		GetMessage(groupid, 0, 5);
-		self.setInterval(function(){GetMessage(groupid, startid, 1)}, 2000);
+		GetMessage(groupid, 0, 100);
+		self.setInterval(function(){GetMessage(groupid, startid, 100)}, 4000);
 	});
 	
 	function GetRequest() {

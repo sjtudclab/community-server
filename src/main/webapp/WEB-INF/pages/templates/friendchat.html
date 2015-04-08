@@ -61,8 +61,8 @@
 		sendtoname = Request['name'];
 		$("#chatuser").text(sendtoname);
 		$("#chatinfo").text("");
-		GetMessage(sendtoid, 0, 5);
-		self.setInterval(function(){GetMessage(sendtoid, startid, 1)}, 2000);
+		GetMessage(sendtoid, 0, 100);
+		self.setInterval(function(){GetMessage(sendtoid, startid, 10)}, 4000);
 	});
 	
 	function GetRequest() {
