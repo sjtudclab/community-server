@@ -19,7 +19,7 @@
     <div class="container">
                 <div class="offset1">
                     <h1>
-                        <a href="start-screen-tenement.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                        <a th:href="@{/start-screen-committee}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
                         物业管理
                     </h1>
                 </div>
@@ -31,9 +31,9 @@
                                     <ul>
                                         <li class="title">功能操作</li>
                                         <li id="l1" class="stick bg-green" onclick="show_all_serve_id()"><a href="#"><i class="icon-star"></i>审批维修资格</a></li>
-                                        <li id="l2" class="stick bg-red" onclick="get_serviceman_info()"><a href="#"><i class="icon-user"></i>管理维修人员</a></li>
-                                        <li id="l3" class="stick bg-blue" onclick="get_comment_order_id()"><a href="#"><i class="icon-bookmark-2"></i>管理服务评价</a></li>
-                                        <li id="l4" class="stick bg-yellow" onclick="get_all_order_id()"><a href="#"><i class="icon-cycle"></i>管理维修进度</a></li>
+                                        <li id="l2" class="stick bg-red" onclick="show_serviceman_info()"><a href="#"><i class="icon-user"></i>管理维修人员</a></li>
+                                        <li id="l3" class="stick bg-blue" onclick="show_comment_order_id()"><a href="#"><i class="icon-bookmark-2"></i>管理服务评价</a></li>
+                                        <li id="l4" class="stick bg-yellow" onclick="show_all_order_id()"><a href="#"><i class="icon-cycle"></i>管理维修进度</a></li>
 
                                     </ul>
                                 </nav>
@@ -169,7 +169,7 @@
                                             </div>
                                             <div class="span7">
                                                 <div class="input-control select">
-                                                    <select id="order_id" onchange="get_selected_comment(this.value)"></select>
+                                                    <select id="order_id" onchange="show_selected_comment(this.value)"></select>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@
                                             </div>
                                             <div class="span7">
                                                 <div class="input-control select">
-                                                    <select id="order_id_2" onchange="get_selected_order(this.value)"></select>
+                                                    <select id="order_id_2" onchange="show_selected_order(this.value)"></select>
                                                 </div>
                                             </div>
                                         </div>
@@ -379,77 +379,49 @@ function unpass_serviceman_result(){
 			//alert("完成对"+$serve_id+"的审核");
 	});
 
-};// to continue
-
-function get_comment_order_id(){
-	$.ajax({
-		url:getUrl("rest/tenement/all/order/commented"),
-		type:"get",
-		dataType:"json",
-		success:function(obj){
-			$("#order_id").empty();
-			$("#order_id").append("<option>请选择</option>");
-			$.each(obj, function (n, value) {
-				$("#order_id").append("<option>" + value.order_id + "</option>");
-			});
-		}
-	});
-	return;
 };
 
-function get_selected_comment(order_id){
-	//alert(order_id);
-	$.ajax({
-		url:getUrl("rest/tenement/order/comment/"+order_id),
-		type:"get",
-		dataType:"json",
-		success:function(obj){
-			$("#order_serve_id").html(obj.serve_id);
-			$("#order_score").html(obj.user_score);
-			$("#order_comment").html(obj.user_comment);
-		}
+function show_comment_order_id(){
+	get_comment_order_id(function(obj) {
+		$("#order_id").empty();
+		$("#order_id").append("<option>请选择</option>");
+		$.each(obj, function (n, value) {
+			$("#order_id").append("<option>" + value.order_id + "</option>");
+		});
 	});
-	return;
 };
 
-function get_all_order_id(){
-	$.ajax({
-		url:getUrl("rest/tenement/all/order"),
-		type:"get",
-		dataType:"json",
-		success:function(obj){
+function show_selected_comment(order_id){
+	get_selected_comment(order_id, function(obj) {
+		$("#order_serve_id").html(obj.serve_id);
+		$("#order_score").html(obj.user_score);
+		$("#order_comment").html(obj.user_comment);
+	});
+
+};
+
+function show_all_order_id(){
+	get_all_order_id(function(obj) {
 			$("#order_id_2").empty();
 			$("#order_id_2").append("<option>请选择</option>");
 			$.each(obj, function (n, value) {
 				$("#order_id_2").append("<option>" + value.order_id + "</option>");
 			});
-		}
 	});
-	return;
 };
 
-function get_selected_order(order_id){
-	$.ajax({
-		url:getUrl("rest/tenement/one/order/"+order_id),
-		type:"get",
-		dataType:"json",
-		success:function(obj){
+function show_selected_order(order_id){
+	get_selected_order(order_id, function(obj) {
 			$("#progress_status").html(obj.stage);
 			$("#progress_type").html(obj.order_name);
 			$("#progress_address").html(obj.order_address);
 			$("#progress_contact_name").html(obj.contact_name);
 			$("#progress_contact_phone").html(obj.contact_phone);
-		}
 	});
-	return;
 };
 
-function get_serviceman_info(){
-	$.ajax({
-		url:getUrl("rest/tenement/manage/serviceman/all"),
-		type:"get",
-		dataType:"json",
-		success:function(obj){
+function show_serviceman_info(){
+	get_serviceman_info(function(obj) {
 			$("#serviceman_data").empty();
 
 			var serviceman_data = "";
@@ -476,12 +448,9 @@ function get_serviceman_info(){
 				serviceman_data += person;
 			});
 
-
 			serviceman_data += "</tbody></table>";
 			$("#serviceman_data").append(serviceman_data);
-		}
 	});
-	return;
 };
 </script>
     
