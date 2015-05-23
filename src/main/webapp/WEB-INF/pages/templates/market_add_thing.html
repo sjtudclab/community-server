@@ -14,7 +14,7 @@
 <script type="text/javascript" language="javascript">
 	function submitYouFrom(){
 		document.getElementById('id_post_form').submit();
-		alert("submit success:");
+		alert("发布物品成功");
 		//location.href = "market.html";
 		
 	}
@@ -34,7 +34,7 @@
                     <div class="second__add_cont_main">
                         <div class="">
                             <h1>
-                            <a href="market.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                            <a th:href="@{/resident/market}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
                             填写物品信息
                             </h1>
                         </div>
@@ -55,11 +55,11 @@
                                             <td width="18%">类型</td>
                                             <td class="space" id="deal_type">
                                                 <label for="id_deal_type_0" style="display:inherit;"> 
-                                                    <input id="id_deal_type_0" name="dealType" value="1"autocomplete="off" type="radio" checked="checked"> 
+                                                    <input id="id_deal_type_0" name="dealType" value="转让"autocomplete="off" type="radio" checked="checked"> 
                                                     <span>转让&nbsp;&nbsp;</span>
                                                 </label> 
                                                 <label for="id_deal_type_3" style="display:inherit;"> 
-                                                    <input id="id_deal_type_3" name="dealType" value="4"autocomplete="off" type="radio"> 
+                                                    <input id="id_deal_type_3" name="dealType" value="免费赠送"autocomplete="off" type="radio"> 
                                                     <span>免费赠送&nbsp;&nbsp;</span> 
                                                 </label> 
                                                 <span id="tip_span_deal_type"></span>
@@ -77,7 +77,7 @@
                                                 <span id="titleErr" class="validatorMsg validatorError"
                                                 style="display:none;">6-30字，简单说说要卖什么。</span> 
                                                 <span id="titleRig" class="validatorRight"></span> 
-                                                <span id="titleNull" class="validatorNull validatorError">忘记填写标题了哦</span>
+                                                <span id="titleNull" class="validatorNull validatorError"></span>
                                             </td>
                                         </tr>
                                         
@@ -92,7 +92,7 @@
                                                     <span id="tip_span_description" style="display:none;">10-2000字，介绍一下具体情况</span> 
                                                     <span id="descriptionErr"class="validatorMsg validatorError" style="display:none;">10-2000字，介绍一下具体情况</span>
                                                     <span id="describeRig" class="validatorRight"></span>
-                                                    <span id="describeNull" class="validatorNull validatorError">忘记填写描述啦！</span>
+                                                    <span id="describeNull" class="validatorNull validatorError"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -103,24 +103,24 @@
                                                 <div class="input-control select span4">
                                                     <select name="type1" autocomplete="off" id="id_type">
                                                     <option value="">请选择</option>
-                                                        <option value="1">家具</option>
-                                                        <option value="2">家用电器</option>
-                                                        <option value="3">家居百货</option>
-                                                        <option value="4">设备/办公用品</option>
-                                                        <option value="5">母婴/儿童用品</option>
-                                                        <option value="6">老年用品</option>
-                                                        <option value="7">服饰/箱包</option>
-                                                        <option value="8">美容护肤/化妆品</option>
-                                                        <option value="9">图书/音乐/运动</option>
-                                                        <option value="11">食品/保健品</option>
-                                                        <option value="12">闲置礼品</option>
-                                                        <option value="13">二手手机</option>
-                                                        <option value="14">二手笔记本</option>
-                                                        <option value="15">台式电脑/网络</option>
-                                                        <option value="16">电子数码</option>
-                                                        <option value="17">虚拟物品</option>
-                                                        <option value="216">出行车辆</option>
-                                                        <option value="18">其他物品</option>
+                                                        <option value="家具">家具</option>
+                                                        <option value="家用电器">家用电器</option>
+                                                        <option value="家居百货">家居百货</option>
+                                                        <option value="设备或办公用品">设备/办公用品</option>
+                                                        <option value="母婴或儿童用品">母婴/儿童用品</option>
+                                                        <option value="老年用品">老年用品</option>
+                                                        <option value="服饰或箱包">服饰/箱包</option>
+                                                        <option value="美容护肤或化妆品">美容护肤/化妆品</option>
+                                                        <option value="图书或音乐或运动">图书/音乐/运动</option>
+                                                        <option value="食品或保健品">食品/保健品</option>
+                                                        <option value="闲置礼品">闲置礼品</option>
+                                                        <option value="二手手机">二手手机</option>
+                                                        <option value="二手笔记本">二手笔记本</option>
+                                                        <option value="台式电脑或网络用品">台式电脑/网络</option>
+                                                        <option value="电子数码">电子数码</option>
+                                                        <option value="虚拟物品">虚拟物品</option>
+                                                        <option value="出行车辆">出行车辆</option>
+                                                        <option value="其他物品">其他物品</option>
                                                     </select>
                                                 </div> 
                                                  <span id="categoryNull" class="validatorMsg validatorError"style="display:none;">忘记选择分类啦</span>
@@ -152,7 +152,7 @@
                                                 <span id="tip_span_phone"></span> 
                                                 <span id="phoneErr" class="validatorMsg validatorError"style="display:none;">电话格式不对哦</span> 
                                                     <span id="phoneRig"class="validatorRight"></span> 
-                                                    <span id="phoneNull"class="validatorNull validatorError">忘记填写联系电话啦！</span> 
+                                                    <span id="phoneNull"class="validatorNull validatorError"></span> 
                                                 </span>
                                             </td>
                                         </tr>
@@ -166,7 +166,7 @@
                                                  <span id="tip_span_person"></span> 
                                                  <span id="personErr"class="validatorMsg validatorError" style="display:none;">2-6个字母或汉字</span>
                                                  <span id="personRig" class="validatorRight"></span> 
-                                                 <span id="personNull" class="validatorNull validatorError">忘记填写联系人啦！</span>
+                                                 <span id="personNull" class="validatorNull validatorError"></span>
                                             </td>
                                         </tr>
                                         <tr>

@@ -9,8 +9,7 @@
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
     <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
-    <script th:src="@{/js/chen/goodsInfo.js}"></script>
-    <script th:src="@{/js/chen/clickLove.js}"></script>
+    <script th:src="@{/js/chen/market_resident.js}"></script>
 
     <title>物品详细信息</title>
 </head>
@@ -25,7 +24,7 @@
                     <div>
                         <div class="row">
                             <h1>
-                            <a href="market.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                            <a th:href="@{/resident/market}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
                             <span id="title"></span>
                             </h1>
                         </div>
@@ -67,47 +66,61 @@
     </div>
 
     <div th:include="market_template :: copy"></div>
-</body>
-
+    
 <script type="text/javascript">
-/*
-    $(document).ready(function(){
-    //alert("Goods Info Page");
+$(document).ready(function(){
 
-    $.extend({
-      getUrlVars: function(){
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++)
-        {
-          hash = hashes[i].split('=');
-          vars.push(hash[0]);
-          vars[hash[0]] = hash[1];
-        }
-        return vars;
-      },
-      getUrlVar: function(name){
-        return $.getUrlVars()[name];
-      }
-    });
+	$.extend({
+		  getUrlVars: function(){
+		    var vars = [], hash;
+		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		    for(var i = 0; i < hashes.length; i++)
+		    {
+		      hash = hashes[i].split('=');
+		      vars.push(hash[0]);
+		      vars[hash[0]] = hash[1];
+		    }
+		    return vars;
+		  },
+		  getUrlVar: function(name){
+		    return $.getUrlVars()[name];
+		  }
+	});
+	
+	// Getting URL var by its nam
+	$goodsID = $.getUrlVar('id');
+	//alert("通过URL获取参数:" + $goodsID);
+	$user_id = 1;
+	
+	get_thing_data($goodsID, function(obj){
+		
+			$("#goods_id").html($goodsID);
+			$("#user_id").html($user_id);         // 用户 ID
 
-    $goodsID = $.getUrlVar('id');
+			$("#imagePath").attr("src", obj.imagePath);
+			//$("#imagePath").attr("src", "images/11.jpg");
+			$("#title").html(decodeURI(obj.title));
+			$("#type").html(decodeURI(obj.type));
+			$("#category").html(decodeURI(obj.category));
+			$("#desc").html(decodeURI(obj.desc));
+			$("#owner").html(decodeURI(obj.owner));
+			$("#phone").html(decodeURI(obj.phone));
+	});
+	
+	$("body").on("click", "#love_thing", function(){
+		
+		$("#love_thing").removeClass("primary");
+		$("#love_thing").text("已关注");
+		$("#love_thing").attr("disabled", true);
+		
+		alert("用户:"+$("#user_id").text()+" 已关注物品:"+$("#goods_id").text());
+		
+		send_click_love_data($("#user_id").text(),$("#goods_id").text());
 
-    $.ajax({
-        url:"",
-        type:"get",
-        dataType:"json",
-        data:{},
-        success:function(obj){
-
-        },
-        error:function(){
-            
-        }
-    });
+	});
 
 });
-*/
 </script>
-
+    
+</body>
 </html>

@@ -9,7 +9,7 @@
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
     <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
-    <script th:src="@{/js/chen/search_goods.js}"></script>
+    <script th:src="@{/js/chen/market_resident.js}"></script>
 
     <title>搜索物品</title>
 </head>
@@ -30,7 +30,7 @@
 
 	            <div class="span6">
 	            	<h1>
-	            	<a href="market.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+	            	<a th:href="@{/resident/market}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
 	            	<span>搜索物品</span>
 	            	</h1>
 
@@ -39,7 +39,7 @@
 				</br>
 
                 <div class="input-control text span5">
-            		<input id="search_input" type="text" placeholder="请输入搜索关键词"/>
+            		<input id="search_input" type="text" onkeydown="enter_press()" placeholder="请输入搜索关键词"/>
             		<button id="search_button" class="btn-search" onclick="search_goods()"></button>
             	</div>
             	
@@ -59,5 +59,61 @@
     </div>
 
     <div th:include="market_template :: copy"></div>
+    
+<script type="text/javascript">
+$(document).ready(function(){
+	// 查看物品详细信息
+	$("body").on("click", ".goods", function(){
+		$goodsID = $(this).find("div").eq(1).find("span").eq(1).text();
+		//alert("id:"+$goodsID);
+		check_market_thing($goodsID);
+	});
+	
+});
+
+function search_goods(){
+	
+	alert("开始搜索物品");
+	var content = $("#search_input")[0].value;
+	
+	get_search_data(content, function(obj){
+			$("#search_goods").empty();
+			
+			var goodsList = "";
+			if (obj.length > 0) {
+				$.each(obj, function (n, value) {
+					//alert(n +" "+ value.title);
+					var goods = "";
+					goods +=
+					"<div class=\"tile double goods\">" +                // class goods用于查看物品的详细信息
+	                    "<div class=\"tile-content image\">" +
+	                        "<img src=\""+value.imagePath+"\">" +
+	                    "</div>" +
+
+	                    "<div class=\"brand bg-dark opacity\">" +
+	                        "<span class=\"text\">"+decodeURI(value.title)+"</span>" + 
+	                        "<span style=\"display:none\">"+value.id+"</span>" +
+	                    "</div>" +
+	                "</div>";
+
+	                goodsList += goods;
+				});
+			}
+			else{
+				goodsList = "<h2>暂时未搜索到物品信息</h2>";
+			}
+
+			$("#search_goods").append(goodsList);
+	});
+};
+
+function enter_press(){
+	if(event.keyCode == 13){
+		search_goods();
+	}
+};
+
+</script>
+
 </body>
 </html>
