@@ -147,7 +147,7 @@
 
       function getData()
       {
-        $.ajax(
+        /* $.ajax(
         {
           url: "/community-server/rest/apartment",
           dataType: "JSON",
@@ -156,7 +156,9 @@
             addToArray(data, "apartment_detail");
           }
         }
-        )
+        ) */
+        var data = get_apartment("");
+    	addToArray(data, "apartment_detail");
       }
 
     })

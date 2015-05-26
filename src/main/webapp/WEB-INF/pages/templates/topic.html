@@ -31,9 +31,12 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/dongjunyi.js}"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $.ajax({
+
+	
+ /*    $(document).ready(function(){
+         $.ajax({
             type: "GET",
             url: getUrl('rest/topic?type=1'),
             dataType: "json",
@@ -71,8 +74,10 @@
             error: function(data) {
                 console.log(data);
             }
-        });//ajax
-    });
+        });//ajax  
+    }); */
+    get_all_topic();
+    
 </script>
 
 </body>

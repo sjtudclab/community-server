@@ -43,6 +43,7 @@
       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
    <script th:src="@{/scripts/modernizr-2.6.1.min.js}"></script>
    <script th:src="@{/scripts/jquery-1.7.2.min.js}"></script>
+   <script th:src="@{/js/dongjunyi.js}"></script>
    <link rel="stylesheet" href="http://dreamsky.github.io/main/blog/common/init.css">
    <style>
       body {
@@ -94,14 +95,20 @@
 	
 	function showBlock(manager_name)
 	{
-		$.ajax(
+		/* $.ajax(
 		{
 			url : "rest/buildings",
 			dataType : "JSON",
 			type : "GET",
 			success : function(data){
             	block = data;
-				for(var i=0;i<block.length;i++)
+				
+			}
+		}
+		) */
+		
+		block = get_buildings("");
+		for(var i=0;i<block.length;i++)
 				{
 					if (i == 0)
 					{
@@ -111,56 +118,55 @@
 					else
 						document.all.showBlock.innerHTML += "<option value=\""+block[i].id+"\">"+block[i].name+"</option>";
 				}
-			}
-		}
-		)
 	}
 
 	function showRoom() 
 	{
       block_id = document.all.showBlock.value;
-		$.ajax(
+		/* $.ajax(
 		{
 			url : "rest/buildings/" + block_id.toString() + "/apartments",
 			dataType : "JSON",
 			type : "GET",
 			success : function(data){
 				all_room = data;
-				var allhtm = "<h2><font color=\"white\">房屋选择</font></h2>"; 
-				for(var i=0;i<all_room.length;i++)
-				{
-					if (i % 7 == 0)
-						allhtm += "<a class=\"tile square text tilesquareblock\"";
-					else if (i % 7 == 1)	
-						allhtm += "<a class=\"tile square text tilesquareblock bg-color-orange\"";
-					else if (i % 7 == 2)
-						allhtm += "<a class=\"tile square text tilesquareblock bg-color-greenDark\"";
-					else if (i % 7 == 3)
-						allhtm += "<a class=\"tile square text tilesquareblock bg-color-purple\"";
-					else if (i % 7 == 4)
-						allhtm += "<a class=\"tile square text tilesquareblock bg-color-red\"";
-					else if (i % 7 == 5)
-						allhtm += "<a class=\"tile square text tilesquareblock bg-color-yellow\"";
-					else if (i % 7 == 6)
-						allhtm += "<a class=\"tile square text tilesquareblock bg-color-blueDark\"";		
-					allhtm += "href=\"detail.html?id=" + all_room[i].id.toString()
-                      +  "&floor=" + encodeURI(encodeURI(all_room[i].floor))
-                      +  "&location=" + encodeURI(encodeURI(all_room[i].location))
-                      +  "&resident=" + encodeURI(encodeURI(all_room[i].resident))
-                      +  "&serialNumber=" + all_room[i].serialNumber
-                      +  "&owner=" + all_room[i].owner.toString()
-                      +  "\">";	 
-					allhtm += "<div class=\"text-big\">"+ (parseInt(all_room[i].serialNumber)%1000).toString() +"</div>";
-               		allhtm += "<div class=\"text\">"+all_room[i].floor+"</div>";
-               		allhtm += "</a>";
-				}
-				if (all_room.length>0)
-					document.all.section1.innerHTML = allhtm;
-				else
-					document.all.section1.innerHTML = "<h2><font color=\"white\">无数据</font></h2>"; 
 			}
 		}
-		)			
+		)	 */
+		all_room = get_buildings(block_id.toString() + "/apartments");
+		var allhtm = "<h2><font color=\"white\">房屋选择</font></h2>"; 
+		for(var i=0;i<all_room.length;i++)
+		{
+			if (i % 7 == 0)
+				allhtm += "<a class=\"tile square text tilesquareblock\"";
+			else if (i % 7 == 1)	
+				allhtm += "<a class=\"tile square text tilesquareblock bg-color-orange\"";
+			else if (i % 7 == 2)
+				allhtm += "<a class=\"tile square text tilesquareblock bg-color-greenDark\"";
+			else if (i % 7 == 3)
+				allhtm += "<a class=\"tile square text tilesquareblock bg-color-purple\"";
+			else if (i % 7 == 4)
+				allhtm += "<a class=\"tile square text tilesquareblock bg-color-red\"";
+			else if (i % 7 == 5)
+				allhtm += "<a class=\"tile square text tilesquareblock bg-color-yellow\"";
+			else if (i % 7 == 6)
+				allhtm += "<a class=\"tile square text tilesquareblock bg-color-blueDark\"";		
+			allhtm += "href=\"detail.html?id=" + all_room[i].id.toString()
+              +  "&floor=" + encodeURI(encodeURI(all_room[i].floor))
+              +  "&location=" + encodeURI(encodeURI(all_room[i].location))
+              +  "&resident=" + encodeURI(encodeURI(all_room[i].resident))
+              +  "&serialNumber=" + all_room[i].serialNumber
+              +  "&owner=" + all_room[i].owner.toString()
+              +  "\">";	 
+			allhtm += "<div class=\"text-big\">"+ (parseInt(all_room[i].serialNumber)%1000).toString() +"</div>";
+       		allhtm += "<div class=\"text\">"+all_room[i].floor+"</div>";
+       		allhtm += "</a>";
+		}
+		if (all_room.length>0)
+			document.all.section1.innerHTML = allhtm;
+		else
+			document.all.section1.innerHTML = "<h2><font color=\"white\">无数据</font></h2>"; 
+	
 	}
 
 	</script>

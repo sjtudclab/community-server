@@ -47,8 +47,10 @@
             });
 
             $topicId = $.getTopicId();
-
-            $.ajax({
+			
+            get_topic_result_byid($topicId);
+            
+            /* $.ajax({
                 url: getUrl('rest/topic/' + $topicId),
                 type:"get",
                 dataType:"json",
@@ -64,7 +66,7 @@
                 error:function(){
                     alert("获取物品"+$goodsID+"信息失败");
                 }
-            });
+            }); */
         });
     </script>
 </div>

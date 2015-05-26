@@ -16,6 +16,7 @@
 <script th:src="@{/zang/js/jquery.min.js}"></script>
 <script th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/dongjunyi.js}"></script>
 
 </head>
 <body>
@@ -40,14 +41,21 @@
 			});
 		}); */
 		
-		$.get(getUrl("rest/work_report/all"), function(data) {
+ 		var data = get_work_report("all");
+		for (var objval in data){
+				$("#reportlist").append(
+						"<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
+						+ "<div>" + getNowFormatDate(new Date(objval["reportTime"])) + " 述职报告</div>" 
+						+ "</h3></div><div class='panel-body'>" + objval["content"] + "</div>" + "<a href='" + objval["attachment"] + "'>附件</a></div>");
+		}; 
+/* 		$.get(getUrl("rest/work_report/all"), function(data) {
 			$.each(data, function(index, objval){
 				$("#reportlist").append(
 						"<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
 						+ "<div>" + getNowFormatDate(new Date(objval["reportTime"])) + " 述职报告</div>" 
 						+ "</h3></div><div class='panel-body'>" + objval["content"] + "</div>" + "<a href='" + objval["attachment"] + "'>附件</a></div>");
 			});
-		});
+		}); */
 	});
 	
 	function getNowFormatDate(day) 
