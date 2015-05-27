@@ -29,7 +29,7 @@
     <script th:src="@{/js/docs.js}"></script>
     <script th:src="@{/js/github.info.js}"></script>
 	<script th:src="@{/js/common.js}"></script>
-
+	<script th:src="@{/js/dongjunyi.js}"></script>
     <title>业委会</title>
 </head>
 <body class="metro">
@@ -55,39 +55,31 @@
     
     <script type="text/javascript">
     var userPositionUrl = getUrl("resident/user_position");
-
-	(function($){
-        $.ajax({
-            type: "GET",
-            url: getUrl('rest/managementCitizens/owner'),
-            success: function(data) {
-                var users = [];
-                $(data).each(function(i, d) {
-                    for (var r in d.roles) {
-                        users.push({userid: d.id, username: d.name, role: d.roles[r], imageUrl: d.image});
-                    }
-                });
-
-                $(users).each(function(ind, el) {
-                    var name = el.username;
-                    var position = el.role.name;
-                    var html = 
-                        '<div class="image-container shadow">' +
-                        '<a  href="{0}"><img src="{1}" class=""></a>'.format(userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'owner'), 
-                        		getUrl('images/' + el.imageUrl)) +
-                            '<div class="overlay">' +
-                                '<span class="name-text">{0}</span><br>'.format(name) +
-                                '<span class="position-text">{0}</span>'.format(position) +
-                            '</div>' +
-                        '</div>';
-                    $('.person-list-container').append($(html));
-                });
-            },
-            error: function(obj) {
-                console.log(obj);
+	
+    get_managementCitizens_owner(function(data)
+	{
+		var users = [];
+        $(data).each(function(i, d) {
+            for (var r in d.roles) {
+                users.push({userid: d.id, username: d.name, role: d.roles[r], imageUrl: d.image});
             }
-        })
-        })(jQuery);
+        });
+
+        $(users).each(function(ind, el) {
+            var name = el.username;
+            var position = el.role.name;
+            var html = 
+                '<div class="image-container shadow">' +
+                '<a  href="{0}"><img src="{1}" class=""></a>'.format(userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'owner'), 
+                		getUrl('images/' + el.imageUrl)) +
+                    '<div class="overlay">' +
+                        '<span class="name-text">{0}</span><br>'.format(name) +
+                        '<span class="position-text">{0}</span>'.format(position) +
+                    '</div>' +
+                '</div>';
+            $('.person-list-container').append($(html));
+        });
+	});
 	</script>
 
 </body>

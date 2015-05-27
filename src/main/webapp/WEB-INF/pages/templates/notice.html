@@ -25,32 +25,15 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	//userid = currentUserId();
-/* 		$.get(getUrl("rest/work_report/") + userid, function(data) {
-		$.each(data, function(index, objval){
-			var attachment = objval["attachment"];
-			var reporttime = objval["reportTime"];
-			var content = objval["content"];
-			$("#reportlist").append("<li>" + content + "<a href='" + attachment + "'>附件</a>");
-		});
-	}); */
-	
-	var data = get_information("1");
-	for (var objval in data) {
-		$("#noticelist").append(
-				"<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
-				+ "<div>" + getNowFormatDate(new Date(objval["submitTime"])) + " 社区公告</div>" 
-				+ "</h3></div><div class='panel-body'>" + objval["content"] + "</div>" + "<image src='" + objval["attachment"] + "'></></div>");
-	}
-	
-	/* $.get(getUrl("rest/information/1"), function(data) {
+
+	get_information("1", function(data) {
 		$.each(data, function(index, objval){
 			$("#noticelist").append(
 					"<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
 					+ "<div>" + getNowFormatDate(new Date(objval["submitTime"])) + " 社区公告</div>" 
 					+ "</h3></div><div class='panel-body'>" + objval["content"] + "</div>" + "<image src='" + objval["attachment"] + "'></></div>");
 		});
-	}); */
+	}); 
 });
 
 function getNowFormatDate(day) 

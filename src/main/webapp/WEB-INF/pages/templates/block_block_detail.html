@@ -43,7 +43,7 @@
       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
    <script th:src="@{/scripts/modernizr-2.6.1.min.js}"></script>
    <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
-
+<script type="text/javascript" th:src="@{/js/dongjunyi.js}"></script>
    <script language="javascript" type="text/javascript">
     $.extend({
      getUrlVars: function(){
@@ -147,18 +147,11 @@
 
       function getData()
       {
-        /* $.ajax(
+        get_apartment("", function(data)
         {
-          url: "/community-server/rest/apartment",
-          dataType: "JSON",
-          type: "GET", 
-          success: function (data) { 
-            addToArray(data, "apartment_detail");
-          }
-        }
-        ) */
-        var data = get_apartment("");
-    	addToArray(data, "apartment_detail");
+        	addToArray(data, "apartment_detail");
+        	buildTable();
+        });
       }
 
     })
@@ -171,8 +164,7 @@
     var arr6 = new Array();     //是否显示
 
     var flag = 0;
-    setTimeout("buildTable()",5000);
-
+   
     function showTable()
     {
       searchTable();

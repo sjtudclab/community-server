@@ -43,54 +43,44 @@
 
     </div> <!-- End of container -->
     <div th:include="metro_header :: copy"></div>
-
+	<script th:src="@{/js/dongjunyi.js}"></script>
     <script type="text/javascript">
     
     var userPositionUrl = getUrl("resident/user_position");
-
-    (function($){
-        $.ajax({
-            type: "GET",
-            url: getUrl('rest/managementCitizens/committee'),
-            success: function(data) {
-                var users = [];
-                $(data).each(function(i, d) {
-                    for (var r in d.roles) {
-                        users.push({userid: d.id, username: d.name, role: d.roles[r], imageUrl: d.image});
-                    }
-                });
-                var police = $(users).filter(function(i,d) {return d.role.name.includes('民警');})[0];
-                var zhucan = $(users).filter(function(i,d) {return d.role.name.includes('助残员');})[0];
-
-                $(users).each(function(ind, el) {
-                    if (el.userid == police.userid || el.userid == zhucan.userid) {
-                        return;
-                    }
-                    var name = el.username;
-                    var position = el.role.name;
-                    var html = 
-                        '<div class="image-container shadow">' +
-                        '<a  href="{0}"><img src="{1}" class=""></a>'.format(userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'committee'), 
-                        		getUrl('images/' + el.imageUrl)) +
-                            '<div class="overlay">' +
-                                '<span class="name-text">{0}</span><br>'.format(name) +
-                                '<span class="position-text">{0}</span>'.format(position) +
-                            '</div>' 
-                        '</div>';
-                    $('.person-list-container').append($(html));
-                });
-
-                $('.police .prname').text(police.username);
-                $('.zhucan .prname').text(zhucan.username);
-                $('.police .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(police.userid, police.role.id, 'committee'))
-                $('.zhucan .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(zhucan.userid, zhucan.role.id, 'committee'))
-
-            },
-            error: function(obj) {
-                console.log(obj);
+    get_managementCitizens_committee(function(data) {
+		var users = [];
+        $(data).each(function(i, d) {
+            for (var r in d.roles) {
+                users.push({userid: d.id, username: d.name, role: d.roles[r], imageUrl: d.image});
             }
         });
-        })(jQuery);
+        var police = $(users).filter(function(i,d) {return d.role.name.includes('民警');})[0];
+        var zhucan = $(users).filter(function(i,d) {return d.role.name.includes('助残员');})[0];
+
+        $(users).each(function(ind, el) {
+            if (el.userid == police.userid || el.userid == zhucan.userid) {
+                return;
+            }
+            var name = el.username;
+            var position = el.role.name;
+            var html = 
+                '<div class="image-container shadow">' +
+                '<a  href="{0}"><img src="{1}" class=""></a>'.format(userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(el.userid, el.role.id, 'committee'), 
+                		getUrl('images/' + el.imageUrl)) +
+                    '<div class="overlay">' +
+                        '<span class="name-text">{0}</span><br>'.format(name) +
+                        '<span class="position-text">{0}</span>'.format(position) +
+                    '</div>' 
+                '</div>';
+            $('.person-list-container').append($(html));
+        });
+
+        $('.police .prname').text(police.username);
+        $('.zhucan .prname').text(zhucan.username);
+        $('.police .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(police.userid, police.role.id, 'committee'))
+        $('.zhucan .prname').attr('href', userPositionUrl + '?user_id={0}&role_id={1}&back_url={2}'.format(zhucan.userid, zhucan.role.id, 'committee'))
+         
+	});
     </script>
 
 </body>

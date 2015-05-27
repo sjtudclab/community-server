@@ -29,7 +29,7 @@
     <script th:src="@{/js/docs.js}"></script>
     <script th:src="@{/js/github.info.js}"></script>
 	<script th:src="@{/js/common.js}"></script>
-
+	<script th:src="@{/js/dongjunyi.js}"></script>
     <title>物业人员</title>
 </head>
 <body class="metro">
@@ -54,12 +54,10 @@
 
     <script type="text/javascript">    
     var userPositionUrl = getUrl("resident/user_position");
-
-    (function($){
-        $.ajax({
-            type: "GET",
-            url: getUrl('rest/managementCitizens/tenement'),
-            success: function(data) {
+		
+    
+    get_managementCitizens_tenement(function(data)
+    {
                 var users = [];
                 $(data).each(function(i, d) {
                     for (var r in d.roles) {
@@ -81,12 +79,7 @@
                         '</div>';
                     $('.person-list-container').append($(html));
                 });
-            },
-            error: function(obj) {
-                console.log(obj);
-            }
-        })
-        })(jQuery);
+      });
     </script>
 
 </body>

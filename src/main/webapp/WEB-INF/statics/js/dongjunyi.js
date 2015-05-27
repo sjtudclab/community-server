@@ -12,10 +12,20 @@ function post_announcement() {
  * @RequestMapping(value="",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  * @RequestMapping(value="{id}/citizen",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  */
-function get_apartment(parameter) {
-	return getData("/apartment/" + parameter, "apartment");
+function get_apartment(parameter, success, failure)
+{
+	$.ajax({
+		url:getUrl("rest/apartment/" + parameter),
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			if (typeof success == "function") {
+				success(data);
+			}
+		},
+		error:function(obj){console.log(obj);}
+	});	
 }
-
 /* @RequestMapping(Constants.REST + "/block_info/")
  * @RequestMapping(value="manager",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  */
@@ -34,22 +44,119 @@ function get_block_room(parameter) {
  * @RequestMapping(value="",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  * @RequestMapping(value="{id}/apartments",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  */
-function get_buildings(parameter) {
-	return getData("/buildings/" + parameter, "buildings");
+function get_buildings(parameter, success, failure)
+{
+	$.ajax({
+        url: getUrl('rest/buildings/' + parameter),
+        type:"get",
+        dataType:"json",
+        success:function(data){
+            if (typeof success == "function") {
+				success(data);
+				}
+        },
+        error:function(){
+        }
+    }); 
 }
 
 /* @RequestMapping(Constants.REST + "/citizen")
  * @RequestMapping(value="{id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  */
-function get_citizen() {
-	return getData("/citizen", "citizen");
+function get_citizen(success, failure)
+{
+	$.ajax({
+		url:getUrl("rest/citizen"),
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			if (typeof success == "function") {
+				success(data);
+			}
+		},
+		error:function(obj){console.log(obj);}
+	});	
 }
 
 /* @RequestMapping(Constants.REST + "/managementCitizens/")
  * @RequestMapping(value="{id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  */
-function get_managementCitizens(parameter) {
-	return getData("/managementCitizens/" + parameter, "managementCitizens");
+function get_managementCitizens(parameter, success, failure)
+{
+	$.ajax({
+		url:getUrl("rest/managementCitizens/"+parameter),
+		type:"get",
+		dataType:"json",
+		success:function(users,status){
+			if (typeof success == "function") {
+				success(users,status);
+			}
+		},
+		error:function(){}
+	});	
+}
+
+function get_managementCitizens_owner(success, failure)
+{
+	$.ajax({
+		url:getUrl("rest/managementCitizens/owner"),
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			if (typeof success == "function") {
+				success(data);
+			}
+		},
+		error:function(obj){console.log(obj);}
+	});	
+}
+
+function get_managementCitizens_tenement(success, failure)
+{
+	$.ajax({
+		url:getUrl("rest/managementCitizens/tenement"),
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			if (typeof success == "function") {
+				success(data);
+			}
+		},
+		error:function(obj){console.log(obj);}
+	});	
+}
+
+function get_managementCitizens_committee(success, failure)
+{
+	$.ajax({
+		url:getUrl("rest/managementCitizens/committee"),
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			if (typeof success == "function") {
+				success(data);
+			}
+		},
+		error:function(obj){console.log(obj);}
+	});	
+}
+
+function put_managementCitizens(data, success, failure)
+{
+	$.ajax({
+			 type: "put",
+			 url: getUrl("rest/managementCitizens"),
+			 contentType: "application/json",
+			 data: JSON.stringify(us),
+			 success: function(data){
+				 if (typeof success == "function") {
+						success(data);
+				 }
+			 },
+			 error: function(data){
+				 alert('调整人事失败！');
+			 }
+		  }); 
 }
 
 /* @RequestMapping(Constants.REST + "/residentCitizens/")
@@ -88,26 +195,46 @@ function get_activity(parameter) {
  * @RequestMapping(value = "search/{keyword}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  * @RequestMapping(value = "block/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  */
-function get_information(parameter) {
-	return getData("/information/" + parameter, "information");
-}
-function post_information() {	
+function get_information(parameter, success, failure)
+{
+	 $.ajax({
+           type: "GET",
+           url: getUrl('rest/information/'+parameter),
+           dataType: "json",
+           success: function(data) {
+              if (typeof success == "function") {
+				success(data);
+				}
+           },//success
+           error: function(data) {
+               console.log(data);
+           }
+       });//ajax
 }
 
-/* @RequestMapping(Constants.REST + "/item/")
- * @RequestMapping(value="{id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
- * @RequestMapping(value="create",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
- */
-function get_item(parameter) {
-	return getData("/item/" + parameter, "item");
+
+
+function post_information() {	
 }
 
 /* @RequestMapping(Constants.REST + "/roles/")
  * @RequestMapping(value="",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  * @RequestMapping(value="{id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  */
-function get_roles(parameter) {
-	return getData("/roles/" + parameter, "roles");
+function get_roles(success, failure)
+{
+	$.ajax({
+        url: getUrl('rest/roles'),
+        type:"get",
+        dataType:"json",
+        success:function(roles,status){
+            if (typeof success == "function") {
+				success(roles,status);
+				}
+        },
+        error:function(){
+        }
+    }); 
 }
 
 
@@ -129,76 +256,37 @@ function get_topic(parameter) {
 	return getData("/topic/" + parameter, "topic");
 }
 
-function get_topic_byid(topicId)
+function get_topic_byid(topicId, success, failure)
 {
 	$.ajax({
         url: getUrl('rest/topic/' + topicId),
         type:"get",
         dataType:"json",
         success:function(obj){
-            $("#title").html(obj.title);
-            $("#attachment").attr("src", obj.attachment);
-            $("#content").html(decodeURI(obj.content));
-
-            $.each(obj.options, function(optionIndex, option) {
-                var start = "<tr><th style=\"text-align:left\"><label>";
-                var end = "</label></th></tr>";
-                var option = "<input type=\"radio\" value=\"" + option.id + "\" name=\"option\">" + option.name;
-
-                $('#vote_table').append(start + option + end);
-            })
-
-            $('#vote_table').append("<tr><th><button onclick=\"submit()\">确定</button></th></tr>");
+            if (typeof success == "function") {
+				success(obj);
+				}
         },
         error:function(){
-            alert("获取物品" + $goodsID + "信息失败");
         }
     }); 
 }
 
-function get_all_topic()
+function get_all_topic(success, failure)
 {
-	$(document).ready(function(){
-        $.ajax({
+	 $.ajax({
            type: "GET",
            url: getUrl('rest/topic?type=1'),
            dataType: "json",
            success: function(data) {
-               console.log(data);
-               $('#announce').empty();
-               $.each(data, function(commentIndex, comment) {
-
-                   console.log(data.length);
-                   console.log(comment.attachment);
-                   var dt = "<div class=\"timeline-row\">"+"<div class=\"timeline-icon\">"+"<div class=\"bg-primary\">"+"<i class=\"fa fa-pencil\"></i></div></div>";
-                   var dp = "<div class=\"panel timeline-content\">"+"<div class=\"panel-body\">";
-                   var ti = "<div class=\"timeline-time\">";
-                   var title = comment.title;
-                   var de = "</div>";
-                   var unixTimestamp = new Date(comment.submit_time);
-                   commonTime = unixTimestamp.toLocaleString();
-
-                   var vote_url = getUrl("resident/vote/" + comment.topic_id)
-                   var vote = "<a href=\"" + vote_url + "\"><p>进入投票</p></a>";
-
-                   if (comment.attachment != null) {
-                       var u = comment.attachment;
-                       var images = "<img class=\"img-responsive\"src=\""+getUrl(u)+"\">";
-
-                       $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title + "</p>" + images+"<p>"+comment.content+"</p>" + vote +de+de+de);
-                   } else {
-                       $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title + "</p>" + images+"<p>"+comment.content+"</p>" + vote +de+de+de);
-                   }
-
-
-
-               })
+              if (typeof success == "function") {
+				success(data);
+				}
            },//success
            error: function(data) {
                console.log(data);
            }
        });//ajax
-    }); 
 }
 
 function post_topic(jsonData)
@@ -214,25 +302,20 @@ function post_topic(jsonData)
     })
 }
 
-function get_topic_result_byid(temp)
+function get_topic_result_byid(topicId, success, failure)
 {
 	$.ajax({
-        url: getUrl('rest/topic/' + temp),
+        url: getUrl('rest/topic/' + topicId),
         type:"get",
         dataType:"json",
         success:function(obj){
-            $("#title").html(obj.title);
-            $("#attachment").attr("src", obj.attachment);
-            $("#content").html(decodeURI(obj.content));
-
-            $.each(obj.options, function(index, option) {
-                $("#display_region").append("<p>{0} : {1} 票</p>".format(option.name, option.voteCount));
-            })
+            if (typeof success == "function") {
+				success(obj);
+				}
         },
         error:function(){
-            alert("获取物品"+$goodsID+"信息失败");
         }
-    });
+    }); 
 }
 
 /* @RequestMapping(Constants.REST + "/vote/")
@@ -242,21 +325,27 @@ function get_topic_result_byid(temp)
 function get_vote() {
 	return getData("/vote/" + "all", "vote");
 }
-function post_vote()
-{
-}
 
 /* @RequestMapping(Constants.REST + "/work_report/")
  * @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  * @RequestMapping(value = "all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
  * @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
  */
-function get_work_report(parameter) {
-	return getData("/work_report/" + parameter, "work report");
-}
-function post_work_report()
+function get_work_report(parameter, success, failure)
 {
+	$.ajax({
+		url:getUrl("rest/work_report/"+parameter),
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			if (typeof success == "function") {
+				success(data);
+			}
+		},
+		error:function(){}
+	});	
 }
+
 
 function getData(url_string, info)
 {
@@ -274,5 +363,5 @@ function getData(url_string, info)
           }
         }
     )
-    return r_data;
+    
 }

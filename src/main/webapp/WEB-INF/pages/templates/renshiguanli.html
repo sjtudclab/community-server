@@ -18,7 +18,7 @@
 <script src="../../../js/jquery.js" th:src="@{/js/jquery.js}"></script>
 <script src="../../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 <script src="../../../js/common.js" th:src="@{/js/common.js}"></script>
-
+<script th:src="@{/js/dongjunyi.js}"></script>
 <script type="text/javascript">
     
   $(document).ready(function(){
@@ -34,16 +34,12 @@
 		 $('form').remove();
 		 $('#framework').remove();
 		 
-		 
-		 
-		 $.get(getUrl("rest/managementCitizens/blockLeader"), "", function(users, status){
-			
+		 get_managementCitizens("blockLeader", function(users, status){
 			 var div = $("<div id='framework'><div><image src='" + getUrl("images/framework.jpg") + "'/></div>");
 			 var table = $("<table class='table table-bordered' contenteditable='true'>")
 			 var thead = $("<thead><tr><th>责任块区</th><th>块长</th><th>责任区域</th></tr></thead>");
 		     var tbody = $("<tbody>"); 
-		     
-		    
+ 
 		     $(users).each(function(index,user){
 		    	
 				var desc = "";
@@ -63,7 +59,6 @@
 			 table.append(thead,tbody,"</table>");
 			 div.append(table,"</div>");
 			 $("div.span9").append(div); 
-		 
 		 });
 		 
 		 return false;
@@ -76,8 +71,7 @@
 		   $("form").remove();
 		   $("#check").remove();
 		   $('#framework').remove();
-		   
-		   $.get(getUrl("rest/managementCitizens/committee") ,"",function(users,status){
+		   get_managementCitizens("committee", function(users, status){
 			   var divs = "<div id='check'>";
 			   $(users).each(function(index,user){
 				   var roleNames = "";
@@ -109,22 +103,12 @@
 		    var thead = $("<thead>");
 	    	var tbody = $("<tbody>");    	
 	    	
-	    	$.get(getUrl("rest/managementCitizens/committee"),"",function(datas,status){
+	    	get_managementCitizens("committee", function(users, status){
 
 	        	var checkboxs = "";
-	    		$.get(getUrl("rest/roles"),"",function(roles,status){
-	    			//var n = 0;
-	        		/* $(roles).each(function(index1,role){
-	            		checkboxs += "<input type='checkbox' name='roleId' value=" + role.id + ">" + role.name + "</input>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-	            		n += 1;
-	            		if(n == 5){
-	            			checkboxs += "<br><br>";
-	            			n=0;
-	            		}
-	        		}); */
-	        		
+	        	get_roles(function(roles,status){
 	        		thead.append("<tr><th>人员</th><th>角色</th></tr>","</thead>");	        		
-	        		$(datas).each(function(index2,user){
+	        		$(users).each(function(index2,user){
 	        			$('form').serialize().split('id')
 	        			var n = 0;
 	        			var tr = "<tr>";
@@ -194,19 +178,11 @@
 					user.roleIds.push(d.value); 
 				} 
 			});
-		  
-		   $.ajax({
-			 type: "put",
-			 url: getUrl("rest/managementCitizens"),
-			 contentType: "application/json",
-			 data: JSON.stringify(us),
-			 success: function(data){
-				 $("#personnelCheck").click();
-			 },
-			 error: function(data){
-				 alert('调整人事失败！');
-			 }
-		  }); 
+		  put_managementCitizens(JSON.stringify(us), function(data)
+			{
+			  			$("#personnelCheck").click();
+			});
+		   
 		  return false;
 	  });
 	  
