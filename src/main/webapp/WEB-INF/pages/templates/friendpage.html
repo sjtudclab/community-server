@@ -13,6 +13,7 @@
     <script th:src="@{/zang/js/jquery.min.js}"></script>
     <script th:src="@{/zang/bootstrap-3.3.2-dist/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/friend_add.js}"></script>
 
 
     <title>我的好友</title>
@@ -53,7 +54,7 @@
 	$(document).ready(function() {
 		userid = currentUserId();
 		$("#friendlist").html("");
-		$.get(getUrl("rest/friends/" + userid + "/relations"), function(data) {
+		/*$.get(getUrl("rest/friends/" + userid + "/relations"), function(data) {
 			$.each(data, function (n, value) {
 				var friend = "";
 				friend =
@@ -72,10 +73,30 @@
                 "</div>";
                 $("#friendlist").append(friend);
 			});
-		});
+		});*/
+        get_friend(userid,function(data){
+            $.each(data, function (n, value) {
+                var friend = "";
+                friend =
+                "<div class=\"tile double goods\">" +
+                    "<div class=\"tile-content image\">" +
+                        "<a href='friendchat?id=" + value.friendId + "&name=" + value.name +
+                        "'><img src=\""+value.image+"\"></a>" +
+                    "</div>" +
+
+                    "<div class=\"brand bg-dark opacity\">" +
+                        "<a href='friendchat?id=" + value.friendId + "&name=" + value.name + "'>" +
+                        "<span class=\"text\">"+ value.name +"</span>" + 
+                        "<span style=\"display:none\">"+value.friendId+"</span>" +
+                         "</a>"
+                    "</div>" +
+                "</div>";
+                $("#friendlist").append(friend);
+            });
+        });
 
 		
-		$.get(getUrl("rest/friends/" + userid + "/applications"), function(data) {
+		get_friend(userid,function(data){
 			var count = 0;
 			$.each(data, function(index, objval) {
 				count++;

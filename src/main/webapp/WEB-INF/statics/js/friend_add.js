@@ -52,3 +52,29 @@
             }
         });
     };
+
+    function get_friend(userid,success,failure) {
+        $.ajax({
+            url: getUrl("rest/friends/" + userid + "/relations"),
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                if (typeof success == "function") {
+                    success(data);
+                }
+            }
+        });
+    };
+
+    function get_appli(userid,success,failure) {
+        $.ajax({
+            url: getUrl("rest/friends/" + userid + "/applications"),
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                if (typeof success == "function") {
+                    success(data);
+                }
+            }
+        });
+    };
