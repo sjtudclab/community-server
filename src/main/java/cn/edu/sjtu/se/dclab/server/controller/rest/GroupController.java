@@ -93,7 +93,7 @@ public class GroupController {
 	@ResponseBody
 	public String createGroup(@RequestBody String groupInfo) {
 		Map<String, Object> map = DataUtil.getFromJson(groupInfo);
-		long userId = (int) map.get("userId");
+		long userId = Integer.parseInt(map.get("userId").toString());
 		String name = (String) map.get("name");
 		Group group = new Group();
 		group.setName(name);
