@@ -22,6 +22,7 @@
 		<ddlutils.version>1.0</ddlutils.version>
 		<mybati.spring.version>1.2.1</mybati.spring.version>
 		<thymeleaf.version>2.1.3.RELEASE</thymeleaf.version>
+		<authclient.version>0.1</authclient.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -210,6 +211,11 @@
   			<groupId>xml-apis</groupId>
    			<artifactId>xml-apis</artifactId>
    			<version>1.4.01</version>
+		</dependency>
+		<dependency>
+  			<groupId>cn.edu.sjtu.se.dclab</groupId>
+   			<artifactId>authclient</artifactId>
+   			<version>0.1</version>
 		</dependency>
 		
 	</dependencies>
