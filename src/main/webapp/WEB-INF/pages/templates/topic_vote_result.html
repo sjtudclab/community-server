@@ -47,23 +47,15 @@
             });
 
             $topicId = $.getTopicId();
+			
+            get_topic_result_byid($topicId, function(obj){
+                $("#title").html(obj.title);
+                $("#attachment").attr("src", obj.attachment);
+                $("#content").html(decodeURI(obj.content));
 
-            $.ajax({
-                url: getUrl('rest/topic/' + $topicId),
-                type:"get",
-                dataType:"json",
-                success:function(obj){
-                    $("#title").html(obj.title);
-                    $("#attachment").attr("src", obj.attachment);
-                    $("#content").html(decodeURI(obj.content));
-
-                    $.each(obj.options, function(index, option) {
-                        $("#display_region").append("<p>{0} : {1} 票</p>".format(option.name, option.voteCount));
-                    })
-                },
-                error:function(){
-                    alert("获取物品"+$goodsID+"信息失败");
-                }
+                $.each(obj.options, function(index, option) {
+                    $("#display_region").append("<p>{0} : {1} 票</p>".format(option.name, option.voteCount));
+                })
             });
         });
     </script>

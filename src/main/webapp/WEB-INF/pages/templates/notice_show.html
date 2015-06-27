@@ -31,43 +31,34 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/dongjunyi.js}"></script>
    	<script type="text/javascript">
    	$(document).ready(function(){
-   		$.ajax({
-            type: "GET",
-            url: getUrl('rest/information/1'),
-            dataType: "json",
-            success: function(data) {
-            	console.log(data);
-            	$('#announce').empty();
-                $.each(data, function(commentIndex, comment) {
+   		
+   		get_information("1", function(data) {
+   			console.log(data);
+        	$('#announce').empty();
+            $.each(data, function(commentIndex, comment) {
 
-                    console.log(data.length);
-                    console.log(comment.attachment);
-                	var dt = "<div class=\"timeline-row\">"+"<div class=\"timeline-icon\">"+"<div class=\"bg-primary\">"+"<i class=\"fa fa-pencil\"></i></div></div>";
-                	var dp = "<div class=\"panel timeline-content\">"+"<div class=\"panel-body\">";
-                	var ti = "<div class=\"timeline-time\">";
-                    var title = comment.title;
-                	var de = "</div>";
-                	var unixTimestamp = new Date(comment.submitTime); 
-					commonTime = unixTimestamp.toLocaleString();
+                console.log(data.length);
+                console.log(comment.attachment);
+            	var dt = "<div class=\"timeline-row\">"+"<div class=\"timeline-icon\">"+"<div class=\"bg-primary\">"+"<i class=\"fa fa-pencil\"></i></div></div>";
+            	var dp = "<div class=\"panel timeline-content\">"+"<div class=\"panel-body\">";
+            	var ti = "<div class=\"timeline-time\">";
+                var title = comment.title;
+            	var de = "</div>";
+            	var unixTimestamp = new Date(comment.submitTime); 
+				commonTime = unixTimestamp.toLocaleString();
 
-                    if (comment.attachment != null) {
-                        var u = comment.attachment;
-                        var images = "<img class=\"img-responsive\"src=\""+getUrl(u)+"\">";
-                        $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title + "</p>" + images+"<p>"+comment.content+"</p>"+de+de+de);
-                    } else {
-                        $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title +comment.content+"</p>"+de+de+de);
-                    }
-
-
-
-                })
-            },//success
-            error: function(data) {
-            	console.log(data);
-            }
-        });//ajax
+                if (comment.attachment != null) {
+                    var u = comment.attachment;
+                    var images = "<img class=\"img-responsive\"src=\""+getUrl(u)+"\">";
+                    $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title + "</p>" + images+"<p>"+comment.content+"</p>"+de+de+de);
+                } else {
+                    $('#announce').append(dt+ti+commonTime+de+dp+"<p>" + title +comment.content+"</p>"+de+de+de);
+                }
+   			});
+   		});
    	});
    	</script>
    

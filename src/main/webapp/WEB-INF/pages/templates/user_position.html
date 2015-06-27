@@ -22,6 +22,7 @@
     <script th:src="@{/js/jquery/jquery.mousewheel.js}"></script>
     <script th:src="@{/js/prettify/prettify.js}"></script>
     <script th:src="@{/js/holder/holder.js}"></script>
+    <script th:src="@{/js/dongjunyi.js}"></script>
 	<script type="text/javascript" th:src="@{/zang/js/jquery.js}"></script>
 	<script type="text/javascript" th:src="@{/zang/js/tendina.js}"></script>
 	<script type="text/javascript" th:src="@{/zang/js/common.js}"></script>
@@ -96,7 +97,23 @@
             $('.back-btn').attr('href', getUrl('resident/' + backUrl));
         }
 
-        $.ajax({
+        var data = get_managementCitizens(userid);
+        function success_func()
+        {
+        	console.log(data);
+            var name = data.name;
+            $('.username').text(name);
+            var position = $(data.roles).filter(function(i, d) {return d.id == roleid;})[0];
+
+            var html = 
+                '<div class="image-container shadow">' +
+                '<img src="{0}" class=""></a>'.format(getUrl("images/" + data.image)) +
+                '</div>';
+            $('.person-list-container').append($(html));
+            $('.description').text(position.description);
+            $('.position-name').text(position.name);
+        }
+        /* $.ajax({
             type: "GET",
             url: getUrl('rest/managementCitizens/' + userid),
             success: function(data) {
@@ -116,7 +133,7 @@
             error: function(obj) {
                 console.log(obj);
             }
-        });
+        }); */
         
 		$("#send").click(function() {
 			if ($("#cont")[0].value != "") {

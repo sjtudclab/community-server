@@ -9,7 +9,7 @@
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
     <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
-    <script th:src="@{/js/chen/userLovedGoods.js}"></script>
+    <script th:src="@{/js/chen/market_resident.js}"></script>
 
     <title>我的关注</title>
 </head>
@@ -20,7 +20,7 @@
         
         <!-- 返回主页 -->
         <div class="offset1">
-            <h1><a href="market.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的关注</h1>
+            <h1><a th:href="@{/resident/market}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>我的关注</h1>
         </div>
         <!-- End 返回主页 -->
 
@@ -39,5 +39,37 @@
     </div>
 
     <div th:include="market_template :: copy"></div>
+    
+<script type="text/javascript">
+$(document).ready(function(){
+	//alert("获取用户物品信息");
+	var userID = 1;
+	get_user_love_data(userID, function(obj){
+			console.log("success:"+obj);
+			var goodsList = "";
+			$.each(obj, function (n, value) {
+				//alert(n +" "+ value.title);
+				var goods = "";
+				goods +=
+				"<div class=\"tile double goods\">" +                // class goods用于查看物品的详细信息
+                    "<div class=\"tile-content image\">" +
+                        "<img src=\""+value.imagePath+"\">" +
+                    "</div>" +
+
+                    "<div class=\"brand bg-dark opacity\">" +
+                        "<span class=\"text\">"+decodeURI(value.title)+"</span>" + 
+                        "<span style=\"display:none\">"+value.id+"</span>" +
+                    "</div>" +
+                "</div>";
+
+                goodsList += goods;
+			});
+
+			$("#love_goods").append(goodsList);
+	});
+
+});
+</script>
+
 </body>
 </html>

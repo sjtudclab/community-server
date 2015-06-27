@@ -27,6 +27,8 @@ import cn.edu.sjtu.se.dclab.server.transfer.MessageTransfer;
 import cn.edu.sjtu.se.dclab.server.util.DataUtil;
 import cn.edu.sjtu.se.dclab.server.util.TransferUtil;
 
+import javax.print.attribute.standard.Media;
+
 /**
  * 2015年4月2日 上午9:52:05
  *

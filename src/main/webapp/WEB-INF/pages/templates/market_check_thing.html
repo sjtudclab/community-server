@@ -9,8 +9,8 @@
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
     <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
-    <script th:src="@{/js/chen/goodsInfo.js}"></script>
-    <script th:src="@{/js/chen/clickCheck.js}"></script>
+    <script th:src="@{/js/chen/market_resident.js}"></script>
+    <script th:src="@{/js/chen/market_admin.js}"></script>
 
     <title>物品详细信息</title>
 </head>
@@ -26,7 +26,7 @@
                     <div>
                         <div class="row">
                             <h1>
-                            <a href="market_manage.html"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                            <a th:href="@{/committee/market}"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
                             <span id="title"></span>
                             </h1>
                         </div>
@@ -77,5 +77,67 @@
     </div>
 
     <div th:include="market_template :: copy"></div>
+<script type="text/javascript">  
+$(document).ready(function(){
+
+	$.extend({
+		  getUrlVars: function(){
+		    var vars = [], hash;
+		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		    for(var i = 0; i < hashes.length; i++)
+		    {
+		      hash = hashes[i].split('=');
+		      vars.push(hash[0]);
+		      vars[hash[0]] = hash[1];
+		    }
+		    return vars;
+		  },
+		  getUrlVar: function(name){
+		    return $.getUrlVars()[name];
+		  }
+	});
+	
+	// Getting URL var by its nam
+	$goodsID = $.getUrlVar('id');
+	//alert("通过URL获取参数:" + $goodsID);
+	
+	get_thing_data($goodsID, function(obj){
+		
+			$("#goods_id").html($goodsID);
+
+			$("#imagePath").attr("src", obj.imagePath);
+			//$("#imagePath").attr("src", "images/11.jpg");
+			$("#title").html(decodeURI(obj.title));
+			$("#type").html(decodeURI(obj.type));
+			$("#category").html(decodeURI(obj.category));
+			$("#desc").html(decodeURI(obj.desc));
+			$("#owner").html(decodeURI(obj.owner));
+			$("#phone").html(decodeURI(obj.phone));
+	});
+	
+	$("body").on("click", "#agree_thing", function(){
+		$("#agree_thing").removeClass("primary");
+		$("#agree_thing").text("已审核");
+		$("#agree_thing").attr("disabled", true);
+		$("#unagree_thing").css("display", "none");
+		alert("已审核物品:"+$("#goods_id").text());
+		
+		check_pass($("#goods_id").text());
+
+	});
+
+	$("body").on("click", "#unagree_thing", function(){
+		$("#unagree_thing").removeClass("primary");
+		$("#unagree_thing").text("已审核");
+		$("#unagree_thing").attr("disabled", true);
+		$("#agree_thing").css("display", "none");
+		alert("已审核物品:"+$("#goods_id").text());
+		
+		check_unpass($("#goods_id").text());
+	});
+	
+});
+</script>
+
 </body>
 </html>

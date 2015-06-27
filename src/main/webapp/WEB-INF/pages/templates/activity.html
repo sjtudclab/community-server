@@ -31,13 +31,10 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/dongjunyi.js}"></script>
    	<script type="text/javascript">
-   	$(document).ready(function(){
-        $.ajax({
-            type: "GET",
-            url: getUrl('rest/information/2'),
-            dataType: "json",
-            success: function(data) {
+   	get_information("2", function(data)
+   	{
                 console.log(data);
                 $('#announce').empty();
                 $.each(data, function(commentIndex, comment) {
@@ -63,12 +60,7 @@
 
 
                 })
-            },//success
-            error: function(data) {
-                console.log(data);
-            }
-        });//ajax
-   	});
+     });
    	</script>
    
   </body>

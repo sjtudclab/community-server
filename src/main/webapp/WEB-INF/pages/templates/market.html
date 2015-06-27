@@ -9,7 +9,7 @@
     <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
 
     <script type="text/javascript" th:src="@{/scripts/jquery-1.8.2.min.js}"></script>
-    <script th:src="@{/js/chen/marketInfo.js}"></script>
+    <script th:src="@{/js/chen/market_resident.js}"></script>
 
     <title>以物换物主页</title>
 </head>
@@ -72,100 +72,12 @@
                         <span class="text">二手沙发，8成新。适合放在客厅</span>
                     </div>
                 </div>
-                
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/2.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">电熨斗，8成新。可满足日常需求</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/3.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">美的电风扇，9成新。家中闲置，希望出掉，可与人交换</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/4.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">乐高玩具。适合全家老少</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/5.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">洋娃娃</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/6.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">家中闲置。女士羽绒服一件</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/7.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">油画。提升逼格利器</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/8.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">8成新烟灰缸</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/9.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">工艺品</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/10.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">健身球</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/1.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">二手沙发，8成新。适合放在客厅</span>
-                    </div>
-                </div>
-                <div class="tile double">
-                    <div class="tile-content image">
-                        <img th:src="@{/images/2.jpg}">
-                    </div>
-                    <div class="brand bg-dark opacity">
-                        <span class="text">电熨斗，8成新。可满足日常需求</span>
-                    </div>
-                </div>
                 -->
+                
             </div>
             <!-- End 最近发布的物品 -->
 
-            <!-- 即将交易的物品 -->
+            <!-- 即将交易的物品 
             <div class="row">
                 <h2>即将交换的物品</h2>
                 <div class="tile double">
@@ -265,12 +177,52 @@
                     </div>
                 </div>
             </div>
-            <!-- End 即将交易的物品 -->
+             End 即将交易的物品 -->
             
         </div>
         
     </div>
 
     <div th:include="market_template :: copy"></div>
+
+<script type="text/javascript">
+$(function (){
+	
+	get_latest_market_data(function(obj){
+			console.log("success:"+obj);
+			var goodsList = "";
+			$.each(obj, function (n, value) {
+				//alert(n +" "+ value.title);
+				var goods = "";
+				goods +=
+				"<div class=\"tile double goods\">" +                // class goods用于查看物品的详细信息
+                    "<div class=\"tile-content image\">" +
+                        "<img src=\""+value.imagePath+"\">" +
+                    "</div>" +
+
+                    "<div class=\"brand bg-dark opacity\">" +
+                        "<span class=\"text\">"+decodeURI(value.title)+"</span>" + 
+                        "<span style=\"display:none\">"+value.id+"</span>" +
+                    "</div>" +
+                "</div>";
+
+                goodsList += goods;
+			});
+
+			$("#latestSecondGoods").append(goodsList); // 显示最新发布的物品
+	});
+
+
+	// 查看物品详细信息
+	$("body").on("click", ".goods", function(){
+		$goodsID = $(this).find("div").eq(1).find("span").eq(1).text();
+		//alert("id:"+$goodsID);
+		check_market_thing($goodsID);
+
+	});
+	
+});
+</script>
+    
 </body>
 </html>

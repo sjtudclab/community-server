@@ -39,78 +39,53 @@
 </div>
 
 <div th:include="login_footer :: copy"></div>
-
+<script th:src="@{/js/friend_add.js}"></script>
 <script type="application/javascript">
     var citizenId = 0;
 
     function apply() {
-        if (citizenId != 0) {
-            $.ajax({
-                url: getUrl('rest/friends/' + currentUserId() + '/applications/' + citizenId),
-                type: 'post',
-                success: function() {
-                    alert('好友申请已添加。');
-                }
-            })
-        } else {
-            alert("请完成选择！");
-        }
+        new_apply();
     }
 
     function building_selection_changed(obj) {
-        $.ajax({
-            url: getUrl('rest/buildings/' + obj[obj.selectedIndex].value + '/apartments'),
-            type: 'get',
-            dataType: 'json',
-            success: function(data) {
-                var apartmentList = "";
-                $.each(data, function(index, value) {
-                    var apartment = "<option value=\"" + value.id + "\">" + value.name + "</option>";
-                    apartmentList += apartment;
-                });
+        new_building_selection(obj[obj.selectedIndex].value, function(data){
+            var apartmentList = "";
+            $.each(data, function(index, value) {
+                var apartment = "<option value=\"" + value.id + "\">" + value.name + "</option>";
+                apartmentList += apartment;
+            });
 
-                $('#apartment_selection').empty().append(apartmentList);
-                $('#apartment_selection').selectedIndex = 0;
-            }
+            $('#apartment_selection').empty().append(apartmentList);
+            $('#apartment_selection').selectedIndex = 0;
         });
     };
 
     function apartment_selection_changed(obj) {
-        $.ajax({
-            url: getUrl('rest/apartment/' + obj[obj.selectedIndex].value + '/citizen'),
-            type: 'get',
-            dataType: 'json',
-            success: function(data) {
-                var apartmentList = "";
-                $.each(data, function(index, value) {
-                    var apartment = "<option value=\"" + value.user + "\">" + value.name + "</option>";
-                    apartmentList += apartment;
-                });
+        new_apartment_selection(obj[obj.selectedIndex].value,function(data) {
+            var apartmentList = "";
+            $.each(data, function(index, value) {
+                var apartment = "<option value=\"" + value.user + "\">" + value.name + "</option>";
+                apartmentList += apartment;
+            });
 
-                var citizen_sel = $('#citizen_selection')
-                citizen_sel.empty().append(apartmentList);
-                citizen_sel.selectedIndex = 0;
-                citizenId = citizen_sel[citizen_sel.selectedIndex].value;
-            }
-        })
+            var citizen_sel = $('#citizen_selection')
+            citizen_sel.empty().append(apartmentList);
+            citizen_sel.selectedIndex = 0;
+            citizenId = citizen_sel[citizen_sel.selectedIndex].value;
+        });
     };
 
     $(document).ready(function() {
-        $.ajax({
-            url: getUrl('rest/buildings'),
-            type: 'get',
-            dataType: 'json',
-            success: function(data) {
-                var bdList = "";
-                $.each(data, function(index, value) {
-                    var bd = "<option value=\"" + value.id + "\">" + value.name + "</option>";
-                    bdList += bd;
-                })
+        get_building(function(data){
+            var bdList = "";
+            $.each(data, function(index, value) {
+                var bd = "<option value=\"" + value.id + "\">" + value.name + "</option>";
+                bdList += bd;
+            })
 
-                $('#building_selection').append(bdList);
-                $('#building_selection').selectedIndex = 0;
-            }
-        })
+            $('#building_selection').append(bdList);
+            $('#building_selection').selectedIndex = 0;
+        });
     });
 </script>
 </div>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.ValidationMapper">
+
+    <select id="checkIsFriends" resultType="int">
+        SELECT COUNT(*) FROM user_relation
+        WHERE (followed_id = #{fromUserId} AND follower_id = #{toUserId})
+        OR (follower_id = #{fromUserId} AND followed_id = #{toUserId})
+        AND relation_type_id = 1
+    </select>
+
+    <select id="checkBelongsToGroup" resultType="int">
+        SELECT COUNT(*) FROM user_group
+        WHERE user_id = #{userId}
+        AND group_id = #{groupId}
+    </select>
+</mapper>

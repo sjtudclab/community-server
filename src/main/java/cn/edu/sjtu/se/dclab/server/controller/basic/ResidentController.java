@@ -66,6 +66,11 @@ public class ResidentController {
     public String market_search() {
         return "market_search";
     }
+    
+    @RequestMapping("market_thing_info")
+    public String market_thing_info() {
+        return "market_thing_info";
+    }
 
     @RequestMapping("repair")
     public String repair() {

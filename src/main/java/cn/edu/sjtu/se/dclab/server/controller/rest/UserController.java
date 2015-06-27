@@ -288,7 +288,7 @@ public class UserController {
 				citizen.setGender(gender);
 			}
 			if(map.containsKey("age")){
-				int age = (int) map.get("age");
+				int age = Integer.parseInt(map.get("age").toString());
 				citizen.setAge(age);
 			}
 			if(map.containsKey("phone")){
@@ -312,7 +312,7 @@ public class UserController {
 				citizen.setGender(gender);
 			}
 			if(map.containsKey("age")){
-				int age = (int) map.get("age");
+				int age = Integer.parseInt(map.get("age").toString());
 				citizen.setAge(age);
 			}
 			if(map.containsKey("phone")){
@@ -335,7 +335,7 @@ public class UserController {
 			citizen.setGender(gender);
 		}
 		if(map.containsKey("age")){
-			int age = (int) map.get("age");
+			int age = Integer.parseInt(map.get("age").toString());
 			citizen.setAge(age);
 		}
 		if(map.containsKey("phone")){

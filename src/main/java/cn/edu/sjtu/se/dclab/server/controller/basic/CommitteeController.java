@@ -44,7 +44,12 @@ public class CommitteeController {
 
 	@RequestMapping("market")
 	public String market() {
-		return "market_committee";
+		return "market_manage";
+	}
+	
+	@RequestMapping("market_check_thing")
+	public String market_check_thing() {
+		return "market_check_thing";
 	}
 
 	@RequestMapping("workreport")
