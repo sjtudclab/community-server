@@ -1,0 +1,13 @@
+cn.edu.sjtu.se.dclab
+cn.edu.sjtu.se.dclab.server.common
+cn.edu.sjtu.se.dclab.server.controller.basic
+cn.edu.sjtu.se.dclab.server.controller.rest
+cn.edu.sjtu.se.dclab.server.entity
+cn.edu.sjtu.se.dclab.server.entity.converter
+cn.edu.sjtu.se.dclab.server.entity.deserializer
+cn.edu.sjtu.se.dclab.server.mapper
+cn.edu.sjtu.se.dclab.server.security
+cn.edu.sjtu.se.dclab.server.service
+cn.edu.sjtu.se.dclab.server.service.impl
+cn.edu.sjtu.se.dclab.server.transfer
+cn.edu.sjtu.se.dclab.server.util
