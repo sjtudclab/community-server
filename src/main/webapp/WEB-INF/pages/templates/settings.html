@@ -10,6 +10,7 @@
 </head>
 <body class="metro">
 
+    <object ID="plugin" WIDTH=0 HEIGHT=0 CLASSID="CLSID:93300EB1-EBC7-4352-A24B-7837B6A11822"> </object>
 
     <div class="container">
         <h1>
@@ -121,7 +122,7 @@
 
 						<div class="input-control text" data-role="input-control">
 							<input type="text" id="cardremain" value=""
-								placeholder="请插入读卡器，放上市民卡，并点击确认" isabled />
+								placeholder="请插入读卡器，放上市民卡，并点击确认" disabled />
 						</div>
 						<button class="button info" id="btn-read-cardremains" type="button">确认</button>
 					</fieldset>
@@ -204,10 +205,15 @@
 				'{{~}}';
 
 			// card remains
-			$('body').append('<object ID="plugin" WIDTH=0 HEIGHT=0 CLASSID="CLSID:93300EB1-EBC7-4352-A24B-7837B6A11822"> </object>');
+			// $('body').append('<object ID="plugin" WIDTH=0 HEIGHT=0 CLASSID="CLSID:93300EB1-EBC7-4352-A24B-7837B6A11822"> </object>');
 			$('#btn-read-cardremains').click(function() {
-				var a =	plugin.readinfo();
-				alert(a);
+				try {
+					var a =	document.getElementById('plugin').readbalance();
+					$('#cardremain').val(a);
+				} catch (e) {
+					alert("错误：请使用IE浏览器，并安装读卡插件");
+
+				}
 			});
 
 			$.ajax({
