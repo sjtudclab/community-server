@@ -106,4 +106,9 @@ public class ResidentController {
     public String merchantInfo() {
     	return "merchant";
     }
+    
+    @RequestMapping("merchant/transinfo")
+    public String transInfo() {
+    	return "transinfo";
+    }
 }
