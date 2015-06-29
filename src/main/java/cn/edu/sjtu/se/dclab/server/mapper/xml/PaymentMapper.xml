@@ -9,4 +9,35 @@
         VALUES (#{paymentId}, #{deviceId}, #{cardId}, #{sum}, #{timestamp}, #{balance})
     </update>
 
+    <select id="getUserPaymentInfo" resultMap="PaymentUserTransferMap">
+        SELECT payment_id, pay.card_id, `sum`, `timestamp`, merchant_name
+        FROM payment pay
+        LEFT JOIN device dev ON pay.device_id = dev.device_id
+        LEFT JOIN merchant mer ON dev.merchant_id = mer.merchant_id
+        LEFT JOIN user u ON u.card_id = pay.card_id
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getMerchantExpenseInfo" resultMap="PaymentMerchantTransferMap">
+        SELECT payment_id, pay.card_id, `sum`, `timestamp`
+        FROM payment pay
+        LEFT JOIN device dev ON pay.device_id = dev.device_id
+        LEFT JOIN merchant mer ON dev.merchant_id = mer.merchant_id
+        WHERE dev.merchant_id = #{merchantId}
+    </select>
+
+    <resultMap type="PaymentUserTransfer" id="PaymentUserTransferMap">
+        <id property="paymentId" column="payment_id" />
+        <result property="cardId" column="card_id" />
+        <result property="merchantName" column="merchant_name" />
+        <result property="sum" column="sum" />
+        <result property="timestamp" column="timestamp" />
+    </resultMap>
+
+    <resultMap type="PaymentMerchantTransfer" id="PaymentMerchantTransferMap">
+        <id property="paymentId" column="payment_id" />
+        <result property="sum" column="sum" />
+        <result property="timestamp" column="timestamp" />
+        <result property="cardId" column="card_id" />
+    </resultMap>
 </mapper>

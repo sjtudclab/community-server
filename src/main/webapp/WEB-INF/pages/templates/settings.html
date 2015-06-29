@@ -197,9 +197,9 @@
 				'{{~it :item:index}}' +
 				'<a class="list" transactionid="{{=item.transactionId}}">' +
 					'<div class="list-content">' +
-						'<div class="list-right" style="float: right;margin-top: 6px;">{{=item.amount}}元</div>' +
+						'<div class="list-right" style="float: right;margin-top: 6px;">{{=item.sum}}元</div>' +
 						'<span class="list-title" style="width:auto">{{=item.merchantName}}</span>' +
-						'<span class="list-subtitle" style="width:auto">{{=item.timestring}}</span>' +
+						'<span class="list-subtitle" style="width:auto">{{=item.timestamp}}</span>' +
 					'</div>' +
 				'</a>' + 
 				'{{~}}';
@@ -218,12 +218,12 @@
 
 			$.ajax({
 				type:'get',
-				url:getUrl('rest/transactions/user/'+currentUserId()),
+				url:getUrl('rest/payment/user/'+currentUserId()),
 				success:function(data) {
 					console.log(data);
 					var processedData = data.map(function(d) {
 						var ad = d;
-						ad.timestring = (new Date(d.time)).format('yyyy-mm-dd HH:MM');
+						ad.timestamp = (new Date(d.timestamp)).format('yyyy-mm-dd HH:MM');
 						return ad;
 					});
 					var tempFn = doT.template(transactionTemplate);

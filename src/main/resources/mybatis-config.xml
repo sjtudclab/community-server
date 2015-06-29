@@ -65,6 +65,9 @@
 
         <typeAlias alias="Card" type="cn.edu.sjtu.se.dclab.server.entity.Card" />
         <typeAlias alias="Payment" type="cn.edu.sjtu.se.dclab.server.entity.Payment" />
+
+        <typeAlias alias="PaymentUserTransfer" type="cn.edu.sjtu.se.dclab.server.transfer.PaymentUserTransfer" />
+        <typeAlias alias="PaymentMerchantTransfer" type="cn.edu.sjtu.se.dclab.server.transfer.PaymentMerchantTransfer" />
     </typeAliases>
 
     <typeHandlers>
