@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=620px,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />  
     <meta name="product" content="Metro UI CSS Framework">
 
-    <title>个人设置</title>
+    <title>个人信息</title>
 </head>
 <body class="metro">
 
+    <object ID="plugin" WIDTH=0 HEIGHT=0 CLASSID="CLSID:93300EB1-EBC7-4352-A24B-7837B6A11822"> </object>
 
     <div class="container">
         <h1>
             <a th:href="@{/start-screen-committee}" class="back-btn"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
-          	  <span class="position-name">个人设置</span><small class="on-right"></small>
+          	  <span class="position-name">个人信息</span><small class="on-right"></small>
         </h1>
 
         <h3>
@@ -26,94 +27,115 @@
             </div>
         </div>
 
-        <div class="detail" style="width: 400px">
+        <div class="grid">
+	        <div class="row">
+		        <div class="span5 detail" style="width: 400px">
+					<fieldset style="margin-bottom: 30px">
+						<legend>详细信息</legend>
 
-			<fieldset style="margin-bottom: 30px">
-				<legend>详细信息</legend>
-
-				<label>用户昵称</label>
-				<div class="input-control text" data-role="input-control">
-					<input type="text" id="nickname" value="{nickName}"
-						placeholder="请添加昵称" />
-					<button class="btn-clear" tabindex="-1" type="button"></button>
-				</div>
-
-				<label>性别</label>
-				<div class="input-control text" data-role="input-control">
-					<div>
-						<div class="input-control radio default-style"
-							data-role="input-control">
-							<label> <input type="radio" name="gender"
-								id="gender-male" value="male"> <span class="check"></span> 男
-							</label>
+						<label>用户昵称</label>
+						<div class="input-control text" data-role="input-control">
+							<input type="text" id="nickname" value="{nickName}"
+								placeholder="请添加昵称" />
+							<button class="btn-clear" tabindex="-1" type="button"></button>
 						</div>
-						<div class="input-control radio  default-style"
-							data-role="input-control">
-							<label> <input type="radio" name="gender"
-								id="gender-female" value="female"> <span class="check"></span> 女
-							</label>
+
+						<label>性别</label>
+						<div class="input-control text" data-role="input-control">
+							<div>
+								<div class="input-control radio default-style"
+									data-role="input-control">
+									<label> <input type="radio" name="gender"
+										id="gender-male" value="male"> <span class="check"></span> 男
+									</label>
+								</div>
+								<div class="input-control radio  default-style"
+									data-role="input-control">
+									<label> <input type="radio" name="gender"
+										id="gender-female" value="female"> <span class="check"></span> 女
+									</label>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
 
-				<label>年龄</label>
-				<div class="input-control text" data-role="input-control">
-					<input type="text" id="age" value="{age}" placeholder="请输入年龄" />
-					<button class="btn-clear" tabindex="-1" type="button"></button>
-				</div>
+						<label>年龄</label>
+						<div class="input-control text" data-role="input-control">
+							<input type="text" id="age" value="{age}" placeholder="请输入年龄" />
+							<button class="btn-clear" tabindex="-1" type="button"></button>
+						</div>
 
-				<label>邮箱地址</label>
-				<div class="input-control text" data-role="input-control">
-					<input type="email" id="email" value="{email}" placeholder="请输入邮箱" />
-					<button class="btn-clear" tabindex="-1" type="button"></button>
-				</div>
+						<label>邮箱地址</label>
+						<div class="input-control text" data-role="input-control">
+							<input type="email" id="email" value="{email}" placeholder="请输入邮箱" />
+							<button class="btn-clear" tabindex="-1" type="button"></button>
+						</div>
 
-				<label>电话</label>
-				<div class="input-control text" data-role="input-control">
-					<input type="text" id="phone" value="{phone}" placeholder="请输入邮箱" />
-					<button class="btn-clear" tabindex="-1" type="button"></button>
-				</div>
+						<label>电话</label>
+						<div class="input-control text" data-role="input-control">
+							<input type="text" id="phone" value="{phone}" placeholder="请输入邮箱" />
+							<button class="btn-clear" tabindex="-1" type="button"></button>
+						</div>
 
-				<button class="button large primary" id="btnSubmit">提交</button>
+						<button class="button large primary" id="btnSubmit">提交</button>
 
-			</fieldset>
+					</fieldset>
 
-			<fieldset style="margin-bottom: 30px">
-				<legend>身份认证</legend>
-				<div class="unverified">
-					<div style="margin-bottom: 10px">
-						您的身份还没有确认，请插入读卡器，然后将身份证放到读卡器上，点击“认证身份”
-					</div>
-					<button class="button large info" id="btnVerify">认证身份</button>
-				</div>
-				
-				<div class="verified" style="display:none">
-					<div style="margin-bottom: 10px">
-						您的身份已经确认。
-					</div>
-				</div>
-			</fieldset>
+					<fieldset style="margin-bottom: 30px">
+						<legend>身份认证</legend>
+						<div class="unverified">
+							<div style="margin-bottom: 10px">
+								您的身份还没有确认，请插入读卡器，然后将身份证放到读卡器上，点击“认证身份”
+							</div>
+							<button class="button large info" id="btnVerify">认证身份</button>
+						</div>
+						
+						<div class="verified" style="display:none">
+							<div style="margin-bottom: 10px">
+								您的身份已经确认。
+							</div>
+						</div>
+					</fieldset>
 
-			<fieldset>
-				<legend>其他设置</legend>
-				<div class="input-control text" data-role="input-control">
-					<input type="password" id="oldpw" placeholder="请输入原始密码" />
-					<button class="btn-clear" tabindex="-1" type="button"></button>
-				</div>
+					<fieldset>
+						<legend>其他设置</legend>
+						<div class="input-control text" data-role="input-control">
+							<input type="password" id="oldpw" placeholder="请输入原始密码" />
+							<button class="btn-clear" tabindex="-1" type="button"></button>
+						</div>
 
-				<div class="input-control text" data-role="input-control">
-					<input type="password" id="newpw" placeholder="请输入新密码" />
-					<button class="btn-clear" tabindex="-1" type="button"></button>
-				</div>
+						<div class="input-control text" data-role="input-control">
+							<input type="password" id="newpw" placeholder="请输入新密码" />
+							<button class="btn-clear" tabindex="-1" type="button"></button>
+						</div>
 
-				<div class="input-control text" data-role="input-control">
-					<input type="password" id="confirmnewpw" placeholder="请再输入一遍新密码" />
-					<button class="btn-clear" tabindex="-1" type="button"></button>
-				</div>
+						<div class="input-control text" data-role="input-control">
+							<input type="password" id="confirmnewpw" placeholder="请再输入一遍新密码" />
+							<button class="btn-clear" tabindex="-1" type="button"></button>
+						</div>
 
-				<button class="button large info" id="btnChangePw">修改密码</button>
-        	</fieldset>
-        	
+						<button class="button large info" id="btnChangePw">修改密码</button>
+		        	</fieldset>
+	       		</div>
+	       		<div class="span5">
+					<fieldset style="margin-bottom: 30px">
+						<legend>卡余额</legend>
+
+						<div class="input-control text" data-role="input-control">
+							<input type="text" id="cardremain" value=""
+								placeholder="请插入读卡器，放上市民卡，并点击确认" disabled />
+						</div>
+						<button class="button info" id="btn-read-cardremains" type="button">确认</button>
+					</fieldset>
+					
+					<fieldset style="margin-bottom: 30px">
+						<legend>用卡记录</legend>
+
+						<div class="listview-outlook" id="cardrecordlist" data-role="listview">
+						</div>
+					</fieldset>
+
+	       		</div>
+	        </div>
         </div>
 
     </div> <!-- End of container -->
@@ -123,122 +145,181 @@
     <script type="text/javascript" th:src="@{/js/md5.js}"></script>
     
     <script type = "text/javascript" >
-        (function($) {
-		    var $radios = $('input:radio[name=gender]');
-		    if($radios.is(':checked') === false) {
-		        $radios.filter('[value=male]').prop('checked', true);
-		    }
+		(function($) {
+			var $radios = $('input:radio[name=gender]');
+			if ($radios.is(':checked') === false) {
+				$radios.filter('[value=male]')
+						.prop('checked', true);
+			}
 
-		    // Load user info
-            $.ajax({
-                type: "GET",
-                url: getUrl('rest/users/{0}/citizen'.format(currentUserId())),
-                success: function(data) {					
+			// Load user info
+			$.ajax({
+				type : "GET",
+				url : getUrl('rest/users/{0}/citizen'
+						.format(currentUserId())),
+				success : function(data) {
 					$('.username').text(data.username);
 					$('#nickname').val(data.nickName);
-					
-				    var genderStr = data.gender == '女' ? "female" : "male";
-				    $radios.filter('[value={0}]'.format(genderStr)).prop('checked', true);
-				
-				    $('#age').val(data.age == null ? '' : data.age);
-				    $('#email').val(data.email == null ? '' : data.email);
-				    $('#phone').val(data.phone == null ? '' : data.phone);
-				    
-				    if (data.hasIdentityCard) {
-                		$('.unverified').hide();
-                		$('.verified').show();
-				    } else {
-                		$('.unverified').show();
-                		$('.verified').hide();
-				    }
-                },
-                error: function(obj) {
-                    console.log(obj);
-                }
-            });
-		    
-		    $('#btnSubmit, #btnChangePw, #btnVerify').click(function(event) {
-		    	var data;
-		    	var type;
-		    	if ($(this).is('#btnSubmit')) {
-		    		data = {
-	                    "nickName": $('#nickname').val(),
-	                    //"realName":"a",
-	                    "gender":$('input:radio[name=gender]:checked').val() == 'female' ? '女' : '男',
-	                    "age": parseInt($('#age').val()) || 0,
-	                    "phone": $('#phone').val(),
-	                    "email": $('#email').val(),
-	                };
-		    		type  = 'baseinfo';
-		    	} else if ($(this).is('#btnChangePw')){
-		    		var oldpw = $('#oldpw').val();
-		    		var newpw = $('#newpw').val();
-		    		var newpwcf = $('#confirmnewpw').val();
-		    		if (newpw != newpwcf) {
-		    			alert('新密码不一致！');
-		    			return;
-		    		}
-		    		data = {
-	                    "oldPassword":oldpw,
-	                    "newPassword":newpw,
-	                };
-		    		type = 'changepw';
-		    	} else {
-		    		if (initPlugin() == false) {
-		    			return;
-		    		}
-		    		var idStr = getIDInformation();
-		    		if (idStr == false) {
-		    			return;
-		    		}
-		    		//idStr = idStr.match(/[0-9Xx]*/)[0];
-		    		idStr = idStr.slice(0, -1);
-		    		idStr = md5(idStr);
-		    		data = {
-		    			identityNumber: idStr
-		    		};
-		    		type = 'verify';
-		    	}
 
-                $.ajax({
-                    type: 'PUT', 
-                    url: getUrl('rest/users/{0}/citizen'.format(currentUserId())),
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    dataType: 'text',
-                    success: function(data) {
-                        console.log(data);
-                        if (data == "success") {
-                        	if (type == 'verify') {
-                        		alert('验证成功');
-                        		$('.unverified').hide();
-                        		$('.verified').show();
-                        	} else if (type == 'baseinfo') {
-                            	alert("修改成功");
-                        	} else {
-                            	alert("修改密码成功！");
-                        	}
-                        } else {
-                        	if (type == 'verify') {
-                        		alert('验证失败');
-                        	} else if (type == 'baseinfo') {
-                            	alert("修改失败");
-                        	} else {
-                            	alert("修改密码失败，原密码错误");
-                        	}
-                        }
-                    }, 
-                    error: function(data) {
-                        console.log(data);
-                    	alert("修改失败");
-                    }
-                })
+					var genderStr = data.gender == '女' ? "female"
+							: "male";
+					$radios
+							.filter(
+									'[value={0}]'
+											.format(genderStr))
+							.prop('checked', true);
 
-		    	return false;
-		    });
-		    
-        })(jQuery);
-        </script>
+					$('#age').val(
+							data.age == null ? ''
+									: data.age);
+					$('#email').val(
+							data.email == null ? ''
+									: data.email);
+					$('#phone').val(
+							data.phone == null ? ''
+									: data.phone);
+
+					if (data.hasIdentityCard) {
+						$('.unverified').hide();
+						$('.verified').show();
+					} else {
+						$('.unverified').show();
+						$('.verified').hide();
+					}
+				},
+				error : function(obj) {
+					console.log(obj);
+				}
+			});
+
+			// load transactions
+			var transactionTemplate = 
+				'{{~it :item:index}}' +
+				'<a class="list" transactionid="{{=item.transactionId}}">' +
+					'<div class="list-content">' +
+						'<div class="list-right" style="float: right;margin-top: 6px;">{{=item.amount}}元</div>' +
+						'<span class="list-title" style="width:auto">{{=item.merchantName}}</span>' +
+						'<span class="list-subtitle" style="width:auto">{{=item.timestring}}</span>' +
+					'</div>' +
+				'</a>' + 
+				'{{~}}';
+
+			// card remains
+			// $('body').append('<object ID="plugin" WIDTH=0 HEIGHT=0 CLASSID="CLSID:93300EB1-EBC7-4352-A24B-7837B6A11822"> </object>');
+			$('#btn-read-cardremains').click(function() {
+				try {
+					var a =	document.getElementById('plugin').readbalance();
+					$('#cardremain').val(a);
+				} catch (e) {
+					alert("错误：请使用IE浏览器，并安装读卡插件");
+
+				}
+			});
+
+			$.ajax({
+				type:'get',
+				url:getUrl('rest/transactions/user/'+currentUserId()),
+				success:function(data) {
+					console.log(data);
+					var processedData = data.map(function(d) {
+						var ad = d;
+						ad.timestring = (new Date(d.time)).format('yyyy-mm-dd HH:MM');
+						return ad;
+					});
+					var tempFn = doT.template(transactionTemplate);
+					$('#cardrecordlist').html(tempFn(processedData));
+				}
+			})
+
+			$('#btnSubmit, #btnChangePw, #btnVerify').click(function(event) {
+				var data;
+				var type;
+				if ($(this).is('#btnSubmit')) {
+					data = {
+						"nickName" : $('#nickname')
+								.val(),
+						//"realName":"a",
+						"gender" : $(
+								'input:radio[name=gender]:checked')
+								.val() == 'female' ? '女'
+								: '男',
+						"age" : parseInt($('#age')
+								.val()) || 0,
+						"phone" : $('#phone').val(),
+						"email" : $('#email').val(),
+					};
+					type = 'baseinfo';
+				} else if ($(this).is(
+						'#btnChangePw')) {
+					var oldpw = $('#oldpw').val();
+					var newpw = $('#newpw').val();
+					var newpwcf = $('#confirmnewpw')
+							.val();
+					if (newpw != newpwcf) {
+						alert('新密码不一致！');
+						return;
+					}
+					data = {
+						"oldPassword" : oldpw,
+						"newPassword" : newpw,
+					};
+					type = 'changepw';
+				} else {
+					if (initPlugin() == false) {
+						return;
+					}
+					var idStr = getIDInformation();
+					if (idStr == false) {
+						return;
+					}
+					//idStr = idStr.match(/[0-9Xx]*/)[0];
+					idStr = idStr.slice(0, -1);
+					idStr = md5(idStr);
+					data = {
+						identityNumber : idStr
+					};
+					type = 'verify';
+				}
+
+				$.ajax({
+					type : 'PUT',
+					url : getUrl('rest/users/{0}/citizen'.format(currentUserId())),
+					data : JSON.stringify(data),
+					contentType : 'application/json',
+					dataType : 'text',
+					success : function(data) {
+						console.log(data);
+						if (data == "success") {
+							if (type == 'verify') {
+								alert('验证成功');
+								$('.unverified').hide();
+								$('.verified').show();
+							} else if (type == 'baseinfo') {
+								alert("修改成功");
+							} else {
+								alert("修改密码成功！");
+							}
+						} else {
+							if (type == 'verify') {
+								alert('验证失败');
+							} else if (type == 'baseinfo') {
+								alert("修改失败");
+							} else {
+								alert("修改密码失败，原密码错误");
+							}
+						}
+					},
+					error : function(data) {
+						console.log(data);
+						alert("修改失败");
+					}
+				});
+
+				return false;
+			});
+			
+		})(jQuery);
+	</script>
 
 </body>
 </html>

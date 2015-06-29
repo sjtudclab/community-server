@@ -101,4 +101,14 @@ public class ResidentController {
     public String voteResult() {
         return "topic_vote_result";
     }
+    
+    @RequestMapping("merchant")
+    public String merchantInfo() {
+    	return "merchant";
+    }
+    
+    @RequestMapping("merchant/transinfo")
+    public String transInfo() {
+    	return "transinfo";
+    }
 }
