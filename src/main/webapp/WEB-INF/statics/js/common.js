@@ -40,7 +40,7 @@
 	currentUserId = function() {
 		var cu = currentUser();
 		if (cu == null) {
-			window.location = 'metrologin.html';
+			window.location = getUrl('/login/resident');
 			return 0;
 		}
 		return typeof cu.id == "undefined" ? 0 : cu.id;
