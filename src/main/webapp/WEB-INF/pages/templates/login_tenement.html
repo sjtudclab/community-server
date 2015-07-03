@@ -95,8 +95,8 @@
 		if (idStr == false) {
 			return;
 		}
-		//idStr = idStr.match(/[0-9Xx]*/)[0];
-		idStr = idStr.slice(0, -1);
+		idStr = idStr.match(/[0-9a-zA-Z\-]*/)[0];
+		//idStr = idStr.slice(0, -1);
 		idStr = md5(idStr);
 		var dataObj = [{name: "cardtype", value: "readercard"}, {name: "cardnumber", value: idStr}, {name: "citizentype", value: "service"}];
 		$.ajax({
