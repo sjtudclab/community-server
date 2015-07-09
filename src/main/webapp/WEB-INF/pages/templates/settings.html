@@ -209,7 +209,20 @@
 			$('#btn-read-cardremains').click(function() {
 				try {
 					var a =	document.getElementById('plugin').readbalance();
-					$('#cardremain').val(a);
+					//var ai = parseInt(a);
+					if (a >= 0) {
+						$('#cardremain').val((a / 100) + ' 元');
+					} else {
+						if (a == -1) {
+							alert('错误：未找到PSAM卡，请检查驱动程序');
+						} else if (a == -2) {
+							alert('错误：未找到读卡器');
+						} else if (a == -4) {
+							alert('错误：未找到市民卡');
+						} else {
+							alert('错误：未知错误');
+						}
+					}
 				} catch (e) {
 					alert("错误：请使用IE浏览器，并安装读卡插件");
 
@@ -272,8 +285,8 @@
 					if (idStr == false) {
 						return;
 					}
-					//idStr = idStr.match(/[0-9Xx]*/)[0];
-					idStr = idStr.slice(0, -1);
+					idStr = idStr.match(/[0-9a-zA-Z\-]*/)[0];
+					//idStr = idStr.slice(0, -1);
 					idStr = md5(idStr);
 					data = {
 						identityNumber : idStr
