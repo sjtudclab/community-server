@@ -24,4 +24,7 @@ public class LoginBasicController {
     public String tenementLogin() {
         return "login_tenement";
     }
+
+    @RequestMapping("merchant")
+    public String merchantLogin() { return "login_merchant"; }
 }

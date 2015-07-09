@@ -10,10 +10,10 @@
         WHERE `from` = #{userId} or `to` = #{userId}
     </select>
 
-    <select id="findAllByUserIdAndMailStatus" parameterType="java.util.Map" resultMap="MailBoxMap">
+    <select id="findAllByUserIdAndMailStatus" resultMap="MailBoxMap">
         SELECT id, `from`, `to`, content, submited_date, status
         FROM mailbox
-        WHERE `to` = #{userId} AND status = #{status}
+        WHERE `to` = #{userId} AND `status` = #{status}
     </select>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="MailBox">

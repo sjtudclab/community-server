@@ -44,10 +44,7 @@ public class MailBoxServiceImpl implements MailBoxService {
 
 	@Override
 	public Collection<MailBoxTransfer> getMailBoxByUserIdAndMailStatus(long id, String status) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("userId", id);
-		params.put("status", status);
-		Collection<MailBox> mailBoxes = mailBoxMapper.findAllByUserIdAndMailStatus(params);
+		Collection<MailBox> mailBoxes = mailBoxMapper.findAllByUserIdAndMailStatus(id, status);
 
 		Collection<MailBoxTransfer> mailBoxTransfers = new ArrayList<MailBoxTransfer>();
 		for (MailBox mailBox : mailBoxes) {
