@@ -20,10 +20,14 @@
 		WHERE group_id = #{groupId};
 	</select>
 	
-	<update id="update" parameterType="Group">
+	<update id="update" parameterType="java.lang.Long">
 		UPDATE `group` SET name = #{name}, count = #{count}, status = #{status}
 		WHERE group_id = #{id};
 	</update>
+	
+	<select id="findUsersById" resultType="long">
+	    SELECT user_id FROM user_group WHERE group_id = #{groupId};
+	</select>
 	
 	<resultMap type="Group" id="GroupMap">
 		<id property="id" column="group_id" />

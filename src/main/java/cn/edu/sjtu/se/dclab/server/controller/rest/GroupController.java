@@ -175,6 +175,12 @@ public class GroupController {
 		
 		return transfer;
 	}
+	
+	@RequestMapping(value = "/{groupId}/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<Long> getUsers(@PathVariable long groupId){
+		return groupService.findUsersById(groupId);
+	}
 
 	private GroupTransfer convertGroupToGroupTransfer(Group group) {
 		if (group == null)

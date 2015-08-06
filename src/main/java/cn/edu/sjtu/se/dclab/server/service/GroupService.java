@@ -13,5 +13,7 @@ public interface GroupService {
 	public Collection<Group> findByUserId(long userId);
 
 	public void create(Group group);
-
+	
+	public Collection<Long> findUsersById(long id);
+ 
 }

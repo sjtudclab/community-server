@@ -53,4 +53,9 @@ public class GroupServiceImpl implements GroupService {
 		userGroupMapper.save(userGroup);
 	}
 
+	@Override
+	public Collection<Long> findUsersById(long id) {
+		return groupMapper.findUsersById(id);
+	}
+
 }

@@ -20,4 +20,6 @@ public interface GroupMapper {
 
 	public void update(Group group);
 
+	public Collection<Long> findUsersById(@Param("groupId") long groupId);
+
 }

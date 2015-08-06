@@ -143,11 +143,12 @@ function get_managementCitizens_committee(success, failure)
 
 function put_managementCitizens(data, success, failure)
 {
+	console.log(data);
 	$.ajax({
 			 type: "put",
 			 url: getUrl("rest/managementCitizens"),
 			 contentType: "application/json",
-			 data: JSON.stringify(us),
+			 data: JSON.stringify(data),
 			 success: function(data){
 				 if (typeof success == "function") {
 						success(data);
