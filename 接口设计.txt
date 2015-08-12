@@ -63,3 +63,5 @@
 	1）更新用户信息
 	GET users/{userId}/citizen   
 	PUT users/{userId}/citizen       {""}
+5、补充
+	居委会  GET rest/managementCitizens/committee
