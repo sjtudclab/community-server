@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.service.impl;
 
 import java.util.Collection;
 
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +58,6 @@ public class GroupServiceImpl implements GroupService {
 	public Collection<Long> findUsersById(long id) {
 		return groupMapper.findUsersById(id);
 	}
-
+	@Override
+	public Collection<User> findMemberlistById(long id) {return groupMapper.findMemberlistById(id);}
 }

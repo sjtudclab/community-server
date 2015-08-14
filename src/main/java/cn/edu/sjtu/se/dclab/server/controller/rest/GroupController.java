@@ -189,4 +189,9 @@ public class GroupController {
 				group.getCount(), group.getOwner());
 	}
 
+	@RequestMapping(value = "/{groupId}/memberlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Collection<User> getMemberlist(@PathVariable long groupId){
+		return groupService.findMemberlistById(groupId);
+	}
 }

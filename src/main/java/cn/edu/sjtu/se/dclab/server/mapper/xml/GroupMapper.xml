@@ -28,7 +28,11 @@
 	<select id="findUsersById" resultType="long">
 	    SELECT user_id FROM user_group WHERE group_id = #{groupId};
 	</select>
-	
+
+	<select id="findMemberlistById" resultMap="UserMap">
+		SELECT user.user_id,user.username,user.name,user.image FROM user join user_group on user.user_id=user_group.user_id WHERE group_id = #{groupId};
+	</select>
+
 	<resultMap type="Group" id="GroupMap">
 		<id property="id" column="group_id" />
 		<result property="name" column="name" />
@@ -37,5 +41,12 @@
 		<result property="owner" column="owner" />
 		<result property="createTime" column="create_time" />
 	</resultMap>
-	
+
+	<resultMap type="User" id="UserMap">
+		<id property="id" column="user_id" />
+		<result property="username" column="username" />
+		<result property="name" column="name" />
+		<result property="image" column="image" />
+	</resultMap>
+
 </mapper>

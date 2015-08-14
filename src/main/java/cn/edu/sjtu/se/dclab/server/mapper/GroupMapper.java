@@ -2,6 +2,7 @@ package cn.edu.sjtu.se.dclab.server.mapper;
 
 import java.util.Collection;
 
+import cn.edu.sjtu.se.dclab.server.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import cn.edu.sjtu.se.dclab.server.entity.Group;
@@ -21,5 +22,7 @@ public interface GroupMapper {
 	public void update(Group group);
 
 	public Collection<Long> findUsersById(@Param("groupId") long groupId);
+
+	public Collection<User> findMemberlistById(long id);
 
 }
