@@ -9,7 +9,7 @@ public class LivingCard {
     private String address;
     private String zip_code;
     private String house_number;
-    private int user_id;
+    private User user;
 
     public int getLivingcard_id() {
         return livingcard_id;
@@ -51,11 +51,11 @@ public class LivingCard {
         this.house_number = house_number;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
