@@ -1,7 +1,9 @@
 package cn.edu.sjtu.se.dclab.server.controller.rest;
 
 import cn.edu.sjtu.se.dclab.server.common.Constants;
+import cn.edu.sjtu.se.dclab.server.entity.LivingCard;
 import cn.edu.sjtu.se.dclab.server.entity.NetCard;
+import cn.edu.sjtu.se.dclab.server.service.LivingCardService;
 import cn.edu.sjtu.se.dclab.server.service.NetCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,9 +21,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class InfoCardController {
     @Autowired
     private NetCardService netCardService;
+    @Autowired
+    private LivingCardService livingCardService;
+
     @RequestMapping(value = "netcard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public NetCard getNetCard(@PathVariable(value = "id") long id) {
         return netCardService.getNetCardByUserId(id);
+    }
+
+    @RequestMapping(value = "livingcard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public LivingCard getLivingCard(@PathVariable(value = "id") long id) {
+        return livingCardService.getLivingCardByUserId(id);
     }
 }
