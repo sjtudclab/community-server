@@ -1,0 +1,46 @@
+<?mybatis version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.PartyCardMapper">
+
+    <select id="getPartyCardByUserId"  resultMap="PartyCardMap">
+        SELECT * FROM partycard WHERE user_id = #{id}
+    </select>
+
+    <resultMap id="PartyCardMap" type="PartyCard">
+        <id property="partycard_id" column="partycard_id" />
+        <result property="relation" column="relation" />
+        <result property="party_branch" column="party_branch" />
+        <result property="position" column="position" />
+        <result property="type" column="type" />
+        <result property="status" column="status" />
+        <result property="join_date" column="join_date" />
+        <result property="confirm_date" column="confirm_date" />
+        <result property="inspection_person" column="inspection_person" />
+        <result property="application_id" column="application_id" />
+        <association property="user" resultMap="UserMap" />
+    </resultMap>
+
+    <resultMap type="User" id="UserMap">
+        <id property="id" column="user_id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="salt" column="salt" />
+        <result property="name" column="name" />
+        <result property="status" column="status" />
+        <result property="note" column="note" />
+        <result property="email" column="email" />
+        <result property="enabled" column="enabled" />
+        <result property="image" column="image" />
+        <result property="identityNumber" column="identity_number" />
+
+        <association property="userType" resultMap="UserTypeMap" />
+    </resultMap>
+
+    <resultMap type="UserType" id="UserTypeMap">
+        <id property="id" column="user_type_id" />
+        <result property="type" column="type" />
+        <result property="tableName" column="table_name" />
+    </resultMap>
+</mapper>

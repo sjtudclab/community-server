@@ -67,6 +67,7 @@
         <typeAlias alias="Payment" type="cn.edu.sjtu.se.dclab.server.entity.Payment" />
         <typeAlias alias="NetCard" type="cn.edu.sjtu.se.dclab.server.entity.NetCard" />
         <typeAlias alias="LivingCard" type="cn.edu.sjtu.se.dclab.server.entity.LivingCard" />
+        <typeAlias alias="PartyCard" type="cn.edu.sjtu.se.dclab.server.entity.PartyCard" />
 
         <typeAlias alias="PaymentUserTransfer" type="cn.edu.sjtu.se.dclab.server.transfer.PaymentUserTransfer" />
         <typeAlias alias="PaymentMerchantTransfer" type="cn.edu.sjtu.se.dclab.server.transfer.PaymentMerchantTransfer" />
