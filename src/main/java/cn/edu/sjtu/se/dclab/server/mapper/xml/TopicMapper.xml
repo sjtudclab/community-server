@@ -6,10 +6,10 @@
 
    <insert id="submitTopic" parameterType="Topic" useGeneratedKeys="true" keyProperty="topicId">
        INSERT INTO topic
-       (name, content, `desc`, vote_count, start_time, end_time, topic_type_id, parent_topic_id,
+       (title, content, `desc`, vote_count, start_time, end_time, topic_type_id, parent_topic_id,
         attachment, created_by, submit_time)
        VALUES
-       (#{name}, #{content}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
+       (#{title}, #{content}, #{desc}, #{voteCount}, #{startTime}, #{endTime}, #{topicTypeId},
         #{parentTopicId}, #{attachment}, #{createdBy}, #{submitTime})
    </insert>
 

@@ -24,7 +24,7 @@
     </h1>
 
     <form role="form" method="post" th:action="@{/rest/topic}" enctype="multipart/form-data"
-            id="subitForm">
+            id="submitForm">
         <div class="grid">
             <div class="row">
                 <div class="span7">
@@ -61,7 +61,7 @@
 
     $('#submitForm').submit(function() {
         alert('提交成功');
-        window.location = getUrl('committee/activity');
+        window.location = getUrl('committee/topic');
         return false;
     });
 </script>
