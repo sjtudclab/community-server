@@ -14,7 +14,6 @@
 
 
 	<context:annotation-config />
-
 	<!--
 	<mvc:resources location="/WEB-INF/statics/images/" mapping="/images/**" />
 	<mvc:resources location="/WEB-INF/statics/css/" mapping="/css/**" />
@@ -29,8 +28,8 @@
 	<mvc:resources location="/WEB-INF/statics/scripts/" mapping="/scripts/**" />
 	<mvc:resources location="/WEB-INF/statics/zang/" mapping="/zang/**" />
 	-->
+	<mvc:resources location="/uploadimage/" mapping="/uploadimage/**" />
 	<mvc:resources location="/WEB-INF/statics/" mapping="/**" />
-
 	<mvc:annotation-driven />
 	<context:component-scan base-package="cn.edu.sjtu.se.dclab" />
 
