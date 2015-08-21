@@ -142,8 +142,8 @@
 					contentType: 'application/json; charset=utf-8',
 					url: getUrl("rest/mailboxs"),
 					data: JSON.stringify({
-						"from": userid,
-						"to": $("#to").text(),
+						"from": currentUserId(),
+						"to": userid,
 						"content": $("#cont")[0].value,
 						"submitedDate": new Date().getTime()
 					}),
