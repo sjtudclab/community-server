@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
+import cn.edu.sjtu.se.dclab.server.transfer.UserTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -114,6 +115,24 @@ public class FriendController {
 		Information information = new Information();
 		information.setFrom(fromId);
 		information.setTo(toId);
+		information.setContent((String)map.get("message"));
+		information.setStatus(Constants.INFORMATION_UNDO_STATUS);
+
+		informationService
+				.create(information, Constants.INFORMATION_ADD_FRIEND);
+
+		return Result.SUCCESS;
+	}
+
+	@RequestMapping(value = "{fromId}/applications/byaccount/{toUsername}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String createFriendApplicationsByName(@PathVariable long fromId,
+										   @PathVariable String toUsername, @RequestBody String message) {
+		Map<String,Object> map = DataUtil.getFromJson(message);
+		UserTransfer userTransfer = userService.getUserByUsername(toUsername);
+		Information information = new Information();
+		information.setFrom(fromId);
+		information.setTo(userTransfer.getId());
 		information.setContent((String)map.get("message"));
 		information.setStatus(Constants.INFORMATION_UNDO_STATUS);
 
