@@ -71,6 +71,8 @@
 
         <typeAlias alias="PaymentUserTransfer" type="cn.edu.sjtu.se.dclab.server.transfer.PaymentUserTransfer" />
         <typeAlias alias="PaymentMerchantTransfer" type="cn.edu.sjtu.se.dclab.server.transfer.PaymentMerchantTransfer" />
+
+        <typeAlias alias="BBSPost" type="cn.edu.sjtu.se.dclab.server.entity.BBSPost" />
     </typeAliases>
 
     <typeHandlers>
