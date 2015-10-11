@@ -20,4 +20,10 @@ public class BBSServiceImpl implements BBSService {
 	public Collection<BBSPost> findAll() {
 		return bbsMapper.findAll();
 	}
+
+	@Override
+	public void save(BBSPost bbsPost) {
+		// TODO Auto-generated method stub
+		bbsMapper.save(bbsPost);
+	}
 }

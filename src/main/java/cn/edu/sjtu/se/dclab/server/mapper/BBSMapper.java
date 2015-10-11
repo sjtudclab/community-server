@@ -8,4 +8,5 @@ import java.util.Collection;
 public interface BBSMapper {
 	
 	public Collection<BBSPost> findAll();
+	public void save(BBSPost bbsPost);
 }

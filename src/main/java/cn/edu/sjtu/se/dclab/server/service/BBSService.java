@@ -7,5 +7,5 @@ import java.util.Collection;
 public interface BBSService {
 	
 	public Collection<BBSPost> findAll();	//JSON
-	
+	public void save(BBSPost bbsPost);
 }
