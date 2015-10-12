@@ -11,4 +11,6 @@ public interface BBSService {
 	public void save(BBSPost bbsPost);
 	public void saveReply(BBSReply bbsReply);
 	public Collection<BBSPost> findBbsPostById(long id);
+	public Collection<BBSReply> findBbsRepliesByPostId(long post_id);
+
 }
