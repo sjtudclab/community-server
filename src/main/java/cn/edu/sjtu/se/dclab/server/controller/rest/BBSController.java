@@ -53,4 +53,12 @@ public class BBSController {
         return Result.SUCCESS;
 
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Collection<BBSPost> getBbsPost(@PathVariable long id)  {
+        return bbsService.findBbsPostById(id);
+
+    }
+
 }

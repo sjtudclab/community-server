@@ -33,4 +33,9 @@ public class BBSServiceImpl implements BBSService {
 		// TODO Auto-generated method stub
 		bbsMapper.saveReply(bbsReply);
 	}
+
+	@Override
+	public Collection<BBSPost> findBbsPostById(long id) {
+		return bbsMapper.findBbsPostById(id);
+	}
 }

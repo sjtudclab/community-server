@@ -11,4 +11,5 @@ public interface BBSMapper {
 	public Collection<BBSPost> findAll();
 	public void save(BBSPost bbsPost);
 	public void saveReply(BBSReply bbsReply);
+	public Collection<BBSPost> findBbsPostById(long id);
 }
