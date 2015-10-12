@@ -54,6 +54,16 @@ public class BBSController {
 
     }
 
+    @RequestMapping(value = "reply/{post_id}/{reply_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String replyPostReply(@PathVariable long post_id, @PathVariable long reply_id,  @RequestBody BBSReply bbsReply)  {
+        bbsReply.setBbs_post_id(post_id);
+        bbsReply.setBbs_another_reply_id(reply_id);
+        bbsService.saveReplyReply(bbsReply);
+        return Result.SUCCESS;
+
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Collection<BBSPost> getBbsPost(@PathVariable long id)  {

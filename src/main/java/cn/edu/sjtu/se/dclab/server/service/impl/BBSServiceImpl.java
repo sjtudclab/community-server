@@ -35,6 +35,11 @@ public class BBSServiceImpl implements BBSService {
 	}
 
 	@Override
+	public void saveReplyReply(BBSReply bbsReply){
+		bbsMapper.saveReplyReply(bbsReply);
+	}
+
+	@Override
 	public Collection<BBSPost> findBbsPostById(long id) {
 		return bbsMapper.findBbsPostById(id);
 	}

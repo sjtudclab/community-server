@@ -10,6 +10,7 @@ public interface BBSService {
 	public Collection<BBSPost> findAll();	//JSON
 	public void save(BBSPost bbsPost);
 	public void saveReply(BBSReply bbsReply);
+	public void saveReplyReply(BBSReply bbsReply);
 	public Collection<BBSPost> findBbsPostById(long id);
 	public Collection<BBSReply> findBbsRepliesByPostId(long post_id);
 

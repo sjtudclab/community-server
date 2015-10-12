@@ -31,6 +31,14 @@
 		(#{bbs_post_id}, #{bbs_reply_id}, #{bbs_replier_id}, #{bbs_reply_time}, #{bbs_reply_content}, #{bbs_another_reply_id});
 	</insert>
 
+	<!--保存回复的回复-->
+	<insert id="saveReplyReply" useGeneratedKeys="true" keyColumn="bbs_reply_id" keyProperty="id" parameterType="BBSReply">
+		INSERT INTO bbs_reply
+		(bbs_post_id,bbs_reply_id, bbs_replier_id, bbs_reply_time, bbs_reply_content, bbs_another_reply_id)
+		VALUES
+		(#{bbs_post_id}, #{bbs_reply_id}, #{bbs_replier_id}, #{bbs_reply_time}, #{bbs_reply_content}, #{bbs_another_reply_id});
+	</insert>
+
 	<resultMap type="BBSPost" id="BBSPostMap">
 		<id property="id" column="bbs_post_id" />
 		<result property="communityId" column="bbs_community_id" />
