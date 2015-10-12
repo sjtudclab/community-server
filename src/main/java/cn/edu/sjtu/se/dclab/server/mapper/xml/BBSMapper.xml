@@ -8,12 +8,19 @@
 		select * from bbs_post;
 	</select>
 
-	<insert id="save" useGeneratedKeys="true" keyColumn="information_id" keyProperty="id" parameterType="BBSPost">
+	<insert id="save" useGeneratedKeys="true" keyColumn="bbs_post_id" keyProperty="id" parameterType="BBSPost">
 		INSERT INTO bbs_post
 		(bbs_community_id,bbs_post_title, bbs_post_type, bbs_poster_id, bbs_reply_nums, bbs_good_nums, bbs_content)
 		VALUES
 		(#{communityId}, #{title}, #{type}, #{posterId}, #{replyNums}, #{goodNums},
 		#{content});
+	</insert>
+
+	<insert id="saveReply" useGeneratedKeys="true" keyColumn="bbs_reply_id" keyProperty="id" parameterType="BBSReply">
+		INSERT INTO bbs_reply
+		(bbs_post_id,bbs_reply_id, bbs_replier_id, bbs_reply_time, bbs_reply_content, bbs_another_reply_id)
+		VALUES
+		(#{bbs_post_id}, #{bbs_reply_id}, #{bbs_replier_id}, #{bbs_reply_time}, #{bbs_reply_content}, #{bbs_another_reply_id});
 	</insert>
 
 	<resultMap type="BBSPost" id="BBSPostMap">

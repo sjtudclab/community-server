@@ -3,15 +3,13 @@ package cn.edu.sjtu.se.dclab.server.controller.rest;
 import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.common.Result;
 import cn.edu.sjtu.se.dclab.server.entity.BBSPost;
+import cn.edu.sjtu.se.dclab.server.entity.BBSReply;
 import cn.edu.sjtu.se.dclab.server.service.BBSService;
 import cn.edu.sjtu.se.dclab.server.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Map;
@@ -43,6 +41,15 @@ public class BBSController {
     @ResponseBody
     public String postBbspost(@RequestBody BBSPost bbsPost)  {
         bbsService.save(bbsPost);
+        return Result.SUCCESS;
+
+    }
+
+    @RequestMapping(value = "reply/{post_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String replyBbspost(@PathVariable long post_id, @RequestBody BBSReply bbsReply)  {
+        bbsReply.setBbs_post_id(post_id);
+        bbsService.saveReply(bbsReply);
         return Result.SUCCESS;
 
     }
