@@ -16,6 +16,10 @@
 		select * from bbs_reply where bbs_post_id=#{post_id} and bbs_another_reply_id=1;
 	</select>
 
+	<select id="findBbsReplyReplies" resultMap="BBSReplyMap">
+		select * from bbs_reply where bbs_post_id=#{post_id} and bbs_another_reply_id=#{reply_id};
+	</select>
+
 	<insert id="save" useGeneratedKeys="true" keyColumn="bbs_post_id" keyProperty="id" parameterType="BBSPost">
 		INSERT INTO bbs_post
 		(bbs_community_id,bbs_post_title, bbs_post_type, bbs_poster_id, bbs_reply_nums, bbs_good_nums, bbs_content)

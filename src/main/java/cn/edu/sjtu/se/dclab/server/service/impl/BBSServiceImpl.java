@@ -48,4 +48,9 @@ public class BBSServiceImpl implements BBSService {
 	public Collection<BBSReply> findBbsRepliesByPostId(long post_id) {
 		return bbsMapper.findBbsRepliesByPostId(post_id);
 	}
+
+	@Override
+	public Collection<BBSReply> findBbsReplyReplies(long post_id, long reply_id) {
+		return bbsMapper.findBbsReplyReplies(post_id, reply_id);
+	}
 }

@@ -77,4 +77,11 @@ public class BBSController {
         return bbsService.findBbsRepliesByPostId(post_id);
 
     }
+
+    @RequestMapping(value = "/{post_id}/{reply_id}/replies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Collection<BBSReply> getReplyReplies(@PathVariable long post_id, @PathVariable long reply_id)  {
+        return bbsService.findBbsReplyReplies(post_id, reply_id);
+
+    }
 }
