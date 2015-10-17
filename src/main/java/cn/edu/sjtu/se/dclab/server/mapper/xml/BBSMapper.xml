@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.sjtu.se.dclab.server.mapper.BBSMapper">
 
 	<select id="findAll" resultMap="BBSPostMap">
-		select * from bbs_post;
+		select bbs_post.*, user.name from bbs_post left join user on user.user_id = bbs_post.bbs_poster_id;
 	</select>
 
 	<select id="findBbsPostById" resultMap="BBSPostMap">
@@ -49,6 +49,7 @@
 		<result property="title" column="bbs_post_title" />
 		<result property="type" column="bbs_post_type" />
 		<result property="posterId" column="bbs_poster_id" />
+		<result property="posterName" column="name" />
 		<result property="replyNums" column="bbs_reply_nums" />
 		<result property="goodNums" column="bbs_good_nums" />
 		<result property="content" column="bbs_content" />

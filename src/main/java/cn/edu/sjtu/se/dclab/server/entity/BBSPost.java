@@ -17,7 +17,17 @@ public class BBSPost {
 
     private long posterId;
 
+    private String posterName;
+
     private long replyNums;
+
+    public String getPosterName() {
+        return posterName;
+    }
+
+    public void setPosterName(String posterName) {
+        this.posterName = posterName;
+    }
 
     private long goodNums;
 
