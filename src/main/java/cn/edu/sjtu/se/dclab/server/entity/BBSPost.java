@@ -19,6 +19,16 @@ public class BBSPost {
 
     private String posterName;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    private String userName;
+
     private long replyNums;
 
     public String getPosterName() {
