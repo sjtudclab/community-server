@@ -29,9 +29,11 @@ public class MediaController {
     @Autowired
     private MediaService mediaService;
 
-    @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseBody
     public String save(HttpServletRequest request,
                        HttpServletResponse response) throws IOException {
+
         int contentType = Integer.valueOf(request.getParameter("contentType"));
         int fileIndex = Integer.valueOf(request.getParameter("fileIndex"));
 
@@ -45,7 +47,7 @@ public class MediaController {
         return mediaService.save(media,request);
     }
 
-    @RequestMapping(value = "{url}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "{url}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public MultipartFile findByUrl(@PathVariable(value = "url")String url) {
         return mediaService.findByUrl(url);

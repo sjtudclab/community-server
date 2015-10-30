@@ -75,7 +75,7 @@ public class InformationController {
 
 		return "redirect:" + request.getParameter("redirect_url");
 	}
-	
+
 	@RequestMapping(value = "search/{keyword}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Collection<Information> findByKeyword(@PathVariable(value = "keyword")String keyword) {
