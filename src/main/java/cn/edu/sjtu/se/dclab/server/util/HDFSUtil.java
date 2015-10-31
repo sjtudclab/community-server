@@ -1,5 +1,7 @@
 package cn.edu.sjtu.se.dclab.server.util;
 
+import org.apache.commons.compress.compressors.FileNameUtil;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
@@ -19,18 +21,18 @@ import java.net.URI;
 public class HDFSUtil {
     private static final Logger LOG = LoggerFactory.getLogger(FileUtil.class);
 
-    private static String HDFS_URI = "hdfs://192.168.1.108:9000";
-    public static String uploadFile(MultipartFile file, HttpServletRequest request) {
-        String uploadedPath = "/messages";
-        String fileName = file.getName();
+    private final static String HDFS_URI = "hdfs://192.168.1.108:9000";
+    public final static String UPLOAD_PATH = "/messages";
+    public static String uploadFile(MultipartFile file) {
+        String uploadedPath = UPLOAD_PATH;
+        String fileName = file.getOriginalFilename();
 
         try {
-            Path filePath = new Path("/user/hadoop/test.txt");
             Configuration conf = new Configuration();
             System.setProperty("HADOOP_USER_NAME", "hadoop");
             System.setProperty("hadoop.home.dir", "/");
             FileSystem fs = FileSystem.get(new URI(HDFS_URI), conf);
-            uploadedPath += File.separator + getFileNameWithoutExt(fileName) + System.currentTimeMillis() + getFileType(fileName);
+            uploadedPath += File.separator + getFileNameWithoutExt(fileName) + "_" + System.currentTimeMillis() + "." + getFileType(fileName);
             Path outFile = new Path(uploadedPath);
             FSDataOutputStream out = fs.create(outFile);
             out.write(file.getBytes());
@@ -42,12 +44,13 @@ public class HDFSUtil {
         }
         return uploadedPath;
     }
+
+
     private static String getFileNameWithoutExt(String filename) {
-        return filename.split("\\.")[0];
+       return FilenameUtils.getBaseName(filename);
     }
 
     private static String getFileType(String filename){
-        String[] arr = filename.split("\\.");
-        return arr[1];
+        return FilenameUtils.getExtension(filename);
     }
 }
