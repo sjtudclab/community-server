@@ -4,12 +4,14 @@ import cn.edu.sjtu.se.dclab.server.entity.Media;
 import cn.edu.sjtu.se.dclab.server.service.MediaService;
 import cn.edu.sjtu.se.dclab.server.util.FileUtil;
 import cn.edu.sjtu.se.dclab.server.util.HDFSUtil;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Service
+@Qualifier("MediaServiceHDFSImpl")
 public class MediaServiceHDFSImpl implements MediaService {
 
 
