@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -58,9 +55,9 @@ public class MediaController {
         return mediaService.findByUrl(url);
     }
 
-    @RequestMapping(value = "/download/{path}", method = RequestMethod.GET)
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
     @ResponseBody
-    public void downloadFile(HttpServletResponse response,@PathVariable("path") String path) throws IOException {
+    public void downloadFile(HttpServletResponse response,@RequestParam("path") String path) throws IOException {
         InputStream is = mediaService.getInputStreamFromPath(path);
         OutputStream os = response.getOutputStream();
         response.setContentType("application/octet-stream");
