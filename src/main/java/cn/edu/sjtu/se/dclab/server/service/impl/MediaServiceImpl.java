@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 
 @Service
 public class MediaServiceImpl implements MediaService {
@@ -23,6 +24,10 @@ public class MediaServiceImpl implements MediaService {
     {
         MultipartFile f = null;
         return f;
+    }
+
+    public InputStream getInputStreamFromPath(String path) {
+        return null;
     }
 }
 

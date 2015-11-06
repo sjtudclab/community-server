@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 
 @Service
 public class MediaServiceHDFSImpl implements MediaService {
@@ -23,6 +24,17 @@ public class MediaServiceHDFSImpl implements MediaService {
     {
         MultipartFile f = null;
         return f;
+    }
+
+    @Override
+    public InputStream getInputStreamFromPath(String path) {
+        InputStream is = null;
+        try{
+            is = HDFSUtil.getFileFromPath(path);
+        } catch (Exception e) {
+            e.printStackTrace();;
+        }
+        return is;
     }
 }
 

@@ -4,6 +4,7 @@ import cn.edu.sjtu.se.dclab.server.common.Constants;
 import cn.edu.sjtu.se.dclab.server.entity.Media;
 import cn.edu.sjtu.se.dclab.server.service.MediaService;
 import cn.edu.sjtu.se.dclab.server.util.FileUtil;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by hadoop on 10/30/15.
@@ -51,5 +54,23 @@ public class MediaController {
     @ResponseBody
     public MultipartFile findByUrl(@PathVariable(value = "url")String url) {
         return mediaService.findByUrl(url);
+    }
+
+    @RequestMapping(value = "/download/{path}", method = RequestMethod.GET)
+    @ResponseBody
+    public void downloadFile(HttpServletResponse response,@PathVariable("path") String path) throws IOException {
+        InputStream is = mediaService.getInputStreamFromPath(path);
+        OutputStream os = response.getOutputStream();
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=\""
+                + FilenameUtils.getName(path) + "\"");
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = is.read(buffer)) != -1) {
+            os.write(buffer, 0, len);
+        }
+        os.flush();
+        os.close();
+        is.close();
     }
 }
