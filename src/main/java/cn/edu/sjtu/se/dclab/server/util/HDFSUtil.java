@@ -45,7 +45,13 @@ public class HDFSUtil {
         return uploadedPath;
     }
 
-
+    public static InputStreamReader getFileFromPath(String path) throws Exception{
+        Configuration conf = new Configuration();
+        FileSystem fs = FileSystem.get(new URI("hdfs://192.168.1.108:9000"), conf);
+        Path file = new Path(path);
+        FSDataInputStream getIt = fs.open(file);
+        return new InputStreamReader(getIt);
+    }
     private static String getFileNameWithoutExt(String filename) {
        return FilenameUtils.getBaseName(filename);
     }
