@@ -47,4 +47,6 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
+	<import resource="dubbo-consumer.xml" />
+
 </beans>

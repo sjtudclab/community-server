@@ -7,6 +7,7 @@ import cn.edu.sjtu.se.dclab.server.entity.BBSReply;
 import cn.edu.sjtu.se.dclab.server.service.BBSService;
 import cn.edu.sjtu.se.dclab.server.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +21,12 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = Constants.REST + "/bbspost")
 public class BBSController {
-    @Autowired
+
+
     private BBSService bbsService;
 
-    public BBSService getBBSService() {
-        return bbsService;
-    }
-
-    public void setBBSService(BBSService bbsService) {
+    @Autowired
+    public BBSController(BBSService bbsService) {
         this.bbsService = bbsService;
     }
 
